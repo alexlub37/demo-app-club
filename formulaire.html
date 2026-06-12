@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<!-- CAM Basket formulaire V61.05 - message connexion instable au lieu de Failed to fetch -->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Formulaire Match V61.05</title>
+
+<style>
+body{
+  background:#000;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  padding:20px;
+  margin:0;
+}
+.wrap{
+  max-width:700px;
+  margin:0 auto;
+}
+h2{
+  color:#ffd400;
+  text-align:center;
+  margin-bottom:20px;
+}
+label{
+  display:block;
+  margin-top:16px;
+  font-weight:bold;
+}
+input, textarea, select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border-radius:10px;
+  border:none;
+  box-sizing:border-box;
+  font-size:16px;
+}
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+.choice-group{
+  margin-top:10px;
+}
+.choice-btn{
+  display:block;
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border-radius:12px;
+  background:#222;
+  color:#fff;
+  border:2px solid #444;
+  text-align:left;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-sizing:border-box;
+}
+.choice-btn.active{
+  background:#ffd400;
+  color:#000;
+  border-color:#ffd400;
+}
+.send{
+  margin-top:24px;
+  width:100%;
+  padding:14px;
+  background:#ffd400;
+  color:#000;
+  font-weight:bold;
+  border:none;
+  border-radius:12px;
+  font-size:17px;
+  cursor:pointer;
+}
+.note{
+  margin-top:12px;
+  color:#cfcfcf;
+  text-align:center;
+  font-size:14px;
+}
+
+.apport-note{
+  margin-top:6px;
+  color:#cfcfcf;
+  font-size:14px;
+}
+
+.choice-btn.disabled{
+  opacity:.45;
+  pointer-events:none;
+  position:relative;
+}
+.choice-btn.disabled::after{
+  content:"✅ Complet";
+  float:right;
+  font-size:13px;
+  color:#1faa59;
+}
+
+    /* ── Compatibilité iOS ── */
+    * { -webkit-tap-highlight-color: transparent; }
+    input, select, textarea { font-size: 16px !important; }
+    body { -webkit-overflow-scrolling: touch; }
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <h2 id="titreMatch">Réponse Match</h2>
+
+  <label for="joueur">Prénom du joueur</label>
+  <select id="joueur">
+    <option value="">Choisir un joueur</option>
+  </select>
+
+  <label>Présence</label>
+  <div class="choice-group" id="presenceGroup">
+    <div class="choice-btn" onclick="selectPresence(this, 'Présent')">Présent</div>
+    <div class="choice-btn" onclick="selectPresence(this, 'Absent')">Absent</div>
+  </div>
+
+  <div id="domicileNote" class="note" style="display:none;text-align:left;">
+    Match à domicile : aucun transport à renseigner.
+  </div>
+
+  <div id="transportBloc" style="display:none;">
+    <label>Transport</label>
+    <div class="choice-group" id="transportGroup">
+      <div class="choice-btn" onclick="selectTransport(this, 'Direct')">Je me rends directement au match</div>
+      <div class="choice-btn" onclick="selectTransport(this, 'Gymnase')">Je pars du gymnase</div>
+      <div class="choice-btn" onclick="selectTransport(this, 'Besoin')">J’ai besoin d’un transport</div>
+    </div>
+
+    <label for="places">Places disponibles</label>
+    <input id="places" type="number" min="0" placeholder="Exemple : 2">
+  </div>
+
+  <div id="apportBloc" style="display:none;">
+    <label>Tu participes à l’organisation ?</label>
+    <div class="apport-note">Optionnel — objectif : 2 boissons, 2 nourritures et 1 personne pour les maillots.</div>
+    <div class="choice-group" id="apportGroup">
+      <div class="choice-btn" onclick="selectApport(this, 'Boisson')">Boisson</div>
+      <div class="choice-btn" onclick="selectApport(this, 'Nourriture')">Nourriture</div>
+      <div class="choice-btn" onclick="selectApport(this, 'Maillots')">Maillots</div>
+    </div>
+  </div>
+
+  <label for="commentaire">Commentaire</label>
+  <textarea id="commentaire" placeholder="Ajoute un commentaire si besoin"></textarea>
+
+  <button class="send" onclick="envoyerFormulaire()">Envoyer la réponse</button>
+
+  <button class="send" style="background:#333;color:#fff;border:2px solid #555;margin-top:10px;" onclick="annulerFormulaire()">Annuler</button>
+
+  <div class="note">Après envoi, retour automatique à l’application.</div>
+
+</div>
+
+<script>
+// V60.39 quotas organisation pilotés par CONFIG + correction codes joueurs partagés
+
+let presenceValue = "";
+let transportValue = "";
+let apportValue = "";
+let playerCodeValidated = false;
+let playerCodeValue = "";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsAagDE1Hvc7iAZSkkJPzDn9Q4INQuZdphxUEPrwz65veoF3_sEJ_LzSVsYMZLsAGiwA/exec";
+
+
+let organisationConfig = {
+  maillots: 1,
+  boisson: 2,
+  nourriture: 2,
+  activerMaillots: true,
+  activerBoisson: true,
+  activerNourriture: true
+};
+
+function configValueForm(cfg, key, fallback = ""){
+  const k = String(key || "").trim().toLowerCase();
+  const val = cfg && Object.prototype.hasOwnProperty.call(cfg, k) ? cfg[k] : undefined;
+  return val === undefined || val === null || String(val).trim() === "" ? fallback : String(val).trim();
+}
+
+function configIntForm(cfg, key, fallback){
+  const raw = configValueForm(cfg, key, "");
+  if (raw === "") return fallback;
+  const n = parseInt(String(raw).replace(",", "."), 10);
+  return Number.isFinite(n) && n >= 0 ? n : fallback;
+}
+
+function configBoolForm(cfg, key, fallback){
+  const raw = normalizeQuota(configValueForm(cfg, key, ""));
+  if (!raw) return fallback;
+  if (["oui", "o", "yes", "y", "true", "1", "actif", "active"].includes(raw)) return true;
+  if (["non", "n", "no", "false", "0", "inactif", "inactive"].includes(raw)) return false;
+  return fallback;
+}
+
+async function chargerConfigOrganisation(){
+  try{
+    const url = APPS_SCRIPT_URL + "?action=getConfig&t=" + encodeURIComponent(Date.now());
+    const res = await fetch(url, { cache: "no-store" });
+    const cfg = await res.json();
+
+    organisationConfig = {
+      maillots: configIntForm(cfg, "quota_maillots", 1),
+      boisson: configIntForm(cfg, "quota_boisson", 2),
+      nourriture: configIntForm(cfg, "quota_nourriture", 2),
+      activerMaillots: configBoolForm(cfg, "activer_maillots", true),
+      activerBoisson: configBoolForm(cfg, "activer_boisson", true),
+      activerNourriture: configBoolForm(cfg, "activer_nourriture", true)
+    };
+  }catch(e){
+    console.warn("CONFIG quotas non chargée, valeurs de secours utilisées", e);
+  }
+}
+
+function getOrganisationQuotas(){
+  return organisationConfig;
+}
+
+function getQuotaByLabel(label){
+  const q = getOrganisationQuotas();
+  const n = normalizeQuota(label);
+  if (n.includes("maillot")) return q.maillots;
+  if (n.includes("boisson")) return q.boisson;
+  if (n.includes("nourriture")) return q.nourriture;
+  return 0;
+}
+
+function isOrganisationOptionEnabled(label){
+  const q = getOrganisationQuotas();
+  const n = normalizeQuota(label);
+  if (n.includes("maillot")) return q.activerMaillots && q.maillots > 0;
+  if (n.includes("boisson")) return q.activerBoisson && q.boisson > 0;
+  if (n.includes("nourriture")) return q.activerNourriture && q.nourriture > 0;
+  return true;
+}
+
+function isAwayMatch() {
+  const type = getParam("type")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+
+  return ["e", "ext", "exterieur", "extérieur"].includes(type);
+}
+
+function resetTransport() {
+  transportValue = "";
+  document.querySelectorAll("#transportGroup .choice-btn").forEach(btn => btn.classList.remove("active"));
+  document.getElementById("places").value = "";
+}
+
+function resetApport() {
+  apportValue = "";
+  document.querySelectorAll("#apportGroup .choice-btn").forEach(btn => btn.classList.remove("active"));
+}
+
+function getParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param) || "";
+}
+
+function chargerJoueurs() {
+  const joueursParam = getParam("joueurs");
+  const select = document.getElementById("joueur");
+  select.innerHTML = "<option value=''>Choisir un joueur</option>";
+
+  if (!joueursParam) return;
+
+  const liste = decodeURIComponent(joueursParam)
+    .split("|")
+    .map(x => x.trim())
+    .filter(Boolean);
+
+  liste.forEach(j => {
+    const [prenomRaw, codeRaw] = j.split("§");
+    const prenom = String(prenomRaw || "").trim();
+    const code = String(codeRaw || "").trim();
+
+    const option = document.createElement("option");
+    option.value = prenom;
+    option.textContent = prenom;
+    option.dataset.code = code;
+    select.appendChild(option);
+  });
+
+  select.onchange = verifierCodeJoueur;
+}
+
+function resetValidationCodeJoueur(){
+  playerCodeValidated = false;
+  playerCodeValue = "";
+  resetApport();
+}
+
+function codeValideFormat(code){
+  return /^\d{4}$/.test(String(code || "").trim());
+}
+
+async function verifierCodeJoueur(){
+  const select = document.getElementById("joueur");
+  const option = select.options[select.selectedIndex];
+  const prenom = option ? option.value : "";
+  const codeExistant = option ? String(option.dataset.code || "").trim() : "";
+
+  resetValidationCodeJoueur();
+
+  if (!prenom) return;
+
+  if (codeExistant) {
+    const saisie = prompt("Entre ton code d'accès pour " + prenom + " :");
+    if (saisie === null) {
+      select.value = "";
+      return;
+    }
+
+    if (String(saisie).trim() !== codeExistant) {
+      alert("Code incorrect ❌");
+      select.value = "";
+      return;
+    }
+
+    playerCodeValidated = true;
+    playerCodeValue = codeExistant;
+    return;
+  }
+
+  const nouveauCode = prompt("Première connexion pour " + prenom + ". Crée ton code d'accès :");
+  if (nouveauCode === null) {
+    select.value = "";
+    return;
+  }
+
+  const code1 = String(nouveauCode).trim();
+
+  if (!codeValideFormat(code1)) {
+    alert("Le code doit contenir exactement 4 chiffres.");
+    select.value = "";
+    return;
+  }
+
+  const confirmation = prompt("Confirme ton code d'accès :");
+  if (confirmation === null) {
+    select.value = "";
+    return;
+  }
+
+  if (String(confirmation).trim() !== code1) {
+    alert("Les deux codes ne correspondent pas ❌");
+    select.value = "";
+    return;
+  }
+
+  try {
+    await enregistrerCodeJoueur(prenom, code1);
+  } catch(e) {
+    alert("Erreur création code : " + (e.message || e));
+    select.value = "";
+    return;
+  }
+
+  option.dataset.code = code1;
+  playerCodeValidated = true;
+  playerCodeValue = code1;
+  alert("Code enregistré ✅");
+}
+
+async function enregistrerCodeJoueur(prenom, code){
+  const data = {
+    action: "setCode",
+    equipe: getParam("equipe"),
+    prenom: prenom,
+    code: code
+  };
+
+  const res = await fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  const txt = await res.text();
+  if (txt !== "OK") {
+    throw new Error(txt);
+  }
+}
+
+
+function afficherOptionsOrganisation(){
+  const isAway = isAwayMatch();
+  const q = getOrganisationQuotas();
+
+  document.querySelectorAll("#apportGroup .choice-btn").forEach(btn => {
+    const txt = normalizeQuota(btn.textContent);
+    let visible = isOrganisationOptionEnabled(btn.textContent);
+
+    // À l'extérieur, on ne demande pas Boisson / Nourriture.
+    if (isAway && (txt.includes("boisson") || txt.includes("nourriture"))) {
+      visible = false;
+    }
+
+    btn.style.display = visible ? "block" : "none";
+    if (!visible) {
+      btn.classList.remove("active");
+      btn.classList.remove("disabled");
+    }
+  });
+
+  const note = document.querySelector(".apport-note");
+  if (note) {
+    if (isAway) {
+      note.textContent = q.activerMaillots && q.maillots > 0
+        ? "Optionnel — objectif : " + q.maillots + " personne(s) pour les maillots."
+        : "Aucun apport demandé pour ce match extérieur.";
+    } else {
+      const parts = [];
+      if (q.activerBoisson && q.boisson > 0) parts.push(q.boisson + " boisson(s)");
+      if (q.activerNourriture && q.nourriture > 0) parts.push(q.nourriture + " nourriture(s)");
+      if (q.activerMaillots && q.maillots > 0) parts.push(q.maillots + " personne(s) pour les maillots");
+      note.textContent = parts.length
+        ? "Optionnel — objectif : " + parts.join(", ") + "."
+        : "Aucun apport demandé pour ce match.";
+    }
+  }
+}
+
+window.onload = async function() {
+  const display = getParam("display") || getParam("match");
+  if (display) {
+    document.getElementById("titreMatch").innerText = "Réponse - " + display;
+  }
+
+  if (!isAwayMatch()) {
+    document.getElementById("domicileNote").style.display = "block";
+  }
+
+  await chargerConfigOrganisation();
+  chargerJoueurs();
+  afficherOptionsOrganisation();
+};
+
+function selectPresence(el, value) {
+  presenceValue = value;
+  document.querySelectorAll("#presenceGroup .choice-btn").forEach(btn => btn.classList.remove("active"));
+  el.classList.add("active");
+
+  const transportBloc = document.getElementById("transportBloc");
+  const apportBloc = document.getElementById("apportBloc");
+
+  if (value === "Présent" && isAwayMatch()) {
+    transportBloc.style.display = "block";
+  } else {
+    transportBloc.style.display = "none";
+    resetTransport();
+  }
+
+  if (value === "Présent") {
+    apportBloc.style.display = "block";
+    afficherOptionsOrganisation();
+    chargerQuotasOrganisation();
+  } else {
+    apportBloc.style.display = "none";
+    resetApport();
+  }
+}
+
+function selectTransport(el, value) {
+  transportValue = value;
+  document.querySelectorAll("#transportGroup .choice-btn").forEach(btn => btn.classList.remove("active"));
+  el.classList.add("active");
+}
+
+function selectApport(el, value) {
+  if (el.classList.contains("disabled")) return;
+  el.classList.toggle("active");
+}
+
+
+function getApportFinal(){
+  const selected = Array.from(document.querySelectorAll("#apportGroup .choice-btn.active"))
+    .filter(btn => btn.style.display !== "none")
+    .map(btn => btn.textContent.trim());
+
+  if (isAwayMatch()) {
+    return selected.filter(v => normalizeQuota(v).includes("maillot")).join(", ");
+  }
+
+  return selected.join(", ");
+}
+
+let sending = false;
+
+async function envoyerFormulaire() {
+  if (sending) return;
+
+  const joueur = document.getElementById("joueur").value;
+
+  if (!joueur) {
+    alert("Choisis le prénom du joueur avant d'envoyer.");
+    return;
+  }
+
+  if (!playerCodeValidated || !playerCodeValue) {
+    alert("Valide ton code d'accès avant d'envoyer.");
+    return;
+  }
+
+  if (!presenceValue) {
+    alert("Choisis Présent ou Absent avant d'envoyer.");
+    return;
+  }
+
+  if (presenceValue === "Présent" && isAwayMatch() && !transportValue) {
+    alert("Choisis le moyen de transport avant d'envoyer.");
+    return;
+  }
+
+  // V60.39 : juste avant l'envoi, on recharge les quotas.
+  // Si un autre joueur vient de prendre les maillots, le bouton est désactivé avant l'enregistrement.
+  const apportAvantControle = getApportFinal();
+  if (presenceValue === "Présent" && apportAvantControle) {
+    await chargerQuotasOrganisation();
+    const apportApresControle = getApportFinal();
+
+    if (normalizeQuota(apportAvantControle).includes("maillot") && !normalizeQuota(apportApresControle).includes("maillot")) {
+      alert("Les maillots sont déjà pris par un autre joueur. Merci de choisir un autre apport.");
+      return;
+    }
+    if (normalizeQuota(apportAvantControle).includes("boisson") && !normalizeQuota(apportApresControle).includes("boisson")) {
+      alert("Le quota Boisson est déjà complet.");
+      return;
+    }
+    if (normalizeQuota(apportAvantControle).includes("nourriture") && !normalizeQuota(apportApresControle).includes("nourriture")) {
+      alert("Le quota Nourriture est déjà complet.");
+      return;
+    }
+  }
+
+  sending = true;
+
+  const btn = document.querySelector(".send");
+  if (btn) {
+    btn.disabled = true;
+    btn.innerText = "Envoi en cours...";
+  }
+  const data = {
+    action: "enregistrerReponse",
+    match: getParam("match"),
+    matchKey: getParam("match"),
+    display: getParam("display"),
+    matchDisplay: getParam("display"),
+    equipe: getParam("equipe"),
+    prenom: joueur,
+    presence: presenceValue,
+    transport: transportValue,
+    places: document.getElementById("places").value || "",
+    apport: getApportFinal(),
+    commentaire: document.getElementById("commentaire").value,
+    code: playerCodeValue
+  };
+
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(txt => {
+    if (txt !== "OK") throw new Error(txt);
+    document.body.innerHTML = "<h2 style='color:#ffd400;text-align:center;margin-top:50px;'>Réponse envoyée 👍<br>Retour...</h2>";
+    setTimeout(() => {
+      try { window.close(); } catch(e) {}
+      window.location.href = "https://alexlub37.github.io/cam-basket-app/";
+    }, 1200);
+  })
+  .catch((err) => {
+    sending = false;
+    const btn = document.querySelector(".send");
+    if (btn) {
+      btn.disabled = false;
+      btn.innerText = "Envoyer la réponse";
+    }
+    const msg = String(err.message || err || "");
+    if (msg.includes("QUOTA_MAILLOTS_COMPLET")) {
+      alert("Les maillots sont déjà pris par un autre joueur. Merci de choisir un autre apport.");
+    } else if (msg.includes("QUOTA_BOISSON_COMPLET")) {
+      alert("Le quota Boisson est déjà complet.");
+    } else if (msg.includes("QUOTA_NOURRITURE_COMPLET")) {
+      alert("Le quota Nourriture est déjà complet.");
+    } else {
+      const isNetworkError =
+        msg.includes("Failed to fetch") ||
+        msg.includes("NetworkError") ||
+        msg.includes("Load failed") ||
+        msg.includes("Failed to load") ||
+        msg.includes("fetch");
+
+      if (isNetworkError) {
+        alert(
+          "Connexion instable ⚠️\n\n" +
+          "Ta réponse a peut-être bien été enregistrée.\n" +
+          "Avant de recommencer, vérifie dans le détail du match si ton nom apparaît bien.\n\n" +
+          "Si ton nom apparaît : ne renvoie pas la réponse.\n" +
+          "Si ton nom n’apparaît pas : tu peux réessayer."
+        );
+      } else {
+        alert("Erreur d'envoi ❌ : " + msg);
+      }
+    }
+  });
+}
+
+function annulerFormulaire(){
+  try { window.close(); } catch(e) {}
+  window.location.href = "https://alexlub37.github.io/cam-basket-app/";
+}
+
+function normalizeQuota(str){
+  return String(str || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .trim()
+    .toLowerCase();
+}
+
+function parseCsvLineQuota(line){
+  const out = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') { cur += '"'; i++; }
+      else inQuotes = !inQuotes;
+    } else if (ch === "," && !inQuotes) {
+      out.push(cur); cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  out.push(cur);
+  return out;
+}
+
+function rowToObjectQuota(headers, row){
+  const obj = {};
+  headers.forEach((h,i) => obj[String(h || "").trim()] = String(row[i] || "").trim());
+  return obj;
+}
+
+function getRowQuota(row, name){
+  const target = normalizeQuota(name);
+  for (const k in row){
+    if (normalizeQuota(k) === target) return String(row[k] || "").trim();
+  }
+  return "";
+}
+
+function normaliserDateQuota(value){
+  const txt = String(value || "").trim();
+  if (!txt) return "";
+  let m = txt.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
+  if (m) return String(m[3]).padStart(2,"0") + "/" + String(m[2]).padStart(2,"0") + "/" + m[1];
+  m = txt.match(/\b(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})\b/);
+  if (m) return String(m[1]).padStart(2,"0") + "/" + String(m[2]).padStart(2,"0") + "/" + m[3];
+  return txt;
+}
+
+function normaliserHeureQuota(value){
+  let txt = String(value || "").trim().toLowerCase().replace(":","h").replace(/\s+/g,"");
+  if (!txt) return "";
+  let m = txt.match(/\b(\d{1,2})h(\d{1,2})\b/);
+  if (m) return String(Number(m[1])).padStart(2,"0") + "h" + String(Number(m[2])).padStart(2,"0");
+  m = txt.match(/\b(\d{1,2})h\b/);
+  if (m) return String(Number(m[1])).padStart(2,"0") + "h00";
+  return txt;
+}
+
+function badgeLieuQuota(value){
+  const t = normalizeQuota(value);
+  if (["d","dom","domicile"].includes(t)) return "Domicile";
+  if (["e","ext","exterieur","extérieur"].includes(t)) return "Extérieur";
+  return String(value || "").trim();
+}
+
+function extraireMatchInfoQuota(matchText){
+  const txt = String(matchText || "").replace(/\s+/g," ").trim();
+  const info = { raw: txt, key:"", equipe:"", adversaire:"", lieu:"", date:"", heure:"" };
+  if (!txt) return info;
+
+  const pipeParts = txt.split("|").map(x => x.trim());
+  if (pipeParts.length >= 5) {
+    info.equipe = pipeParts[0] || "";
+    info.adversaire = pipeParts[1] || "";
+    info.lieu = badgeLieuQuota(pipeParts[2] || "");
+    info.date = normaliserDateQuota(pipeParts[3] || "");
+    info.heure = normaliserHeureQuota(pipeParts[4] || "");
+    info.key = [info.equipe, info.adversaire, info.lieu, info.date, info.heure].map(normalizeQuota).join("|");
+    return info;
+  }
+
+  const dateMatch = txt.match(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{4}\b|\b\d{4}-\d{1,2}-\d{1,2}\b/);
+  const heureMatch = txt.match(/\b\d{1,2}h\d{0,2}\b|\b\d{1,2}:\d{2}\b/);
+  info.date = dateMatch ? normaliserDateQuota(dateMatch[0]) : "";
+  info.heure = heureMatch ? normaliserHeureQuota(heureMatch[0]) : "";
+
+  if (/\bdomicile\b/i.test(txt)) info.lieu = "Domicile";
+  else if (/\bextérieur\b|\bexterieur\b/i.test(txt)) info.lieu = "Extérieur";
+
+  const titre = (txt.split(" - ")[0] || txt).trim();
+  if (titre.includes(" vs ")) {
+    const parts = titre.split(" vs ").map(x => x.trim());
+    const left = parts[0] || "";
+    const right = parts[1] || "";
+    if (normalizeQuota(left).startsWith("montrichard ")) {
+      info.equipe = left.replace(/^Montrichard\s+/i, "").trim();
+      info.adversaire = right;
+    } else if (normalizeQuota(right).startsWith("montrichard ")) {
+      info.adversaire = left;
+      info.equipe = right.replace(/^Montrichard\s+/i, "").trim();
+    }
+  }
+
+  info.key = [info.equipe, info.adversaire, info.lieu, info.date, info.heure].map(normalizeQuota).join("|");
+  return info;
+}
+
+function memeMatchQuota(rowMatch){
+  const row0 = normalizeQuota(rowMatch);
+  const match0 = normalizeQuota(getParam("match"));
+  const display0 = normalizeQuota(getParam("display"));
+  const equipe0 = normalizeQuota(getParam("equipe"));
+
+  if (!row0) return false;
+  if (row0 === match0 || (display0 && row0 === display0)) return true;
+
+  const rowInfo = extraireMatchInfoQuota(rowMatch);
+  const candidats = [getParam("match"), getParam("display")].filter(Boolean).map(extraireMatchInfoQuota);
+
+  return candidats.some(info => {
+    if (rowInfo.key && info.key && rowInfo.key === info.key) return true;
+    if (equipe0 && rowInfo.equipe && normalizeQuota(rowInfo.equipe) !== equipe0) return false;
+
+    let preuves = 0;
+    if (rowInfo.adversaire && info.adversaire && normalizeQuota(rowInfo.adversaire) === normalizeQuota(info.adversaire)) preuves++;
+    if (rowInfo.date && info.date && normalizeQuota(rowInfo.date) === normalizeQuota(info.date)) preuves++;
+    if (rowInfo.heure && info.heure && normalizeQuota(rowInfo.heure) === normalizeQuota(info.heure)) preuves++;
+    if (rowInfo.lieu && info.lieu && normalizeQuota(rowInfo.lieu) === normalizeQuota(info.lieu)) preuves++;
+
+    return preuves >= 2 && rowInfo.adversaire && info.adversaire && rowInfo.date && info.date;
+  });
+}
+
+
+async function chargerQuotasOrganisationDepuisServeur(){
+  try{
+    const params = new URLSearchParams();
+    params.set("action", "getEtatOrganisationMatch");
+    params.set("match", getParam("match"));
+    params.set("matchKey", getParam("match"));
+    params.set("display", getParam("display"));
+    params.set("matchDisplay", getParam("display"));
+    params.set("equipe", getParam("equipe"));
+    params.set("type", getParam("type"));
+    params.set("t", String(Date.now()));
+
+    const res = await fetch(APPS_SCRIPT_URL + "?" + params.toString(), { cache: "no-store" });
+    const data = await res.json();
+    if (!data || data.ok !== true || !data.counts) return false;
+
+    const q = getOrganisationQuotas();
+    const counts = data.counts || {};
+
+    appliquerQuotaBouton("Boisson", Number(counts.boisson || 0) >= q.boisson);
+    appliquerQuotaBouton("Nourriture", Number(counts.nourriture || 0) >= q.nourriture);
+    appliquerQuotaBouton("Maillots", Number(counts.maillots || 0) >= q.maillots);
+
+    return true;
+  }catch(e){
+    console.warn("Quotas serveur non chargés, fallback CSV", e);
+    return false;
+  }
+}
+
+async function chargerQuotasOrganisation(){
+  const okServeur = await chargerQuotasOrganisationDepuisServeur();
+  if (okServeur) return;
+
+  try{
+    const sheetId = "1CbySOHD6ykiSSIWvptNF6vs2AtJPmRHigaE1h73VRoA";
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=REPONSES&t=${encodeURIComponent(Date.now())}`;
+    const res = await fetch(url, { cache: "no-store" });
+    const txt = await res.text();
+    const rows = txt.replace(/^\uFEFF/, "").split(/\r?\n/).filter(l => l.trim()).map(parseCsvLineQuota);
+    if (rows.length < 2) return;
+
+    const headers = rows[0];
+    const data = rows.slice(1).map(r => rowToObjectQuota(headers, r));
+    const matchActuel = normalizeQuota(getParam("match"));
+    const displayActuel = normalizeQuota(getParam("display"));
+    const equipeActuelle = normalizeQuota(getParam("equipe"));
+
+    function memeMatch(row){
+      const e = normalizeQuota(getRowQuota(row, "Équipe") || getRowQuota(row, "Equipe"));
+      if (equipeActuelle && e && e !== equipeActuelle) return false;
+      return memeMatchQuota(getRowQuota(row, "Match"));
+    }
+
+    const byPlayer = {};
+    data.forEach(row => {
+      if (!memeMatch(row)) return;
+
+      const statut = normalizeQuota(getRowQuota(row, "Statut réponse") || getRowQuota(row, "Statut reponse"));
+      if (statut.includes("reconfirmer") || statut.includes("annule")) return;
+
+      const prenom = normalizeQuota(getRowQuota(row, "Prénom") || getRowQuota(row, "Prenom"));
+      const code = normalizeQuota(getRowQuota(row, "Code accès") || getRowQuota(row, "Code acces") || getRowQuota(row, "Code"));
+
+      // V60.39 : on déduplique par joueur, pas par code.
+      // Plusieurs joueurs peuvent avoir le même code en test : si on déduplique par code,
+      // le formulaire croit qu'il n'y a qu'un seul apport et laisse Maillots disponible.
+      const key = prenom || code;
+      if (key) byPlayer[key] = row;
+    });
+
+    let boisson = 0, nourriture = 0, maillots = 0;
+
+    Object.values(byPlayer).forEach(row => {
+      const presence = normalizeQuota(getRowQuota(row, "Présence") || getRowQuota(row, "Presence"));
+      if (presence !== "present") return;
+
+      const apport = normalizeQuota(getRowQuota(row, "Apport"));
+      if (apport.includes("boisson")) boisson++;
+      if (apport.includes("nourriture")) nourriture++;
+      if (apport.includes("maillot")) maillots++;
+    });
+
+    const q = getOrganisationQuotas();
+    appliquerQuotaBouton("Boisson", boisson >= q.boisson);
+    appliquerQuotaBouton("Nourriture", nourriture >= q.nourriture);
+    appliquerQuotaBouton("Maillots", maillots >= q.maillots);
+  }catch(e){
+    console.warn("Quotas non chargés", e);
+  }
+}
+
+function appliquerQuotaBouton(label, complet){
+  document.querySelectorAll("#apportGroup .choice-btn").forEach(btn => {
+    if (normalizeQuota(btn.textContent).includes(normalizeQuota(label))) {
+      if (!isOrganisationOptionEnabled(btn.textContent) || getQuotaByLabel(label) <= 0) {
+        btn.classList.remove("active");
+        btn.classList.remove("disabled");
+        btn.style.display = "none";
+        return;
+      }
+
+      if (complet) {
+        btn.classList.remove("active");
+        btn.classList.add("disabled");
+      } else {
+        btn.classList.remove("disabled");
+      }
+    }
+  });
+}
+
+</script>
+
+</body>
+</html>
