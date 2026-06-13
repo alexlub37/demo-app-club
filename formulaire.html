@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- CAM Basket formulaire V61.05 - message connexion instable au lieu de Failed to fetch -->
+<!-- Démo App Club formulaire V61.08-DEMO - URL script démo + sheetId démo -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.05</title>
+<title>Formulaire Match V61.08-DEMO</title>
 
 <style>
 body{
@@ -170,7 +170,7 @@ let transportValue = "";
 let apportValue = "";
 let playerCodeValidated = false;
 let playerCodeValue = "";
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsAagDE1Hvc7iAZSkkJPzDn9Q4INQuZdphxUEPrwz65veoF3_sEJ_LzSVsYMZLsAGiwA/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
 
 
 let organisationConfig = {
@@ -578,7 +578,7 @@ async function envoyerFormulaire() {
     document.body.innerHTML = "<h2 style='color:#ffd400;text-align:center;margin-top:50px;'>Réponse envoyée 👍<br>Retour...</h2>";
     setTimeout(() => {
       try { window.close(); } catch(e) {}
-      window.location.href = "https://alexlub37.github.io/cam-basket-app/";
+      window.location.href = "https://alexlub37.github.io/demo-app-club/";
     }, 1200);
   })
   .catch((err) => {
@@ -620,7 +620,7 @@ async function envoyerFormulaire() {
 
 function annulerFormulaire(){
   try { window.close(); } catch(e) {}
-  window.location.href = "https://alexlub37.github.io/cam-basket-app/";
+  window.location.href = "https://alexlub37.github.io/demo-app-club/";
 }
 
 function normalizeQuota(str){
@@ -795,7 +795,7 @@ async function chargerQuotasOrganisation(){
   if (okServeur) return;
 
   try{
-    const sheetId = "1CbySOHD6ykiSSIWvptNF6vs2AtJPmRHigaE1h73VRoA";
+    const sheetId = "1-Jc5y_mSHZSOk4Lm1ptz8NjqTowsFh9n_NRb3rIuu8g";
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=REPONSES&t=${encodeURIComponent(Date.now())}`;
     const res = await fetch(url, { cache: "no-store" });
     const txt = await res.text();
