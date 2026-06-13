@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.09-DEMO-CONFIG - Configuration centrale app-config.js -->
+<!-- Démo App Club formulaire V61.09-DEMO-CONFIG - Configuration centrale app-config.js + libellés club -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -174,6 +174,26 @@ let playerCodeValue = "";
 const APP_CONFIG = window.APP_CONFIG || {};
 const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
 const APP_HOME_URL = APP_CONFIG.APP_HOME_URL || "https://alexlub37.github.io/demo-app-club/";
+
+const APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
+const APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
+const APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
+const APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
+function appEscapeRegExp(str){
+  return String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+function removeHomeClubPrefixForm(text){
+  const club = String(APP_HOME_CLUB_NAME || "").trim();
+  const raw = String(text || "").trim();
+  if (!club) return raw;
+  return raw.replace(new RegExp("^" + appEscapeRegExp(club) + "\\s+", "i"), "").trim();
+}
+function startsWithHomeClubForm(text){
+  const club = String(APP_HOME_CLUB_NAME || "").trim();
+  if (!club) return false;
+  return normalizeQuota(text).startsWith(normalizeQuota(club) + " ");
+}
+
 
 
 let organisationConfig = {
@@ -723,12 +743,12 @@ function extraireMatchInfoQuota(matchText){
     const parts = titre.split(" vs ").map(x => x.trim());
     const left = parts[0] || "";
     const right = parts[1] || "";
-    if (normalizeQuota(left).startsWith("montrichard ")) {
-      info.equipe = left.replace(/^Montrichard\s+/i, "").trim();
+    if (startsWithHomeClubForm(left)) {
+      info.equipe = removeHomeClubPrefixForm(left);
       info.adversaire = right;
-    } else if (normalizeQuota(right).startsWith("montrichard ")) {
+    } else if (startsWithHomeClubForm(right)) {
       info.adversaire = left;
-      info.equipe = right.replace(/^Montrichard\s+/i, "").trim();
+      info.equipe = removeHomeClubPrefixForm(right);
     }
   }
 

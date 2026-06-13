@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.11 - Coach - Configuration centrale app-config.js -->
+<!-- Démo App Club V63.11 - Coach - Configuration centrale app-config.js + libellés club -->
 
 <html lang="fr">
 <head>
@@ -11,7 +11,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CAM Coach Montrichard</title>
+  <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
   <meta name="cam-basket-version" content="V63.11-COACH-CONFIG" />
   <style>
@@ -2041,7 +2041,7 @@ body.coach-app #weekendCard{
 <link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="logo_192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
-<meta name="apple-mobile-web-app-title" content="CAM Basket">
+<meta name="apple-mobile-web-app-title" content="Démo App Club">
 
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNBTSBCYXNrZXQgTW9udHJpY2hhcmQiLAogICJzaG9ydF9uYW1lIjogIkNBTSBCYXNrZXQiLAogICJzdGFydF91cmwiOiAiLi9pbmRleC5odG1sIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDAwMDAwIiwKICAidGhlbWVfY29sb3IiOiAiI2ZmZDQwMCIsCiAgImljb25zIjogWwogICAgeyJzcmMiOiAibG9nb18xOTIucG5nIiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifSwKICAgIHsic3JjIjogImxvZ29fNTEyLnBuZyIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn0KICBdCn0=">
 </head>
@@ -2149,7 +2149,7 @@ body.coach-app #weekendCard{
     ">V63.11 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
-        <button class="hero-logo-btn" aria-label="Informations CAM Basket" onclick="openInfoModal()" style="cursor:pointer;">
+        <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
           <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
         </button>
         <div id="heroSlogan" style="
@@ -2169,7 +2169,7 @@ body.coach-app #weekendCard{
           white-space: nowrap;
         ">Tous<br>en Jaune&nbsp;!</div>
       </div>
-      <h1 class="hero-title">CAM Coach<br>Montrichard</h1>      <div id="appSubtitle" class="hero-sub" style="display:none"></div>
+      <h1 class="hero-title">Démo Coach<br>Club</h1>      <div id="appSubtitle" class="hero-sub" style="display:none"></div>
       <div class="top-actions coach-actions">
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
         <button id="btn-coach" class="btn-outline" onclick="openCoachMain()">Coach</button>
@@ -2807,6 +2807,30 @@ body.coach-app #weekendCard{
     const RESPONSE_SHEET_NAME = "REPONSES";
     const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
     function getScriptUrl() { return APP_CONFIG.APPS_SCRIPT_URL || window._configScriptUrl || APPS_SCRIPT_URL; }
+
+    const APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
+    const APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
+    const APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
+    const APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
+    const APP_WHATSAPP_MATCH_ADDED_TITLE = APP_CONFIG.WHATSAPP_MATCH_ADDED_TITLE || ("Nouveau match " + APP_CLUB_NAME);
+    const APP_WHATSAPP_MATCH_MODIFIED_TITLE = APP_CONFIG.WHATSAPP_MATCH_MODIFIED_TITLE || ("Match modifié " + APP_CLUB_NAME);
+    const APP_WHATSAPP_MATCH_REPLY_TEXT = APP_CONFIG.WHATSAPP_MATCH_REPLY_TEXT || "Merci de répondre dans l’application :";
+    function appEscapeRegExp(str){
+      return String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+    function removeHomeClubPrefix(text){
+      const club = String(APP_HOME_CLUB_NAME || "").trim();
+      const raw = String(text || "").trim();
+      if (!club) return raw;
+      return raw.replace(new RegExp("^" + appEscapeRegExp(club) + "\\s+", "i"), "").trim();
+    }
+    function startsWithHomeClub(text, normalizer){
+      const club = String(APP_HOME_CLUB_NAME || "").trim();
+      if (!club) return false;
+      const fn = typeof normalizer === "function" ? normalizer : function(v){ return String(v || "").trim().toLowerCase(); };
+      return fn(text).startsWith(fn(club) + " ");
+    }
+
     let lastCoachPresentPlayers = [];
 
     let state = {
@@ -3667,12 +3691,12 @@ body.coach-app #weekendCard{
 
     function buildMatchDisplay(m){
       return isHomeType(m.type)
-        ? `Montrichard ${m.equipe} vs ${m.adversaire}`
-        : `${m.adversaire} vs Montrichard ${m.equipe}`;
+        ? `${APP_HOME_CLUB_NAME} ${m.equipe} vs ${m.adversaire}`
+        : `${m.adversaire} vs ${APP_HOME_CLUB_NAME} ${m.equipe}`;
     }
 
     function buildMatchTitleHtml(m){
-      const homeClub = "Montrichard";
+      const homeClub = APP_HOME_CLUB_NAME;
       const adversaire = escapeHtml(m.adversaire || "-");
 
       if (isHomeType(m.type)) {
@@ -3730,7 +3754,8 @@ body.coach-app #weekendCard{
     }
 
     function buildDirectMatchUrl(m){
-      const url = new URL(window.location.origin + window.location.pathname);
+      const baseUrl = APP_CONFIG.APP_HOME_URL || (window.location.origin + window.location.pathname);
+      const url = new URL(baseUrl, window.location.href);
       url.searchParams.set("matchKey", buildMatchKey(m));
       if (m && m.row) url.searchParams.set("matchRow", String(m.row));
       return url.toString();
@@ -3769,7 +3794,7 @@ body.coach-app #weekendCard{
 
     function buildWhatsAppMatchMessage(m, mode){
       const directUrl = buildDirectMatchUrl(m);
-      const titre = mode === "modif" ? "🏀 Match modifié" : "🏀 Nouveau match ajouté";
+      const titre = mode === "modif" ? "🏀 " + APP_WHATSAPP_MATCH_MODIFIED_TITLE : "🏀 " + APP_WHATSAPP_MATCH_ADDED_TITLE;
       const ligneMatch = buildMatchDisplay(m);
       const lieu = [m.gymnase, m.ville].filter(Boolean).join(" — ");
       return [
@@ -3781,7 +3806,7 @@ body.coach-app #weekendCard{
         "Heure : " + (m.heure || "-"),
         "Lieu : " + (lieu || badgeForType(m.type).label || "-"),
         "",
-        "Merci de répondre dans l’application :",
+        APP_WHATSAPP_MATCH_REPLY_TEXT,
         directUrl
       ].join("\n");
     }
@@ -3905,12 +3930,12 @@ body.coach-app #weekendCard{
         const left = parts[0] || "";
         const right = parts[1] || "";
 
-        if (normalize(left).startsWith("montrichard ")) {
-          equipe = left.replace(/^Montrichard\s+/i, "").trim();
+        if (startsWithHomeClub(left, normalize)) {
+          equipe = removeHomeClubPrefix(left);
           adversaire = right;
-        } else if (normalize(right).startsWith("montrichard ")) {
+        } else if (startsWithHomeClub(right, normalize)) {
           adversaire = left;
-          equipe = right.replace(/^Montrichard\s+/i, "").trim();
+          equipe = removeHomeClubPrefix(right);
         } else {
           equipe = left;
           adversaire = right;
@@ -6043,7 +6068,7 @@ function envoyerWhatsappConvocation() {
 
   const titreMatch = buildMatchDisplay(m);
   const message =
-`🏀 Convocation CAM Basket Montrichard
+`🏀 ${APP_WHATSAPP_CONVOCATION_TITLE}
 
 ${titreMatch}
 ${m.date || ""} ${m.heure || ""}
@@ -6584,7 +6609,7 @@ async function genererConvocation(){
 
         const titreMatch = buildMatchDisplay(m);
         const message =
-`🏀 Convocation CAM Basket Montrichard
+`🏀 ${APP_WHATSAPP_CONVOCATION_TITLE}
 
 ${titreMatch}
 ${m.date || ""} ${m.heure || ""}
@@ -6853,7 +6878,7 @@ openMatches = function(){
   </script>
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
-      <h3>Application CAM Basket</h3>
+      <h3>Application Démo App Club</h3>
       <div class="modal-line"><span class="modal-label">Version :</span> V63.07 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
