@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.04 - Gestion - URL script démo + libellés démo -->
+<!-- Démo App Club V65.07 - Gestion - Configuration centrale app-config.js -->
 
 <html lang="fr">
 <head>
@@ -11,9 +11,9 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Démo App Club - Gestion</title>
+  <title>CAM Gestion Montrichard</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.04-GESTION" />
+  <meta name="cam-basket-version" content="V65.07-GESTION-CONFIG" />
   <style>
     :root{
       --bg:#050505;
@@ -1746,7 +1746,7 @@ button:disabled,
 <link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="logo_192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
-<meta name="apple-mobile-web-app-title" content="Démo App Club">
+<meta name="apple-mobile-web-app-title" content="CAM Basket">
 
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNBTSBCYXNrZXQgTW9udHJpY2hhcmQiLAogICJzaG9ydF9uYW1lIjogIkNBTSBCYXNrZXQiLAogICJzdGFydF91cmwiOiAiLi9pbmRleC5odG1sIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDAwMDAwIiwKICAidGhlbWVfY29sb3IiOiAiI2ZmZDQwMCIsCiAgImljb25zIjogWwogICAgeyJzcmMiOiAibG9nb18xOTIucG5nIiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifSwKICAgIHsic3JjIjogImxvZ29fNTEyLnBuZyIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn0KICBdCn0=">
 </head>
@@ -1863,10 +1863,10 @@ button:disabled,
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.03 GESTION</button>
+    ">V65.07 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
-        <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
+        <button class="hero-logo-btn" aria-label="Logo CAM Basket" style="cursor:default;">
           <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
         </button>
         <div id="heroSlogan" style="
@@ -1884,9 +1884,9 @@ button:disabled,
           text-shadow: 0 2px 6px rgba(0,0,0,0.8);
           pointer-events: none;
           white-space: nowrap;
-        ">Bienvenue<br>démo&nbsp;!</div>
+        ">Tous<br>en Jaune&nbsp;!</div>
       </div>
-      <h1 class="hero-title">Démo App<br>Gestion</h1>      <div id="appSubtitle" class="hero-sub">Outil interne club</div>
+      <h1 class="hero-title">CAM Gestion<br>Montrichard</h1>      <div id="appSubtitle" class="hero-sub">Outil interne club</div>
       <div class="top-actions gestion-top-actions">
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
       </div>
@@ -2025,7 +2025,7 @@ button:disabled,
         </div>
         <div class="gm-field">
           <label>Lieu événement</label>
-          <input id="grClubEventLieu" type="text" placeholder="Gymnase Démo">
+          <input id="grClubEventLieu" type="text" placeholder="Gymnase de Montrichard">
           <small>CONFIG : club_event_lieu</small>
         </div>
         <div class="gm-field">
@@ -2632,8 +2632,10 @@ button:disabled,
     </section>
   </main>
 
+  <script src="app-config.js"></script>
   <script>
-    const SHEET_ID = "1CbySOHD6ykiSSIWvptNF6vs2AtJPmRHigaE1h73VRoA";
+    const APP_CONFIG = window.APP_CONFIG || {};
+    const SHEET_ID = APP_CONFIG.SHEET_ID || "1-Jc5y_mSHZSOk4Lm1ptz8NjqTowsFh9n_NRb3rIuu8g";
     const SHEETS = {
       parametres: "PARAMETRES",
       equipes: "EQUIPES",
@@ -2650,8 +2652,8 @@ button:disabled,
 
     const RESPONSE_SHEET_ID = SHEET_ID;
     const RESPONSE_SHEET_NAME = "REPONSES";
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
-    function getScriptUrl() { return window._configScriptUrl || APPS_SCRIPT_URL; }
+    const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
+    function getScriptUrl() { return APP_CONFIG.APPS_SCRIPT_URL || window._configScriptUrl || APPS_SCRIPT_URL; }
     let lastCoachPresentPlayers = [];
 
     let state = {
@@ -3510,14 +3512,13 @@ button:disabled,
     }
 
     function buildMatchDisplay(m){
-      const homeClub = cfgValue("nom_club", "Démo App Club");
       return isHomeType(m.type)
-        ? `${homeClub} ${m.equipe} vs ${m.adversaire}`
-        : `${m.adversaire} vs ${homeClub} ${m.equipe}`;
+        ? `Montrichard ${m.equipe} vs ${m.adversaire}`
+        : `${m.adversaire} vs Montrichard ${m.equipe}`;
     }
 
     function buildMatchTitleHtml(m){
-      const homeClub = cfgValue("nom_club", "Démo App Club");
+      const homeClub = "Montrichard";
       const adversaire = escapeHtml(m.adversaire || "-");
 
       if (isHomeType(m.type)) {
@@ -5752,7 +5753,7 @@ function envoyerWhatsappConvocation() {
 
   const titreMatch = buildMatchDisplay(m);
   const message =
-`📣 Convocation Démo App Club
+`🏀 Convocation CAM Basket Montrichard
 
 ${titreMatch}
 ${m.date || ""} ${m.heure || ""}
@@ -6297,7 +6298,7 @@ async function genererConvocation(){
 
         const titreMatch = buildMatchDisplay(m);
         const message =
-`📣 Convocation Démo App Club
+`🏀 Convocation CAM Basket Montrichard
 
 ${titreMatch}
 ${m.date || ""} ${m.heure || ""}
@@ -6316,13 +6317,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
   </script>
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
-      <h3>Application Démo Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.04 GESTION</div>
+      <h3>Application CAM Basket</h3>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.03 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.04 — Gestion : application reliée au script démo et libellés démo propres</li>
         <li>V65.03 — Gestion : fond sport configurable via CONFIG</li>
         <li>V65.02 — Gestion : chargement CONFIG fiable + anti-écrasement multi-appareil</li>
         <li>V65.01 — Gestion : sécurité champs vides</li>
@@ -6637,7 +6637,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.04-GESTION";
+window.CAM_BASKET_VERSION = "V65.03-GESTION";
 
 </script>
 
