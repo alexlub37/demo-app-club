@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.07 - Gestion - Configuration centrale app-config.js + libellés club -->
+<!-- Démo App Club V65.09 - Gestion - Configuration centrale app-config.js + libellés club -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.07-GESTION-CONFIG" />
+  <meta name="cam-basket-version" content="V65.09-GESTION-CONFIG" />
   <style>
     :root{
       --bg:#050505;
@@ -1863,7 +1863,7 @@ button:disabled,
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.07 GESTION</button>
+    ">V65.09 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -2655,13 +2655,14 @@ button:disabled,
     const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
     function getScriptUrl() { return APP_CONFIG.APPS_SCRIPT_URL || window._configScriptUrl || APPS_SCRIPT_URL; }
 
-    const APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
-    const APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
-    const APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
-    const APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
-    const APP_WHATSAPP_MATCH_ADDED_TITLE = APP_CONFIG.WHATSAPP_MATCH_ADDED_TITLE || ("Nouveau match " + APP_CLUB_NAME);
-    const APP_WHATSAPP_MATCH_MODIFIED_TITLE = APP_CONFIG.WHATSAPP_MATCH_MODIFIED_TITLE || ("Match modifié " + APP_CLUB_NAME);
-    const APP_WHATSAPP_MATCH_REPLY_TEXT = APP_CONFIG.WHATSAPP_MATCH_REPLY_TEXT || "Merci de répondre dans l’application :";
+    let APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
+    let APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
+    let APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
+    let APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
+    let APP_WHATSAPP_MATCH_ADDED_TITLE = APP_CONFIG.WHATSAPP_MATCH_ADDED_TITLE || ("Nouveau match " + APP_CLUB_NAME);
+    let APP_WHATSAPP_MATCH_MODIFIED_TITLE = APP_CONFIG.WHATSAPP_MATCH_MODIFIED_TITLE || ("Match modifié " + APP_CLUB_NAME);
+    let APP_WHATSAPP_MATCH_REPLY_TEXT = APP_CONFIG.WHATSAPP_MATCH_REPLY_TEXT || "Merci de répondre dans l’application :";
+    let APP_WHATSAPP_ICON = APP_CONFIG.WHATSAPP_ICON !== undefined ? String(APP_CONFIG.WHATSAPP_ICON || "") : "🏀";
     function appEscapeRegExp(str){
       return String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
@@ -2717,6 +2718,29 @@ button:disabled,
       if (["oui", "o", "yes", "y", "true", "1", "actif", "active"].includes(raw)) return true;
       if (["non", "n", "no", "false", "0", "inactif", "inactive"].includes(raw)) return false;
       return fallback;
+    }
+
+
+    function cfgRawValue(key, fallback = "") {
+      const cfg = state.config || {};
+      const k = String(key || "").trim().toLowerCase();
+      if (Object.prototype.hasOwnProperty.call(cfg, k)) return String(cfg[k] ?? "").trim();
+      return fallback;
+    }
+
+    function syncClubTextConfigFromSheet() {
+      const clubFromConfig = cfgValue("nom_club", APP_CLUB_NAME || APP_NAME || "Démo App Club");
+      APP_NAME = cfgValue("app_name", APP_NAME || clubFromConfig);
+      APP_CLUB_NAME = cfgValue("club_name", clubFromConfig);
+      APP_HOME_CLUB_NAME = cfgValue("home_club_name", APP_CLUB_NAME);
+
+      const rawIcon = cfgRawValue("whatsapp_icon", "__APP_CONFIG_FALLBACK__");
+      if (rawIcon !== "__APP_CONFIG_FALLBACK__") APP_WHATSAPP_ICON = rawIcon;
+
+      APP_WHATSAPP_CONVOCATION_TITLE = cfgValue("whatsapp_convocation_title", "Convocation " + APP_CLUB_NAME);
+      APP_WHATSAPP_MATCH_ADDED_TITLE = cfgValue("whatsapp_match_added_title", "Nouveau match " + APP_CLUB_NAME);
+      APP_WHATSAPP_MATCH_MODIFIED_TITLE = cfgValue("whatsapp_match_modified_title", "Match modifié " + APP_CLUB_NAME);
+      APP_WHATSAPP_MATCH_REPLY_TEXT = cfgValue("whatsapp_match_reply_text", "Merci de répondre dans l’application :");
     }
 
     function getOrganisationQuotas() {
@@ -2902,6 +2926,7 @@ button:disabled,
           const cfg0 = await r0.json();
           state.config = {};
           Object.entries(cfg0).forEach(([k,v]) => { state.config[k.trim().toLowerCase()] = String(v); });
+          syncClubTextConfigFromSheet();
           // Mettre à jour logo splash si logo_url défini
           const logoUrl = state.config["logo_url"];
           if (logoUrl) {
@@ -3078,6 +3103,7 @@ button:disabled,
           console.log("CONFIG ligne", i, ":", JSON.stringify(key), "=", JSON.stringify(val));
           if (key && key !== "cle" && key !== "clé" && key !== "valeur") state.config[key] = val;
         });
+        syncClubTextConfigFromSheet();
         console.log("CONFIG finale:", JSON.stringify(state.config));
 
         const seasonBadge = document.getElementById("seasonBadge");
@@ -3640,7 +3666,8 @@ button:disabled,
 
     function buildWhatsAppMatchMessage(m, mode){
       const directUrl = buildDirectMatchUrl(m);
-      const titre = mode === "modif" ? "🏀 " + APP_WHATSAPP_MATCH_MODIFIED_TITLE : "🏀 " + APP_WHATSAPP_MATCH_ADDED_TITLE;
+      const whatsappIconPrefix = APP_WHATSAPP_ICON ? APP_WHATSAPP_ICON + " " : "";
+      const titre = whatsappIconPrefix + (mode === "modif" ? APP_WHATSAPP_MATCH_MODIFIED_TITLE : APP_WHATSAPP_MATCH_ADDED_TITLE);
       const ligneMatch = buildMatchDisplay(m);
       const lieu = [m.gymnase, m.ville].filter(Boolean).join(" — ");
       return [
@@ -5778,7 +5805,7 @@ function envoyerWhatsappConvocation() {
 
   const titreMatch = buildMatchDisplay(m);
   const message =
-`🏀 ${APP_WHATSAPP_CONVOCATION_TITLE}
+`${APP_WHATSAPP_ICON ? APP_WHATSAPP_ICON + " " : ""}${APP_WHATSAPP_CONVOCATION_TITLE}
 
 ${titreMatch}
 ${m.date || ""} ${m.heure || ""}
@@ -6323,7 +6350,7 @@ async function genererConvocation(){
 
         const titreMatch = buildMatchDisplay(m);
         const message =
-`🏀 ${APP_WHATSAPP_CONVOCATION_TITLE}
+`${APP_WHATSAPP_ICON ? APP_WHATSAPP_ICON + " " : ""}${APP_WHATSAPP_CONVOCATION_TITLE}
 
 ${titreMatch}
 ${m.date || ""} ${m.heure || ""}
