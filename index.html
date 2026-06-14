@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V62.35-JOUEURS-COLOR-FIX4" />
+  <meta name="cam-basket-version" content="V62.36-JOUEURS-BUTTON-UNIFORM" />
   <style>
     :root{
       --bg:#050505;
@@ -3071,6 +3071,36 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
           color: var(--accent) !important;
           border-color: rgba(var(--accent-rgb), .55) !important;
         }
+
+        /* V5 : tous les boutons ont le même fond et le même texte */
+        button, .btn-light, .btn-light.active, .btn-outline, .btn-outline.active, .back,
+        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
+        .gm-tab, .gm-tab.active, .link-btn, a.link-btn, .link-btn.primary,
+        .btn-primary, .primary, .action-primary, .whatsapp-btn,
+        .bureau-action-btn, .club-social-btn, .convoc-action, .gm-send-btn,
+        .gj-save, #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
+        #btnGenererConvocation, #btnWhatsappCoach, #btnFaireConvocationCoach,
+        #btnValiderConvocation, #btnWhatsAppConvocation, #btnEnvoyerWhatsApp,
+        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp, #btnAjouterMatch,
+        #btnModifierMatch, #btnAjouterJoueur {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+        }
+        button *, .btn-light *, .btn-outline *, .back *, .menu-btn *, .role-menu-card *,
+        .gestion-home-tile *, .gestion-settings-tile *, .gm-tab *, .link-btn *,
+        a.link-btn *, .btn-primary *, .primary *, .action-primary *, .whatsapp-btn *,
+        .bureau-action-btn *, .club-social-btn *, .convoc-action *, .gm-send-btn *,
+        .gj-save *, #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
+        #btnGenererConvocation *, #btnWhatsappCoach *, #btnFaireConvocationCoach *,
+        #btnValiderConvocation *, #btnWhatsAppConvocation *, #btnEnvoyerWhatsApp *,
+        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *, #btnAjouterMatch *,
+        #btnModifierMatch *, #btnAjouterJoueur * {
+          color: var(--button-text) !important;
+        }
+        button:disabled, .role-menu-card.disabled, .menu-btn.disabled {
+          opacity: .55 !important;
+        }
         hr, .separator { border-color: rgba(var(--accent-rgb), .22) !important; }
       `;
 
@@ -6078,7 +6108,7 @@ function ouvrirFormulaire(match, equipe, typeMatch, displayMatch) {
             + "&equipe=" + encodeURIComponent(equipe)
             + "&type=" + encodeURIComponent(typeMatch || "")
             + "&joueurs=" + joueursString
-            + "&v=colorfix4"
+            + "&v=buttonuniform1"
             + "&t=" + encodeURIComponent(Date.now());
 
   const popup = window.open(url, "_blank");

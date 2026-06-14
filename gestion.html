@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.13-GESTION-COLOR-FIX4" />
+  <meta name="cam-basket-version" content="V65.14-GESTION-BUTTON-UNIFORM" />
   <style>
     :root{
       --bg:#050505;
@@ -5962,7 +5962,7 @@ function ouvrirFormulaire(match, equipe, typeMatch, displayMatch) {
             + "&equipe=" + encodeURIComponent(equipe)
             + "&type=" + encodeURIComponent(typeMatch || "")
             + "&joueurs=" + joueursString
-            + "&v=colorfix4"
+            + "&v=buttonuniform1"
             + "&t=" + encodeURIComponent(Date.now());
 
   const popup = window.open(url, "_blank");
@@ -6759,6 +6759,37 @@ function appliquerConfig() {
     .coach-space-convoc,.weekend-match,.item{border-left-color:${couleurSecondaire}!important;}
     .team-extra{border-top-color:${rgbaFromHexGestion(couleurSecondaire,.25)}!important;}
     .splash-dot{background:${couleurSecondaire}!important;}
+
+        /* V5 : tous les boutons ont le même fond et le même texte */
+        button, .btn-light, .btn-light.active, .btn-outline, .btn-outline.active, .back,
+        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
+        .gm-tab, .gm-tab.active, .link-btn, a.link-btn, .link-btn.primary,
+        .btn-primary, .primary, .action-primary, .whatsapp-btn,
+        .bureau-action-btn, .club-social-btn, .convoc-action, .gm-send-btn,
+        .gj-save, #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
+        #btnGenererConvocation, #btnWhatsappCoach, #btnFaireConvocationCoach,
+        #btnValiderConvocation, #btnWhatsAppConvocation, #btnEnvoyerWhatsApp,
+        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp, #btnAjouterMatch,
+        #btnModifierMatch, #btnAjouterJoueur {
+          background: ${couleurPrincipale} !important;
+          color: ${couleurBoutonTexte} !important;
+          border-color: ${couleurPrincipale} !important;
+        }
+        button *, .btn-light *, .btn-outline *, .back *, .menu-btn *, .role-menu-card *,
+        .gestion-home-tile *, .gestion-settings-tile *, .gm-tab *, .link-btn *,
+        a.link-btn *, .btn-primary *, .primary *, .action-primary *, .whatsapp-btn *,
+        .bureau-action-btn *, .club-social-btn *, .convoc-action *, .gm-send-btn *,
+        .gj-save *, #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
+        #btnGenererConvocation *, #btnWhatsappCoach *, #btnFaireConvocationCoach *,
+        #btnValiderConvocation *, #btnWhatsAppConvocation *, #btnEnvoyerWhatsApp *,
+        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *, #btnAjouterMatch *,
+        #btnModifierMatch *, #btnAjouterJoueur * {
+          color: ${couleurBoutonTexte} !important;
+        }
+        button:disabled, .role-menu-card.disabled, .menu-btn.disabled {
+          opacity: .55 !important;
+        }
+
   `;
 
   // SVG fond sport / brushstrokes : l'accent secondaire colore le décor, le fond_type reste prioritaire.
@@ -6966,7 +6997,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.10-GESTION-COLOR";
+window.CAM_BASKET_VERSION = "V65.14-GESTION-BUTTON-UNIFORM";
 
 </script>
 

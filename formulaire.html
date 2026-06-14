@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.14-DEMO-COLOR-FIX4 - Couleurs entièrement pilotées par CONFIG -->
+<!-- Démo App Club formulaire V61.15-DEMO-BUTTON-UNIFORM - Couleurs entièrement pilotées par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.14-DEMO-COLOR-FIX4</title>
+<title>Formulaire Match V61.15-DEMO-BUTTON-UNIFORM</title>
 
 <style>
 :root{
@@ -184,6 +184,31 @@ h2{color:var(--app-primary)!important;}
   background:transparent!important;
   color:var(--app-text)!important;
   border-color:var(--app-secondary)!important;
+}
+</style>
+
+
+<style id="_form_button_uniform_v5">
+/* V61.15 : tous les boutons du formulaire ont la même couleur */
+.choice-btn,
+.choice-btn.active,
+.send,
+.send.cancel{
+  background:var(--app-primary)!important;
+  color:var(--app-button-text)!important;
+  border:2px solid var(--app-primary)!important;
+}
+.choice-btn *,
+.choice-btn.active *,
+.send *,
+.send.cancel *{
+  color:var(--app-button-text)!important;
+}
+.choice-btn.active{
+  box-shadow:0 0 0 3px var(--app-secondary)!important;
+}
+.choice-btn.disabled{
+  opacity:.45!important;
 }
 </style>
 
