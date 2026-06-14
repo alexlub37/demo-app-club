@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V62.33-JOUEURS-COLOR-CLEAN" />
+  <meta name="cam-basket-version" content="V62.34-JOUEURS-COLOR-CLEAN3" />
   <style>
     :root{
       --bg:#050505;
@@ -22,7 +22,7 @@
       --text:#ffffff;
       --muted:#cfcfcf;
       --line:#2d2d2d;
-      --accent:#ffd400;
+      --accent:#ffffff;
       --ok:#1faa59;
       --warn:#ff9f1c;
     }
@@ -1913,7 +1913,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 <style id="_color_cleanup_v2">
 /* V-COLOR-CLEANUP-2 : supprime les anciens jaunes fixes et applique les couleurs CONFIG */
 :root{
-  --accent-rgb:255,212,0;
+  --accent-rgb:255,255,255;
   --button-bg:var(--accent);
   --button-text:#000;
 }
@@ -1988,11 +1988,116 @@ hr,.separator{
   border-color:rgba(var(--accent-rgb),.20)!important;
 }
 /* Fond sport : les bordures dessinées suivent l'accent, pas un jaune fixe */
-#camSvgBackground path[fill="#ffd400"],
-#camSvgBackground path[fill="#FFD400"]{
+#camSvgBackground path[fill="#ffffff"],
+#camSvgBackground path[fill="#ffffff"]{
   fill:var(--accent)!important;
 }
 /* Indicateur de mise à jour */
+#syncIndicator,
+.sync-indicator{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+}
+</style>
+
+
+
+<style id="_color_cleanup_v3_forced">
+/* V-COLOR-CLEANUP-3 : derniers éléments forcés sur CONFIG */
+:root{
+  --button-bg: var(--button-bg, var(--accent));
+  --button-text: var(--button-text, #000000);
+}
+/* Boutons principaux créés dynamiquement */
+#btnReponseMatch,
+#btnCoachResponses,
+#btnGenererConvocation,
+#btnWhatsappCoach,
+#btnFaireConvocationCoach,
+.convoc-action,
+.link-btn.primary,
+.gm-send-btn,
+.gj-save,
+#grSaveBtn,
+button.primary,
+.btn-primary,
+.modal-close{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+  border-color:var(--button-bg)!important;
+}
+#btnReponseMatch *,
+#btnCoachResponses *,
+#btnGenererConvocation *,
+#btnWhatsappCoach *,
+#btnFaireConvocationCoach *,
+.convoc-action *,
+.link-btn.primary *,
+.gm-send-btn *,
+.gj-save *,
+#grSaveBtn *,
+button.primary *,
+.btn-primary *,
+.modal-close *{
+  color:var(--button-text)!important;
+}
+/* Boutons secondaires / retour */
+.back,
+.btn-outline:not(.active),
+.menu-btn:not(.active){
+  background:rgba(0,0,0,.35)!important;
+  color:var(--text)!important;
+  border-color:var(--accent)!important;
+}
+/* Cartes convocation / apports / détail match */
+#matchConvocationCard,
+.match-convoc-card,
+.convocation-card,
+.convoc-card,
+.convoc-result,
+.apports-card,
+.gm-share-prompt,
+.gm-reconfirm-note,
+.home-week-card,
+.home-match-card,
+.card,
+.match-card{
+  border-color:rgba(var(--accent-rgb),.55)!important;
+}
+#matchConvocationCard,
+.match-convoc-card,
+.apports-card,
+.convoc-card,
+.convoc-result{
+  background:rgba(var(--accent-rgb),.05)!important;
+}
+#matchConvocationCard h2,
+.match-convoc-card h2,
+#matchConvocationCard h3,
+.match-convoc-card h3,
+.match-convoc-title,
+.convoc-title,
+.apports-title,
+.apports-card h2,
+.apports-card h3,
+.apports-card strong,
+.home-section-title,
+.home-count,
+.detail-label,
+.status-badge,
+.pill,
+.match-badge,
+.weekend-match-type,
+.type-ext,
+.team-name,
+.match-date-time-row span:last-child{
+  color:var(--accent)!important;
+  border-color:rgba(var(--accent-rgb),.55)!important;
+}
+hr,.separator{
+  border-color:rgba(var(--accent-rgb),.25)!important;
+}
+#_refreshIndicator,
 #syncIndicator,
 .sync-indicator{
   background:var(--button-bg)!important;
@@ -2861,17 +2966,17 @@ hr,.separator{
       if (/^[0-9a-fA-F]{6}$/.test(v)) {
         return [parseInt(v.slice(0,2),16), parseInt(v.slice(2,4),16), parseInt(v.slice(4,6),16)].join(",");
       }
-      return fallback || "255,212,0";
+      return fallback || "255,255,255";
     }
 
     function appliquerCouleursConfigJoueurs(cfg) {
       const root = document.documentElement;
       const couleurFond = cfgColorValueJoueurs("couleur_fond", "#050505");
-      const couleurPrincipale = cfgColorValueJoueurs("couleur_principale", "#ffd400");
+      const couleurPrincipale = cfgColorValueJoueurs("couleur_principale", "#ffffff");
       const couleurSecondaire = cfgColorValueJoueurs("couleur_secondaire", couleurPrincipale);
       const couleurTexte = cfgColorValueJoueurs("couleur_texte", "#ffffff");
       const couleurBoutonTexte = cfgColorValueJoueurs("couleur_bouton_texte", "#000000");
-      const accentRgb = hexToRgbStringJoueurs(couleurSecondaire, "255,212,0");
+      const accentRgb = hexToRgbStringJoueurs(couleurSecondaire, "102,153,0");
 
       root.style.setProperty("--bg", couleurFond);
       root.style.setProperty("--text", couleurTexte);
@@ -4274,7 +4379,7 @@ if(!bouton){
   bouton.style.borderRadius = "14px";
   bouton.style.background = "var(--button-bg)";
   bouton.style.border = "none";
-  bouton.style.color = "#000";
+  bouton.style.color = "var(--button-text)";
   bouton.innerText = "Répondre / confirmer";
 
   document.querySelector("#matchDetailScreen .card").appendChild(bouton);
@@ -4307,7 +4412,7 @@ chargerConvocationEnregistree(m);
         const ind = document.createElement('div');
         ind.id = '_refreshIndicator';
         ind.innerHTML = '🔄 Mise à jour…';
-        ind.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(var(--accent-rgb),0.92);color:#000;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;';
+        ind.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);background:var(--button-bg);color:var(--button-text);font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;';
         document.body.appendChild(ind);
       }
 

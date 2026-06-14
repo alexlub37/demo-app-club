@@ -1,4 +1,4 @@
-// Démo App Club — configuration centrale V1.05
+// Démo App Club — configuration centrale V1.06
 // Fichier technique minimum.
 // Pour créer une copie pour un autre club, modifier uniquement les 3 valeurs ci-dessous.
 // Les textes du club et WhatsApp sont maintenant pilotés par CONFIG dans Google Sheets.
