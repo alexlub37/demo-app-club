@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.13 - Coach - Configuration centrale app-config.js + libellés club -->
+<!-- Démo App Club V63.14 - Coach - couleurs CONFIG : fond/principale/secondaire/texte/boutons -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.13-COACH-CONFIG" />
+  <meta name="cam-basket-version" content="V63.14-COACH-COLOR" />
   <style>
     :root{
       --bg:#050505;
@@ -23,6 +23,9 @@
       --muted:#cfcfcf;
       --line:#2d2d2d;
       --accent:#ffd400;
+      --accent-rgb:255,212,0;
+      --button-bg:#ffd400;
+      --button-text:#000000;
       --ok:#1faa59;
       --warn:#ff9f1c;
     }
@@ -97,8 +100,9 @@
     }
     .btn-light,
     .btn-outline.active{
-      background:var(--accent);
-      color:#000;
+      background:var(--button-bg);
+      color:var(--button-text);
+      border-color:var(--button-bg);
     }
     .btn-outline{
       background:#0b0b0b;
@@ -183,8 +187,8 @@
       max-width:44%;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,212,0,.48);
-      background:rgba(255,212,0,.10);
+      border:1px solid rgba(var(--accent-rgb),.48);
+      background:rgba(var(--accent-rgb),.10);
       color:var(--accent);
       font-size:13px;
       font-weight:900;
@@ -201,7 +205,7 @@
     .team-extra{
       margin-top:12px;
       padding-top:11px;
-      border-top:1px solid rgba(255,212,0,.18);
+      border-top:1px solid rgba(var(--accent-rgb),.18);
       display:grid;
       gap:8px;
     }
@@ -300,7 +304,7 @@
       border-left:4px solid rgba(255,255,255,.85)!important;
     }
     .coach-space-convoc{
-      border-left-color:rgba(255,212,0,.92)!important;
+      border-left-color:rgba(var(--accent-rgb),.92)!important;
     }
     .coach-space-row{
       display:grid;
@@ -422,7 +426,7 @@
       margin-left:8px;
       padding:4px 8px;
       border-radius:999px;
-      border:1px solid rgba(255,212,0,.45);
+      border:1px solid rgba(var(--accent-rgb),.45);
       color:var(--accent);
       font-size:11px;
       font-weight:900;
@@ -495,8 +499,8 @@
       display:inline-block;
       padding:6px 10px;
       border-radius:999px;
-      background:rgba(255,212,0,.12);
-      border:1px solid rgba(255,212,0,.45);
+      background:rgba(var(--accent-rgb),.12);
+      border:1px solid rgba(var(--accent-rgb),.45);
       color:var(--accent);
       font-size:12px;
       font-weight:900;
@@ -572,9 +576,9 @@
     }
     .pill{
       display:inline-block;
-      background:rgba(255,212,0,.13);
+      background:rgba(var(--accent-rgb),.13);
       color:var(--accent);
-      border:1px solid rgba(255,212,0,.35);
+      border:1px solid rgba(var(--accent-rgb),.35);
       padding:7px 12px;
       border-radius:999px;
       font-size:12px;
@@ -584,7 +588,7 @@
       display:inline-block;
       text-decoration:none;
       background:var(--accent);
-      color:#000;
+      color:var(--button-text);
       padding:12px 14px;
       border-radius:14px;
       font-weight:900;
@@ -625,7 +629,7 @@
       gap: 10px;
       align-items: center;
       background: rgba(0,0,0,.20);
-      border: 1px solid rgba(255,212,0,.20);
+      border: 1px solid rgba(var(--accent-rgb),.20);
       border-radius: 12px;
       padding: 9px 10px;
       margin-bottom: 0;
@@ -721,7 +725,7 @@
     }
     .weekend-match[data-home-match-idx]:active{
       transform:scale(.98);
-      border-color:rgba(255,212,0,.55);
+      border-color:rgba(var(--accent-rgb),.55);
     }
 
     .modal-overlay{
@@ -767,7 +771,7 @@
     .modal-close{
       width:100%;
       background:var(--accent);
-      color:#000;
+      color:var(--button-text);
       border:1px solid var(--accent);
       padding:12px 10px;
       border-radius:12px;
@@ -793,12 +797,12 @@
     .convoc-item input{transform:scale(1.25)}
     .convoc-result{display:none;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#101010;color:#fff}
     .convoc-title{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:8px;display:block}
-    .convoc-action{margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:#ffd400;color:#000;border:none}
+    .convoc-action{margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:var(--button-bg);color:var(--button-text);border:none}
     .match-convoc-card{
-  border:1.5px solid rgba(255,212,0,0.6);
+  border:1.5px solid rgba(var(--accent-rgb),0.6);
   border-radius:16px;
   padding:10px;
-  background:rgba(255,212,0,0.04);
+  background:rgba(var(--accent-rgb),0.04);
 }
     .match-convoc-card h2{
       margin:0 0 10px;
@@ -819,7 +823,7 @@
 }
     .match-convoc-player{
   background:rgba(255,255,255,0.02);
-  border:1px solid rgba(255,212,0,0.4);
+  border:1px solid rgba(var(--accent-rgb),0.4);
   border-radius:8px;
   padding:6px 8px;
   font-size:15px;
@@ -945,10 +949,10 @@
 .apports-card{
   display:none;
   margin-top:14px;
-  border:1px solid rgba(255,212,0,.45);
+  border:1px solid rgba(var(--accent-rgb),.45);
   border-radius:18px;
   padding:14px;
-  background:rgba(255,212,0,.035);
+  background:rgba(var(--accent-rgb),.035);
 }
 .apports-title{
   color:var(--accent);
@@ -1024,10 +1028,10 @@
 .apports-card{
   display:none;
   margin-top:14px;
-  border:1px solid rgba(255,212,0,.42);
+  border:1px solid rgba(var(--accent-rgb),.42);
   border-radius:18px;
   padding:14px;
-  background:rgba(255,212,0,.035);
+  background:rgba(var(--accent-rgb),.035);
 }
 .apports-title{
   color:var(--accent) !important;
@@ -1077,10 +1081,10 @@
 .apports-card{
   display:none;
   margin-top:14px;
-  border:1px solid rgba(255,212,0,.42);
+  border:1px solid rgba(var(--accent-rgb),.42);
   border-radius:18px;
   padding:14px;
-  background:rgba(255,212,0,.02) !important;
+  background:rgba(var(--accent-rgb),.02) !important;
 }
 .apports-title{
   color:var(--accent) !important;
@@ -1145,8 +1149,8 @@
 }
 
 .btn-action{
-  background:#ffd400;
-  color:#000;
+  background:var(--button-bg);
+  color:var(--button-text);
   padding:10px 14px;
   border-radius:10px;
   text-decoration:none;
@@ -1182,7 +1186,7 @@
   display:inline-block;
   text-decoration:none;
   background:var(--accent);
-  color:#000;
+  color:var(--button-text);
   padding:10px 13px;
   border-radius:12px;
   font-weight:900;
@@ -1213,14 +1217,14 @@ body>*:not(#camSvgBackground){position:relative;z-index:1;}
 header,main,section,.screen,.container,.app,.wrapper,.page,.hero,.top,.app-header,.content,#home,#homeScreen,.home,.home-screen{background:transparent!important;}
 .card,.item,.match-card,.bureau-member-card,.convocation-card,.response-card,.menu-btn,.list-card,.team-card,.player-card{
   background:rgba(0,0,0,.38)!important;
-  border:1px solid rgba(255,212,0,.34)!important;
+  border:1px solid rgba(var(--accent-rgb),.34)!important;
   box-shadow:0 10px 24px rgba(0,0,0,.36);
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
 input,textarea,select{
   background:rgba(0,0,0,.45)!important;
-  border:1px solid rgba(255,212,0,.28)!important;
+  border:1px solid rgba(var(--accent-rgb),.28)!important;
   color:#fff!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
@@ -1228,7 +1232,7 @@ input,textarea,select{
 button,.menu-btn,.back{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:transform .12s ease;}
 button:active,.menu-btn:active,.back:active{transform:scale(.97);}
 .back{background:rgba(0,0,0,.42)!important;border:2px solid var(--accent,#ffd400)!important;color:var(--accent,#ffd400)!important;}
-hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!important;}
+hr,.separator{border-color:rgba(var(--accent-rgb),.18)!important;background:transparent!important;}
 .modal,#infoModal,.version-modal,.changelog-modal{
   position:fixed!important;inset:0!important;z-index:99999!important;
   align-items:center!important;justify-content:center!important;padding:18px!important;
@@ -1239,7 +1243,7 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 .modal-content,.modal-box,.info-modal-content,#infoModal .card,#infoModal>div,.version-modal>div,.changelog-modal>div{
   position:relative!important;margin:0 auto!important;max-width:420px!important;width:min(92vw,420px)!important;
   max-height:80vh!important;overflow:auto!important;background:rgba(10,10,10,.94)!important;
-  border:1px solid rgba(255,212,0,.40)!important;border-radius:22px!important;box-shadow:0 20px 60px rgba(0,0,0,.75)!important;
+  border:1px solid rgba(var(--accent-rgb),.40)!important;border-radius:22px!important;box-shadow:0 20px 60px rgba(0,0,0,.75)!important;
 }
 
 
@@ -1279,7 +1283,7 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 
 /* Gestion matchs intégrée V60.34 */
 .gm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.gm-tab.active{background:var(--accent)!important;color:#000!important}
+.gm-tab.active{background:var(--accent)!important;color:var(--button-text)!important}
 .gm-field{margin-top:12px}
 .gm-field label{display:block;color:#fff;font-weight:900;margin-bottom:6px;font-size:14px}
 .gm-field small{display:block;color:var(--muted);margin-top:5px;font-size:12px;line-height:1.35}
@@ -1323,8 +1327,8 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
   min-height:54px!important;
   border:3px solid #fff!important;
   border-radius:18px!important;
-  background:#ffd400!important;
-  color:#000!important;
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
   font-size:18px!important;
   font-weight:900!important;
   box-shadow:0 8px 22px rgba(0,0,0,.45);
@@ -1340,7 +1344,7 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 
 /* Protection Gestion matchs V60.34 */
 .gm-lock-card{
-  border:1px solid rgba(255,212,0,.42)!important;
+  border:1px solid rgba(var(--accent-rgb),.42)!important;
   background:rgba(0,0,0,.42)!important;
 }
 .gm-lock-note{
@@ -1354,8 +1358,8 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
   margin-top:10px;
   padding:10px 12px;
   border-radius:14px;
-  border:1px solid rgba(255,212,0,.35);
-  background:rgba(255,212,0,.08);
+  border:1px solid rgba(var(--accent-rgb),.35);
+  background:rgba(var(--accent-rgb),.08);
   color:var(--accent);
   font-size:13px;
   font-weight:800;
@@ -1538,12 +1542,12 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 .gj-message.ok{display:block;background:#1f8f3a;color:#fff}
 .gj-message.err{display:block;background:#b00020;color:#fff}
 .gj-player-card.inactive{opacity:.58}
-.gj-badge{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid rgba(255,212,0,.45);color:var(--accent)}
+.gj-badge{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent)}
 .gj-badge-off{border-color:#e04040;color:#ff9b9b}
-.gj-save{width:100%;margin-top:14px;min-height:54px!important;border:3px solid #fff!important;border-radius:18px!important;background:#ffd400!important;color:#000!important;font-size:18px!important;font-weight:900!important}
+.gj-save{width:100%;margin-top:14px;min-height:54px!important;border:3px solid #fff!important;border-radius:18px!important;background:var(--button-bg)!important;color:var(--button-text)!important;font-size:18px!important;font-weight:900!important}
 .gj-form-card{display:none}
 .gj-form-card.active{display:block}
-.gj-mode-badge{display:inline-block;margin:2px 0 8px 0;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,212,0,.45);color:var(--accent);font-size:12px;font-weight:900}
+.gj-mode-badge{display:inline-block;margin:2px 0 8px 0;padding:6px 10px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent);font-size:12px;font-weight:900}
 .gj-cancel{width:100%;margin-top:10px;min-height:48px!important;border:2px solid var(--accent)!important;border-radius:18px!important;background:transparent!important;color:#fff!important;font-size:16px!important;font-weight:900!important}
 .gj-help-warning{margin-top:10px;color:#ffd08a;font-size:13px;line-height:1.35}
 .gj-mode-choice-card,
@@ -1659,8 +1663,8 @@ button:disabled,
   margin-top:10px;
   padding:10px 12px;
   border-radius:14px;
-  border:1px solid rgba(255,212,0,.35);
-  background:rgba(255,212,0,.08);
+  border:1px solid rgba(var(--accent-rgb),.35);
+  background:rgba(var(--accent-rgb),.08);
   color:var(--accent);
   font-size:13px;
   font-weight:800;
@@ -1677,8 +1681,8 @@ button:disabled,
   margin:12px 0;
   padding:14px;
   border-radius:16px;
-  border:1px solid rgba(255,212,0,.45);
-  background:rgba(255,212,0,.08);
+  border:1px solid rgba(var(--accent-rgb),.45);
+  background:rgba(var(--accent-rgb),.08);
   color:#fff;
 }
 .gm-share-prompt.active{display:block}
@@ -1698,8 +1702,8 @@ button:disabled,
   width:100%;
   min-height:50px!important;
   border-radius:18px!important;
-  background:#ffd400!important;
-  color:#000!important;
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
   border:2px solid #fff!important;
   font-weight:950!important;
   font-size:16px!important;
@@ -1721,7 +1725,7 @@ button:disabled,
   object-fit:cover;
   border-radius:18px;
   margin-bottom:12px;
-  border:1px solid rgba(255,212,0,.35);
+  border:1px solid rgba(var(--accent-rgb),.35);
 }
 .club-event-title{
   color:var(--accent);
@@ -1740,8 +1744,8 @@ button:disabled,
   display:inline-block;
   margin-top:12px;
   text-decoration:none;
-  background:#ffd400;
-  color:#000;
+  background:var(--button-bg);
+  color:var(--button-text);
   border-radius:999px;
   padding:9px 14px;
   font-weight:950;
@@ -1772,8 +1776,8 @@ button:disabled,
   text-decoration:none;
   border-radius:999px;
   padding:8px 13px;
-  background:rgba(255,212,0,.08);
-  border:1px solid rgba(255,212,0,.34);
+  background:rgba(var(--accent-rgb),.08);
+  border:1px solid rgba(var(--accent-rgb),.34);
   color:#fff;
   font-weight:900;
   font-size:13px;
@@ -1813,7 +1817,7 @@ button:disabled,
 
 /* V62.05 JOUEURS - stabilisation parcours */
 .player-help-card{
-  border:1px solid rgba(255,212,0,.34)!important;
+  border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
   padding:14px!important;
 }
@@ -1833,8 +1837,8 @@ button:disabled,
   width:100%;
   min-height:46px!important;
   border-radius:16px!important;
-  background:#ffd400!important;
-  color:#000!important;
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
   border:2px solid #fff!important;
   font-weight:950!important;
 }
@@ -1844,8 +1848,8 @@ button:disabled,
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
 .player-team-select-actions{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0 14px;}
-.player-team-card-selected{border-color:#ffd400!important;background:rgba(255,212,0,.12)!important;}
-.player-team-check{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,212,0,.45);color:#ffd400;font-size:12px;font-weight:950;}
+.player-team-card-selected{border-color:#ffd400!important;background:rgba(var(--accent-rgb),.12)!important;}
+.player-team-check{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);color:#ffd400;font-size:12px;font-weight:950;}
 body.player-app #btn-coach,
 body.player-app #btn-gestion,
 body.player-app #btn-benevoles{display:none!important;}
@@ -1906,8 +1910,8 @@ body.coach-app #weekendCard{
   margin:12px 0 14px;
   padding:14px;
   border-radius:18px;
-  border:1px solid rgba(255,212,0,.45);
-  background:rgba(255,212,0,.045);
+  border:1px solid rgba(var(--accent-rgb),.45);
+  background:rgba(var(--accent-rgb),.045);
 }
 .coach-logistique-title{
   color:var(--accent);
@@ -1941,7 +1945,7 @@ body.coach-app #weekendCard{
 .coach-logistique-section{
   margin-top:10px;
   padding-top:10px;
-  border-top:1px solid rgba(255,212,0,.18);
+  border-top:1px solid rgba(var(--accent-rgb),.18);
 }
 .coach-logistique-section-title{
   color:var(--accent);
@@ -2146,7 +2150,7 @@ body.coach-app #weekendCard{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.13 COACH</button>
+    ">V63.14 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -2435,7 +2439,7 @@ body.coach-app #weekendCard{
             width:100%;
             padding:13px;
             background:#25D366;
-            color:#000;
+            color:var(--button-text);
             border:none;
             border-radius:14px;
             font-size:15px;
@@ -4276,7 +4280,7 @@ chargerConvocationEnregistree(m);
         const ind = document.createElement('div');
         ind.id = '_refreshIndicator';
         ind.innerHTML = '🔄 Mise à jour…';
-        ind.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(255,212,0,0.92);color:#000;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;';
+        ind.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(var(--accent-rgb),0.92);color:var(--button-text);font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;';
         document.body.appendChild(ind);
       }
 
@@ -5947,7 +5951,10 @@ function renderBenevoles(){
 
     function setActiveButton(name){
       const buttons = ['btn-home','btn-teams','btn-myteams','btn-coach','btn-gestion','btn-bureau','btn-benevoles'];
-      const c = (state.config && state.config['couleur_principale']) || '';
+      const cfg = state.config || {};
+      const couleurPrincipale = cfg['couleur_principale'] || '';
+      const couleurSecondaire = cfg['couleur_secondaire'] || couleurPrincipale;
+      const couleurBoutonTexte = cfg['couleur_bouton_texte'] || '';
 
       buttons.forEach(id => {
         const el = document.getElementById(id);
@@ -5957,7 +5964,7 @@ function renderBenevoles(){
           el.classList.add('btn-outline');
           el.style.removeProperty('background');
           el.style.removeProperty('color');
-          if (c) el.style.setProperty('border-color', c, 'important');
+          if (couleurSecondaire) el.style.setProperty('border-color', couleurSecondaire, 'important');
         }
       });
 
@@ -5967,10 +5974,10 @@ function renderBenevoles(){
           active.classList.add('active');
           active.classList.remove('btn-outline');
           active.classList.add('btn-light');
-          if (c) {
-            active.style.setProperty('background', c, 'important');
-            active.style.setProperty('border-color', c, 'important');
-            active.style.setProperty('color', '#000', 'important');
+          if (couleurPrincipale) {
+            active.style.setProperty('background', couleurPrincipale, 'important');
+            active.style.setProperty('border-color', couleurPrincipale, 'important');
+            if (couleurBoutonTexte) active.style.setProperty('color', couleurBoutonTexte, 'important');
           }
         }
       }
@@ -6977,6 +6984,83 @@ window.addEventListener('focus', () => {
   }
 });
 
+
+function cfgColorValue(key, fallback) {
+  const v = cfgValue(key, fallback || "").trim();
+  return v || fallback || "";
+}
+
+function hexToRgbString(color, fallback) {
+  let v = String(color || "").trim();
+  if (!v) return fallback || "255,212,0";
+  if (v[0] === "#") v = v.slice(1);
+  if (/^[0-9a-fA-F]{3}$/.test(v)) {
+    v = v.split("").map(ch => ch + ch).join("");
+  }
+  if (/^[0-9a-fA-F]{6}$/.test(v)) {
+    return [parseInt(v.slice(0,2),16), parseInt(v.slice(2,4),16), parseInt(v.slice(4,6),16)].join(",");
+  }
+  return fallback || "255,212,0";
+}
+
+function appliquerCouleursConfigCoach(cfg) {
+  const root = document.documentElement;
+  const couleurFond = cfgColorValue("couleur_fond", "#050505");
+  const couleurPrincipale = cfgColorValue("couleur_principale", "#ffd400");
+  const couleurSecondaire = cfgColorValue("couleur_secondaire", couleurPrincipale);
+  const couleurTexte = cfgColorValue("couleur_texte", "#ffffff");
+  const couleurBoutonTexte = cfgColorValue("couleur_bouton_texte", "#000000");
+
+  root.style.setProperty("--bg", couleurFond);
+  root.style.setProperty("--text", couleurTexte);
+  root.style.setProperty("--accent", couleurSecondaire);
+  root.style.setProperty("--accent-rgb", hexToRgbString(couleurSecondaire, "255,212,0"));
+  root.style.setProperty("--button-bg", couleurPrincipale);
+  root.style.setProperty("--button-text", couleurBoutonTexte);
+  root.style.setProperty("--line", couleurSecondaire);
+
+  let s = document.getElementById("_cfg_colors_coach");
+  if (!s) { s = document.createElement("style"); s.id = "_cfg_colors_coach"; document.head.appendChild(s); }
+  s.textContent = `
+    body, header { background: var(--bg) !important; color: var(--text) !important; }
+    #camSvgBackground { background: var(--bg) !important; }
+    .hero-title, .item-title, .menu-title, .detail-title, h1, h2, h3, label { color: var(--text) !important; }
+    .muted, .item-sub, .coach-msg, .empty, .note, .detail-sub { color: color-mix(in srgb, var(--text) 72%, transparent) !important; }
+    .card, .item, .menu-card, .convoc-card, .coach-item, .convoc-item, .convoc-result,
+    .home-week-card, .home-match-card, .apports-card, .bureau-member-card, .modal-card {
+      border-color: rgba(var(--accent-rgb), .55) !important;
+    }
+    .hero-sub, .badge-season, .coach-title, .convoc-title, .apports-title, .pill,
+    .home-section-title, .home-count, .detail-label, .status-badge {
+      color: var(--accent) !important;
+      border-color: rgba(var(--accent-rgb), .55) !important;
+    }
+    button, .btn-outline, .back {
+      border-color: var(--accent) !important;
+      color: var(--text) !important;
+    }
+    .btn-light, .btn-light.active, .btn-outline.active, .convoc-action,
+    .primary, .gm-tab.active, button[type="submit"] {
+      background: var(--button-bg) !important;
+      color: var(--button-text) !important;
+      border-color: var(--button-bg) !important;
+    }
+    .btn-outline:not(.active), .back {
+      background: rgba(0,0,0,.35) !important;
+      color: var(--text) !important;
+      border-color: var(--accent) !important;
+    }
+    input, select, textarea {
+      border-color: var(--accent) !important;
+    }
+  `;
+
+  document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", couleurSecondaire));
+  const badge = document.getElementById("versionBadge");
+  if (badge) { badge.style.color = couleurSecondaire; badge.style.borderColor = couleurSecondaire; }
+  document.querySelectorAll(".splash-dot").forEach(d => d.style.background = couleurSecondaire);
+}
+
 // ══════════════════════════════════
 // ⚙️ CONFIG
 // ══════════════════════════════════
@@ -7002,30 +7086,11 @@ function appliquerConfig() {
   // Fond configurable : basket / hand / foot / neutre via CONFIG en V63.07
   appliquerFondSportConfig(cfg);
 
-  // Couleur principale
+  // Couleurs pilotées par CONFIG / PARAMETRES_CLUB
+  appliquerCouleursConfigCoach(cfg);
+
+  // Compatibilité : anciens éléments utilisant encore couleur_principale
   const c = cfg["couleur_principale"] || "";
-  if (c) {
-    // Variable CSS
-    document.documentElement.style.setProperty("--accent", c);
-    // Style injecté pour forcer sur tous les éléments
-    let s = document.getElementById("_cfg");
-    if (!s) { s = document.createElement("style"); s.id = "_cfg"; document.head.appendChild(s); }
-    s.textContent =
-      ".btn-light.active{background:" + c + "!important;border-color:" + c + "!important}" +
-      ".btn-outline{border-color:" + c + "!important}" +
-      ".hero-sub,.badge-season,.coach-title,.convoc-title,.apports-title{color:" + c + "!important}";
-    // SVG fond brushstrokes
-    document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", c));
-    // Badge version
-    const badge = document.getElementById("versionBadge");
-    if (badge) { badge.style.color = c; badge.style.borderColor = c; }
-    // Points du splash screen
-    document.querySelectorAll(".splash-dot").forEach(d => d.style.background = c);
-    // Boutons déjà actifs
-    document.querySelectorAll(".btn-light.active").forEach(el => {
-      el.style.setProperty("background", c, "important");
-    });
-  }
 
   // Nom du club
   const nom = cfg["nom_club"] || "";

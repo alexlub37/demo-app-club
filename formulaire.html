@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.11-DEMO-COLOR-FOND - Couleurs propres pilotées par CONFIG -->
+<!-- Démo App Club formulaire V61.10-DEMO-COLOR - Couleurs boutons pilotées par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.11-DEMO-COLOR-FOND</title>
+<title>Formulaire Match V61.10-DEMO-COLOR</title>
 
 <style>
 :root{
   --app-primary:#ffd400;
-  --app-secondary:#444444;
-  --app-bg:#000000;
+  --app-secondary:#000000;
   --app-text:#ffffff;
   --app-button-text:#000000;
   --app-choice-bg:#222222;
-  --app-choice-border:#555555;
+  --app-choice-border:#444444;
   --app-note:#cfcfcf;
 }
 body{
-  background:var(--app-bg);
+  background:var(--app-secondary);
   color:var(--app-text);
   font-family:Arial,sans-serif;
   padding:20px;
@@ -43,11 +42,9 @@ input, textarea, select{
   padding:12px;
   margin-top:6px;
   border-radius:10px;
-  border:2px solid var(--app-choice-border);
+  border:none;
   box-sizing:border-box;
   font-size:16px;
-  background:#ffffff;
-  color:#000000;
 }
 textarea{
   min-height:90px;
@@ -88,24 +85,17 @@ textarea{
   font-size:17px;
   cursor:pointer;
 }
-.send.cancel{
-  background:transparent;
-  color:var(--app-text);
-  border:2px solid var(--app-secondary);
-}
 .note{
   margin-top:12px;
   color:var(--app-note);
   text-align:center;
   font-size:14px;
-  opacity:.82;
 }
 
 .apport-note{
   margin-top:6px;
   color:var(--app-note);
   font-size:14px;
-  opacity:.82;
 }
 
 .choice-btn.disabled{
@@ -175,7 +165,7 @@ textarea{
 
   <button class="send" onclick="envoyerFormulaire()">Envoyer la réponse</button>
 
-  <button class="send cancel" style="margin-top:10px;" onclick="annulerFormulaire()">Annuler</button>
+  <button class="send" style="background:#333;color:#fff;border:2px solid #555;margin-top:10px;" onclick="annulerFormulaire()">Annuler</button>
 
   <div class="note">Après envoi, retour automatique à l’application.</div>
 
@@ -183,7 +173,7 @@ textarea{
 
 <script src="app-config.js"></script>
 <script>
-// V61.11 couleurs propres : fond séparé, boutons et contours pilotés par CONFIG
+// V61.10 couleurs boutons pilotées par CONFIG + quotas organisation pilotés par CONFIG
 
 let presenceValue = "";
 let transportValue = "";
@@ -247,19 +237,10 @@ function configBoolForm(cfg, key, fallback){
 
 function appliquerThemeFormulaire(cfg){
   const root = document.documentElement;
-  const primary = configValueForm(cfg, "couleur_principale", "#ffd400");
-  const secondary = configValueForm(cfg, "couleur_secondaire", "#555555");
-  const bg = configValueForm(cfg, "couleur_fond", "#000000");
-  const text = configValueForm(cfg, "couleur_texte", "#ffffff");
-  const buttonText = configValueForm(cfg, "couleur_bouton_texte", "#000000");
-
-  root.style.setProperty("--app-primary", primary);
-  root.style.setProperty("--app-secondary", secondary);
-  root.style.setProperty("--app-bg", bg);
-  root.style.setProperty("--app-text", text);
-  root.style.setProperty("--app-button-text", buttonText);
-  root.style.setProperty("--app-choice-border", secondary);
-  root.style.setProperty("--app-note", text);
+  root.style.setProperty("--app-primary", configValueForm(cfg, "couleur_principale", "#ffd400"));
+  root.style.setProperty("--app-secondary", configValueForm(cfg, "couleur_secondaire", "#000000"));
+  root.style.setProperty("--app-text", configValueForm(cfg, "couleur_texte", "#ffffff"));
+  root.style.setProperty("--app-button-text", configValueForm(cfg, "couleur_bouton_texte", "#000000"));
 }
 
 async function chargerConfigOrganisation(){
