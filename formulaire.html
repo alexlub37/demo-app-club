@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.11-DEMO-COLOR-FOND - Couleurs propres pilotées par CONFIG -->
+<!-- Démo App Club formulaire V61.12-DEMO-COLOR-CLEAN - Couleurs entièrement pilotées par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.11-DEMO-COLOR-FOND</title>
+<title>Formulaire Match V61.12-DEMO-COLOR-CLEAN</title>
 
 <style>
 :root{
@@ -125,6 +125,22 @@ textarea{
     input, select, textarea { font-size: 16px !important; }
     body { -webkit-overflow-scrolling: touch; }
 </style>
+
+<style id="_form_color_cleanup_v2">
+/* V61.12 : tous les anciens jaunes suivent maintenant CONFIG */
+:root{
+  --app-primary:#ffd400;
+  --app-secondary:#555555;
+  --app-bg:#000000;
+  --app-text:#ffffff;
+  --app-button-text:#000000;
+}
+h2{color:var(--app-primary)!important;}
+.send{background:var(--app-primary)!important;color:var(--app-button-text)!important;border-color:var(--app-primary)!important;}
+.choice-btn.active{background:var(--app-primary)!important;color:var(--app-button-text)!important;border-color:var(--app-primary)!important;}
+.choice-btn,.send.cancel,input,select,textarea{border-color:var(--app-secondary)!important;}
+</style>
+
 </head>
 
 <body>
@@ -183,7 +199,7 @@ textarea{
 
 <script src="app-config.js"></script>
 <script>
-// V61.11 couleurs propres : fond séparé, boutons et contours pilotés par CONFIG
+// V61.12 couleurs propres : fond séparé, boutons, titres et contours pilotés par CONFIG
 
 let presenceValue = "";
 let transportValue = "";

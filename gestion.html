@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.10 - Gestion - couleurs CONFIG complètes -->
+<!-- Démo App Club V65.11 - Gestion - nettoyage couleurs fixes -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.10-GESTION-COLOR" />
+  <meta name="cam-basket-version" content="V65.11-GESTION-COLOR-CLEAN" />
   <style>
     :root{
       --bg:#050505;
@@ -183,8 +183,8 @@
       max-width:44%;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,212,0,.48);
-      background:rgba(255,212,0,.10);
+      border:1px solid rgba(var(--accent-rgb),.48);
+      background:rgba(var(--accent-rgb),.10);
       color:var(--accent);
       font-size:13px;
       font-weight:900;
@@ -201,7 +201,7 @@
     .team-extra{
       margin-top:12px;
       padding-top:11px;
-      border-top:1px solid rgba(255,212,0,.18);
+      border-top:1px solid rgba(var(--accent-rgb),.18);
       display:grid;
       gap:8px;
     }
@@ -300,7 +300,7 @@
       border-left:4px solid rgba(255,255,255,.85)!important;
     }
     .coach-space-convoc{
-      border-left-color:rgba(255,212,0,.92)!important;
+      border-left-color:rgba(var(--accent-rgb),.92)!important;
     }
     .coach-space-row{
       display:grid;
@@ -387,7 +387,7 @@
       white-space:nowrap;
     }
     .coach-convoc-alert{
-      color:#ffd08a;
+      color:var(--accent);
       font-size:11px;
       font-weight:900;
       white-space:nowrap;
@@ -422,7 +422,7 @@
       margin-left:8px;
       padding:4px 8px;
       border-radius:999px;
-      border:1px solid rgba(255,212,0,.45);
+      border:1px solid rgba(var(--accent-rgb),.45);
       color:var(--accent);
       font-size:11px;
       font-weight:900;
@@ -495,8 +495,8 @@
       display:inline-block;
       padding:6px 10px;
       border-radius:999px;
-      background:rgba(255,212,0,.12);
-      border:1px solid rgba(255,212,0,.45);
+      background:rgba(var(--accent-rgb),.12);
+      border:1px solid rgba(var(--accent-rgb),.45);
       color:var(--accent);
       font-size:12px;
       font-weight:900;
@@ -529,7 +529,7 @@
       display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;margin-left:8px
     }
     .badge-home{background:#143f20;color:#9effb8;border:1px solid #1faa59}
-    .badge-away{background:#4a2e00;color:#ffd08a;border:1px solid #ff9f1c}
+    .badge-away{background:#4a2e00;color:var(--accent);border:1px solid #ff9f1c}
     .toolbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
     .search{
       width:100%;
@@ -561,9 +561,9 @@
     }
     .pill{
       display:inline-block;
-      background:rgba(255,212,0,.13);
+      background:rgba(var(--accent-rgb),.13);
       color:var(--accent);
-      border:1px solid rgba(255,212,0,.35);
+      border:1px solid rgba(var(--accent-rgb),.35);
       padding:7px 12px;
       border-radius:999px;
       font-size:12px;
@@ -614,7 +614,7 @@
       gap: 10px;
       align-items: center;
       background: rgba(0,0,0,.20);
-      border: 1px solid rgba(255,212,0,.20);
+      border: 1px solid rgba(var(--accent-rgb),.20);
       border-radius: 12px;
       padding: 9px 10px;
       margin-bottom: 0;
@@ -675,7 +675,7 @@
       white-space: nowrap;
     }
     .type-dom { background: rgba(31,170,89,0.2); color: #9effb8; border:1px solid rgba(31,170,89,.55); }
-    .type-ext { background: rgba(255,159,28,0.15); color: #ffd08a; border:1px solid rgba(255,159,28,.55); }
+    .type-ext { background: rgba(var(--accent-rgb),0.15); color: var(--accent); border:1px solid rgba(var(--accent-rgb),.55); }
     .weekend-more {
       margin-top: 7px;
       color: var(--muted);
@@ -710,7 +710,7 @@
     }
     .weekend-match[data-home-match-idx]:active{
       transform:scale(.98);
-      border-color:rgba(255,212,0,.55);
+      border-color:rgba(var(--accent-rgb),.55);
     }
 
     .modal-overlay{
@@ -782,12 +782,12 @@
     .convoc-item input{transform:scale(1.25)}
     .convoc-result{display:none;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#101010;color:#fff}
     .convoc-title{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:8px;display:block}
-    .convoc-action{margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:#ffd400;color:#000;border:none}
+    .convoc-action{margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:var(--button-bg);color:#000;border:none}
     .match-convoc-card{
-  border:1.5px solid rgba(255,212,0,0.6);
+  border:1.5px solid rgba(var(--accent-rgb),0.6);
   border-radius:16px;
   padding:10px;
-  background:rgba(255,212,0,0.04);
+  background:rgba(var(--accent-rgb),0.04);
 }
     .match-convoc-card h2{
       margin:0 0 10px;
@@ -808,7 +808,7 @@
 }
     .match-convoc-player{
   background:rgba(255,255,255,0.02);
-  border:1px solid rgba(255,212,0,0.4);
+  border:1px solid rgba(var(--accent-rgb),0.4);
   border-radius:8px;
   padding:6px 8px;
   font-size:15px;
@@ -934,10 +934,10 @@
 .apports-card{
   display:none;
   margin-top:14px;
-  border:1px solid rgba(255,212,0,.45);
+  border:1px solid rgba(var(--accent-rgb),.45);
   border-radius:18px;
   padding:14px;
-  background:rgba(255,212,0,.035);
+  background:rgba(var(--accent-rgb),.035);
 }
 .apports-title{
   color:var(--accent);
@@ -1013,10 +1013,10 @@
 .apports-card{
   display:none;
   margin-top:14px;
-  border:1px solid rgba(255,212,0,.42);
+  border:1px solid rgba(var(--accent-rgb),.42);
   border-radius:18px;
   padding:14px;
-  background:rgba(255,212,0,.035);
+  background:rgba(var(--accent-rgb),.035);
 }
 .apports-title{
   color:var(--accent) !important;
@@ -1066,10 +1066,10 @@
 .apports-card{
   display:none;
   margin-top:14px;
-  border:1px solid rgba(255,212,0,.42);
+  border:1px solid rgba(var(--accent-rgb),.42);
   border-radius:18px;
   padding:14px;
-  background:rgba(255,212,0,.02) !important;
+  background:rgba(var(--accent-rgb),.02) !important;
 }
 .apports-title{
   color:var(--accent) !important;
@@ -1134,7 +1134,7 @@
 }
 
 .btn-action{
-  background:#ffd400;
+  background:var(--button-bg);
   color:#000;
   padding:10px 14px;
   border-radius:10px;
@@ -1201,22 +1201,22 @@ body>*:not(#camSvgBackground){position:relative;z-index:1;}
 header,main,section,.screen,.container,.app,.wrapper,.page,.hero,.top,.app-header,.content,#home,#homeScreen,.home,.home-screen{background:transparent!important;}
 .card,.item,.match-card,.bureau-member-card,.convocation-card,.response-card,.menu-btn,.list-card,.team-card,.player-card{
   background:rgba(0,0,0,.38)!important;
-  border:1px solid rgba(255,212,0,.34)!important;
+  border:1px solid rgba(var(--accent-rgb),.34)!important;
   box-shadow:0 10px 24px rgba(0,0,0,.36);
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
 input,textarea,select{
   background:rgba(0,0,0,.45)!important;
-  border:1px solid rgba(255,212,0,.28)!important;
+  border:1px solid rgba(var(--accent-rgb),.28)!important;
   color:#fff!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
 button,.menu-btn,.back{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:transform .12s ease;}
 button:active,.menu-btn:active,.back:active{transform:scale(.97);}
-.back{background:rgba(0,0,0,.42)!important;border:2px solid var(--accent,#ffd400)!important;color:var(--accent,#ffd400)!important;}
-hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!important;}
+.back{background:rgba(0,0,0,.42)!important;border:2px solid var(--accent,var(--button-bg))!important;color:var(--accent,var(--button-bg))!important;}
+hr,.separator{border-color:rgba(var(--accent-rgb),.18)!important;background:transparent!important;}
 .modal,#infoModal,.version-modal,.changelog-modal{
   position:fixed!important;inset:0!important;z-index:99999!important;
   align-items:center!important;justify-content:center!important;padding:18px!important;
@@ -1227,7 +1227,7 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 .modal-content,.modal-box,.info-modal-content,#infoModal .card,#infoModal>div,.version-modal>div,.changelog-modal>div{
   position:relative!important;margin:0 auto!important;max-width:420px!important;width:min(92vw,420px)!important;
   max-height:80vh!important;overflow:auto!important;background:rgba(10,10,10,.94)!important;
-  border:1px solid rgba(255,212,0,.40)!important;border-radius:22px!important;box-shadow:0 20px 60px rgba(0,0,0,.75)!important;
+  border:1px solid rgba(var(--accent-rgb),.40)!important;border-radius:22px!important;box-shadow:0 20px 60px rgba(0,0,0,.75)!important;
 }
 
 
@@ -1311,7 +1311,7 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
   min-height:54px!important;
   border:3px solid #fff!important;
   border-radius:18px!important;
-  background:#ffd400!important;
+  background:var(--button-bg)!important;
   color:#000!important;
   font-size:18px!important;
   font-weight:900!important;
@@ -1328,7 +1328,7 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 
 /* Protection Gestion matchs V60.34 */
 .gm-lock-card{
-  border:1px solid rgba(255,212,0,.42)!important;
+  border:1px solid rgba(var(--accent-rgb),.42)!important;
   background:rgba(0,0,0,.42)!important;
 }
 .gm-lock-note{
@@ -1342,8 +1342,8 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
   margin-top:10px;
   padding:10px 12px;
   border-radius:14px;
-  border:1px solid rgba(255,212,0,.35);
-  background:rgba(255,212,0,.08);
+  border:1px solid rgba(var(--accent-rgb),.35);
+  background:rgba(var(--accent-rgb),.08);
   color:var(--accent);
   font-size:13px;
   font-weight:800;
@@ -1358,9 +1358,9 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
   margin-bottom:12px;
   padding:12px 14px;
   border-radius:16px;
-  border:1px solid rgba(255,159,28,.55);
-  background:rgba(255,159,28,.12);
-  color:#ffd08a;
+  border:1px solid rgba(var(--accent-rgb),.55);
+  background:rgba(var(--accent-rgb),.12);
+  color:var(--accent);
   font-weight:800;
   line-height:1.35;
 }
@@ -1375,11 +1375,11 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
   margin-top:12px;
   padding:12px;
   border-radius:14px;
-  border:1px solid rgba(255,159,28,.45);
-  background:rgba(255,159,28,.08);
+  border:1px solid rgba(var(--accent-rgb),.45);
+  background:rgba(var(--accent-rgb),.08);
 }
 .coach-reconfirm-title{
-  color:#ffd08a;
+  color:var(--accent);
   font-size:12px;
   text-transform:uppercase;
   letter-spacing:.04em;
@@ -1397,16 +1397,16 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 
 
 .match-convoc-player.replace{
-  border-color:rgba(255,159,28,.75)!important;
-  color:#ffd08a!important;
+  border-color:rgba(var(--accent-rgb),.75)!important;
+  color:var(--accent)!important;
 }
 .match-convoc-alert{
   margin-top:8px;
   padding:8px 10px;
   border-radius:12px;
-  border:1px solid rgba(255,159,28,.45);
-  background:rgba(255,159,28,.10);
-  color:#ffd08a;
+  border:1px solid rgba(var(--accent-rgb),.45);
+  background:rgba(var(--accent-rgb),.10);
+  color:var(--accent);
   font-size:13px;
   font-weight:800;
 }
@@ -1526,14 +1526,14 @@ hr,.separator{border-color:rgba(255,212,0,.18)!important;background:transparent!
 .gj-message.ok{display:block;background:#1f8f3a;color:#fff}
 .gj-message.err{display:block;background:#b00020;color:#fff}
 .gj-player-card.inactive{opacity:.58}
-.gj-badge{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid rgba(255,212,0,.45);color:var(--accent)}
+.gj-badge{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent)}
 .gj-badge-off{border-color:#e04040;color:#ff9b9b}
-.gj-save{width:100%;margin-top:14px;min-height:54px!important;border:3px solid #fff!important;border-radius:18px!important;background:#ffd400!important;color:#000!important;font-size:18px!important;font-weight:900!important}
+.gj-save{width:100%;margin-top:14px;min-height:54px!important;border:3px solid #fff!important;border-radius:18px!important;background:var(--button-bg)!important;color:#000!important;font-size:18px!important;font-weight:900!important}
 .gj-form-card{display:none}
 .gj-form-card.active{display:block}
-.gj-mode-badge{display:inline-block;margin:2px 0 8px 0;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,212,0,.45);color:var(--accent);font-size:12px;font-weight:900}
+.gj-mode-badge{display:inline-block;margin:2px 0 8px 0;padding:6px 10px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent);font-size:12px;font-weight:900}
 .gj-cancel{width:100%;margin-top:10px;min-height:48px!important;border:2px solid var(--accent)!important;border-radius:18px!important;background:transparent!important;color:#fff!important;font-size:16px!important;font-weight:900!important}
-.gj-help-warning{margin-top:10px;color:#ffd08a;font-size:13px;line-height:1.35}
+.gj-help-warning{margin-top:10px;color:var(--accent);font-size:13px;line-height:1.35}
 .gj-mode-choice-card,
 .gj-create-card{padding:18px!important}
 .gj-choice-title{color:#fff;font-size:22px;font-weight:950;line-height:1.1;margin-bottom:6px}
@@ -1627,9 +1627,9 @@ button:disabled,
   margin-top:2px;
 }
 .weekend-status.forfait-adverse{
-  background:rgba(255,159,28,0.18);
-  color:#ffd08a;
-  border:1px solid rgba(255,159,28,.65);
+  background:rgba(var(--accent-rgb),0.18);
+  color:var(--accent);
+  border:1px solid rgba(var(--accent-rgb),.65);
 }
 .weekend-status.forfait-cam{
   background:rgba(224,64,64,0.18);
@@ -1647,8 +1647,8 @@ button:disabled,
   margin-top:10px;
   padding:10px 12px;
   border-radius:14px;
-  border:1px solid rgba(255,212,0,.35);
-  background:rgba(255,212,0,.08);
+  border:1px solid rgba(var(--accent-rgb),.35);
+  background:rgba(var(--accent-rgb),.08);
   color:var(--accent);
   font-size:13px;
   font-weight:800;
@@ -1665,8 +1665,8 @@ button:disabled,
   margin:12px 0;
   padding:14px;
   border-radius:16px;
-  border:1px solid rgba(255,212,0,.45);
-  background:rgba(255,212,0,.08);
+  border:1px solid rgba(var(--accent-rgb),.45);
+  background:rgba(var(--accent-rgb),.08);
   color:#fff;
 }
 .gm-share-prompt.active{display:block}
@@ -1686,7 +1686,7 @@ button:disabled,
   width:100%;
   min-height:50px!important;
   border-radius:18px!important;
-  background:#ffd400!important;
+  background:var(--button-bg)!important;
   color:#000!important;
   border:2px solid #fff!important;
   font-weight:950!important;
@@ -1705,7 +1705,7 @@ button:disabled,
 .gestion-home-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
 .gestion-home-grid-single{grid-template-columns:1fr!important;}
 .gestion-home-tile{min-height:112px;}
-.gestion-settings-tile{min-height:88px;border-color:rgba(255,212,0,.55)!important;}
+.gestion-settings-tile{min-height:88px;border-color:rgba(var(--accent-rgb),.55)!important;}
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,.reglages-preview-card select,.reglages-preview-card textarea{width:100%!important;opacity:.78;}
 .reglages-preview-card button:disabled{opacity:.55!important;}
@@ -1734,7 +1734,7 @@ button:disabled,
   opacity:1!important;
 }
 .reglages-preview-note{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.35;}
-#grSaveBtn{width:100%;min-height:52px!important;border-radius:18px!important;background:#ffd400!important;color:#000!important;border:2px solid #fff!important;font-weight:950!important;}
+#grSaveBtn{width:100%;min-height:52px!important;border-radius:18px!important;background:var(--button-bg)!important;color:#000!important;border:2px solid #fff!important;font-weight:950!important;}
 #grSaveBtn:disabled{opacity:.65!important;}
 
 </style>
@@ -1749,6 +1749,97 @@ button:disabled,
 <meta name="apple-mobile-web-app-title" content="Démo App Club">
 
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNBTSBCYXNrZXQgTW9udHJpY2hhcmQiLAogICJzaG9ydF9uYW1lIjogIkNBTSBCYXNrZXQiLAogICJzdGFydF91cmwiOiAiLi9pbmRleC5odG1sIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDAwMDAwIiwKICAidGhlbWVfY29sb3IiOiAiI2ZmZDQwMCIsCiAgImljb25zIjogWwogICAgeyJzcmMiOiAibG9nb18xOTIucG5nIiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifSwKICAgIHsic3JjIjogImxvZ29fNTEyLnBuZyIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn0KICBdCn0=">
+
+<style id="_color_cleanup_v2">
+/* V-COLOR-CLEANUP-2 : supprime les anciens jaunes fixes et applique les couleurs CONFIG */
+:root{
+  --accent-rgb:255,212,0;
+  --button-bg:var(--accent);
+  --button-text:#000;
+}
+/* Boutons principaux / actions */
+.convoc-action,
+.link-btn.primary,
+.gm-send-btn,
+.gj-save,
+#grSaveBtn,
+#btnFaireConvocationCoach,
+button.primary,
+.btn-primary,
+.modal-close{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+  border-color:var(--button-bg)!important;
+}
+.convoc-action *,
+.link-btn.primary *,
+.gm-send-btn *,
+.gj-save *,
+#grSaveBtn *,
+#btnFaireConvocationCoach *,
+button.primary *,
+.btn-primary *,
+.modal-close *{
+  color:var(--button-text)!important;
+}
+/* Contours / accents */
+.convocation-card,
+.convoc-card,
+.apports-card,
+.gm-share-prompt,
+.gm-reconfirm-note,
+.gestion-home-tile,
+.gestion-settings-tile,
+.player-team-card-selected,
+.weekend-match,
+.home-week-card,
+.home-match-card,
+.card,
+.match-card{
+  border-color:rgba(var(--accent-rgb),.55)!important;
+}
+/* Titres / badges accentués */
+.convoc-title,
+.apports-title,
+.home-section-title,
+.home-count,
+.detail-label,
+.hero-sub,
+.badge-season,
+.weekend-date,
+.weekend-date small,
+.player-team-check,
+.status-badge,
+.pill,
+.match-badge,
+.weekend-match-type,
+.type-ext{
+  color:var(--accent)!important;
+  border-color:rgba(var(--accent-rgb),.55)!important;
+}
+.pill,
+.match-badge,
+.weekend-match-type,
+.type-ext,
+.player-team-card-selected{
+  background:rgba(var(--accent-rgb),.12)!important;
+}
+hr,.separator{
+  border-color:rgba(var(--accent-rgb),.20)!important;
+}
+/* Fond sport : les bordures dessinées suivent l'accent, pas un jaune fixe */
+#camSvgBackground path[fill="#ffd400"],
+#camSvgBackground path[fill="#FFD400"]{
+  fill:var(--accent)!important;
+}
+/* Indicateur de mise à jour */
+#syncIndicator,
+.sync-indicator{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+}
+</style>
+
 </head>
 <body class="loading">
 
@@ -1835,10 +1926,10 @@ button:disabled,
       <path d="M135 410 C210 300 330 215 485 155" stroke="#050505" stroke-width="24" fill="none" stroke-linecap="round"/>
     </g>
     <g id="svgAccentPaths" clip-path="url(#bounds)">
-      <path d="M0 0 H390 V20 C290 8 190 14 105 17 C45 18 18 12 0 6Z" fill="#ffd400"/>
-      <path d="M0 0 V844 H10 C5 744 8 636 7 520 C5 390 9 255 6 145 C4 68 7 25 0 0Z" fill="#ffd400"/>
-      <path d="M390 0 V844 H380 C385 744 382 636 383 520 C385 390 381 255 384 145 C386 68 383 25 390 0Z" fill="#ffd400"/>
-      <path d="M0 844 H390 V820 C310 834 238 828 150 824 C78 820 34 836 0 844Z" fill="#ffd400"/>
+      <path d="M0 0 H390 V20 C290 8 190 14 105 17 C45 18 18 12 0 6Z" fill="var(--accent)"/>
+      <path d="M0 0 V844 H10 C5 744 8 636 7 520 C5 390 9 255 6 145 C4 68 7 25 0 0Z" fill="var(--accent)"/>
+      <path d="M390 0 V844 H380 C385 744 382 636 383 520 C385 390 381 255 384 145 C386 68 383 25 390 0Z" fill="var(--accent)"/>
+      <path d="M0 844 H390 V820 C310 834 238 828 150 824 C78 820 34 836 0 844Z" fill="var(--accent)"/>
       <path d="M0 30 C80 20 170 28 250 20 C315 14 356 22 390 28" stroke="#050505" stroke-width="10" fill="none" opacity=".75"/>
       <path d="M20 0 C10 90 30 175 19 265 C10 335 24 435 17 525 C10 635 24 745 18 844" stroke="#050505" stroke-width="10" fill="none" opacity=".75"/>
       <path d="M370 0 C380 90 360 175 371 265 C380 335 366 435 373 525 C380 635 366 745 372 844" stroke="#050505" stroke-width="10" fill="none" opacity=".75"/>
@@ -1853,9 +1944,9 @@ button:disabled,
       position:absolute;
       top:10px;
       left:12px;
-      background:rgba(255,212,0,0.15);
-      border:1px solid rgba(255,212,0,0.40);
-      color:#ffd400;
+      background:rgba(var(--accent-rgb),0.15);
+      border:1px solid rgba(var(--accent-rgb),0.40);
+      color:var(--accent);
       font-size:10px;
       font-weight:800;
       padding:3px 9px;
@@ -1877,7 +1968,7 @@ button:disabled,
           right: auto;
           font-family: 'Segoe Script', 'Brush Script MT', 'Comic Sans MS', cursive;
           font-size: 13px;
-          color: #ffd400;
+          color: var(--accent);
           line-height: 1.3;
           text-align: left;
           transform: rotate(-14deg);
@@ -2253,7 +2344,7 @@ button:disabled,
           <div id="coachPresents" class="coach-list"><div class="muted">Aucun</div></div>
         </div>
 
-        <button id="btnFaireConvocationCoach" style="display:none;margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:#0b0b0b;color:#fff;border:2px solid #ffd400;">
+        <button id="btnFaireConvocationCoach" style="display:none;margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:#0b0b0b;color:#fff;border:2px solid var(--button-bg);">
           Faire la convocation
         </button>
 
@@ -4062,7 +4153,7 @@ if(!bouton){
   bouton.style.padding = "14px";
   bouton.style.fontWeight = "900";
   bouton.style.borderRadius = "14px";
-  bouton.style.background = "#ffd400";
+  bouton.style.background = "var(--button-bg)";
   bouton.style.border = "none";
   bouton.style.color = "#000";
   bouton.innerText = "Répondre / confirmer";
@@ -4097,7 +4188,7 @@ chargerConvocationEnregistree(m);
         const ind = document.createElement('div');
         ind.id = '_refreshIndicator';
         ind.innerHTML = '🔄 Mise à jour…';
-        ind.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(255,212,0,0.92);color:#000;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;';
+        ind.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(var(--accent-rgb),0.92);color:#000;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;';
         document.body.appendChild(ind);
       }
 
@@ -6476,6 +6567,13 @@ function appliquerConfig() {
   const couleurTexte = cfg["couleur_texte"] || "#ffffff";
   const couleurBoutonTexte = cfg["couleur_bouton_texte"] || "#000000";
 
+
+  function rgbStringFromHexGestion(hex){
+    const h = String(hex || "").trim().replace("#", "");
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) return "255,212,0";
+    return parseInt(h.slice(0,2),16)+","+parseInt(h.slice(2,4),16)+","+parseInt(h.slice(4,6),16);
+  }
+
   function rgbaFromHexGestion(hex, alpha){
     const h = String(hex || "").trim().replace("#", "");
     if (!/^[0-9a-fA-F]{6}$/.test(h)) return "rgba(255,255,255," + alpha + ")";
@@ -6488,6 +6586,8 @@ function appliquerConfig() {
   document.documentElement.style.setProperty("--bg", couleurFond);
   document.documentElement.style.setProperty("--text", couleurTexte);
   document.documentElement.style.setProperty("--accent", couleurSecondaire);
+  document.documentElement.style.setProperty("--accent-rgb", rgbStringFromHexGestion(couleurSecondaire));
+  document.documentElement.style.setProperty("--accent-rgb", rgbaFromHexGestion(couleurSecondaire, 1).replace(/^rgba\((.*),1\)$/,"$1"));
   document.documentElement.style.setProperty("--line", rgbaFromHexGestion(couleurSecondaire, .45));
 
   let s = document.getElementById("_cfg");
