@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.12-GESTION-COLOR-CLEAN3" />
+  <meta name="cam-basket-version" content="V65.13-GESTION-COLOR-FIX4" />
   <style>
     :root{
       --bg:#050505;
@@ -1942,6 +1942,54 @@ hr,.separator{
 .sync-indicator{
   background:var(--button-bg)!important;
   color:var(--button-text)!important;
+}
+</style>
+
+
+<style id="_color_visibility_fix_v4">
+/* V-COLOR-CLEANUP-4 : texte des boutons toujours lisible avec couleur_bouton_texte */
+:root{
+  --button-bg: var(--accent, #ffffff);
+  --button-text: #000000;
+}
+button:not(.back):not(.btn-outline):not(.cancel):not(.secondary):not(.ghost),
+.btn-light,
+.btn-outline.active,
+.convoc-action,
+.gm-save,
+.gj-save,
+.save,
+.send:not(.cancel),
+.action-primary,
+.whatsapp-btn,
+#btnReponseMatch,
+#btnFaireConvocationCoach,
+#btnValiderConvocation,
+#btnWhatsAppConvocation,
+#btnEnvoyerWhatsApp,
+#btnAjouterMatchWhatsApp,
+#btnModifierMatchWhatsApp,
+#btnAjouterMatch,
+#btnModifierMatch,
+#btnAjouterJoueur,
+#btnModifierJoueur,
+#btnAjouterEquipe,
+#btnModifierEquipe,
+#btnAjouterAdversaire,
+#btnModifierAdversaire{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+  border-color:var(--button-bg)!important;
+}
+button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):not(.gm-save):not(.gj-save):not(.whatsapp-btn),
+.btn-outline,
+.send.cancel,
+.gm-cancel,
+.gj-cancel,
+.cancel,
+.secondary,
+.ghost{
+  color:var(--text, var(--app-text, #ffffff))!important;
 }
 </style>
 
@@ -5914,7 +5962,7 @@ function ouvrirFormulaire(match, equipe, typeMatch, displayMatch) {
             + "&equipe=" + encodeURIComponent(equipe)
             + "&type=" + encodeURIComponent(typeMatch || "")
             + "&joueurs=" + joueursString
-            + "&v=60.39"
+            + "&v=colorfix4"
             + "&t=" + encodeURIComponent(Date.now());
 
   const popup = window.open(url, "_blank");

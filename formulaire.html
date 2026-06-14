@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.13-DEMO-COLOR-CLEAN3 - Couleurs entièrement pilotées par CONFIG -->
+<!-- Démo App Club formulaire V61.14-DEMO-COLOR-FIX4 - Couleurs entièrement pilotées par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.13-DEMO-COLOR-CLEAN3</title>
+<title>Formulaire Match V61.14-DEMO-COLOR-FIX4</title>
 
 <style>
 :root{
@@ -169,6 +169,22 @@ h2{color:var(--app-primary)!important;}
   border-color:var(--app-primary)!important;
 }
 .choice-btn,.send.cancel,input,select,textarea{border-color:var(--app-secondary)!important;}
+</style>
+
+
+<style id="_form_button_visibility_fix_v4">
+/* V61.14 : boutons visibles même si couleur_principale = blanc */
+.send:not(.cancel),
+.choice-btn.active{
+  background:var(--app-primary)!important;
+  color:var(--app-button-text)!important;
+  border-color:var(--app-primary)!important;
+}
+.send.cancel{
+  background:transparent!important;
+  color:var(--app-text)!important;
+  border-color:var(--app-secondary)!important;
+}
 </style>
 
 </head>
