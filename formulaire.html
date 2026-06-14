@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.09-DEMO-CONFIG - Configuration centrale app-config.js + libellés club -->
+<!-- Démo App Club formulaire V61.10-DEMO-COLOR - Couleurs boutons pilotées par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.09-DEMO-CONFIG</title>
+<title>Formulaire Match V61.10-DEMO-COLOR</title>
 
 <style>
+:root{
+  --app-primary:#ffd400;
+  --app-secondary:#000000;
+  --app-text:#ffffff;
+  --app-button-text:#000000;
+  --app-choice-bg:#222222;
+  --app-choice-border:#444444;
+  --app-note:#cfcfcf;
+}
 body{
-  background:#000;
-  color:#fff;
+  background:var(--app-secondary);
+  color:var(--app-text);
   font-family:Arial,sans-serif;
   padding:20px;
   margin:0;
@@ -19,7 +28,7 @@ body{
   margin:0 auto;
 }
 h2{
-  color:#ffd400;
+  color:var(--app-primary);
   text-align:center;
   margin-bottom:20px;
 }
@@ -50,9 +59,9 @@ textarea{
   padding:14px;
   margin-top:10px;
   border-radius:12px;
-  background:#222;
-  color:#fff;
-  border:2px solid #444;
+  background:var(--app-choice-bg);
+  color:var(--app-text);
+  border:2px solid var(--app-choice-border);
   text-align:left;
   font-size:16px;
   font-weight:bold;
@@ -60,16 +69,16 @@ textarea{
   box-sizing:border-box;
 }
 .choice-btn.active{
-  background:#ffd400;
-  color:#000;
-  border-color:#ffd400;
+  background:var(--app-primary);
+  color:var(--app-button-text);
+  border-color:var(--app-primary);
 }
 .send{
   margin-top:24px;
   width:100%;
   padding:14px;
-  background:#ffd400;
-  color:#000;
+  background:var(--app-primary);
+  color:var(--app-button-text);
   font-weight:bold;
   border:none;
   border-radius:12px;
@@ -78,14 +87,14 @@ textarea{
 }
 .note{
   margin-top:12px;
-  color:#cfcfcf;
+  color:var(--app-note);
   text-align:center;
   font-size:14px;
 }
 
 .apport-note{
   margin-top:6px;
-  color:#cfcfcf;
+  color:var(--app-note);
   font-size:14px;
 }
 
@@ -164,7 +173,7 @@ textarea{
 
 <script src="app-config.js"></script>
 <script>
-// V60.39 quotas organisation pilotés par CONFIG + correction codes joueurs partagés
+// V61.10 couleurs boutons pilotées par CONFIG + quotas organisation pilotés par CONFIG
 
 let presenceValue = "";
 let transportValue = "";
@@ -226,11 +235,20 @@ function configBoolForm(cfg, key, fallback){
   return fallback;
 }
 
+function appliquerThemeFormulaire(cfg){
+  const root = document.documentElement;
+  root.style.setProperty("--app-primary", configValueForm(cfg, "couleur_principale", "#ffd400"));
+  root.style.setProperty("--app-secondary", configValueForm(cfg, "couleur_secondaire", "#000000"));
+  root.style.setProperty("--app-text", configValueForm(cfg, "couleur_texte", "#ffffff"));
+  root.style.setProperty("--app-button-text", configValueForm(cfg, "couleur_bouton_texte", "#000000"));
+}
+
 async function chargerConfigOrganisation(){
   try{
     const url = APPS_SCRIPT_URL + "?action=getConfig&t=" + encodeURIComponent(Date.now());
     const res = await fetch(url, { cache: "no-store" });
     const cfg = await res.json();
+    appliquerThemeFormulaire(cfg);
 
     organisationConfig = {
       maillots: configIntForm(cfg, "quota_maillots", 1),
@@ -598,7 +616,7 @@ async function envoyerFormulaire() {
   .then(res => res.text())
   .then(txt => {
     if (txt !== "OK") throw new Error(txt);
-    document.body.innerHTML = "<h2 style='color:#ffd400;text-align:center;margin-top:50px;'>Réponse envoyée 👍<br>Retour...</h2>";
+    document.body.innerHTML = "<h2 style='color:var(--app-primary);text-align:center;margin-top:50px;'>Réponse envoyée 👍<br>Retour...</h2>";
     setTimeout(() => {
       try { window.close(); } catch(e) {}
       window.location.href = APP_HOME_URL;
