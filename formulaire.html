@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.15-DEMO-BUTTON-UNIFORM - Couleurs entièrement pilotées par CONFIG -->
+<!-- Démo App Club formulaire V61.16-DEMO-AUDIT-COLOR - Couleurs entièrement pilotées par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.15-DEMO-BUTTON-UNIFORM</title>
+<title>Formulaire Match V61.16-DEMO-AUDIT-COLOR</title>
 
 <style>
 :root{
@@ -124,6 +124,10 @@ textarea{
     * { -webkit-tap-highlight-color: transparent; }
     input, select, textarea { font-size: 16px !important; }
     body { -webkit-overflow-scrolling: touch; }
+
+/* AUDIT FORM BUTTON SAFETY */
+.send, .choice-btn.active { background:var(--app-primary)!important; color:var(--app-button-text)!important; border-color:var(--app-primary)!important; }
+.send.cancel { background:var(--app-primary)!important; color:var(--app-button-text)!important; border-color:var(--app-primary)!important; }
 </style>
 
 <style id="_form_color_cleanup_v2">
@@ -189,7 +193,7 @@ h2{color:var(--app-primary)!important;}
 
 
 <style id="_form_button_uniform_v5">
-/* V61.15 : tous les boutons du formulaire ont la même couleur */
+/* V61.16 : audit couleurs boutons uniformes */
 .choice-btn,
 .choice-btn.active,
 .send,

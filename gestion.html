@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.11 - Gestion - nettoyage couleurs fixes -->
+<!-- Démo App Club V65.16 - Gestion - audit complet couleurs -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.14-GESTION-BUTTON-UNIFORM" />
+  <meta name="app-version" content="V65.16-GESTION-AUDIT-COLOR" />
   <style>
     :root{
       --bg:#050505;
@@ -98,7 +98,7 @@
     .btn-light,
     .btn-outline.active{
       background:var(--accent);
-      color:#000;
+      color:var(--button-text);
     }
     .btn-outline{
       background:#0b0b0b;
@@ -573,7 +573,7 @@
       display:inline-block;
       text-decoration:none;
       background:var(--accent);
-      color:#000;
+      color:var(--button-text);
       padding:12px 14px;
       border-radius:14px;
       font-weight:900;
@@ -756,7 +756,7 @@
     .modal-close{
       width:100%;
       background:var(--accent);
-      color:#000;
+      color:var(--button-text);
       border:1px solid var(--accent);
       padding:12px 10px;
       border-radius:12px;
@@ -782,7 +782,7 @@
     .convoc-item input{transform:scale(1.25)}
     .convoc-result{display:none;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#101010;color:#fff}
     .convoc-title{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:8px;display:block}
-    .convoc-action{margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:var(--button-bg);color:#000;border:none}
+    .convoc-action{margin-top:12px;width:100%;padding:14px;font-weight:900;border-radius:14px;background:var(--button-bg);color:var(--button-text);border:none}
     .match-convoc-card{
   border:1.5px solid rgba(var(--accent-rgb),0.6);
   border-radius:16px;
@@ -1135,7 +1135,7 @@
 
 .btn-action{
   background:var(--button-bg);
-  color:#000;
+  color:var(--button-text);
   padding:10px 14px;
   border-radius:10px;
   text-decoration:none;
@@ -1171,7 +1171,7 @@
   display:inline-block;
   text-decoration:none;
   background:var(--accent);
-  color:#000;
+  color:var(--button-text);
   padding:10px 13px;
   border-radius:12px;
   font-weight:900;
@@ -1267,7 +1267,7 @@ hr,.separator{border-color:rgba(var(--accent-rgb),.18)!important;background:tran
 
 /* Gestion matchs intégrée V60.34 */
 .gm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.gm-tab.active{background:var(--accent)!important;color:#000!important}
+.gm-tab.active{background:var(--accent)!important;color:var(--button-text)!important}
 .gm-field{margin-top:12px}
 .gm-field label{display:block;color:#fff;font-weight:900;margin-bottom:6px;font-size:14px}
 .gm-field small{display:block;color:var(--muted);margin-top:5px;font-size:12px;line-height:1.35}
@@ -1312,7 +1312,7 @@ hr,.separator{border-color:rgba(var(--accent-rgb),.18)!important;background:tran
   border:3px solid #fff!important;
   border-radius:18px!important;
   background:var(--button-bg)!important;
-  color:#000!important;
+  color:var(--button-text)!important;
   font-size:18px!important;
   font-weight:900!important;
   box-shadow:0 8px 22px rgba(0,0,0,.45);
@@ -1528,7 +1528,7 @@ hr,.separator{border-color:rgba(var(--accent-rgb),.18)!important;background:tran
 .gj-player-card.inactive{opacity:.58}
 .gj-badge{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent)}
 .gj-badge-off{border-color:#e04040;color:#ff9b9b}
-.gj-save{width:100%;margin-top:14px;min-height:54px!important;border:3px solid #fff!important;border-radius:18px!important;background:var(--button-bg)!important;color:#000!important;font-size:18px!important;font-weight:900!important}
+.gj-save{width:100%;margin-top:14px;min-height:54px!important;border:3px solid #fff!important;border-radius:18px!important;background:var(--button-bg)!important;color:var(--button-text)!important;font-size:18px!important;font-weight:900!important}
 .gj-form-card{display:none}
 .gj-form-card.active{display:block}
 .gj-mode-badge{display:inline-block;margin:2px 0 8px 0;padding:6px 10px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent);font-size:12px;font-weight:900}
@@ -1687,7 +1687,7 @@ button:disabled,
   min-height:50px!important;
   border-radius:18px!important;
   background:var(--button-bg)!important;
-  color:#000!important;
+  color:var(--button-text)!important;
   border:2px solid #fff!important;
   font-weight:950!important;
   font-size:16px!important;
@@ -1734,7 +1734,7 @@ button:disabled,
   opacity:1!important;
 }
 .reglages-preview-note{margin-top:10px;color:var(--muted);font-size:13px;line-height:1.35;}
-#grSaveBtn{width:100%;min-height:52px!important;border-radius:18px!important;background:var(--button-bg)!important;color:#000!important;border:2px solid #fff!important;font-weight:950!important;}
+#grSaveBtn{width:100%;min-height:52px!important;border-radius:18px!important;background:var(--button-bg)!important;color:var(--button-text)!important;border:2px solid #fff!important;font-weight:950!important;}
 #grSaveBtn:disabled{opacity:.65!important;}
 
 </style>
@@ -1993,6 +1993,91 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
 }
 </style>
 
+<style>
+
+/* AUDIT COLOR SAFETY — boutons uniformes, cartes séparées */
+button,
+.btn-light,
+.btn-primary,
+.primary,
+.action-primary,
+.link-btn.primary,
+a.link-btn.primary,
+.convoc-action,
+.whatsapp-btn,
+.gm-send-btn,
+.gj-save,
+#grSaveBtn,
+#grSaveBtn *,
+#btnGenererConvocation,
+#btnWhatsappCoach,
+#btnAnnulerConvocation,
+#btnFaireConvocationCoach,
+#btnReponseMatch,
+#btnCoachResponses,
+#btnAjouterMatch,
+#btnModifierMatch,
+#btnAjouterJoueur,
+#btnModifierJoueur,
+#btnAjouterEquipe,
+#btnModifierEquipe,
+#btnAjouterAdversaire,
+#btnModifierAdversaire,
+button[type="submit"] {
+  background: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  border-color: var(--button-bg) !important;
+}
+button *,
+.btn-light *,
+.btn-primary *,
+.primary *,
+.action-primary *,
+.link-btn.primary *,
+a.link-btn.primary *,
+.convoc-action *,
+.whatsapp-btn *,
+.gm-send-btn *,
+.gj-save *,
+#btnGenererConvocation *,
+#btnWhatsappCoach *,
+#btnAnnulerConvocation *,
+#btnFaireConvocationCoach *,
+#btnReponseMatch *,
+#btnCoachResponses * {
+  color: var(--button-text) !important;
+}
+.back,
+.btn-outline:not(.active),
+.secondary,
+.ghost,
+.cancel,
+.gm-cancel,
+.gj-cancel {
+  background: rgba(0,0,0,.35) !important;
+  color: var(--text) !important;
+  border-color: var(--accent) !important;
+}
+.menu-btn,
+.role-menu-card,
+.gestion-home-tile,
+.gestion-settings-tile,
+.item,
+.card,
+.weekend-match,
+.home-match-card,
+.home-week-card,
+.match-card,
+.gj-player-card,
+.ge-team-card,
+.list-card,
+.team-card,
+.player-card {
+  background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+  color: var(--text) !important;
+  border-color: rgba(var(--accent-rgb), .55) !important;
+}
+</style>
 </head>
 <body class="loading">
 
@@ -2269,7 +2354,7 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
         </div>
         <div class="gm-field">
           <label>Lieu événement</label>
-          <input id="grClubEventLieu" type="text" placeholder="Gymnase de Montrichard">
+          <input id="grClubEventLieu" type="text" placeholder="Gymnase du club">
           <small>CONFIG : club_event_lieu</small>
         </div>
         <div class="gm-field">
@@ -2526,7 +2611,7 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
             width:100%;
             padding:13px;
             background:#25D366;
-            color:#000;
+            color:var(--button-text);
             border:none;
             border-radius:14px;
             font-size:15px;
@@ -4033,7 +4118,7 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
         return [equipe, adversaire, badgeForType(t).label, date, heure].map(x => normalize(x)).join("|");
       }
 
-      // Format actuel formulaire : "Montrichard U18M-1 vs Montils - 18/05/2026 - 20h00 - Domicile"
+      // Format actuel formulaire : "Équipe vs Adversaire - 18/05/2026 - 20h00 - Domicile"
       const dashParts = txt.split(" - ").map(x => x.trim());
       const title = dashParts[0] || txt;
 
@@ -6760,35 +6845,78 @@ function appliquerConfig() {
     .team-extra{border-top-color:${rgbaFromHexGestion(couleurSecondaire,.25)}!important;}
     .splash-dot{background:${couleurSecondaire}!important;}
 
-        /* V5 : tous les boutons ont le même fond et le même texte */
-        button, .btn-light, .btn-light.active, .btn-outline, .btn-outline.active, .back,
-        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
-        .gm-tab, .gm-tab.active, .link-btn, a.link-btn, .link-btn.primary,
-        .btn-primary, .primary, .action-primary, .whatsapp-btn,
-        .bureau-action-btn, .club-social-btn, .convoc-action, .gm-send-btn,
-        .gj-save, #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
+        /* V6 : boutons d'action uniformes, cartes cliquables séparées */
+        /* Les vrais boutons d'action utilisent couleur_principale + couleur_bouton_texte */
+        .btn-light, .btn-light.active, .btn-outline.active,
+        .primary, .btn-primary, .action-primary,
+        .link-btn.primary, a.link-btn.primary,
+        .convoc-action, .whatsapp-btn, .gm-send-btn, .gj-save,
+        #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
         #btnGenererConvocation, #btnWhatsappCoach, #btnFaireConvocationCoach,
         #btnValiderConvocation, #btnWhatsAppConvocation, #btnEnvoyerWhatsApp,
-        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp, #btnAjouterMatch,
-        #btnModifierMatch, #btnAjouterJoueur {
-          background: ${couleurPrincipale} !important;
-          color: ${couleurBoutonTexte} !important;
-          border-color: ${couleurPrincipale} !important;
+        #btnAnnulerConvocation,
+        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp,
+        #btnAjouterMatch, #btnModifierMatch,
+        #btnAjouterJoueur, #btnModifierJoueur,
+        #btnAjouterEquipe, #btnModifierEquipe,
+        #btnAjouterAdversaire, #btnModifierAdversaire,
+        button[type="submit"] {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
         }
-        button *, .btn-light *, .btn-outline *, .back *, .menu-btn *, .role-menu-card *,
-        .gestion-home-tile *, .gestion-settings-tile *, .gm-tab *, .link-btn *,
-        a.link-btn *, .btn-primary *, .primary *, .action-primary *, .whatsapp-btn *,
-        .bureau-action-btn *, .club-social-btn *, .convoc-action *, .gm-send-btn *,
-        .gj-save *, #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
+        .btn-light *, .btn-light.active *, .btn-outline.active *,
+        .primary *, .btn-primary *, .action-primary *,
+        .link-btn.primary *, a.link-btn.primary *,
+        .convoc-action *, .whatsapp-btn *, .gm-send-btn *, .gj-save *,
+        #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
         #btnGenererConvocation *, #btnWhatsappCoach *, #btnFaireConvocationCoach *,
         #btnValiderConvocation *, #btnWhatsAppConvocation *, #btnEnvoyerWhatsApp *,
-        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *, #btnAjouterMatch *,
-        #btnModifierMatch *, #btnAjouterJoueur * {
-          color: ${couleurBoutonTexte} !important;
+        #btnAnnulerConvocation *,
+        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *,
+        #btnAjouterMatch *, #btnModifierMatch *,
+        #btnAjouterJoueur *, #btnModifierJoueur *,
+        #btnAjouterEquipe *, #btnModifierEquipe *,
+        #btnAjouterAdversaire *, #btnModifierAdversaire *,
+        button[type="submit"] * {
+          color: var(--button-text) !important;
         }
-        button:disabled, .role-menu-card.disabled, .menu-btn.disabled {
-          opacity: .55 !important;
+
+        /* Boutons secondaires : même logique de lisibilité, mais pas de gros pavé plein */
+        .btn-outline:not(.active), .back, .secondary, .ghost, .cancel,
+        .gm-cancel, .gj-cancel {
+          background: rgba(0,0,0,.35) !important;
+          color: var(--text) !important;
+          border-color: var(--accent) !important;
         }
+        .btn-outline:not(.active) *, .back *, .secondary *, .ghost *, .cancel *,
+        .gm-cancel *, .gj-cancel * {
+          color: var(--text) !important;
+        }
+
+        /* Cartes cliquables : ce ne sont pas des boutons visuels, elles restent lisibles */
+        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
+        .item, .weekend-match, .home-match-card, .home-week-card, .match-card,
+        .gj-player-card, .ge-team-card, .list-card, .team-card, .player-card {
+          background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+          color: var(--text) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+        .menu-btn .big, .role-menu-card .big, .gestion-home-tile .big,
+        .gestion-settings-tile .big, .item-title, .team-name, .team-name-line {
+          color: var(--text) !important;
+        }
+        .menu-btn .small, .role-menu-card .small, .gestion-home-tile .small,
+        .gestion-settings-tile .small, .item-sub, .muted {
+          color: color-mix(in srgb, var(--text) 74%, transparent) !important;
+        }
+        .gm-tab, .gm-tab.active {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+        }
+        .gm-tab *, .gm-tab.active * { color: var(--button-text) !important; }
+        button:disabled, .role-menu-card.disabled, .menu-btn.disabled { opacity: .55 !important; }
 
   `;
 
@@ -6997,7 +7125,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.14-GESTION-BUTTON-UNIFORM";
+window.CAM_BASKET_VERSION = "V65.16-GESTION-AUDIT-COLOR";
 
 </script>
 

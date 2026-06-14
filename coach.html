@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.17 - Coach - nettoyage couleurs fixes -->
+<!-- Démo App Club V63.22 - Coach - audit complet couleurs -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.20-COACH-BUTTON-UNIFORM" />
+  <meta name="app-version" content="V63.22-COACH-AUDIT-COLOR" />
   <style>
     :root{
       --bg:#050505;
@@ -2292,6 +2292,91 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
 }
 </style>
 
+<style>
+
+/* AUDIT COLOR SAFETY — boutons uniformes, cartes séparées */
+button,
+.btn-light,
+.btn-primary,
+.primary,
+.action-primary,
+.link-btn.primary,
+a.link-btn.primary,
+.convoc-action,
+.whatsapp-btn,
+.gm-send-btn,
+.gj-save,
+#grSaveBtn,
+#grSaveBtn *,
+#btnGenererConvocation,
+#btnWhatsappCoach,
+#btnAnnulerConvocation,
+#btnFaireConvocationCoach,
+#btnReponseMatch,
+#btnCoachResponses,
+#btnAjouterMatch,
+#btnModifierMatch,
+#btnAjouterJoueur,
+#btnModifierJoueur,
+#btnAjouterEquipe,
+#btnModifierEquipe,
+#btnAjouterAdversaire,
+#btnModifierAdversaire,
+button[type="submit"] {
+  background: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  border-color: var(--button-bg) !important;
+}
+button *,
+.btn-light *,
+.btn-primary *,
+.primary *,
+.action-primary *,
+.link-btn.primary *,
+a.link-btn.primary *,
+.convoc-action *,
+.whatsapp-btn *,
+.gm-send-btn *,
+.gj-save *,
+#btnGenererConvocation *,
+#btnWhatsappCoach *,
+#btnAnnulerConvocation *,
+#btnFaireConvocationCoach *,
+#btnReponseMatch *,
+#btnCoachResponses * {
+  color: var(--button-text) !important;
+}
+.back,
+.btn-outline:not(.active),
+.secondary,
+.ghost,
+.cancel,
+.gm-cancel,
+.gj-cancel {
+  background: rgba(0,0,0,.35) !important;
+  color: var(--text) !important;
+  border-color: var(--accent) !important;
+}
+.menu-btn,
+.role-menu-card,
+.gestion-home-tile,
+.gestion-settings-tile,
+.item,
+.card,
+.weekend-match,
+.home-match-card,
+.home-week-card,
+.match-card,
+.gj-player-card,
+.ge-team-card,
+.list-card,
+.team-card,
+.player-card {
+  background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+  color: var(--text) !important;
+  border-color: rgba(var(--accent-rgb), .55) !important;
+}
+</style>
 </head>
 <body class="loading coach-app">
 
@@ -2682,9 +2767,9 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
             margin-top:14px;
             width:100%;
             padding:13px;
-            background:#25D366;
+            background:var(--button-bg);
             color:var(--button-text);
-            border:none;
+            border:2px solid var(--button-bg);
             border-radius:14px;
             font-size:15px;
             font-weight:900;
@@ -2696,9 +2781,9 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
             margin-top:10px;
             width:100%;
             padding:13px;
-            background:transparent;
-            border:2px solid #e04040;
-            color:#e04040;
+            background:var(--button-bg);
+            border:2px solid var(--button-bg);
+            color:var(--button-text);
             border-radius:14px;
             font-size:15px;
             font-weight:700;
@@ -4191,7 +4276,7 @@ button:not(.back):not(.btn-light):not(.active):not(.send):not(.convoc-action):no
         return [equipe, adversaire, badgeForType(t).label, date, heure].map(x => normalize(x)).join("|");
       }
 
-      // Format actuel formulaire : "Montrichard U18M-1 vs Montils - 18/05/2026 - 20h00 - Domicile"
+      // Format actuel formulaire : "Équipe vs Adversaire - 18/05/2026 - 20h00 - Domicile"
       const dashParts = txt.split(" - ").map(x => x.trim());
       const title = dashParts[0] || txt;
 
@@ -7296,35 +7381,78 @@ function appliquerCouleursConfigCoach(cfg) {
       border-color: var(--accent) !important;
     }
 
-        /* V5 : tous les boutons ont le même fond et le même texte */
-        button, .btn-light, .btn-light.active, .btn-outline, .btn-outline.active, .back,
-        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
-        .gm-tab, .gm-tab.active, .link-btn, a.link-btn, .link-btn.primary,
-        .btn-primary, .primary, .action-primary, .whatsapp-btn,
-        .bureau-action-btn, .club-social-btn, .convoc-action, .gm-send-btn,
-        .gj-save, #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
+        /* V6 : boutons d'action uniformes, cartes cliquables séparées */
+        /* Les vrais boutons d'action utilisent couleur_principale + couleur_bouton_texte */
+        .btn-light, .btn-light.active, .btn-outline.active,
+        .primary, .btn-primary, .action-primary,
+        .link-btn.primary, a.link-btn.primary,
+        .convoc-action, .whatsapp-btn, .gm-send-btn, .gj-save,
+        #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
         #btnGenererConvocation, #btnWhatsappCoach, #btnFaireConvocationCoach,
         #btnValiderConvocation, #btnWhatsAppConvocation, #btnEnvoyerWhatsApp,
-        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp, #btnAjouterMatch,
-        #btnModifierMatch, #btnAjouterJoueur {
+        #btnAnnulerConvocation,
+        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp,
+        #btnAjouterMatch, #btnModifierMatch,
+        #btnAjouterJoueur, #btnModifierJoueur,
+        #btnAjouterEquipe, #btnModifierEquipe,
+        #btnAjouterAdversaire, #btnModifierAdversaire,
+        button[type="submit"] {
           background: var(--button-bg) !important;
           color: var(--button-text) !important;
           border-color: var(--button-bg) !important;
         }
-        button *, .btn-light *, .btn-outline *, .back *, .menu-btn *, .role-menu-card *,
-        .gestion-home-tile *, .gestion-settings-tile *, .gm-tab *, .link-btn *,
-        a.link-btn *, .btn-primary *, .primary *, .action-primary *, .whatsapp-btn *,
-        .bureau-action-btn *, .club-social-btn *, .convoc-action *, .gm-send-btn *,
-        .gj-save *, #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
+        .btn-light *, .btn-light.active *, .btn-outline.active *,
+        .primary *, .btn-primary *, .action-primary *,
+        .link-btn.primary *, a.link-btn.primary *,
+        .convoc-action *, .whatsapp-btn *, .gm-send-btn *, .gj-save *,
+        #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
         #btnGenererConvocation *, #btnWhatsappCoach *, #btnFaireConvocationCoach *,
         #btnValiderConvocation *, #btnWhatsAppConvocation *, #btnEnvoyerWhatsApp *,
-        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *, #btnAjouterMatch *,
-        #btnModifierMatch *, #btnAjouterJoueur * {
+        #btnAnnulerConvocation *,
+        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *,
+        #btnAjouterMatch *, #btnModifierMatch *,
+        #btnAjouterJoueur *, #btnModifierJoueur *,
+        #btnAjouterEquipe *, #btnModifierEquipe *,
+        #btnAjouterAdversaire *, #btnModifierAdversaire *,
+        button[type="submit"] * {
           color: var(--button-text) !important;
         }
-        button:disabled, .role-menu-card.disabled, .menu-btn.disabled {
-          opacity: .55 !important;
+
+        /* Boutons secondaires : même logique de lisibilité, mais pas de gros pavé plein */
+        .btn-outline:not(.active), .back, .secondary, .ghost, .cancel,
+        .gm-cancel, .gj-cancel {
+          background: rgba(0,0,0,.35) !important;
+          color: var(--text) !important;
+          border-color: var(--accent) !important;
         }
+        .btn-outline:not(.active) *, .back *, .secondary *, .ghost *, .cancel *,
+        .gm-cancel *, .gj-cancel * {
+          color: var(--text) !important;
+        }
+
+        /* Cartes cliquables : ce ne sont pas des boutons visuels, elles restent lisibles */
+        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
+        .item, .weekend-match, .home-match-card, .home-week-card, .match-card,
+        .gj-player-card, .ge-team-card, .list-card, .team-card, .player-card {
+          background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+          color: var(--text) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+        .menu-btn .big, .role-menu-card .big, .gestion-home-tile .big,
+        .gestion-settings-tile .big, .item-title, .team-name, .team-name-line {
+          color: var(--text) !important;
+        }
+        .menu-btn .small, .role-menu-card .small, .gestion-home-tile .small,
+        .gestion-settings-tile .small, .item-sub, .muted {
+          color: color-mix(in srgb, var(--text) 74%, transparent) !important;
+        }
+        .gm-tab, .gm-tab.active {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+        }
+        .gm-tab *, .gm-tab.active * { color: var(--button-text) !important; }
+        button:disabled, .role-menu-card.disabled, .menu-btn.disabled { opacity: .55 !important; }
     input, select, textarea {
       border-color: var(--accent) !important;
     }
@@ -7433,8 +7561,8 @@ function appliquerConfig() {
   const eventText = document.getElementById("clubEventText");
   const eventLink = document.getElementById("clubEventLink");
   if (eventCard && eventImg && eventTitle && eventText && eventLink) {
-    const defaultTitle = "1/2 Finale Coupe du Loir-et-Cher U13M";
-    const defaultText = "Samedi 16 mai à 14h\nGymnase communautaire de Montrichard\nCAM Basket-Ball Montrichard vs ADA Blois";
+    const defaultTitle = "Événement du club";
+    const defaultText = "Date, lieu et informations à compléter dans CONFIG.";
     const active = cfgBool("club_event_actif", cfgBool("evenement_club_actif", true));
     const imgUrl = cfgValue("club_event_image", cfgValue("evenement_club_image_url", "evenement_club.jpg"));
     const title = cfgValue("club_event_titre", cfgValue("evenement_club_titre", defaultTitle));
