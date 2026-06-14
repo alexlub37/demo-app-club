@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.31 - Joueurs - Configuration centrale app-config.js + libellés club -->
+<!-- Démo App Club V62.32 - Joueurs - couleurs CONFIG complètes -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V62.31-JOUEURS-CONFIG" />
+  <meta name="cam-basket-version" content="V62.32-JOUEURS-COLOR" />
   <style>
     :root{
       --bg:#050505;
@@ -2755,6 +2755,85 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
       APP_WHATSAPP_MATCH_ADDED_TITLE = cfgValue("whatsapp_match_added_title", "Nouveau match " + APP_CLUB_NAME);
       APP_WHATSAPP_MATCH_MODIFIED_TITLE = cfgValue("whatsapp_match_modified_title", "Match modifié " + APP_CLUB_NAME);
       APP_WHATSAPP_MATCH_REPLY_TEXT = cfgValue("whatsapp_match_reply_text", "Merci de répondre dans l’application :");
+    }
+
+    function cfgColorValueJoueurs(key, fallback) {
+      const raw = cfgRawValue(key, fallback || "");
+      const v = String(raw || fallback || "").trim();
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) return v;
+      if (/^[0-9a-fA-F]{6}$/.test(v)) return "#" + v;
+      return fallback;
+    }
+
+    function hexToRgbStringJoueurs(hex, fallback) {
+      let v = String(hex || "").trim().replace("#", "");
+      if (/^[0-9a-fA-F]{6}$/.test(v)) {
+        return [parseInt(v.slice(0,2),16), parseInt(v.slice(2,4),16), parseInt(v.slice(4,6),16)].join(",");
+      }
+      return fallback || "255,212,0";
+    }
+
+    function appliquerCouleursConfigJoueurs(cfg) {
+      const root = document.documentElement;
+      const couleurFond = cfgColorValueJoueurs("couleur_fond", "#050505");
+      const couleurPrincipale = cfgColorValueJoueurs("couleur_principale", "#ffd400");
+      const couleurSecondaire = cfgColorValueJoueurs("couleur_secondaire", couleurPrincipale);
+      const couleurTexte = cfgColorValueJoueurs("couleur_texte", "#ffffff");
+      const couleurBoutonTexte = cfgColorValueJoueurs("couleur_bouton_texte", "#000000");
+      const accentRgb = hexToRgbStringJoueurs(couleurSecondaire, "255,212,0");
+
+      root.style.setProperty("--bg", couleurFond);
+      root.style.setProperty("--text", couleurTexte);
+      root.style.setProperty("--accent", couleurSecondaire);
+      root.style.setProperty("--accent-rgb", accentRgb);
+      root.style.setProperty("--button-bg", couleurPrincipale);
+      root.style.setProperty("--button-text", couleurBoutonTexte);
+      root.style.setProperty("--line", couleurSecondaire);
+
+      let style = document.getElementById("_cfg_colors_joueurs");
+      if (!style) { style = document.createElement("style"); style.id = "_cfg_colors_joueurs"; document.head.appendChild(style); }
+      style.textContent = `
+        html, body { background: var(--bg) !important; color: var(--text) !important; }
+        #camSvgBackground { background: var(--bg) !important; }
+        .hero-title, .item-title, .menu-title, .detail-title, h1, h2, h3, label { color: var(--text) !important; }
+        .muted, .item-sub, .empty, .note, .detail-sub, .home-match-opponent { color: color-mix(in srgb, var(--text) 72%, transparent) !important; }
+        .hero-sub, .badge-season, .coach-title, .convoc-title, .apports-title, .home-section-title, .home-count, .detail-label, .status-badge {
+          color: var(--accent) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+        .card, .item, .match-card, .bureau-member-card, .convocation-card, .response-card, .menu-btn, .list-card, .team-card, .player-card,
+        .home-week-card, .home-match-card {
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+        input, select, textarea {
+          border-color: var(--accent) !important;
+          color: var(--text) !important;
+        }
+        button, .btn-outline, .back, .menu-btn {
+          border-color: var(--accent) !important;
+          color: var(--text) !important;
+        }
+        .btn-light, .btn-light.active, .btn-outline.active, .primary, .gm-tab.active, button[type="submit"] {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+        }
+        .btn-outline:not(.active), .back {
+          background: rgba(0,0,0,.35) !important;
+          color: var(--text) !important;
+          border-color: var(--accent) !important;
+        }
+        .home-match-date, .home-match-time, .pill, .badge-away, .badge-home {
+          color: var(--accent) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+        hr, .separator { border-color: rgba(var(--accent-rgb), .22) !important; }
+      `;
+
+      document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", couleurSecondaire));
+      const badge = document.getElementById("versionBadge");
+      if (badge) { badge.style.color = couleurSecondaire; badge.style.borderColor = couleurSecondaire; }
+      document.querySelectorAll(".splash-dot").forEach(d => d.style.background = couleurSecondaire);
     }
 
     function getOrganisationQuotas() {
@@ -6756,30 +6835,8 @@ function appliquerConfig() {
   // Fond configurable : basket / hand / foot / neutre via CONFIG en V62.25
   appliquerFondSportConfig(cfg);
 
-  // Couleur principale
-  const c = cfg["couleur_principale"] || "";
-  if (c) {
-    // Variable CSS
-    document.documentElement.style.setProperty("--accent", c);
-    // Style injecté pour forcer sur tous les éléments
-    let s = document.getElementById("_cfg");
-    if (!s) { s = document.createElement("style"); s.id = "_cfg"; document.head.appendChild(s); }
-    s.textContent =
-      ".btn-light.active{background:" + c + "!important;border-color:" + c + "!important}" +
-      ".btn-outline{border-color:" + c + "!important}" +
-      ".hero-sub,.badge-season,.coach-title,.convoc-title,.apports-title{color:" + c + "!important}";
-    // SVG fond brushstrokes
-    document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", c));
-    // Badge version
-    const badge = document.getElementById("versionBadge");
-    if (badge) { badge.style.color = c; badge.style.borderColor = c; }
-    // Points du splash screen
-    document.querySelectorAll(".splash-dot").forEach(d => d.style.background = c);
-    // Boutons déjà actifs
-    document.querySelectorAll(".btn-light.active").forEach(el => {
-      el.style.setProperty("background", c, "important");
-    });
-  }
+  // Couleurs configurables depuis PARAMETRES_CLUB → CONFIG
+  appliquerCouleursConfigJoueurs(cfg);
 
   // Nom du club
   const nom = cfg["nom_club"] || "";

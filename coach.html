@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.14 - Coach - couleurs CONFIG : fond/principale/secondaire/texte/boutons -->
+<!-- Démo App Club V63.16 - Coach - couleurs CONFIG stable : fond sport préservé -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.14-COACH-COLOR" />
+  <meta name="cam-basket-version" content="V63.16-COACH-COLOR-STABLE" />
   <style>
     :root{
       --bg:#050505;
@@ -7022,7 +7022,8 @@ function appliquerCouleursConfigCoach(cfg) {
   let s = document.getElementById("_cfg_colors_coach");
   if (!s) { s = document.createElement("style"); s.id = "_cfg_colors_coach"; document.head.appendChild(s); }
   s.textContent = `
-    body, header { background: var(--bg) !important; color: var(--text) !important; }
+    body { background: var(--bg) !important; color: var(--text) !important; }
+    header, .hero, .app-header, .top, .home-screen { background: transparent !important; }
     #camSvgBackground { background: var(--bg) !important; }
     .hero-title, .item-title, .menu-title, .detail-title, h1, h2, h3, label { color: var(--text) !important; }
     .muted, .item-sub, .coach-msg, .empty, .note, .detail-sub { color: color-mix(in srgb, var(--text) 72%, transparent) !important; }
