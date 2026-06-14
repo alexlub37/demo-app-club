@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.09 - Gestion - Configuration centrale app-config.js + libellés club -->
+<!-- Démo App Club V65.10 - Gestion - couleurs CONFIG complètes -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V65.09-GESTION-CONFIG" />
+  <meta name="cam-basket-version" content="V65.10-GESTION-COLOR" />
   <style>
     :root{
       --bg:#050505;
@@ -5657,7 +5657,11 @@ function renderBenevoles(){
 
     function setActiveButton(name){
       const buttons = ['btn-home','btn-teams','btn-coach','btn-gestion','btn-bureau','btn-benevoles'];
-      const c = (state.config && state.config['couleur_principale']) || '';
+      const cfg = state.config || {};
+      const cPrimary = cfg['couleur_principale'] || '#ffffff';
+      const cSecondary = cfg['couleur_secondaire'] || cPrimary;
+      const cText = cfg['couleur_texte'] || '#ffffff';
+      const cBtnText = cfg['couleur_bouton_texte'] || '#000000';
 
       buttons.forEach(id => {
         const el = document.getElementById(id);
@@ -5665,9 +5669,9 @@ function renderBenevoles(){
           el.classList.remove('active');
           el.classList.remove('btn-light');
           el.classList.add('btn-outline');
-          el.style.removeProperty('background');
-          el.style.removeProperty('color');
-          if (c) el.style.setProperty('border-color', c, 'important');
+          el.style.setProperty('background', 'transparent', 'important');
+          el.style.setProperty('color', cText, 'important');
+          el.style.setProperty('border-color', cSecondary, 'important');
         }
       });
 
@@ -5677,14 +5681,13 @@ function renderBenevoles(){
           active.classList.add('active');
           active.classList.remove('btn-outline');
           active.classList.add('btn-light');
-          if (c) {
-            active.style.setProperty('background', c, 'important');
-            active.style.setProperty('border-color', c, 'important');
-            active.style.setProperty('color', '#000', 'important');
-          }
+          active.style.setProperty('background', cPrimary, 'important');
+          active.style.setProperty('border-color', cPrimary, 'important');
+          active.style.setProperty('color', cBtnText, 'important');
         }
       }
     }
+
 
 
 function openInfoModal(){
@@ -6466,30 +6469,51 @@ function appliquerConfig() {
   // Fond configurable : basket / hand / foot / neutre via CONFIG en V65.03
   appliquerFondSportConfig(cfg);
 
-  // Couleur principale
-  const c = cfg["couleur_principale"] || "";
-  if (c) {
-    // Variable CSS
-    document.documentElement.style.setProperty("--accent", c);
-    // Style injecté pour forcer sur tous les éléments
-    let s = document.getElementById("_cfg");
-    if (!s) { s = document.createElement("style"); s.id = "_cfg"; document.head.appendChild(s); }
-    s.textContent =
-      ".btn-light.active{background:" + c + "!important;border-color:" + c + "!important}" +
-      ".btn-outline{border-color:" + c + "!important}" +
-      ".hero-sub,.badge-season,.coach-title,.convoc-title,.apports-title{color:" + c + "!important}";
-    // SVG fond brushstrokes
-    document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", c));
-    // Badge version
-    const badge = document.getElementById("versionBadge");
-    if (badge) { badge.style.color = c; badge.style.borderColor = c; }
-    // Points du splash screen
-    document.querySelectorAll(".splash-dot").forEach(d => d.style.background = c);
-    // Boutons déjà actifs
-    document.querySelectorAll(".btn-light.active").forEach(el => {
-      el.style.setProperty("background", c, "important");
-    });
+  // Couleurs CONFIG complètes — V65.10
+  const couleurFond = cfg["couleur_fond"] || "#000000";
+  const couleurPrincipale = cfg["couleur_principale"] || "#ffffff";
+  const couleurSecondaire = cfg["couleur_secondaire"] || cfg["couleur_principale"] || "#ffd400";
+  const couleurTexte = cfg["couleur_texte"] || "#ffffff";
+  const couleurBoutonTexte = cfg["couleur_bouton_texte"] || "#000000";
+
+  function rgbaFromHexGestion(hex, alpha){
+    const h = String(hex || "").trim().replace("#", "");
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) return "rgba(255,255,255," + alpha + ")";
+    const r = parseInt(h.slice(0,2),16);
+    const g = parseInt(h.slice(2,4),16);
+    const b = parseInt(h.slice(4,6),16);
+    return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
   }
+
+  document.documentElement.style.setProperty("--bg", couleurFond);
+  document.documentElement.style.setProperty("--text", couleurTexte);
+  document.documentElement.style.setProperty("--accent", couleurSecondaire);
+  document.documentElement.style.setProperty("--line", rgbaFromHexGestion(couleurSecondaire, .45));
+
+  let s = document.getElementById("_cfg");
+  if (!s) { s = document.createElement("style"); s.id = "_cfg"; document.head.appendChild(s); }
+  s.textContent = `
+    body{background:${couleurFond}!important;color:${couleurTexte}!important;}
+    header{color:${couleurTexte}!important;}
+    .hero-title,.item-title,.team-name-line,.team-name,.coach-space-team,.coach-response-count,.coach-convoc-state,.coach-match-title,.match-detail-title,.match-detail-title .vs-line,.match-date-time-row,.modal-label,.role-menu-card .big,.gj-field label,.gj-choice-title,.gm-field label,.gm-title,.ge-title{color:${couleurTexte}!important;}
+    .hero-sub,.badge-season,.coach-title,.convoc-title,.apports-title,.team-extra-title,.match-detail-title .vs-small,.match-date-time-row span:last-child,.pill,.gm-share-prompt-title,.reglages-preview-card h3,.home-upcoming-title,.weekend-date,.weekend-date small{color:${couleurSecondaire}!important;}
+    button,.btn-outline,.back,.menu-btn,.role-menu-card,.item,.card,.weekend-match,.convoc-card,.convoc-item,.gm-share-prompt,.gestion-home-tile,.gestion-settings-tile,.reglages-preview-card input,.reglages-preview-card select,.reglages-preview-card textarea,input,select,textarea,.search{border-color:${couleurSecondaire}!important;}
+    .btn-outline,.back,.menu-btn,.role-menu-card,button{color:${couleurTexte}!important;}
+    .btn-light,.btn-light.active,.btn-outline.active,.modal-close,.gj-save,.gm-send-btn,#grSaveBtn,.convoc-action,.link-btn.primary{background:${couleurPrincipale}!important;border-color:${couleurPrincipale}!important;color:${couleurBoutonTexte}!important;}
+    .btn-light.active *, .btn-outline.active *, .modal-close *, .gj-save *, .gm-send-btn *, #grSaveBtn *{color:${couleurBoutonTexte}!important;}
+    .gj-badge,.pill,.match-badge,.weekend-match-type{border-color:${couleurSecondaire}!important;color:${couleurSecondaire}!important;background:${rgbaFromHexGestion(couleurSecondaire,.12)}!important;}
+    .gm-share-prompt,.gm-reconfirm-note,.coach-match-badge,.home-info-card{border-color:${rgbaFromHexGestion(couleurSecondaire,.45)}!important;background:${rgbaFromHexGestion(couleurSecondaire,.08)}!important;}
+    .coach-space-convoc,.weekend-match,.item{border-left-color:${couleurSecondaire}!important;}
+    .team-extra{border-top-color:${rgbaFromHexGestion(couleurSecondaire,.25)}!important;}
+    .splash-dot{background:${couleurSecondaire}!important;}
+  `;
+
+  // SVG fond sport / brushstrokes : l'accent secondaire colore le décor, le fond_type reste prioritaire.
+  document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", couleurSecondaire));
+
+  // Badge version
+  const badge = document.getElementById("versionBadge");
+  if (badge) { badge.style.color = couleurSecondaire; badge.style.borderColor = couleurSecondaire; }
 
   // Nom du club
   const nom = cfg["nom_club"] || "";
@@ -6689,7 +6713,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.03-GESTION";
+window.CAM_BASKET_VERSION = "V65.10-GESTION-COLOR";
 
 </script>
 
