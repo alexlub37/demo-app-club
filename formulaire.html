@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.17-DEMO-COULEURS-OFFICIELLES - Règle officielle couleurs -->
+<!-- Démo App Club formulaire V61.18-DEMO-CONTRASTE-FORMULAIRE - Sécurité contraste joueur -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.17-DEMO-COULEURS-OFFICIELLES</title>
+<title>Formulaire Match V61.18-DEMO-CONTRASTE-FORMULAIRE</title>
 
 <style>
 :root{
@@ -271,6 +271,55 @@ input::placeholder, textarea::placeholder{
 }
 </style>
 
+
+<style id="_form_contrast_safe_v61_18">
+/* V61.18 — sécurité contraste formulaire joueur
+   Le formulaire garde des cartes sombres. Si Couleur texte arrive en noir depuis CONFIG,
+   le texte est sécurisé en blanc pour éviter l'écran illisible après chargement. */
+html, body{
+  background:var(--app-bg)!important;
+  color:var(--app-text)!important;
+}
+.wrap,
+h2,
+label,
+.note,
+.apport-note,
+.choice-btn:not(.active),
+.choice-btn:not(.active) *,
+.send.cancel,
+.send.cancel *{
+  color:var(--app-text)!important;
+}
+.wrap{
+  background:linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94))!important;
+  border-color:var(--app-secondary)!important;
+}
+.choice-btn:not(.active){
+  background:rgba(0,0,0,.34)!important;
+  border-color:var(--app-secondary)!important;
+}
+input, select, textarea{
+  background:rgba(0,0,0,.32)!important;
+  color:var(--app-text)!important;
+  border-color:var(--app-secondary)!important;
+}
+.choice-btn.active,
+.send:not(.cancel){
+  background:var(--app-primary)!important;
+  color:var(--app-button-text)!important;
+  border-color:var(--app-primary)!important;
+}
+.choice-btn.active *,
+.send:not(.cancel) *{
+  color:var(--app-button-text)!important;
+}
+.send.cancel{
+  background:rgba(0,0,0,.35)!important;
+  border-color:var(--app-secondary)!important;
+}
+</style>
+
 </head>
 
 <body>
@@ -391,6 +440,25 @@ function configBoolForm(cfg, key, fallback){
   return fallback;
 }
 
+
+function luminanceHexForm(hex){
+  const raw = String(hex || "").trim();
+  const m = raw.match(/^#?([0-9a-f]{6})$/i);
+  if (!m) return null;
+  const n = parseInt(m[1], 16);
+  const r = ((n >> 16) & 255) / 255;
+  const g = ((n >> 8) & 255) / 255;
+  const b = (n & 255) / 255;
+  const conv = v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  return 0.2126 * conv(r) + 0.7152 * conv(g) + 0.0722 * conv(b);
+}
+
+function secureTextForDarkCardForm(value){
+  const lum = luminanceHexForm(value);
+  if (lum !== null && lum < 0.35) return "#ffffff";
+  return value;
+}
+
 function appliquerThemeFormulaire(cfg){
   const root = document.documentElement;
   const primary = configValueForm(cfg, "couleur_principale", "#ffffff");
@@ -398,11 +466,12 @@ function appliquerThemeFormulaire(cfg){
   const bg = configValueForm(cfg, "couleur_fond", "#000000");
   const text = configValueForm(cfg, "couleur_texte", "#ffffff");
   const buttonText = configValueForm(cfg, "couleur_bouton_texte", "#000000");
+  const safeText = secureTextForDarkCardForm(text);
 
   root.style.setProperty("--app-primary", primary);
   root.style.setProperty("--app-secondary", secondary);
   root.style.setProperty("--app-bg", bg);
-  root.style.setProperty("--app-text", text);
+  root.style.setProperty("--app-text", safeText);
   root.style.setProperty("--app-button-text", buttonText);
   root.style.setProperty("--app-choice-border", secondary);
   root.style.setProperty("--app-note", text);
