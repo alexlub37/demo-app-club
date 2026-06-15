@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.21 - Gestion - cartes modules sombres -->
+<!-- Démo App Club V65.22 - Gestion - fenêtre version simplifiée -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.21-GESTION-CARTES-SOMBRES" />
+  <meta name="app-version" content="V65.22-GESTION-VERSION-5-MODS" />
   <style>
     :root{
       --bg:#050505;
@@ -2078,6 +2078,50 @@ a.link-btn.primary *,
   border-color: rgba(var(--accent-rgb), .55) !important;
 }
 </style>
+
+<style id="_version_modal_5mods_v12">
+/* V65.22 — badge version visible + fenêtre version compacte */
+#versionBadge{
+  background: rgba(0,0,0,.58) !important;
+  color: var(--accent) !important;
+  border: 1.5px solid var(--accent) !important;
+  min-width: auto !important;
+  width: auto !important;
+  max-width: 150px !important;
+  height: auto !important;
+  padding: 5px 10px !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  line-height: 1.1 !important;
+  box-shadow: none !important;
+  white-space: nowrap !important;
+}
+#versionBadge *{
+  color: var(--accent) !important;
+}
+#infoModal .modal-card{
+  max-height: min(78vh, 620px) !important;
+  overflow-y: auto !important;
+  padding: 20px !important;
+}
+#infoModal .modal-list{
+  margin-bottom: 16px !important;
+}
+#infoModal .modal-list li{
+  margin: 8px 0 !important;
+  line-height: 1.28 !important;
+}
+#infoModal .modal-close{
+  background: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  border-color: var(--button-bg) !important;
+  min-height: 48px !important;
+}
+#infoModal .modal-close *{
+  color: var(--button-text) !important;
+}
+</style>
+
 </head>
 <body class="loading">
 
@@ -2192,7 +2236,7 @@ a.link-btn.primary *,
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.21 GESTION</button>
+    ">V65.22 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -6702,17 +6746,16 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.21 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.22 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.03 — Gestion : fond sport configurable via CONFIG</li>
-        <li>V65.02 — Gestion : chargement CONFIG fiable + anti-écrasement multi-appareil</li>
-        <li>V65.01 — Gestion : sécurité champs vides</li>
-        <li>V65.00 — Gestion : Réglages app connectés à CONFIG</li>
-        <li>V64.03 — Gestion : écran Réglages app préparé</li>
-        <li>V64.02 — Gestion : accès direct aux modules</li>
+        <li>V65.22 — Gestion : fenêtre version simplifiée à 5 dernières modifications</li>
+        <li>V65.21 — Gestion : cartes modules sombres, séparées des boutons</li>
+        <li>V65.20 — Gestion : boutons et cartes rendus plus sobres</li>
+        <li>V65.19 — Gestion : boutons globaux sécurisés via CONFIG</li>
+        <li>V65.18 — Gestion : couleurs boutons pilotées par PARAMETRES_CLUB</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -7126,6 +7169,14 @@ function appliquerConfig() {
           color: color-mix(in srgb, var(--text) 74%, transparent) !important;
         }
 
+
+        /* V65.22 : le badge version n'est pas un bouton principal */
+        #versionBadge {
+          background: rgba(0,0,0,.58) !important;
+          color: var(--accent) !important;
+          border-color: var(--accent) !important;
+        }
+
   `;
 
   // SVG fond sport / brushstrokes : l'accent secondaire colore le décor, le fond_type reste prioritaire.
@@ -7333,7 +7384,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.21-GESTION-CARTES-SOMBRES";
+window.CAM_BASKET_VERSION = "V65.22-GESTION-VERSION-5-MODS";
 
 </script>
 
