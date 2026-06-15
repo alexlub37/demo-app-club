@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.20 - Gestion - boutons sobres -->
+<!-- Démo App Club V65.21 - Gestion - cartes modules sombres -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.20-GESTION-BOUTONS-SOBRES" />
+  <meta name="app-version" content="V65.21-GESTION-CARTES-SOMBRES" />
   <style>
     :root{
       --bg:#050505;
@@ -2192,7 +2192,7 @@ a.link-btn.primary *,
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.20 GESTION</button>
+    ">V65.21 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -2233,29 +2233,29 @@ a.link-btn.primary *,
       </div>
 
       <div class="gestion-home-grid">
-        <button class="menu-btn gestion-home-tile" onclick="showGestionMatchsScreen()">
+        <div class="menu-btn gestion-home-tile" role="button" tabindex="0" onclick="showGestionMatchsScreen()">
           <span class="big">🏀 Matchs</span>
           <span class="small">Ajouter ou modifier les matchs</span>
-        </button>
-        <button class="menu-btn gestion-home-tile" onclick="showGestionJoueursScreen()">
+        </div>
+        <div class="menu-btn gestion-home-tile" role="button" tabindex="0" onclick="showGestionJoueursScreen()">
           <span class="big">👥 Joueurs</span>
           <span class="small">Licences, codes et infos joueurs</span>
-        </button>
-        <button class="menu-btn gestion-home-tile" onclick="showGestionEquipesScreen()">
+        </div>
+        <div class="menu-btn gestion-home-tile" role="button" tabindex="0" onclick="showGestionEquipesScreen()">
           <span class="big">🟡 Équipes</span>
           <span class="small">Coach, codes et entraînements</span>
-        </button>
-        <button class="menu-btn gestion-home-tile" onclick="showGestionAdversairesScreen()">
+        </div>
+        <div class="menu-btn gestion-home-tile" role="button" tabindex="0" onclick="showGestionAdversairesScreen()">
           <span class="big">📍 Adversaires</span>
           <span class="small">Gymnases et adresses</span>
-        </button>
+        </div>
       </div>
 
       <div class="gestion-home-grid gestion-home-grid-single">
-        <button class="menu-btn gestion-home-tile gestion-settings-tile" onclick="openGestionReglagesPreview()">
+        <div class="menu-btn gestion-home-tile gestion-settings-tile" role="button" tabindex="0" onclick="openGestionReglagesPreview()">
           <span class="big">⚙️ Réglages app</span>
           <span class="small">Écran préparé — raccordement serveur plus tard</span>
-        </button>
+        </div>
       </div>
     </section>
 
@@ -2668,30 +2668,30 @@ a.link-btn.primary *,
         <div id="gestionClubText" class="muted">Espace privé pour gérer les données du club.</div>
       </div>
       <div class="role-grid">
-        <button id="gestionMenuMatchs" class="menu-btn role-menu-card" onclick="showGestionMatchsScreen()">
+        <div id="gestionMenuMatchs" class="menu-btn role-menu-card" role="button" tabindex="0" onclick="showGestionMatchsScreen()">
           <span id="gestionMenuMatchsTitle" class="big">🏀 Matchs</span>
           <span id="gestionMenuMatchsText" class="small">Ajouter ou modifier les matchs.</span>
-        </button>
-        <button id="gestionMenuJoueurs" class="menu-btn role-menu-card" onclick="showGestionJoueursScreen()">
+        </div>
+        <div id="gestionMenuJoueurs" class="menu-btn role-menu-card" role="button" tabindex="0" onclick="showGestionJoueursScreen()">
           <span id="gestionMenuJoueursTitle" class="big">👥 Joueurs / Licences</span>
           <span id="gestionMenuJoueursText" class="small">Ajouter, modifier ou désactiver les joueurs.</span>
-        </button>
-        <button id="gestionMenuEquipes" class="menu-btn role-menu-card" onclick="showGestionEquipesScreen()">
+        </div>
+        <div id="gestionMenuEquipes" class="menu-btn role-menu-card" role="button" tabindex="0" onclick="showGestionEquipesScreen()">
           <span id="gestionMenuEquipesTitle" class="big">🏷️ Équipes</span>
           <span id="gestionMenuEquipesText" class="small">Gérer équipes, coachs et entraînements.</span>
-        </button>
-        <button id="gestionMenuAdversaires" class="menu-btn role-menu-card" onclick="showGestionAdversairesScreen()">
+        </div>
+        <div id="gestionMenuAdversaires" class="menu-btn role-menu-card" role="button" tabindex="0" onclick="showGestionAdversairesScreen()">
           <span id="gestionMenuAdversairesTitle" class="big">📍 Adversaires / Gymnases</span>
           <span id="gestionMenuAdversairesText" class="small">Ajouter ou modifier les clubs adverses et leurs adresses.</span>
-        </button>
-        <button id="gestionMenuOfficiels" class="menu-btn role-menu-card disabled" onclick="alert('Gestion officiels prévue dans une prochaine version.')">
+        </div>
+        <div id="gestionMenuOfficiels" class="menu-btn role-menu-card disabled" role="button" tabindex="0" onclick="alert('Gestion officiels prévue dans une prochaine version.')">
           <span id="gestionMenuOfficielsTitle" class="big">👨‍⚖️ Officiels</span>
           <span id="gestionMenuOfficielsText" class="small">Préparé pour arbitres, chrono et table.</span>
-        </button>
-        <button id="gestionMenuReglages" class="menu-btn role-menu-card disabled" onclick="alert('Réglages CONFIG prévus plus tard.')">
+        </div>
+        <div id="gestionMenuReglages" class="menu-btn role-menu-card disabled" role="button" tabindex="0" onclick="alert('Réglages CONFIG prévus plus tard.')">
           <span id="gestionMenuReglagesTitle" class="big">⚙️ Réglages</span>
           <span id="gestionMenuReglagesText" class="small">Préparé pour modifier CONFIG depuis l’app.</span>
-        </button>
+        </div>
       </div>
     </section>
 
@@ -6702,7 +6702,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.20 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.21 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -7099,6 +7099,33 @@ function appliquerConfig() {
           border-radius: 22px !important;
         }
 
+
+        /* V65.21 Gestion : les modules ne sont plus des boutons HTML.
+           Ils restent en cartes sombres, même si la couleur principale est blanche. */
+        div.menu-btn,
+        div.role-menu-card,
+        div.gestion-home-tile,
+        div.gestion-settings-tile {
+          display: block !important;
+          background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+          color: var(--text) !important;
+          border: 1.5px solid rgba(var(--accent-rgb), .60) !important;
+          box-shadow: none !important;
+          cursor: pointer !important;
+        }
+        div.menu-btn *,
+        div.role-menu-card *,
+        div.gestion-home-tile *,
+        div.gestion-settings-tile * {
+          color: var(--text) !important;
+        }
+        div.menu-btn .small,
+        div.role-menu-card .small,
+        div.gestion-home-tile .small,
+        div.gestion-settings-tile .small {
+          color: color-mix(in srgb, var(--text) 74%, transparent) !important;
+        }
+
   `;
 
   // SVG fond sport / brushstrokes : l'accent secondaire colore le décor, le fond_type reste prioritaire.
@@ -7306,7 +7333,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.20-GESTION-BOUTONS-SOBRES";
+window.CAM_BASKET_VERSION = "V65.21-GESTION-CARTES-SOMBRES";
 
 </script>
 
