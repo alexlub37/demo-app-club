@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.20-DEMO-FORMULAIRE-SIMPLE - Retour visuel simple et lisible -->
+<!-- Démo App Club formulaire V61.21-DEMO-FORM-THEME-CACHE - Suppression latence couleur formulaire -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.20-DEMO-FORMULAIRE-SIMPLE</title>
+<title>Formulaire Match V61.21-DEMO-FORM-THEME-CACHE</title>
 
 <style>
 :root{
   --app-primary:#ffffff;
-  --app-secondary:#444444;
+  --app-secondary:#6600CC;
   --app-bg:#000000;
   --app-text:#ffffff;
   --app-button-text:#000000;
   --app-choice-bg:#222222;
-  --app-choice-border:#555555;
+  --app-choice-border:#6600CC;
   --app-note:#cfcfcf;
 }
 body{
@@ -134,7 +134,7 @@ textarea{
 /* V61.12 : tous les anciens jaunes suivent maintenant CONFIG */
 :root{
   --app-primary:#ffffff;
-  --app-secondary:#555555;
+  --app-secondary:#6600CC;
   --app-bg:#000000;
   --app-text:#ffffff;
   --app-button-text:#000000;
@@ -151,7 +151,7 @@ h2{color:var(--app-primary)!important;}
 /* V61.13 : annuler reste secondaire et plus aucun jaune de secours */
 :root{
   --app-primary:#ffffff;
-  --app-secondary:#669900;
+  --app-secondary:#6600CC;
   --app-bg:#000000;
   --app-text:#ffffff;
   --app-button-text:#000000;
@@ -411,6 +411,27 @@ textarea::placeholder{
 }
 </style>
 
+
+<script id="_form_theme_cache_boot_v61_21">
+(function(){
+  try{
+    var cached = localStorage.getItem("demo_app_form_theme_v1");
+    if(!cached) return;
+    var t = JSON.parse(cached);
+    var r = document.documentElement;
+    if(t.primary) r.style.setProperty("--app-primary", t.primary);
+    if(t.secondary) {
+      r.style.setProperty("--app-secondary", t.secondary);
+      r.style.setProperty("--app-choice-border", t.secondary);
+    }
+    r.style.setProperty("--app-bg", "#000000");
+    r.style.setProperty("--app-text", "#ffffff");
+    if(t.buttonText) r.style.setProperty("--app-button-text", t.buttonText);
+    r.style.setProperty("--app-note", "#cfcfcf");
+  }catch(e){}
+})();
+</script>
+
 </head>
 
 <body>
@@ -568,6 +589,15 @@ function appliquerThemeFormulaire(cfg){
   root.style.setProperty("--app-button-text", safeButtonText);
   root.style.setProperty("--app-choice-border", secondary);
   root.style.setProperty("--app-note", "#cfcfcf");
+
+  // V61.21 : mémorise le thème pour éviter le flash de couleur au prochain chargement.
+  try{
+    localStorage.setItem("demo_app_form_theme_v1", JSON.stringify({
+      primary: primary,
+      secondary: secondary,
+      buttonText: safeButtonText
+    }));
+  }catch(e){}
 }
 
 
