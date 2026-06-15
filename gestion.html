@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.18 - Gestion - boutons globaux CONFIG -->
+<!-- Démo App Club V65.20 - Gestion - boutons sobres -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.18-GESTION-BOUTONS-GLOBAUX" />
+  <meta name="app-version" content="V65.20-GESTION-BOUTONS-SOBRES" />
   <style>
     :root{
       --bg:#050505;
@@ -2077,82 +2077,6 @@ a.link-btn.primary *,
   color: var(--text) !important;
   border-color: rgba(var(--accent-rgb), .55) !important;
 }
-
-<style id="_gestion_global_buttons_v8">
-/* V65.18 — Gestion : règle globale des boutons.
-   Boutons = couleur_principale + couleur_bouton_texte.
-   Cartes/menu = fond sombre + bordure couleur_secondaire. */
-#gestionScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
-#gestionClubScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
-#gestionMatchsScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
-#gestionJoueursScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
-#gestionEquipesScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
-#gestionAdversairesScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
-.gm-submit,
-.gj-save,
-#grSaveBtn,
-.gm-share-prompt button{
-  background: var(--button-bg) !important;
-  color: var(--button-text) !important;
-  border-color: var(--button-bg) !important;
-}
-
-#gestionScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
-#gestionClubScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
-#gestionMatchsScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
-#gestionJoueursScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
-#gestionEquipesScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
-#gestionAdversairesScreen button:not(.back):not(.btn-outline):not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
-.gm-submit *,
-.gj-save *,
-#grSaveBtn *,
-.gm-share-prompt button *{
-  color: var(--button-text) !important;
-}
-
-/* Onglets Ajouter / Modifier = boutons d'action */
-.gm-tab{
-  background: var(--button-bg) !important;
-  color: var(--button-text) !important;
-  border-color: var(--button-bg) !important;
-}
-.gm-tab *{ color: var(--button-text) !important; }
-
-/* Boutons secondaires : retour / contour */
-.back,
-.btn-outline:not(.active),
-.gj-cancel,
-.gm-cancel,
-.cancel,
-.secondary{
-  background: rgba(0,0,0,.35) !important;
-  color: var(--text) !important;
-  border-color: var(--accent) !important;
-}
-
-/* Cartes / modules de Gestion : pas des boutons visuels */
-.menu-btn,
-.role-menu-card,
-.gestion-home-tile,
-.gestion-settings-tile{
-  background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
-  color: var(--text) !important;
-  border-color: rgba(var(--accent-rgb), .55) !important;
-}
-.menu-btn .big,
-.role-menu-card .big,
-.gestion-home-tile .big,
-.gestion-settings-tile .big{
-  color: var(--text) !important;
-}
-.menu-btn .small,
-.role-menu-card .small,
-.gestion-home-tile .small,
-.gestion-settings-tile .small{
-  color: color-mix(in srgb, var(--text) 74%, transparent) !important;
-}
-</style>
-
 </style>
 </head>
 <body class="loading">
@@ -2268,7 +2192,7 @@ a.link-btn.primary *,
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.18 GESTION</button>
+    ">V65.20 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -6778,7 +6702,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.18 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.20 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -6903,7 +6827,7 @@ function appliquerConfig() {
   document.documentElement.style.setProperty("--accent-rgb", rgbStringFromHexGestion(couleurSecondaire));
   document.documentElement.style.setProperty("--accent-rgb", rgbaFromHexGestion(couleurSecondaire, 1).replace(/^rgba\((.*),1\)$/,"$1"));
   document.documentElement.style.setProperty("--line", rgbaFromHexGestion(couleurSecondaire, .45));
-  /* V65.18 GESTION : boutons globaux pilotés par PARAMETRES_CLUB → CONFIG */
+  /* V65.19 : boutons globaux pilotés par PARAMETRES_CLUB → CONFIG */
   document.documentElement.style.setProperty("--button-bg", couleurPrincipale);
   document.documentElement.style.setProperty("--button-text", couleurBoutonTexte);
 
@@ -6996,6 +6920,184 @@ function appliquerConfig() {
         }
         .gm-tab *, .gm-tab.active * { color: var(--button-text) !important; }
         button:disabled, .role-menu-card.disabled, .menu-btn.disabled { opacity: .55 !important; }
+
+
+        /* V65.19 Gestion SAFE : dernier passage après tous les anciens styles */
+        /* Boutons d'action = couleur_principale + couleur_bouton_texte */
+        #btn-home,
+        #grSaveBtn,
+        .gm-submit,
+        .gj-save,
+        .gm-share-prompt button,
+        .btn-light:not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
+        .btn-primary,
+        .primary,
+        .action-primary,
+        button[type="submit"] {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+        }
+
+        #btn-home *,
+        #grSaveBtn *,
+        .gm-submit *,
+        .gj-save *,
+        .gm-share-prompt button *,
+        .btn-light:not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
+        .btn-primary *,
+        .primary *,
+        .action-primary *,
+        button[type="submit"] * {
+          color: var(--button-text) !important;
+        }
+
+        /* Onglets ajouter/modifier = boutons */
+        .gm-tab,
+        .gm-tab.active {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+        }
+        .gm-tab *,.gm-tab.active * { color: var(--button-text) !important; }
+
+        /* Cartes/menu Gestion = jamais des boutons blancs */
+        .gestion-home-tile,
+        .gestion-settings-tile,
+        .role-menu-card,
+        button.menu-btn,
+        .menu-btn {
+          background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+          color: var(--text) !important;
+          border: 1px solid rgba(var(--accent-rgb), .55) !important;
+        }
+
+        .gestion-home-tile *,
+        .gestion-settings-tile *,
+        .role-menu-card *,
+        button.menu-btn *,
+        .menu-btn * {
+          color: var(--text) !important;
+        }
+
+        .gestion-home-tile .small,
+        .gestion-settings-tile .small,
+        .role-menu-card .small,
+        .menu-btn .small {
+          color: color-mix(in srgb, var(--text) 74%, transparent) !important;
+        }
+
+        /* Retour / annulation = contour, pas bouton plein */
+        .back,
+        .btn-outline:not(.active),
+        .gj-cancel,
+        .gm-cancel,
+        .cancel,
+        .secondary,
+        .ghost {
+          background: rgba(0,0,0,.35) !important;
+          color: var(--text) !important;
+          border-color: var(--accent) !important;
+        }
+        .back *,.btn-outline:not(.active) *,.gj-cancel *,.gm-cancel *,.cancel *,.secondary *,.ghost * {
+          color: var(--text) !important;
+        }
+
+
+
+        /* V65.20 Gestion : boutons/cartes plus sobres.
+           Cartes = sombres et fines. Boutons = pilotés par CONFIG. */
+
+        .gestion-home-tile,
+        .gestion-settings-tile,
+        .role-menu-card,
+        button.menu-btn,
+        .menu-btn {
+          background: rgba(0,0,0,.34) !important;
+          color: var(--text) !important;
+          border: 1.5px solid rgba(var(--accent-rgb), .60) !important;
+          box-shadow: none !important;
+        }
+        .gestion-home-tile *,
+        .gestion-settings-tile *,
+        .role-menu-card *,
+        button.menu-btn *,
+        .menu-btn * {
+          color: var(--text) !important;
+        }
+        .gestion-home-tile .small,
+        .gestion-settings-tile .small,
+        .role-menu-card .small,
+        .menu-btn .small {
+          color: color-mix(in srgb, var(--text) 74%, transparent) !important;
+        }
+
+        #btn-home,
+        #grSaveBtn,
+        .gm-submit,
+        .gj-save,
+        .gm-share-prompt button,
+        .btn-light:not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile),
+        .btn-primary,
+        .primary,
+        .action-primary,
+        button[type="submit"] {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border: 1.5px solid var(--button-bg) !important;
+          box-shadow: none !important;
+        }
+        #btn-home *,
+        #grSaveBtn *,
+        .gm-submit *,
+        .gj-save *,
+        .gm-share-prompt button *,
+        .btn-light:not(.menu-btn):not(.role-menu-card):not(.gestion-home-tile):not(.gestion-settings-tile) *,
+        .btn-primary *,
+        .primary *,
+        .action-primary *,
+        button[type="submit"] * {
+          color: var(--button-text) !important;
+        }
+
+        .gm-tab,
+        .gm-tab.active {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border: 1.5px solid var(--button-bg) !important;
+          box-shadow: none !important;
+        }
+        .gm-tab *, .gm-tab.active * {
+          color: var(--button-text) !important;
+        }
+
+        .back,
+        .btn-outline:not(.active),
+        .gj-cancel,
+        .gm-cancel,
+        .cancel,
+        .secondary,
+        .ghost {
+          background: rgba(0,0,0,.28) !important;
+          color: var(--text) !important;
+          border: 1.5px solid var(--accent) !important;
+          box-shadow: none !important;
+        }
+        .back *,
+        .btn-outline:not(.active) *,
+        .gj-cancel *,
+        .gm-cancel *,
+        .cancel *,
+        .secondary *,
+        .ghost * {
+          color: var(--text) !important;
+        }
+
+        .gestion-home-tile,
+        .gestion-settings-tile,
+        .role-menu-card {
+          border-radius: 22px !important;
+        }
 
   `;
 
@@ -7204,7 +7306,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.18-GESTION-BOUTONS-GLOBAUX";
+window.CAM_BASKET_VERSION = "V65.20-GESTION-BOUTONS-SOBRES";
 
 </script>
 

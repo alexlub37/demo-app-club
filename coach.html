@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V63.22-COACH-AUDIT-COLOR" />
+  <meta name="cam-basket-version" content="V63.22-COACH-AUDIT-COLOR" />
   <style>
     :root{
       --bg:#050505;
@@ -4276,7 +4276,7 @@ a.link-btn.primary *,
         return [equipe, adversaire, badgeForType(t).label, date, heure].map(x => normalize(x)).join("|");
       }
 
-      // Format actuel formulaire : "Équipe vs Adversaire - 18/05/2026 - 20h00 - Domicile"
+      // Format actuel formulaire : "Montrichard U18M-1 vs Montils - 18/05/2026 - 20h00 - Domicile"
       const dashParts = txt.split(" - ").map(x => x.trim());
       const title = dashParts[0] || txt;
 
