@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.22 - Coach - audit complet couleurs -->
+<!-- Démo App Club V63.23 - Coach - couleurs officielles -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.22-COACH-AUDIT-COLOR" />
+  <meta name="cam-basket-version" content="V63.23-COACH-COULEURS-OFFICIELLES" />
   <style>
     :root{
       --bg:#050505;
@@ -7242,7 +7242,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.07 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.23 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -7336,7 +7336,7 @@ function appliquerCouleursConfigCoach(cfg) {
   const root = document.documentElement;
   const couleurFond = cfgColorValue("couleur_fond", "#050505");
   const couleurPrincipale = cfgColorValue("couleur_principale", "#ffffff");
-  const couleurSecondaire = cfgColorValue("couleur_secondaire", couleurPrincipale);
+  const couleurSecondaire = cfgColorValue("couleur_secondaire", "#669900");
   const couleurTexte = cfgColorValue("couleur_texte", "#ffffff");
   const couleurBoutonTexte = cfgColorValue("couleur_bouton_texte", "#000000");
 
@@ -7456,7 +7456,151 @@ function appliquerCouleursConfigCoach(cfg) {
     input, select, textarea {
       border-color: var(--accent) !important;
     }
-  `;
+  
+
+        /* V-OFFICIAL-COLORS : règle officielle PARAMETRES_CLUB / CONFIG
+           Fond = couleur_fond | Boutons importants = couleur_principale | Texte boutons = couleur_bouton_texte
+           Contours / lignes / accents = couleur_secondaire | Texte général = couleur_texte */
+        html, body {
+          background: var(--bg) !important;
+          color: var(--text) !important;
+        }
+        #camSvgBackground {
+          background: var(--bg) !important;
+        }
+
+        /* Texte principal */
+        .hero-title, .section-title, .item-title, .menu-title, .detail-title,
+        .modal-title, .gm-title, .ge-title, h1, h2, h3, label,
+        .team-name, .team-name-line, .match-detail-title, .match-detail-title .vs-line {
+          color: var(--text) !important;
+        }
+        .muted, .item-sub, .empty, .note, .detail-sub,
+        .home-match-opponent, .team-extra, .small, .description {
+          color: color-mix(in srgb, var(--text) 72%, transparent) !important;
+        }
+
+        /* Accents / petits titres / badges */
+        .hero-sub, .badge-season, .coach-title, .convoc-title, .apports-title,
+        .home-section-title, .home-upcoming-title, .home-count, .detail-label,
+        .status-badge, .pill, .match-badge, .badge-away, .badge-home,
+        .weekend-match-type, .weekend-date, .weekend-date small,
+        .club-social-title, .gm-share-prompt-title, .modal-label,
+        .section-kicker, .kicker {
+          color: var(--accent) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+
+        /* Cartes : jamais couleur_principale en fond */
+        .card, .item, .match-card, .bureau-member-card, .convocation-card,
+        .response-card, .menu-btn, .list-card, .team-card, .player-card,
+        .home-week-card, .home-match-card, .weekend-match, .apports-card,
+        .modal-card, .convoc-card, .convoc-item, .convoc-result,
+        .coach-item, .gm-share-prompt, .home-info-card, .club-social-card,
+        .gestion-home-tile, .gestion-settings-tile, .role-menu-card,
+        .gj-player-card, .ge-team-card, .reglages-preview-card,
+        div.menu-btn, div.role-menu-card, div.gestion-home-tile, div.gestion-settings-tile {
+          background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+          color: var(--text) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+          box-shadow: none !important;
+        }
+        .card *, .item *, .match-card *, .bureau-member-card *, .convocation-card *,
+        .response-card *, .menu-btn *, .list-card *, .team-card *, .player-card *,
+        .home-week-card *, .home-match-card *, .weekend-match *, .apports-card *,
+        .modal-card *, .convoc-card *, .convoc-item *, .convoc-result *,
+        .coach-item *, .gm-share-prompt *, .home-info-card *, .club-social-card *,
+        .gestion-home-tile *, .gestion-settings-tile *, .role-menu-card *,
+        .gj-player-card *, .ge-team-card *, .reglages-preview-card * {
+          color: inherit;
+        }
+        .menu-btn .big, .role-menu-card .big, .gestion-home-tile .big,
+        .gestion-settings-tile .big, .item-title, .team-name, .team-name-line,
+        .home-match-team, .home-match-title {
+          color: var(--text) !important;
+        }
+        .menu-btn .small, .role-menu-card .small, .gestion-home-tile .small,
+        .gestion-settings-tile .small, .item-sub, .muted, .home-match-opponent {
+          color: color-mix(in srgb, var(--text) 74%, transparent) !important;
+        }
+
+        /* Lignes / séparateurs */
+        hr, .separator, .team-extra, .line, .thin-line {
+          border-color: rgba(var(--accent-rgb), .25) !important;
+        }
+
+        /* Champs */
+        input, select, textarea, .search {
+          background: rgba(0,0,0,.32) !important;
+          color: var(--text) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+        input::placeholder, textarea::placeholder {
+          color: color-mix(in srgb, var(--text) 55%, transparent) !important;
+        }
+
+        /* Boutons importants = couleur principale */
+        .btn-light, .btn-light.active, .btn-outline.active,
+        .primary, .btn-primary, .action-primary,
+        .link-btn.primary, a.link-btn.primary,
+        .convoc-action, .whatsapp-btn, .gm-send-btn, .gj-save,
+        #grSaveBtn, #btnReponseMatch, #btnCoachResponses,
+        #btnGenererConvocation, #btnWhatsappCoach, #btnFaireConvocationCoach,
+        #btnValiderConvocation, #btnWhatsAppConvocation, #btnEnvoyerWhatsApp,
+        #btnAjouterMatchWhatsApp, #btnModifierMatchWhatsApp,
+        #btnAjouterMatch, #btnModifierMatch,
+        #btnAjouterJoueur, #btnModifierJoueur,
+        #btnAjouterEquipe, #btnModifierEquipe,
+        #btnAjouterAdversaire, #btnModifierAdversaire,
+        .gm-tab.active, button[type="submit"] {
+          background: var(--button-bg) !important;
+          color: var(--button-text) !important;
+          border-color: var(--button-bg) !important;
+          box-shadow: none !important;
+        }
+        .btn-light *, .btn-light.active *, .btn-outline.active *,
+        .primary *, .btn-primary *, .action-primary *,
+        .link-btn.primary *, a.link-btn.primary *,
+        .convoc-action *, .whatsapp-btn *, .gm-send-btn *, .gj-save *,
+        #grSaveBtn *, #btnReponseMatch *, #btnCoachResponses *,
+        #btnGenererConvocation *, #btnWhatsappCoach *, #btnFaireConvocationCoach *,
+        #btnValiderConvocation *, #btnWhatsAppConvocation *, #btnEnvoyerWhatsApp *,
+        #btnAjouterMatchWhatsApp *, #btnModifierMatchWhatsApp *,
+        #btnAjouterMatch *, #btnModifierMatch *,
+        #btnAjouterJoueur *, #btnModifierJoueur *,
+        #btnAjouterEquipe *, #btnModifierEquipe *,
+        #btnAjouterAdversaire *, #btnModifierAdversaire *,
+        .gm-tab.active *, button[type="submit"] * {
+          color: var(--button-text) !important;
+        }
+
+        /* Boutons secondaires / contours */
+        .btn-outline:not(.active), .back, .secondary, .ghost, .cancel,
+        .gm-cancel, .gj-cancel, .club-social-btn, #versionBadge,
+        .mini-update, #btnAnnulerConvocation {
+          background: rgba(0,0,0,.35) !important;
+          color: var(--text) !important;
+          border-color: var(--accent) !important;
+          box-shadow: none !important;
+        }
+        .btn-outline:not(.active) *, .back *, .secondary *, .ghost *, .cancel *,
+        .gm-cancel *, .gj-cancel *, .club-social-btn *, #versionBadge *,
+        .mini-update *, #btnAnnulerConvocation * {
+          color: var(--text) !important;
+        }
+
+        /* Les cartes qui sont techniquement des boutons restent des cartes */
+        .menu-btn, .role-menu-card, .gestion-home-tile, .gestion-settings-tile,
+        button.menu-btn, button.role-menu-card {
+          background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
+          color: var(--text) !important;
+          border-color: rgba(var(--accent-rgb), .55) !important;
+        }
+
+        button:disabled, .role-menu-card.disabled, .menu-btn.disabled {
+          opacity: .55 !important;
+        }
+`;
 
   document.querySelectorAll("#svgAccentPaths path[fill]").forEach(p => p.setAttribute("fill", couleurSecondaire));
   const badge = document.getElementById("versionBadge");
@@ -7754,7 +7898,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.07-COACH";
+window.CAM_BASKET_VERSION = "V63.23-COACH-COULEURS-OFFICIELLES";
 
 </script>
 

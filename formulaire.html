@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.16-DEMO-AUDIT-COLOR - Couleurs entièrement pilotées par CONFIG -->
+<!-- Démo App Club formulaire V61.17-DEMO-COULEURS-OFFICIELLES - Règle officielle couleurs -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.16-DEMO-AUDIT-COLOR</title>
+<title>Formulaire Match V61.17-DEMO-COULEURS-OFFICIELLES</title>
 
 <style>
 :root{
@@ -213,6 +213,61 @@ h2{color:var(--app-primary)!important;}
 }
 .choice-btn.disabled{
   opacity:.45!important;
+}
+</style>
+
+
+<style id="_official_colors_form_v61_17">
+/* V61.17 — règle officielle couleurs
+   Fond = couleur_fond | Boutons importants = couleur_principale | Texte boutons = couleur_bouton_texte
+   Contours / lignes / accents = couleur_secondaire | Texte général = couleur_texte */
+html, body{
+  background:var(--app-bg)!important;
+  color:var(--app-text)!important;
+}
+.wrap{
+  background:linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94))!important;
+  color:var(--app-text)!important;
+  border:1.5px solid var(--app-secondary)!important;
+  box-shadow:none!important;
+}
+h2, label, .question-title{
+  color:var(--app-text)!important;
+}
+.note, .apport-note{
+  color:color-mix(in srgb, var(--app-text) 72%, transparent)!important;
+}
+input, select, textarea{
+  background:rgba(0,0,0,.32)!important;
+  color:var(--app-text)!important;
+  border-color:var(--app-secondary)!important;
+}
+input::placeholder, textarea::placeholder{
+  color:color-mix(in srgb, var(--app-text) 55%, transparent)!important;
+}
+.choice-btn{
+  background:rgba(0,0,0,.34)!important;
+  color:var(--app-text)!important;
+  border-color:var(--app-secondary)!important;
+  box-shadow:none!important;
+}
+.choice-btn.active, .send:not(.cancel){
+  background:var(--app-primary)!important;
+  color:var(--app-button-text)!important;
+  border-color:var(--app-primary)!important;
+  box-shadow:none!important;
+}
+.choice-btn.active *, .send:not(.cancel) *{
+  color:var(--app-button-text)!important;
+}
+.send.cancel{
+  background:rgba(0,0,0,.35)!important;
+  color:var(--app-text)!important;
+  border-color:var(--app-secondary)!important;
+  box-shadow:none!important;
+}
+.choice-btn.disabled{
+  opacity:.50!important;
 }
 </style>
 
