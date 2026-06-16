@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.23-GESTION-COULEURS-OFFICIELLES" />
+  <meta name="app-version" content="V65.24-GESTION-NAV-SECONDARY" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.02 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.24 GESTION - Accueil direct + écran Réglages app préparé */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.02 GESTION - Réglages CONFIG connectés */
+/* V65.24 GESTION - Réglages CONFIG connectés */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -2122,6 +2122,103 @@ a.link-btn.primary *,
 }
 </style>
 
+
+<style id="_nav_secondary_logo_fix_v20">
+/* V20 — Navigation = secondaire, pas principal.
+   Couleur principale reste réservée aux vrais boutons d'action.
+   Accueil / Coach / Mes matchs / Mes équipes / Mettre à jour restent sobres. */
+
+/* Logo : jamais de fond violet/blanc derrière l'image */
+header .hero button.hero-logo-btn,
+header .hero .hero-logo-btn{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin-bottom:8px!important;
+  min-height:auto!important;
+}
+header .hero button.hero-logo-btn *,
+header .hero .hero-logo-btn *{
+  background:transparent!important;
+}
+header .hero img.hero-logo,
+header .hero #mainLogo{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  object-fit:contain!important;
+}
+
+/* Boutons de navigation du haut : contours couleur secondaire */
+header .top-actions button,
+header .top-actions .btn-light,
+header .top-actions .btn-outline,
+header .header-mini-actions button,
+header .header-mini-actions .btn-outline,
+#btn-home,
+#btn-teams,
+#btn-myteams,
+#btn-bureau,
+#btn-coach,
+#btn-update{
+  background:rgba(0,0,0,.34)!important;
+  color:var(--text)!important;
+  border-color:var(--accent)!important;
+  box-shadow:none!important;
+}
+
+/* Actif = légèrement accentué, mais pas rempli avec Couleur principale */
+header .top-actions button.active,
+header .top-actions .btn-light.active,
+header .top-actions .btn-outline.active,
+#btn-home.active,
+#btn-teams.active,
+#btn-myteams.active,
+#btn-bureau.active,
+#btn-coach.active{
+  background:rgba(var(--accent-rgb), .10)!important;
+  color:var(--text)!important;
+  border-color:var(--accent)!important;
+  box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb), .65)!important;
+}
+
+/* Le texte des boutons navigation reste lisible */
+header .top-actions button *,
+header .header-mini-actions button *,
+#btn-home *,
+#btn-teams *,
+#btn-myteams *,
+#btn-bureau *,
+#btn-coach *,
+#btn-update *{
+  color:var(--text)!important;
+}
+
+/* Les vrais boutons d'action restent pilotés par Couleur principale */
+main .send:not(.cancel),
+main .gm-submit,
+main .gj-save,
+main #grSaveBtn,
+main .convoc-action,
+main .whatsapp-btn,
+main button[type="submit"]{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+  border-color:var(--button-bg)!important;
+}
+main .send:not(.cancel) *,
+main .gm-submit *,
+main .gj-save *,
+main #grSaveBtn *,
+main .convoc-action *,
+main .whatsapp-btn *,
+main button[type="submit"] *{
+  color:var(--button-text)!important;
+}
+</style>
+
 </head>
 <body class="loading">
 
@@ -2236,7 +2333,7 @@ a.link-btn.primary *,
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.22 GESTION</button>
+    ">V65.24 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -6746,7 +6843,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.23 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.24 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -7528,7 +7625,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.23-GESTION-COULEURS-OFFICIELLES";
+window.CAM_BASKET_VERSION = "V65.24-GESTION-NAV-SECONDARY";
 
 </script>
 

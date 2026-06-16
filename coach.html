@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.23-COACH-COULEURS-OFFICIELLES" />
+  <meta name="cam-basket-version" content="V63.24-COACH-NAV-SECONDARY" />
   <style>
     :root{
       --bg:#050505;
@@ -1712,7 +1712,7 @@ button:disabled,
 
 
 
-/* V62.10 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V63.24 COACH - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1815,7 +1815,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.05 JOUEURS - stabilisation parcours */
+/* V63.24 COACH - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1843,7 +1843,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.02 JOUEURS - interface allégée + Bureau visible */
+/* V63.24 COACH - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1872,7 +1872,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V63.06 COACH - séparation propre, sans mélange joueur */
+/* V63.24 COACH - séparation propre, sans mélange joueur */
 body.coach-app #btn-teams,
 body.coach-app #btn-myteams,
 body.coach-app #btn-bureau,
@@ -1904,7 +1904,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.06 COACH - Résumé logistique avant convocation */
+/* V63.24 COACH - Résumé logistique avant convocation */
 .coach-logistique-card{
   display:none;
   margin:12px 0 14px;
@@ -1980,7 +1980,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.06 COACH - Logistique propre domicile / extérieur */
+/* V63.24 COACH - Logistique propre domicile / extérieur */
 .coach-logistique-list{
   display:grid;
   gap:5px;
@@ -2002,7 +2002,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.06 COACH - logistique utile sans compteurs */
+/* V63.24 COACH - logistique utile sans compteurs */
 .coach-logistique-resume{display:none!important;}
 .coach-logistique-card{padding:14px!important;}
 .coach-logistique-title{margin-bottom:4px!important;}
@@ -2019,7 +2019,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.06 COACH - Résumé compact sans doublon */
+/* V63.24 COACH - Résumé compact sans doublon */
 .coach-logistique-resume{display:none!important;}
 .coach-summary-mini{
   display:grid;
@@ -2377,6 +2377,103 @@ a.link-btn.primary *,
   border-color: rgba(var(--accent-rgb), .55) !important;
 }
 </style>
+
+<style id="_nav_secondary_logo_fix_v20">
+/* V20 — Navigation = secondaire, pas principal.
+   Couleur principale reste réservée aux vrais boutons d'action.
+   Accueil / Coach / Mes matchs / Mes équipes / Mettre à jour restent sobres. */
+
+/* Logo : jamais de fond violet/blanc derrière l'image */
+header .hero button.hero-logo-btn,
+header .hero .hero-logo-btn{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin-bottom:8px!important;
+  min-height:auto!important;
+}
+header .hero button.hero-logo-btn *,
+header .hero .hero-logo-btn *{
+  background:transparent!important;
+}
+header .hero img.hero-logo,
+header .hero #mainLogo{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  object-fit:contain!important;
+}
+
+/* Boutons de navigation du haut : contours couleur secondaire */
+header .top-actions button,
+header .top-actions .btn-light,
+header .top-actions .btn-outline,
+header .header-mini-actions button,
+header .header-mini-actions .btn-outline,
+#btn-home,
+#btn-teams,
+#btn-myteams,
+#btn-bureau,
+#btn-coach,
+#btn-update{
+  background:rgba(0,0,0,.34)!important;
+  color:var(--text)!important;
+  border-color:var(--accent)!important;
+  box-shadow:none!important;
+}
+
+/* Actif = légèrement accentué, mais pas rempli avec Couleur principale */
+header .top-actions button.active,
+header .top-actions .btn-light.active,
+header .top-actions .btn-outline.active,
+#btn-home.active,
+#btn-teams.active,
+#btn-myteams.active,
+#btn-bureau.active,
+#btn-coach.active{
+  background:rgba(var(--accent-rgb), .10)!important;
+  color:var(--text)!important;
+  border-color:var(--accent)!important;
+  box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb), .65)!important;
+}
+
+/* Le texte des boutons navigation reste lisible */
+header .top-actions button *,
+header .header-mini-actions button *,
+#btn-home *,
+#btn-teams *,
+#btn-myteams *,
+#btn-bureau *,
+#btn-coach *,
+#btn-update *{
+  color:var(--text)!important;
+}
+
+/* Les vrais boutons d'action restent pilotés par Couleur principale */
+main .send:not(.cancel),
+main .gm-submit,
+main .gj-save,
+main #grSaveBtn,
+main .convoc-action,
+main .whatsapp-btn,
+main button[type="submit"]{
+  background:var(--button-bg)!important;
+  color:var(--button-text)!important;
+  border-color:var(--button-bg)!important;
+}
+main .send:not(.cancel) *,
+main .gm-submit *,
+main .gj-save *,
+main #grSaveBtn *,
+main .convoc-action *,
+main .whatsapp-btn *,
+main button[type="submit"] *{
+  color:var(--button-text)!important;
+}
+</style>
+
 </head>
 <body class="loading coach-app">
 
@@ -2479,7 +2576,7 @@ a.link-btn.primary *,
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.14 COACH</button>
+    ">V63.24 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -6990,7 +7087,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.03 JOUEURS — Accueil club + mes espaces séparés
+// V63.24 COACH — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -7242,7 +7339,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.23 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.24 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -7898,7 +7995,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.23-COACH-COULEURS-OFFICIELLES";
+window.CAM_BASKET_VERSION = "V63.24-COACH-NAV-SECONDARY";
 
 </script>
 
