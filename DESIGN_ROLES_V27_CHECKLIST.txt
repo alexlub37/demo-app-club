@@ -1,0 +1,41 @@
+DEMO APP CLUB — DESIGN ROLES V27
+
+Objectif :
+Ne plus corriger couleur par couleur.
+Chaque élément reçoit un rôle visuel officiel.
+
+Rôles disponibles :
+- role-logo
+- role-logo-link
+- role-nav
+- role-card
+- role-card-click
+- role-field
+- role-choice
+- role-badge
+- role-secondary
+- role-action
+- role-muted
+- role-accent
+
+Règles :
+- role-action = seuls vrais boutons principaux : valider, envoyer, enregistrer, ajouter, modifier, WhatsApp important.
+- role-secondary = retour, annuler, itinéraire, fermer, mettre à jour.
+- role-card-click = carte cliquable qui doit rester une carte.
+- role-nav = navigation entre pages/onglets, jamais bouton blanc plein.
+- role-field = input, select, textarea.
+- role-choice = présent/absent, maillots, boisson, sélection joueur, etc.
+- role-badge = statut, domicile/extérieur, info courte.
+- logo = jamais bouton visuel.
+
+Couleurs utilisées depuis PARAMETRES_CLUB/CONFIG :
+- Couleur fond
+- Couleur principale
+- Couleur secondaire
+- Couleur texte
+- Couleur bouton texte
+- Couleur slogan
+
+Sécurité :
+Si Couleur principale et Couleur bouton texte ne sont pas assez contrastées,
+le texte du bouton action est corrigé automatiquement.

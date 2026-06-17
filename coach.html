@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.26-COACH-CLEAN-SYSTEM" />
+  <meta name="cam-basket-version" content="V63.28-COACH-ROLE-SYSTEM" />
   <style>
     :root{
       --bg:#050505;
@@ -1712,7 +1712,7 @@ button:disabled,
 
 
 
-/* V63.26 COACH - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V63.28 COACH - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1815,7 +1815,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V63.26 COACH - stabilisation parcours */
+/* V63.28 COACH - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1843,7 +1843,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V63.26 COACH - interface allégée + Bureau visible */
+/* V63.28 COACH - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1872,7 +1872,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V63.26 COACH - séparation propre, sans mélange joueur */
+/* V63.28 COACH - séparation propre, sans mélange joueur */
 body.coach-app #btn-teams,
 body.coach-app #btn-myteams,
 body.coach-app #btn-bureau,
@@ -1904,7 +1904,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.26 COACH - Résumé logistique avant convocation */
+/* V63.28 COACH - Résumé logistique avant convocation */
 .coach-logistique-card{
   display:none;
   margin:12px 0 14px;
@@ -1980,7 +1980,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.26 COACH - Logistique propre domicile / extérieur */
+/* V63.28 COACH - Logistique propre domicile / extérieur */
 .coach-logistique-list{
   display:grid;
   gap:5px;
@@ -2002,7 +2002,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.26 COACH - logistique utile sans compteurs */
+/* V63.28 COACH - logistique utile sans compteurs */
 .coach-logistique-resume{display:none!important;}
 .coach-logistique-card{padding:14px!important;}
 .coach-logistique-title{margin-bottom:4px!important;}
@@ -2019,7 +2019,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.26 COACH - Résumé compact sans doublon */
+/* V63.28 COACH - Résumé compact sans doublon */
 .coach-logistique-resume{display:none!important;}
 .coach-summary-mini{
   display:grid;
@@ -3055,6 +3055,262 @@ main button[type="submit"] *{
 }
 </style>
 
+
+<style id="_coach_fix_actions_v26">
+/* V26 Coach — correction boutons blancs / texte invisible.
+   Navigation = secondaire.
+   Convocation / WhatsApp = action principale lisible.
+*/
+
+/* Navigation haut Coach : jamais fond blanc */
+body.coach-app header .top-actions button,
+body.coach-app header .top-actions .btn-light,
+body.coach-app header .top-actions .btn-outline,
+body.coach-app header .header-mini-actions button,
+body.coach-app #btn-home,
+body.coach-app #btn-coach,
+body.coach-app #btn-update,
+body:not(.player-app) #btn-home,
+body:not(.player-app) #btn-coach,
+body:not(.player-app) #btn-update{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,#ffffff)!important;
+  border:2px solid var(--accent,#5A189A)!important;
+  box-shadow:none!important;
+}
+
+body.coach-app header .top-actions button.active,
+body.coach-app header .top-actions .btn-light.active,
+body.coach-app header .top-actions .btn-outline.active,
+body.coach-app #btn-home.active,
+body.coach-app #btn-coach.active,
+body:not(.player-app) #btn-home.active,
+body:not(.player-app) #btn-coach.active{
+  background:rgba(90,24,154,.16)!important;
+  color:var(--text,#ffffff)!important;
+  border-color:var(--accent,#5A189A)!important;
+  box-shadow:inset 0 0 0 1px var(--accent,#5A189A)!important;
+}
+
+/* Cartes/choix coach : sombres */
+.coach-block,
+.coach-card,
+.coach-match-card,
+.coach-player-row,
+.convocation-card,
+.convoc-card,
+#convocationSelectionCard,
+#convocationResult,
+#coachTeamsList .card,
+#coachMatchesList .card{
+  background:linear-gradient(180deg, rgba(18,18,18,.72), rgba(4,4,4,.84))!important;
+  color:var(--text,#ffffff)!important;
+  border-color:rgba(var(--accent-rgb),.55)!important;
+  box-shadow:none!important;
+}
+
+/* Boutons secondaires Coach */
+body.coach-app .back,
+body.coach-app .btn-outline:not(.primary),
+body.coach-app .secondary,
+body.coach-app .cancel,
+body.coach-app #btnAnnulerConvocation,
+body:not(.player-app) .back,
+body:not(.player-app) .btn-outline:not(.primary),
+body:not(.player-app) .secondary,
+body:not(.player-app) .cancel,
+body:not(.player-app) #btnAnnulerConvocation{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,#ffffff)!important;
+  border:2px solid var(--accent,#5A189A)!important;
+  box-shadow:none!important;
+}
+
+/* Actions principales Coach : lisibles */
+#btnGenererConvocation,
+#btnWhatsappCoach,
+#btnFaireConvocationCoach,
+#btnValiderConvocation,
+#btnCoachCode,
+#btnValiderCodeCoach,
+#btnEnregistrerConvocation,
+.coach-action-primary,
+.convoc-action,
+.whatsapp-btn{
+  background:var(--button-bg,#ffffff)!important;
+  color:var(--button-text,#000000)!important;
+  border:2px solid var(--button-bg,#ffffff)!important;
+  box-shadow:none!important;
+}
+
+#btnGenererConvocation *,
+#btnWhatsappCoach *,
+#btnFaireConvocationCoach *,
+#btnValiderConvocation *,
+#btnCoachCode *,
+#btnValiderCodeCoach *,
+#btnEnregistrerConvocation *,
+.coach-action-primary *,
+.convoc-action *,
+.whatsapp-btn *{
+  color:var(--button-text,#000000)!important;
+}
+</style>
+
+
+<style id="_design_roles_v27_css">
+/* ==========================================================
+   DESIGN ROLES V27 — système propre et réutilisable
+   On ne colore plus par page ou par hasard.
+   On classe les éléments par rôle visuel.
+   ========================================================== */
+
+:root{
+  --role-bg: var(--bg, var(--app-bg, #000000));
+  --role-text: var(--text, var(--app-text, #ffffff));
+  --role-secondary: var(--accent, var(--app-secondary, #5A189A));
+  --role-action-bg: var(--button-bg, var(--app-primary, #ffffff));
+  --role-action-text: var(--button-text, var(--app-button-text, #000000));
+  --role-card-bg: rgba(5,5,5,.74);
+  --role-card-bg-2: rgba(16,16,16,.80);
+}
+
+html, body{
+  background:var(--role-bg)!important;
+  color:var(--role-text)!important;
+}
+
+/* LOGO */
+.role-logo,
+.role-logo button,
+.role-logo-link,
+button.role-logo-link{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.role-logo img,
+img.role-logo{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  object-fit:contain!important;
+}
+
+/* NAVIGATION */
+.role-nav{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--role-text)!important;
+  border:2px solid var(--role-secondary)!important;
+  box-shadow:none!important;
+}
+.role-nav.active,
+.role-nav.is-active,
+.role-nav[aria-current="page"]{
+  background:color-mix(in srgb, var(--role-secondary) 16%, rgba(0,0,0,.42))!important;
+  color:var(--role-text)!important;
+  border-color:var(--role-secondary)!important;
+  box-shadow:inset 0 0 0 1px var(--role-secondary)!important;
+}
+.role-nav *{ color:var(--role-text)!important; }
+
+/* CARTES */
+.role-card,
+.role-card-click{
+  background:linear-gradient(180deg, var(--role-card-bg-2), var(--role-card-bg))!important;
+  color:var(--role-text)!important;
+  border:1.5px solid color-mix(in srgb, var(--role-secondary) 65%, transparent)!important;
+  box-shadow:none!important;
+}
+.role-card-click{
+  cursor:pointer;
+}
+.role-card-click:active{
+  transform:scale(.995);
+  filter:brightness(1.08);
+}
+.role-card *,
+.role-card-click *{ color:inherit; }
+
+/* CHAMPS */
+.role-field,
+input.role-field,
+select.role-field,
+textarea.role-field{
+  background:rgba(0,0,0,.42)!important;
+  color:var(--role-text)!important;
+  border:1.8px solid var(--role-secondary)!important;
+  box-shadow:none!important;
+}
+.role-field::placeholder,
+input.role-field::placeholder,
+textarea.role-field::placeholder{
+  color:color-mix(in srgb, var(--role-text) 48%, transparent)!important;
+}
+
+/* CHOIX / SÉLECTION */
+.role-choice{
+  background:rgba(0,0,0,.42)!important;
+  color:var(--role-text)!important;
+  border:1.8px solid var(--role-secondary)!important;
+  box-shadow:none!important;
+}
+.role-choice.active,
+.role-choice.selected,
+.role-choice.is-selected,
+.role-choice[aria-pressed="true"],
+.role-choice input:checked + span{
+  background:color-mix(in srgb, var(--role-secondary) 16%, rgba(0,0,0,.88))!important;
+  color:var(--role-text)!important;
+}
+.role-choice *{ color:var(--role-text)!important; }
+
+/* BADGES / STATUTS */
+.role-badge{
+  background:color-mix(in srgb, var(--role-secondary) 12%, rgba(0,0,0,.35))!important;
+  color:var(--role-secondary)!important;
+  border:1px solid color-mix(in srgb, var(--role-secondary) 70%, transparent)!important;
+  box-shadow:none!important;
+}
+
+/* BOUTONS SECONDAIRES */
+.role-secondary{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--role-text)!important;
+  border:2px solid var(--role-secondary)!important;
+  box-shadow:none!important;
+}
+.role-secondary *{ color:var(--role-text)!important; }
+
+/* ACTIONS PRINCIPALES */
+.role-action{
+  background:var(--role-action-bg)!important;
+  color:var(--role-action-text)!important;
+  border:2px solid var(--role-action-bg)!important;
+  box-shadow:none!important;
+}
+.role-action *{ color:var(--role-action-text)!important; }
+
+/* Textes secondaires */
+.role-muted,
+.muted,
+.note,
+small{
+  color:color-mix(in srgb, var(--role-text) 68%, transparent)!important;
+}
+
+/* Titres ou accents */
+.role-accent,
+.section-title,
+.home-section-title,
+.coach-title,
+.officials-label,
+.apports-title,
+.detail-label{
+  color:var(--role-secondary)!important;
+}
+</style>
+
 </head>
 <body class="loading coach-app">
 
@@ -3157,7 +3413,7 @@ main button[type="submit"] *{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.26 COACH</button>
+    ">V63.28 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -7668,7 +7924,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V63.26 COACH — Accueil club + mes espaces séparés
+// V63.28 COACH — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -7920,7 +8176,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.26 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.28 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -8576,7 +8832,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.26-COACH-CLEAN-SYSTEM";
+window.CAM_BASKET_VERSION = "V63.28-COACH-ROLE-SYSTEM";
 
 </script>
 
@@ -8627,6 +8883,233 @@ window.CAM_BASKET_VERSION = "V63.26-COACH-CLEAN-SYSTEM";
   document.addEventListener("DOMContentLoaded", run);
   window.addEventListener("load", run);
   [0,250,700,1500,3000,5000].forEach(function(t){ setTimeout(run,t); });
+})();
+</script>
+
+
+<script id="_coach_fix_actions_v26_js">
+(function(){
+  function rgb(h){h=String(h||'').trim();var m=h.match(/^#?([0-9a-f]{6})$/i);if(!m)return null;var n=parseInt(m[1],16);return[(n>>16)&255,(n>>8)&255,n&255];}
+  function lum(r){if(!r)return null;var a=r.map(function(x){x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);});return .2126*a[0]+.7152*a[1]+.0722*a[2];}
+  function ctr(a,b){var la=lum(rgb(a)),lb=lum(rgb(b));if(la===null||lb===null)return 99;var hi=Math.max(la,lb),lo=Math.min(la,lb);return(hi+.05)/(lo+.05);}
+  function auto(bg){var l=lum(rgb(bg));return l!==null&&l>.55?'#000000':'#ffffff';}
+  function v(n,f){var x=getComputedStyle(document.documentElement).getPropertyValue(n).trim();return x||f;}
+  function setBtn(el,bg,txt){
+    if(!el)return;
+    el.style.setProperty('background',bg,'important');
+    el.style.setProperty('border-color',bg,'important');
+    el.style.setProperty('color',txt,'important');
+    Array.from(el.children||[]).forEach(function(c){c.style.setProperty('color',txt,'important');});
+  }
+  function run(){
+    try{
+      var accent=v('--accent','#5A189A'), text=v('--text','#ffffff');
+      var bg=v('--button-bg','#ffffff'), txt=v('--button-text','#000000');
+      if(ctr(bg,txt)<3.8){txt=auto(bg);document.documentElement.style.setProperty('--button-text',txt);}
+
+      ['btn-home','btn-coach','btn-update'].forEach(function(id){
+        var e=document.getElementById(id); if(!e)return;
+        e.style.setProperty('color',text,'important');
+        e.style.setProperty('border-color',accent,'important');
+        e.style.setProperty('box-shadow','none','important');
+        e.style.setProperty('background',e.classList.contains('active')?'rgba(90,24,154,.16)':'rgba(0,0,0,.40)','important');
+      });
+
+      ['btnGenererConvocation','btnWhatsappCoach','btnFaireConvocationCoach','btnValiderConvocation','btnEnregistrerConvocation','btnValiderCodeCoach'].forEach(function(id){
+        setBtn(document.getElementById(id),bg,txt);
+      });
+
+      document.querySelectorAll('.convoc-action,.whatsapp-btn,.coach-action-primary').forEach(function(e){
+        setBtn(e,bg,txt);
+      });
+
+      var ann=document.getElementById('btnAnnulerConvocation');
+      if(ann){
+        ann.style.setProperty('background','rgba(0,0,0,.40)','important');
+        ann.style.setProperty('border-color',accent,'important');
+        ann.style.setProperty('color',text,'important');
+      }
+
+      var st=document.getElementById('_coach_fix_actions_v26');
+      if(st&&st.parentNode) st.parentNode.appendChild(st);
+    }catch(e){console.warn('V26 coach visuel ignoré', e);}
+  }
+  document.addEventListener('DOMContentLoaded',run);
+  window.addEventListener('load',run);
+  [0,250,700,1500,3000,6000].forEach(function(t){setTimeout(run,t);});
+})();
+</script>
+
+
+<script id="_design_roles_v27_js">
+(function(){
+  "use strict";
+
+  function qsa(sel){
+    try { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+    catch(e){ return []; }
+  }
+
+  function addRole(sel, role){
+    qsa(sel).forEach(function(el){ el.classList.add(role); });
+  }
+
+  function cssVar(name, fallback){
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
+  }
+
+  function hexToRgb(v){
+    v = String(v || "").trim();
+    var m = v.match(/^#?([0-9a-f]{6})$/i);
+    if(!m) return null;
+    var n = parseInt(m[1], 16);
+    return [(n>>16)&255, (n>>8)&255, n&255];
+  }
+
+  function luminance(rgb){
+    if(!rgb) return null;
+    var a = rgb.map(function(x){
+      x /= 255;
+      return x <= .03928 ? x/12.92 : Math.pow((x+.055)/1.055, 2.4);
+    });
+    return .2126*a[0] + .7152*a[1] + .0722*a[2];
+  }
+
+  function contrast(a,b){
+    var la = luminance(hexToRgb(a)), lb = luminance(hexToRgb(b));
+    if(la === null || lb === null) return 99;
+    var hi = Math.max(la,lb), lo = Math.min(la,lb);
+    return (hi+.05)/(lo+.05);
+  }
+
+  function autoText(bg){
+    var l = luminance(hexToRgb(bg));
+    return l !== null && l > .55 ? "#000000" : "#ffffff";
+  }
+
+  function important(el, prop, value){
+    if(el && el.style) el.style.setProperty(prop, value, "important");
+  }
+
+  function applyInlineRoleStyles(){
+    var text = cssVar("--role-text", cssVar("--text", cssVar("--app-text", "#ffffff")));
+    var secondary = cssVar("--role-secondary", cssVar("--accent", cssVar("--app-secondary", "#5A189A")));
+    var actionBg = cssVar("--role-action-bg", cssVar("--button-bg", cssVar("--app-primary", "#ffffff")));
+    var actionText = cssVar("--role-action-text", cssVar("--button-text", cssVar("--app-button-text", "#000000")));
+
+    if(contrast(actionBg, actionText) < 3.8){
+      actionText = autoText(actionBg);
+      document.documentElement.style.setProperty("--button-text", actionText);
+      document.documentElement.style.setProperty("--app-button-text", actionText);
+      document.documentElement.style.setProperty("--role-action-text", actionText);
+    }
+
+    qsa(".role-nav").forEach(function(el){
+      important(el, "color", text);
+      important(el, "border-color", secondary);
+      important(el, "box-shadow", "none");
+      important(el, "background", el.classList.contains("active") ? "rgba(90,24,154,.16)" : "rgba(0,0,0,.40)");
+    });
+
+    qsa(".role-secondary").forEach(function(el){
+      important(el, "background", "rgba(0,0,0,.40)");
+      important(el, "color", text);
+      important(el, "border-color", secondary);
+      important(el, "box-shadow", "none");
+    });
+
+    qsa(".role-action").forEach(function(el){
+      important(el, "background", actionBg);
+      important(el, "color", actionText);
+      important(el, "border-color", actionBg);
+      important(el, "box-shadow", "none");
+      Array.prototype.slice.call(el.children || []).forEach(function(ch){
+        important(ch, "color", actionText);
+      });
+    });
+
+    qsa(".role-card,.role-card-click").forEach(function(el){
+      important(el, "color", text);
+      important(el, "border-color", "color-mix(in srgb, " + secondary + " 65%, transparent)");
+      important(el, "box-shadow", "none");
+    });
+
+    qsa(".role-field").forEach(function(el){
+      important(el, "background", "rgba(0,0,0,.42)");
+      important(el, "color", text);
+      important(el, "border-color", secondary);
+      important(el, "box-shadow", "none");
+    });
+
+    qsa(".role-choice").forEach(function(el){
+      important(el, "color", text);
+      important(el, "border-color", secondary);
+      important(el, "box-shadow", "none");
+    });
+  }
+
+  function fixKnownTexts(){
+    var wa = document.getElementById("btnWhatsappCoach");
+    if(wa && wa.textContent.trim().length <= 3) wa.textContent = "📲 Envoyer WhatsApp";
+
+    var gen = document.getElementById("btnGenererConvocation");
+    if(gen && !gen.textContent.trim()) gen.textContent = "Enregistrer la convocation";
+
+    var faire = document.getElementById("btnFaireConvocationCoach");
+    if(faire && !faire.textContent.trim()) faire.textContent = "Générer la convocation";
+
+    var rep = document.getElementById("btnReponseMatch");
+    if(rep && !rep.textContent.trim()) rep.textContent = "Répondre / confirmer";
+  }
+
+  function assignRoles(){
+    /* Logo */
+    addRole(".hero-logo-btn, button.hero-logo-btn, .logo-link", "role-logo-link");
+    addRole(".hero-logo, #mainLogo, header img", "role-logo");
+
+    /* Navigation */
+    addRole("header .top-actions button, header .top-actions .btn-light, header .top-actions .btn-outline, header .header-mini-actions button", "role-nav");
+    addRole("#btn-home,#btn-teams,#btn-myteams,#btn-bureau,#btn-benevoles,#btn-coach,#btn-gestion,#btn-update", "role-nav");
+
+    /* Cartes */
+    addRole(".card,.home-info-card,.player-help-card,.home-week-card,.apports-card,.convocation-card,.convoc-card,.convoc-result,.coach-block,.gm-lock-card,.reglages-preview-card,.club-event-card", "role-card");
+
+    /* Cartes cliquables */
+    addRole(".match-card,.home-match-card,.weekend-match,.team-card,.player-card,.gj-player-card,.ge-team-card,.bureau-member-card,.gestion-home-tile,.gestion-settings-tile,.menu-btn,.role-menu-card,.coach-match-card,.coach-player-row,#coachTeamsList .card,#coachMatchesList .card", "role-card-click");
+
+    /* Champs */
+    addRole("input,select,textarea", "role-field");
+
+    /* Choix */
+    addRole(".choice-btn,.player-choice,.team-choice,.selection-choice,.convocation-player,.convocation-item,.coach-player-select,label:has(input[type='checkbox']),label:has(input[type='radio'])", "role-choice");
+
+    /* Badges */
+    addRole(".pill,.badge,.status-badge,.gm-status-badge,.match-badge,.weekend-status,.weekend-match-type,.type-ext,.player-team-check", "role-badge");
+
+    /* Secondaires */
+    addRole(".back,.cancel,.secondary,.ghost,.send.cancel,.gm-cancel,.gj-cancel,.btn-outline:not(.primary),.link-btn:not(.primary),#mapsLink,#btnAnnulerConvocation", "role-secondary");
+
+    /* Actions principales */
+    addRole(".send:not(.cancel),.primary,.btn-primary,.action-primary,.convoc-action,.whatsapp-btn,.gm-save,.gm-submit,.gm-send-btn,.gj-save,#grSaveBtn,button[type='submit']", "role-action");
+    addRole("#btnReponseMatch,#btnValiderCodeCoach,#btnCoachCode,#btnGenererConvocation,#btnWhatsappCoach,#btnFaireConvocationCoach,#btnValiderConvocation,#btnEnregistrerConvocation,#gmAddBtn,#gmEditBtn,#gjSaveBtn,#geSaveBtn,#gaSaveBtn,#btnAjouterMatch,#btnModifierMatch,#btnAjouterJoueur,#btnModifierJoueur,#btnAjouterEquipe,#btnModifierEquipe,#btnAjouterAdversaire,#btnModifierAdversaire", "role-action");
+
+    fixKnownTexts();
+    applyInlineRoleStyles();
+
+    var st = document.getElementById("_design_roles_v27_css");
+    if(st && st.parentNode) st.parentNode.appendChild(st);
+  }
+
+  document.addEventListener("DOMContentLoaded", assignRoles);
+  window.addEventListener("load", assignRoles);
+
+  /* Pas de MutationObserver agressif : on relance juste pendant le chargement des données dynamiques. */
+  [0,250,700,1500,3000,6000,10000,15000].forEach(function(t){
+    setTimeout(assignRoles, t);
+  });
+
+  window.APP_APPLY_DESIGN_ROLES = assignRoles;
 })();
 </script>
 
