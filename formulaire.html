@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.27-DEMO-FORM-ROLE-SYSTEM - Design nettoyé -->
+<!-- Démo App Club formulaire V61.28-DEMO-FORM-ROLE-SYSTEM-V28 - Design nettoyé -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.27-DEMO-FORM-ROLE-SYSTEM</title>
+<title>Formulaire Match V61.28-DEMO-FORM-ROLE-SYSTEM-V28</title>
 
 <style>
 :root{
@@ -2434,6 +2434,101 @@ function appliquerQuotaBouton(label, complet){
   });
 
   window.APP_APPLY_DESIGN_ROLES = assignRoles;
+})();
+</script>
+
+
+<style id="_roles_v28_form_choice_fix">
+/* V28 — Formulaire : l'option choisie doit être très visible. */
+.choice-btn{
+  position:relative!important;
+  background:linear-gradient(180deg, rgba(12,12,12,.98), rgba(0,0,0,.98))!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:2px solid var(--app-secondary,var(--role-secondary,#5A189A))!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+
+.choice-btn.active,
+.choice-btn.selected,
+.choice-btn.is-selected,
+.choice-btn[aria-pressed="true"]{
+  background:linear-gradient(90deg,
+    rgba(var(--accent-rgb,90,24,154),.52),
+    rgba(var(--accent-rgb,90,24,154),.22)
+  )!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:3px solid #ffffff!important;
+  box-shadow:0 0 0 3px rgba(var(--accent-rgb,90,24,154),.55)!important;
+}
+
+.choice-btn.active::after,
+.choice-btn.selected::after,
+.choice-btn.is-selected::after,
+.choice-btn[aria-pressed="true"]::after{
+  content:"✓";
+  position:absolute;
+  right:22px;
+  top:50%;
+  transform:translateY(-50%);
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#ffffff;
+  color:#000000;
+  -webkit-text-fill-color:#000000;
+  font-weight:1000;
+  font-size:22px;
+}
+
+.choice-btn.disabled,
+.choice-btn[aria-disabled="true"]{
+  opacity:.42!important;
+}
+
+.choice-btn.disabled::after,
+.choice-btn[aria-disabled="true"]::after{
+  content:"";
+  display:none!important;
+}
+
+/* Les choix complets boisson/nourriture/maillots doivent rester visuellement désactivés */
+.choice-btn.disabled,
+.choice-btn.disabled *{
+  color:rgba(255,255,255,.52)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.52)!important;
+}
+</style>
+
+
+<script id="_roles_v28_form_choice_fix_js">
+(function(){
+  function fixChoices(){
+    try{
+      document.querySelectorAll('.choice-btn').forEach(function(el){
+        el.classList.remove('role-action');
+        el.classList.add('role-choice');
+        if(el.classList.contains('active') || el.getAttribute('aria-pressed') === 'true'){
+          el.style.setProperty('background','linear-gradient(90deg, rgba(90,24,154,.52), rgba(90,24,154,.22))','important');
+          el.style.setProperty('border','3px solid #ffffff','important');
+          el.style.setProperty('box-shadow','0 0 0 3px rgba(90,24,154,.55)','important');
+        }else{
+          el.style.removeProperty('box-shadow');
+        }
+      });
+      var st=document.getElementById('_roles_v28_form_choice_fix');
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded',fixChoices);
+  window.addEventListener('load',fixChoices);
+  document.addEventListener('click',function(){setTimeout(fixChoices,0);setTimeout(fixChoices,80);setTimeout(fixChoices,250);},true);
+  [0,150,400,900,1500,3000,6000].forEach(function(t){setTimeout(fixChoices,t);});
 })();
 </script>
 

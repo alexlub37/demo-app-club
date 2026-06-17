@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.27-GESTION-ROLE-SYSTEM" />
+  <meta name="app-version" content="V65.28-GESTION-ROLE-SYSTEM-V28" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.27 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.28 GESTION - Accueil direct + écran Réglages app préparé */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.27 GESTION - Réglages CONFIG connectés */
+/* V65.28 GESTION - Réglages CONFIG connectés */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.27 GESTION</button>
+    ">V65.28 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -7578,7 +7578,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.27 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.28 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -8360,7 +8360,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.27-GESTION-ROLE-SYSTEM";
+window.CAM_BASKET_VERSION = "V65.28-GESTION-ROLE-SYSTEM-V28";
 
 </script>
 
@@ -8765,6 +8765,101 @@ window.CAM_BASKET_VERSION = "V65.27-GESTION-ROLE-SYSTEM";
   });
 
   window.APP_APPLY_DESIGN_ROLES = assignRoles;
+})();
+</script>
+
+
+<style id="_roles_v28_nav_fix">
+/* V28 — Verrouillage définitif navigation :
+   aucun bouton de navigation actif ne doit devenir blanc.
+*/
+html body header .top-actions button#btn-home,
+html body header .top-actions button#btn-teams,
+html body header .top-actions button#btn-myteams,
+html body header .top-actions button#btn-bureau,
+html body header .top-actions button#btn-benevoles,
+html body header .top-actions button#btn-coach,
+html body header .top-actions button#btn-gestion,
+html body header .header-mini-actions button#btn-update{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+  border:2px solid var(--accent,var(--app-secondary,#5A189A))!important;
+  box-shadow:none!important;
+}
+
+html body header .top-actions button#btn-home.active,
+html body header .top-actions button#btn-teams.active,
+html body header .top-actions button#btn-myteams.active,
+html body header .top-actions button#btn-bureau.active,
+html body header .top-actions button#btn-benevoles.active,
+html body header .top-actions button#btn-coach.active,
+html body header .top-actions button#btn-gestion.active{
+  background:rgba(var(--accent-rgb,90,24,154),.18)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+  border-color:var(--accent,var(--app-secondary,#5A189A))!important;
+  box-shadow:inset 0 0 0 1px var(--accent,var(--app-secondary,#5A189A))!important;
+}
+
+html body header .top-actions button#btn-home *,
+html body header .top-actions button#btn-teams *,
+html body header .top-actions button#btn-myteams *,
+html body header .top-actions button#btn-bureau *,
+html body header .top-actions button#btn-benevoles *,
+html body header .top-actions button#btn-coach *,
+html body header .top-actions button#btn-gestion *,
+html body header .header-mini-actions button#btn-update *{
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+}
+
+/* Les boutons principaux connus ne doivent pas aspirer la navigation */
+#btn-home.role-action,
+#btn-teams.role-action,
+#btn-myteams.role-action,
+#btn-bureau.role-action,
+#btn-benevoles.role-action,
+#btn-coach.role-action,
+#btn-gestion.role-action,
+#btn-update.role-action{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  border-color:var(--accent,var(--app-secondary,#5A189A))!important;
+}
+</style>
+
+
+<script id="_roles_v28_nav_fix_js">
+(function(){
+  function cssVar(n,f){var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim();return v||f;}
+  function fixNav(){
+    try{
+      var txt=cssVar('--text',cssVar('--app-text','#ffffff'));
+      var accent=cssVar('--accent',cssVar('--app-secondary','#5A189A'));
+      ['btn-home','btn-teams','btn-myteams','btn-bureau','btn-benevoles','btn-coach','btn-gestion','btn-update'].forEach(function(id){
+        var e=document.getElementById(id); if(!e) return;
+        e.classList.remove('role-action');
+        e.classList.add('role-nav');
+        e.style.setProperty('color',txt,'important');
+        e.style.setProperty('-webkit-text-fill-color',txt,'important');
+        e.style.setProperty('border-color',accent,'important');
+        e.style.setProperty('box-shadow','none','important');
+        e.style.setProperty('background', e.classList.contains('active') ? 'rgba(90,24,154,.18)' : 'rgba(0,0,0,.40)', 'important');
+        Array.prototype.slice.call(e.children||[]).forEach(function(c){
+          c.style.setProperty('color',txt,'important');
+          c.style.setProperty('-webkit-text-fill-color',txt,'important');
+        });
+      });
+      var st=document.getElementById('_roles_v28_nav_fix');
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded',fixNav);
+  window.addEventListener('load',fixNav);
+  document.addEventListener('click',function(){setTimeout(fixNav,0);setTimeout(fixNav,80);setTimeout(fixNav,250);},true);
+  [0,150,400,900,1500,3000,6000,10000,15000].forEach(function(t){setTimeout(fixNav,t);});
+  window.APP_FIX_NAV_V28 = fixNav;
 })();
 </script>
 

@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.46-JOUEURS-ROLE-SYSTEM" />
+  <meta name="app-version" content="V62.47-JOUEURS-ROLE-SYSTEM-V28" />
   <style>
     :root{
       --bg:#050505;
@@ -1708,7 +1708,7 @@ button:disabled,
 
 
 
-/* V62.46 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V62.47 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1811,7 +1811,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.46 JOUEURS - stabilisation parcours */
+/* V62.47 JOUEURS - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1839,7 +1839,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.46 JOUEURS - interface allégée + Bureau visible */
+/* V62.47 JOUEURS - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1868,7 +1868,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V62.46 JOUEURS - Sous-titre piloté par CONFIG */
+/* V62.47 JOUEURS - Sous-titre piloté par CONFIG */
 body.player-app #appSubtitle{
   display:none;
 }
@@ -1877,7 +1877,7 @@ body.player-app.subtitle-visible #appSubtitle{
 }
 
 
-/* V62.46 JOUEURS - Bureau dynamique + événement texte vide */
+/* V62.47 JOUEURS - Bureau dynamique + événement texte vide */
 body.player-app #btn-bureau{display:none!important;}
 body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-title:empty,
@@ -1886,7 +1886,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-card.event-no-text .club-event-text{display:none!important;}
 
 
-/* V62.46 JOUEURS - Image événement affichée entière */
+/* V62.47 JOUEURS - Image événement affichée entière */
 .club-event-img{
   object-fit:contain!important;
   max-height:none!important;
@@ -3319,7 +3319,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.46 JOUEURS</button>
+    ">V62.47 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -8008,7 +8008,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.46 JOUEURS — Accueil club + mes espaces séparés
+// V62.47 JOUEURS — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -8260,7 +8260,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.46 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.47 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -8622,7 +8622,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.46-JOUEURS-ROLE-SYSTEM";
+window.CAM_BASKET_VERSION = "V62.47-JOUEURS-ROLE-SYSTEM-V28";
 
 </script>
 
@@ -9082,6 +9082,101 @@ window.CAM_BASKET_VERSION = "V62.46-JOUEURS-ROLE-SYSTEM";
   });
 
   window.APP_APPLY_DESIGN_ROLES = assignRoles;
+})();
+</script>
+
+
+<style id="_roles_v28_nav_fix">
+/* V28 — Verrouillage définitif navigation :
+   aucun bouton de navigation actif ne doit devenir blanc.
+*/
+html body header .top-actions button#btn-home,
+html body header .top-actions button#btn-teams,
+html body header .top-actions button#btn-myteams,
+html body header .top-actions button#btn-bureau,
+html body header .top-actions button#btn-benevoles,
+html body header .top-actions button#btn-coach,
+html body header .top-actions button#btn-gestion,
+html body header .header-mini-actions button#btn-update{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+  border:2px solid var(--accent,var(--app-secondary,#5A189A))!important;
+  box-shadow:none!important;
+}
+
+html body header .top-actions button#btn-home.active,
+html body header .top-actions button#btn-teams.active,
+html body header .top-actions button#btn-myteams.active,
+html body header .top-actions button#btn-bureau.active,
+html body header .top-actions button#btn-benevoles.active,
+html body header .top-actions button#btn-coach.active,
+html body header .top-actions button#btn-gestion.active{
+  background:rgba(var(--accent-rgb,90,24,154),.18)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+  border-color:var(--accent,var(--app-secondary,#5A189A))!important;
+  box-shadow:inset 0 0 0 1px var(--accent,var(--app-secondary,#5A189A))!important;
+}
+
+html body header .top-actions button#btn-home *,
+html body header .top-actions button#btn-teams *,
+html body header .top-actions button#btn-myteams *,
+html body header .top-actions button#btn-bureau *,
+html body header .top-actions button#btn-benevoles *,
+html body header .top-actions button#btn-coach *,
+html body header .top-actions button#btn-gestion *,
+html body header .header-mini-actions button#btn-update *{
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+}
+
+/* Les boutons principaux connus ne doivent pas aspirer la navigation */
+#btn-home.role-action,
+#btn-teams.role-action,
+#btn-myteams.role-action,
+#btn-bureau.role-action,
+#btn-benevoles.role-action,
+#btn-coach.role-action,
+#btn-gestion.role-action,
+#btn-update.role-action{
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  border-color:var(--accent,var(--app-secondary,#5A189A))!important;
+}
+</style>
+
+
+<script id="_roles_v28_nav_fix_js">
+(function(){
+  function cssVar(n,f){var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim();return v||f;}
+  function fixNav(){
+    try{
+      var txt=cssVar('--text',cssVar('--app-text','#ffffff'));
+      var accent=cssVar('--accent',cssVar('--app-secondary','#5A189A'));
+      ['btn-home','btn-teams','btn-myteams','btn-bureau','btn-benevoles','btn-coach','btn-gestion','btn-update'].forEach(function(id){
+        var e=document.getElementById(id); if(!e) return;
+        e.classList.remove('role-action');
+        e.classList.add('role-nav');
+        e.style.setProperty('color',txt,'important');
+        e.style.setProperty('-webkit-text-fill-color',txt,'important');
+        e.style.setProperty('border-color',accent,'important');
+        e.style.setProperty('box-shadow','none','important');
+        e.style.setProperty('background', e.classList.contains('active') ? 'rgba(90,24,154,.18)' : 'rgba(0,0,0,.40)', 'important');
+        Array.prototype.slice.call(e.children||[]).forEach(function(c){
+          c.style.setProperty('color',txt,'important');
+          c.style.setProperty('-webkit-text-fill-color',txt,'important');
+        });
+      });
+      var st=document.getElementById('_roles_v28_nav_fix');
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded',fixNav);
+  window.addEventListener('load',fixNav);
+  document.addEventListener('click',function(){setTimeout(fixNav,0);setTimeout(fixNav,80);setTimeout(fixNav,250);},true);
+  [0,150,400,900,1500,3000,6000,10000,15000].forEach(function(t){setTimeout(fixNav,t);});
+  window.APP_FIX_NAV_V28 = fixNav;
 })();
 </script>
 

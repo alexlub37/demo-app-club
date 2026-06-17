@@ -1,0 +1,23 @@
+DEMO APP CLUB — DESIGN ROLES V28
+
+Corrections ajoutées par rapport à V27 :
+1. Navigation verrouillée sur Joueurs / Coach / Gestion.
+   - Accueil, Mes matchs, Mes équipes, Coach, Gestion, Mettre à jour ne peuvent plus prendre role-action.
+   - Ils restent role-nav : sombre + contour couleur secondaire.
+   - Le mode actif est secondaire léger, jamais bouton blanc plein.
+
+2. Formulaire :
+   - Présent / Absent / choix organisation deviennent très visibles quand sélectionnés.
+   - Option sélectionnée : fond violet/secondaire plus marqué + contour blanc + coche.
+   - Options complètes/désactivées restent atténuées.
+
+3. Pas de nouvelle clé ajoutée.
+   - On garde Couleur fond, principale, secondaire, texte, bouton texte, slogan.
+   - On corrige les rôles, pas les paramètres.
+
+Attention :
+Pour tout nouveau bouton, choisir le rôle :
+- role-action uniquement pour envoyer/valider/enregistrer/ajouter/modifier/WhatsApp important.
+- role-secondary pour retour/annuler/itinéraire/mette à jour.
+- role-card-click pour carte cliquable.
+- role-nav pour navigation.
