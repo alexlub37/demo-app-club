@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.40-JOUEURS-NAV-SECONDARY" />
+  <meta name="app-version" content="V62.41-JOUEURS-DESIGN-ROLES" />
   <style>
     :root{
       --bg:#050505;
@@ -1708,7 +1708,7 @@ button:disabled,
 
 
 
-/* V62.40 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V62.41 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1811,7 +1811,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.40 JOUEURS - stabilisation parcours */
+/* V62.41 JOUEURS - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1839,7 +1839,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.40 JOUEURS - interface allégée + Bureau visible */
+/* V62.41 JOUEURS - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1868,7 +1868,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V62.40 JOUEURS - Sous-titre piloté par CONFIG */
+/* V62.41 JOUEURS - Sous-titre piloté par CONFIG */
 body.player-app #appSubtitle{
   display:none;
 }
@@ -1877,7 +1877,7 @@ body.player-app.subtitle-visible #appSubtitle{
 }
 
 
-/* V62.40 JOUEURS - Bureau dynamique + événement texte vide */
+/* V62.41 JOUEURS - Bureau dynamique + événement texte vide */
 body.player-app #btn-bureau{display:none!important;}
 body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-title:empty,
@@ -1886,7 +1886,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-card.event-no-text .club-event-text{display:none!important;}
 
 
-/* V62.40 JOUEURS - Image événement affichée entière */
+/* V62.41 JOUEURS - Image événement affichée entière */
 .club-event-img{
   object-fit:contain!important;
   max-height:none!important;
@@ -2335,6 +2335,287 @@ main button[type="submit"] *{
 }
 </style>
 
+
+<style id="_ui_roles_v21">
+/* V21 — DESIGN SYSTEM OFFICIEL
+   Séparation claire :
+   - Navigation = contour secondaire
+   - Cartes = fond sombre + contour secondaire
+   - Actions principales = couleur principale + couleur bouton texte
+   - Logo = image/habillage séparé, jamais bouton visuel
+*/
+
+/* Alias variables pour toutes les pages */
+:root{
+  --ui-bg: var(--bg, #000000);
+  --ui-card-bg: rgba(8,8,8,.62);
+  --ui-card-bg-strong: rgba(10,10,10,.78);
+  --ui-text: var(--text, #ffffff);
+  --ui-muted: color-mix(in srgb, var(--ui-text) 70%, transparent);
+  --ui-accent: var(--accent, #6600CC);
+  --ui-action-bg: var(--button-bg, #ffffff);
+  --ui-action-text: var(--button-text, #000000);
+}
+
+/* LOGO : ne doit pas réagir comme un bouton */
+header .hero .hero-logo-btn,
+header .hero button.hero-logo-btn{
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 8px !important;
+  min-height: auto !important;
+  min-width: auto !important;
+  border-radius: 0 !important;
+}
+header .hero .hero-logo-btn:active,
+header .hero button.hero-logo-btn:active{
+  transform: none !important;
+  filter: none !important;
+}
+header .hero img.hero-logo,
+header .hero #mainLogo{
+  display: block !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  object-fit: contain !important;
+}
+
+/* NAVIGATION — boutons de changement d'écran */
+header .top-actions button,
+header .top-actions .btn-light,
+header .top-actions .btn-outline,
+header .header-mini-actions button,
+header .header-mini-actions .btn-outline,
+#btn-home,
+#btn-teams,
+#btn-myteams,
+#btn-bureau,
+#btn-coach,
+#btn-update{
+  background: rgba(0,0,0,.34) !important;
+  color: var(--ui-text) !important;
+  border: 2px solid var(--ui-accent) !important;
+  box-shadow: none !important;
+}
+header .top-actions button.active,
+header .top-actions .btn-light.active,
+header .top-actions .btn-outline.active,
+#btn-home.active,
+#btn-teams.active,
+#btn-myteams.active,
+#btn-bureau.active,
+#btn-coach.active{
+  background: color-mix(in srgb, var(--ui-accent) 15%, transparent) !important;
+  color: var(--ui-text) !important;
+  border-color: var(--ui-accent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ui-accent) 65%, transparent) !important;
+}
+header .top-actions button *,
+header .header-mini-actions button *,
+#btn-home *,
+#btn-teams *,
+#btn-myteams *,
+#btn-bureau *,
+#btn-coach *,
+#btn-update *{
+  color: var(--ui-text) !important;
+}
+
+/* CARTES INFO + CARTES CLIQUABLES */
+main .card,
+main .home-week-card,
+main .home-match-card,
+main .weekend-match,
+main .match-card,
+main .item,
+main .menu-btn,
+main .role-menu-card,
+main .gestion-home-tile,
+main .gestion-settings-tile,
+main .list-card,
+main .team-card,
+main .player-card,
+main .gj-player-card,
+main .ge-team-card,
+main .bureau-member-card,
+main .convocation-card,
+main .response-card,
+main .gm-lock-card,
+main .apports-card,
+main .club-event-card{
+  background: linear-gradient(180deg, rgba(18,18,18,.72), rgba(3,3,3,.82)) !important;
+  color: var(--ui-text) !important;
+  border-color: color-mix(in srgb, var(--ui-accent) 68%, transparent) !important;
+  box-shadow: none !important;
+}
+main .card *,
+main .home-week-card *,
+main .home-match-card *,
+main .weekend-match *,
+main .match-card *,
+main .item *,
+main .menu-btn *,
+main .role-menu-card *,
+main .gestion-home-tile *,
+main .gestion-settings-tile *,
+main .list-card *,
+main .team-card *,
+main .player-card *,
+main .gj-player-card *,
+main .ge-team-card *,
+main .bureau-member-card *,
+main .convocation-card *,
+main .response-card *,
+main .gm-lock-card *,
+main .apports-card *,
+main .club-event-card *{
+  color: inherit;
+}
+main .muted,
+main .small,
+main .card .small,
+main .card .muted,
+main .home-match-sub,
+main .home-match-meta,
+main .item .meta,
+main .item .sub,
+main .note,
+main small{
+  color: var(--ui-muted) !important;
+}
+
+/* Titres secondaires / accents */
+main .section-title,
+main .home-section-title,
+main .gestion-home-kicker,
+main .kicker,
+main .card-kicker,
+main .officials-thanks,
+main .apports-ok,
+main .bureau-member-role,
+main .home-match-time,
+main .home-match-date{
+  color: var(--ui-accent) !important;
+}
+
+/* BADGES / STATUTS */
+main .pill,
+main .badge,
+main .badge-away,
+main .badge-home,
+main .status-badge,
+main .gm-status-badge{
+  background: color-mix(in srgb, var(--ui-accent) 13%, transparent) !important;
+  color: var(--ui-accent) !important;
+  border-color: color-mix(in srgb, var(--ui-accent) 68%, transparent) !important;
+}
+
+/* ACTIONS PRINCIPALES — seulement les vrais boutons d'action */
+main .send:not(.cancel),
+main .gm-submit,
+main .gm-save,
+main .gj-save,
+main #grSaveBtn,
+main .save,
+main .primary,
+main .btn-primary,
+main .action-primary,
+main .convoc-action,
+main .whatsapp-btn,
+main #btnReponseMatch,
+main #btnFaireConvocationCoach,
+main #btnValiderConvocation,
+main #btnWhatsAppConvocation,
+main #btnEnvoyerWhatsApp,
+main #btnAjouterMatchWhatsApp,
+main #btnModifierMatchWhatsApp,
+main #btnAjouterMatch,
+main #btnModifierMatch,
+main #btnAjouterJoueur,
+main #btnModifierJoueur,
+main #btnAjouterEquipe,
+main #btnModifierEquipe,
+main #btnAjouterAdversaire,
+main #btnModifierAdversaire,
+main button[type="submit"]{
+  background: var(--ui-action-bg) !important;
+  color: var(--ui-action-text) !important;
+  border-color: var(--ui-action-bg) !important;
+  box-shadow: none !important;
+}
+main .send:not(.cancel) *,
+main .gm-submit *,
+main .gm-save *,
+main .gj-save *,
+main #grSaveBtn *,
+main .save *,
+main .primary *,
+main .btn-primary *,
+main .action-primary *,
+main .convoc-action *,
+main .whatsapp-btn *,
+main #btnReponseMatch *,
+main #btnFaireConvocationCoach *,
+main #btnValiderConvocation *,
+main #btnWhatsAppConvocation *,
+main #btnEnvoyerWhatsApp *,
+main #btnAjouterMatchWhatsApp *,
+main #btnModifierMatchWhatsApp *,
+main #btnAjouterMatch *,
+main #btnModifierMatch *,
+main #btnAjouterJoueur *,
+main #btnModifierJoueur *,
+main #btnAjouterEquipe *,
+main #btnModifierEquipe *,
+main #btnAjouterAdversaire *,
+main #btnModifierAdversaire *,
+main button[type="submit"] *{
+  color: var(--ui-action-text) !important;
+}
+
+/* ACTIONS SECONDAIRES — retour / annuler / fermer */
+main .back,
+main .cancel,
+main .secondary,
+main .ghost,
+main .send.cancel,
+main .gm-cancel,
+main .gj-cancel,
+main .modal-close{
+  background: rgba(0,0,0,.38) !important;
+  color: var(--ui-text) !important;
+  border-color: var(--ui-accent) !important;
+  box-shadow: none !important;
+}
+main .back *,
+main .cancel *,
+main .secondary *,
+main .ghost *,
+main .send.cancel *,
+main .gm-cancel *,
+main .gj-cancel *,
+main .modal-close *{
+  color: var(--ui-text) !important;
+}
+
+/* CHAMPS */
+main input,
+main select,
+main textarea{
+  background: rgba(0,0,0,.36) !important;
+  color: var(--ui-text) !important;
+  border-color: var(--ui-accent) !important;
+}
+main input::placeholder,
+main textarea::placeholder{
+  color: color-mix(in srgb, var(--ui-text) 48%, transparent) !important;
+}
+</style>
+
 </head>
 <body class="loading player-app">
 
@@ -2437,7 +2718,7 @@ main button[type="submit"] *{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.40 JOUEURS</button>
+    ">V62.41 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -7126,7 +7407,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.40 JOUEURS — Accueil club + mes espaces séparés
+// V62.41 JOUEURS — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -7378,7 +7659,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.40 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.41 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -7740,7 +8021,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.40-JOUEURS-NAV-SECONDARY";
+window.CAM_BASKET_VERSION = "V62.41-JOUEURS-DESIGN-ROLES";
 
 </script>
 
