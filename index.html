@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.41-JOUEURS-DESIGN-ROLES" />
+  <meta name="app-version" content="V62.43-JOUEURS-CLEAN-SYSTEM" />
   <style>
     :root{
       --bg:#050505;
@@ -1708,7 +1708,7 @@ button:disabled,
 
 
 
-/* V62.41 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V62.43 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1811,7 +1811,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.41 JOUEURS - stabilisation parcours */
+/* V62.43 JOUEURS - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1839,7 +1839,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.41 JOUEURS - interface allégée + Bureau visible */
+/* V62.43 JOUEURS - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1868,7 +1868,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V62.41 JOUEURS - Sous-titre piloté par CONFIG */
+/* V62.43 JOUEURS - Sous-titre piloté par CONFIG */
 body.player-app #appSubtitle{
   display:none;
 }
@@ -1877,7 +1877,7 @@ body.player-app.subtitle-visible #appSubtitle{
 }
 
 
-/* V62.41 JOUEURS - Bureau dynamique + événement texte vide */
+/* V62.43 JOUEURS - Bureau dynamique + événement texte vide */
 body.player-app #btn-bureau{display:none!important;}
 body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-title:empty,
@@ -1886,7 +1886,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-card.event-no-text .club-event-text{display:none!important;}
 
 
-/* V62.41 JOUEURS - Image événement affichée entière */
+/* V62.43 JOUEURS - Image événement affichée entière */
 .club-event-img{
   object-fit:contain!important;
   max-height:none!important;
@@ -2616,6 +2616,389 @@ main textarea::placeholder{
 }
 </style>
 
+
+<style id="_joueurs_roles_fix_v22">
+/* V22 Joueurs — séparation stricte :
+   Navigation = secondaire, Itinéraire = secondaire, Répondre = action principale.
+*/
+
+/* Navigation du haut : jamais en fond blanc */
+body.player-app header .top-actions button,
+body.player-app header .top-actions .btn-light,
+body.player-app header .top-actions .btn-outline,
+body.player-app header .header-mini-actions button,
+body.player-app #btn-home,
+body.player-app #btn-teams,
+body.player-app #btn-myteams,
+body.player-app #btn-bureau,
+body.player-app #btn-update{
+  background:rgba(0,0,0,.38)!important;
+  color:var(--text,#ffffff)!important;
+  border:2px solid var(--accent,#5A189A)!important;
+  box-shadow:none!important;
+}
+
+body.player-app header .top-actions button.active,
+body.player-app header .top-actions .btn-light.active,
+body.player-app header .top-actions .btn-outline.active,
+body.player-app #btn-home.active,
+body.player-app #btn-teams.active,
+body.player-app #btn-myteams.active,
+body.player-app #btn-bureau.active{
+  background:rgba(90,24,154,.14)!important;
+  color:var(--text,#ffffff)!important;
+  border-color:var(--accent,#5A189A)!important;
+  box-shadow:inset 0 0 0 1px var(--accent,#5A189A)!important;
+}
+
+body.player-app header .top-actions button *,
+body.player-app header .header-mini-actions button *{
+  color:var(--text,#ffffff)!important;
+}
+
+/* Logo : jamais un bouton coloré */
+body.player-app header .hero-logo-btn,
+body.player-app header button.hero-logo-btn{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+body.player-app header .hero-logo,
+body.player-app header #mainLogo{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+/* Itinéraire = bouton secondaire, pas action principale */
+body.player-app #mapsLink,
+body.player-app a#mapsLink.link-btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:rgba(0,0,0,.38)!important;
+  color:var(--text,#ffffff)!important;
+  border:2px solid var(--accent,#5A189A)!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+body.player-app #mapsLink *{
+  color:var(--text,#ffffff)!important;
+}
+
+/* Répondre / confirmer = vraie action principale */
+body.player-app #btnReponseMatch{
+  background:var(--button-bg,#ffffff)!important;
+  color:var(--button-text,#000000)!important;
+  border:2px solid var(--button-bg,#ffffff)!important;
+  box-shadow:none!important;
+}
+body.player-app #btnReponseMatch *{
+  color:var(--button-text,#000000)!important;
+}
+</style>
+
+
+<style id="_clean_design_system_v23">
+/* V23 — CLEAN DESIGN SYSTEM
+   Objectif : arrêter les conflits visuels.
+   3 familles seulement :
+   1) cartes = contenu, même si cliquable
+   2) navigation/secondaire = contour
+   3) action principale = remplie
+*/
+
+:root{
+  --clean-bg: var(--bg, #000000);
+  --clean-text: var(--text, #ffffff);
+  --clean-muted: color-mix(in srgb, var(--clean-text) 68%, transparent);
+  --clean-accent: var(--accent, #5A189A);
+  --clean-action-bg: var(--button-bg, #ffffff);
+  --clean-action-text: var(--button-text, #000000);
+  --clean-card-bg: rgba(8,8,8,.70);
+  --clean-card-bg-strong: rgba(10,10,10,.84);
+}
+
+/* LOGO : image/habillage séparé, jamais bouton visuel */
+header .hero-logo-btn,
+header button.hero-logo-btn,
+.hero-logo-btn{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 0 8px 0 !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  border-radius: 0 !important;
+}
+header .hero-logo-btn:active,
+header button.hero-logo-btn:active,
+.hero-logo-btn:active{
+  transform: none !important;
+  filter: none !important;
+}
+header img.hero-logo,
+header #mainLogo,
+.hero-logo{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  object-fit: contain !important;
+}
+
+/* NAVIGATION HAUT + ACTIONS SECONDAIRES */
+header .top-actions button,
+header .top-actions .btn-light,
+header .top-actions .btn-outline,
+header .header-mini-actions button,
+header .header-mini-actions .mini-update,
+#btn-home,
+#btn-teams,
+#btn-myteams,
+#btn-bureau,
+#btn-coach,
+#btn-update,
+main .back,
+main .secondary,
+main .ghost,
+main .cancel,
+main .send.cancel,
+main .gm-cancel,
+main .gj-cancel,
+main .modal-close,
+main #mapsLink,
+main .link-btn:not(.primary):not(.action-primary),
+main .social-link,
+main .social-btn,
+main .network-btn{
+  background: rgba(0,0,0,.38) !important;
+  color: var(--clean-text) !important;
+  border: 2px solid var(--clean-accent) !important;
+  box-shadow: none !important;
+}
+
+/* Navigation active : jamais fond blanc */
+header .top-actions button.active,
+header .top-actions .btn-light.active,
+header .top-actions .btn-outline.active,
+#btn-home.active,
+#btn-teams.active,
+#btn-myteams.active,
+#btn-bureau.active,
+#btn-coach.active{
+  background: color-mix(in srgb, var(--clean-accent) 14%, rgba(0,0,0,.42)) !important;
+  color: var(--clean-text) !important;
+  border-color: var(--clean-accent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--clean-accent) 70%, transparent) !important;
+}
+
+header .top-actions button *,
+header .header-mini-actions button *,
+main .back *,
+main .secondary *,
+main .ghost *,
+main .cancel *,
+main .send.cancel *,
+main .gm-cancel *,
+main .gj-cancel *,
+main .modal-close *,
+main #mapsLink *,
+main .link-btn:not(.primary):not(.action-primary) *,
+main .social-link *,
+main .social-btn *,
+main .network-btn *{
+  color: var(--clean-text) !important;
+}
+
+/* CARTES : contenu et cartes cliquables restent des cartes */
+main .card,
+main .home-info-card,
+main .player-help-card,
+main .home-week-card,
+main .home-match-card,
+main .weekend-match,
+main .match-card,
+main .item,
+main .menu-btn,
+main .role-menu-card,
+main .gestion-home-tile,
+main .gestion-settings-tile,
+main .list-card,
+main .team-card,
+main .player-card,
+main .gj-player-card,
+main .ge-team-card,
+main .bureau-member-card,
+main .convocation-card,
+main .response-card,
+main .gm-lock-card,
+main .apports-card,
+main .club-event-card,
+main .reglages-preview-card{
+  background: linear-gradient(180deg, rgba(18,18,18,.72), rgba(4,4,4,.84)) !important;
+  color: var(--clean-text) !important;
+  border-color: color-mix(in srgb, var(--clean-accent) 65%, transparent) !important;
+  box-shadow: none !important;
+}
+
+main .card *,
+main .home-info-card *,
+main .player-help-card *,
+main .home-week-card *,
+main .home-match-card *,
+main .weekend-match *,
+main .match-card *,
+main .item *,
+main .menu-btn *,
+main .role-menu-card *,
+main .gestion-home-tile *,
+main .gestion-settings-tile *,
+main .list-card *,
+main .team-card *,
+main .player-card *,
+main .gj-player-card *,
+main .ge-team-card *,
+main .bureau-member-card *,
+main .convocation-card *,
+main .response-card *,
+main .gm-lock-card *,
+main .apports-card *,
+main .club-event-card *,
+main .reglages-preview-card *{
+  color: inherit;
+}
+
+main .muted,
+main .small,
+main small,
+main .card .muted,
+main .card .small,
+main .home-match-sub,
+main .home-match-meta,
+main .item .meta,
+main .item .sub,
+main .note{
+  color: var(--clean-muted) !important;
+}
+
+/* Titres secondaires, lignes et accents */
+main .section-title,
+main .home-section-title,
+main .home-info-title,
+main .player-help-title,
+main .gestion-home-kicker,
+main .kicker,
+main .card-kicker,
+main .officials-thanks,
+main .apports-ok,
+main .bureau-member-role,
+main .home-match-time,
+main .home-match-date,
+main .officials-label,
+main .detail-label{
+  color: var(--clean-accent) !important;
+}
+
+main hr,
+main .divider,
+main .section-line{
+  border-color: var(--clean-accent) !important;
+  background: var(--clean-accent) !important;
+}
+
+/* BADGES */
+main .pill,
+main .badge,
+main .badge-away,
+main .badge-home,
+main .status-badge,
+main .gm-status-badge{
+  background: color-mix(in srgb, var(--clean-accent) 12%, rgba(0,0,0,.35)) !important;
+  color: var(--clean-accent) !important;
+  border-color: color-mix(in srgb, var(--clean-accent) 70%, transparent) !important;
+}
+
+/* CHAMPS */
+main input,
+main select,
+main textarea{
+  background: rgba(0,0,0,.40) !important;
+  color: var(--clean-text) !important;
+  border-color: var(--clean-accent) !important;
+}
+main input::placeholder,
+main textarea::placeholder{
+  color: color-mix(in srgb, var(--clean-text) 48%, transparent) !important;
+}
+
+/* ACTIONS PRINCIPALES : seuls ces éléments peuvent utiliser couleur_principale */
+main .send:not(.cancel),
+main .gm-submit,
+main .gm-save,
+main .gj-save,
+main #grSaveBtn,
+main .save,
+main .primary,
+main .btn-primary,
+main .action-primary,
+main .convoc-action,
+main .whatsapp-btn,
+main #btnReponseMatch,
+main #btnFaireConvocationCoach,
+main #btnValiderConvocation,
+main #btnWhatsAppConvocation,
+main #btnEnvoyerWhatsApp,
+main #btnAjouterMatchWhatsApp,
+main #btnModifierMatchWhatsApp,
+main #btnAjouterMatch,
+main #btnModifierMatch,
+main #btnAjouterJoueur,
+main #btnModifierJoueur,
+main #btnAjouterEquipe,
+main #btnModifierEquipe,
+main #btnAjouterAdversaire,
+main #btnModifierAdversaire,
+main button[type="submit"]{
+  background: var(--clean-action-bg) !important;
+  color: var(--clean-action-text) !important;
+  border-color: var(--clean-action-bg) !important;
+  box-shadow: none !important;
+}
+
+main .send:not(.cancel) *,
+main .gm-submit *,
+main .gm-save *,
+main .gj-save *,
+main #grSaveBtn *,
+main .save *,
+main .primary *,
+main .btn-primary *,
+main .action-primary *,
+main .convoc-action *,
+main .whatsapp-btn *,
+main #btnReponseMatch *,
+main #btnFaireConvocationCoach *,
+main #btnValiderConvocation *,
+main #btnWhatsAppConvocation *,
+main #btnEnvoyerWhatsApp *,
+main #btnAjouterMatchWhatsApp *,
+main #btnModifierMatchWhatsApp *,
+main #btnAjouterMatch *,
+main #btnModifierMatch *,
+main #btnAjouterJoueur *,
+main #btnModifierJoueur *,
+main #btnAjouterEquipe *,
+main #btnModifierEquipe *,
+main #btnAjouterAdversaire *,
+main #btnModifierAdversaire *,
+main button[type="submit"] *{
+  color: var(--clean-action-text) !important;
+}
+</style>
+
 </head>
 <body class="loading player-app">
 
@@ -2718,7 +3101,7 @@ main textarea::placeholder{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.41 JOUEURS</button>
+    ">V62.43 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -7407,7 +7790,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.41 JOUEURS — Accueil club + mes espaces séparés
+// V62.43 JOUEURS — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -7659,7 +8042,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.41 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.43 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -8021,7 +8404,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.41-JOUEURS-DESIGN-ROLES";
+window.CAM_BASKET_VERSION = "V62.43-JOUEURS-CLEAN-SYSTEM";
 
 </script>
 
@@ -8165,6 +8548,108 @@ window.CAM_BASKET_VERSION = "V62.41-JOUEURS-DESIGN-ROLES";
     setTimeout(window.refreshAndApplyPlayerConfigV6219, 900);
     setTimeout(window.refreshAndApplyPlayerConfigV6219, 1800);
   });
+})();
+</script>
+
+
+<script id="_joueurs_action_contrast_v22">
+(function(){
+  function hexToRgb(v){
+    v = String(v || "").trim();
+    var m = v.match(/^#?([0-9a-f]{6})$/i);
+    if(!m) return null;
+    var n = parseInt(m[1],16);
+    return [(n>>16)&255,(n>>8)&255,n&255];
+  }
+  function lum(rgb){
+    if(!rgb) return null;
+    var a = rgb.map(function(x){
+      x/=255;
+      return x <= .03928 ? x/12.92 : Math.pow((x+.055)/1.055,2.4);
+    });
+    return .2126*a[0]+.7152*a[1]+.0722*a[2];
+  }
+  function contrast(a,b){
+    var la = lum(hexToRgb(a)), lb = lum(hexToRgb(b));
+    if(la === null || lb === null) return 99;
+    var hi = Math.max(la,lb), lo = Math.min(la,lb);
+    return (hi+.05)/(lo+.05);
+  }
+  function autoText(bg){
+    var l = lum(hexToRgb(bg));
+    if(l === null) return "#000000";
+    return l > .55 ? "#000000" : "#ffffff";
+  }
+  function ensureActionContrast(){
+    var r = document.documentElement;
+    var cs = getComputedStyle(r);
+    var bg = (cs.getPropertyValue("--button-bg") || "#ffffff").trim();
+    var txt = (cs.getPropertyValue("--button-text") || "#000000").trim();
+    if(contrast(bg, txt) < 3.8){
+      r.style.setProperty("--button-text", autoText(bg));
+    }
+  }
+  function moveStyleLast(){
+    var st = document.getElementById("_joueurs_roles_fix_v22");
+    if(st && st.parentNode) st.parentNode.appendChild(st);
+  }
+  function run(){
+    ensureActionContrast();
+    moveStyleLast();
+  }
+  document.addEventListener("DOMContentLoaded", run);
+  window.addEventListener("load", run);
+  [0,250,700,1500,3000].forEach(function(t){ setTimeout(run,t); });
+})();
+</script>
+
+
+<script id="_clean_contrast_and_order_v23">
+(function(){
+  function hexToRgb(v){
+    v = String(v || "").trim();
+    var m = v.match(/^#?([0-9a-f]{6})$/i);
+    if(!m) return null;
+    var n = parseInt(m[1],16);
+    return [(n>>16)&255,(n>>8)&255,n&255];
+  }
+  function lum(rgb){
+    if(!rgb) return null;
+    var a = rgb.map(function(x){
+      x/=255;
+      return x <= .03928 ? x/12.92 : Math.pow((x+.055)/1.055,2.4);
+    });
+    return .2126*a[0]+.7152*a[1]+.0722*a[2];
+  }
+  function contrast(a,b){
+    var la = lum(hexToRgb(a)), lb = lum(hexToRgb(b));
+    if(la === null || lb === null) return 99;
+    var hi = Math.max(la,lb), lo = Math.min(la,lb);
+    return (hi+.05)/(lo+.05);
+  }
+  function autoText(bg){
+    var l = lum(hexToRgb(bg));
+    if(l === null) return "#000000";
+    return l > .55 ? "#000000" : "#ffffff";
+  }
+  function run(){
+    var root = document.documentElement;
+    var cs = getComputedStyle(root);
+    var bg = (cs.getPropertyValue("--button-bg") || cs.getPropertyValue("--app-primary") || "#ffffff").trim();
+    var txt = (cs.getPropertyValue("--button-text") || cs.getPropertyValue("--app-button-text") || "#000000").trim();
+    if(contrast(bg, txt) < 3.8){
+      var fixed = autoText(bg);
+      root.style.setProperty("--button-text", fixed);
+      root.style.setProperty("--app-button-text", fixed);
+    }
+    ["_clean_design_system_v23","_form_clean_system_v61_26"].forEach(function(id){
+      var st = document.getElementById(id);
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    });
+  }
+  document.addEventListener("DOMContentLoaded", run);
+  window.addEventListener("load", run);
+  [0,250,700,1500,3000,5000].forEach(function(t){ setTimeout(run,t); });
 })();
 </script>
 

@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.25-GESTION-DESIGN-ROLES" />
+  <meta name="app-version" content="V65.26-GESTION-CLEAN-SYSTEM" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.25 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.26 GESTION - Accueil direct + écran Réglages app préparé */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.25 GESTION - Réglages CONFIG connectés */
+/* V65.26 GESTION - Réglages CONFIG connectés */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -2500,6 +2500,306 @@ main textarea::placeholder{
 }
 </style>
 
+
+<style id="_clean_design_system_v23">
+/* V23 — CLEAN DESIGN SYSTEM
+   Objectif : arrêter les conflits visuels.
+   3 familles seulement :
+   1) cartes = contenu, même si cliquable
+   2) navigation/secondaire = contour
+   3) action principale = remplie
+*/
+
+:root{
+  --clean-bg: var(--bg, #000000);
+  --clean-text: var(--text, #ffffff);
+  --clean-muted: color-mix(in srgb, var(--clean-text) 68%, transparent);
+  --clean-accent: var(--accent, #5A189A);
+  --clean-action-bg: var(--button-bg, #ffffff);
+  --clean-action-text: var(--button-text, #000000);
+  --clean-card-bg: rgba(8,8,8,.70);
+  --clean-card-bg-strong: rgba(10,10,10,.84);
+}
+
+/* LOGO : image/habillage séparé, jamais bouton visuel */
+header .hero-logo-btn,
+header button.hero-logo-btn,
+.hero-logo-btn{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 0 8px 0 !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  border-radius: 0 !important;
+}
+header .hero-logo-btn:active,
+header button.hero-logo-btn:active,
+.hero-logo-btn:active{
+  transform: none !important;
+  filter: none !important;
+}
+header img.hero-logo,
+header #mainLogo,
+.hero-logo{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  object-fit: contain !important;
+}
+
+/* NAVIGATION HAUT + ACTIONS SECONDAIRES */
+header .top-actions button,
+header .top-actions .btn-light,
+header .top-actions .btn-outline,
+header .header-mini-actions button,
+header .header-mini-actions .mini-update,
+#btn-home,
+#btn-teams,
+#btn-myteams,
+#btn-bureau,
+#btn-coach,
+#btn-update,
+main .back,
+main .secondary,
+main .ghost,
+main .cancel,
+main .send.cancel,
+main .gm-cancel,
+main .gj-cancel,
+main .modal-close,
+main #mapsLink,
+main .link-btn:not(.primary):not(.action-primary),
+main .social-link,
+main .social-btn,
+main .network-btn{
+  background: rgba(0,0,0,.38) !important;
+  color: var(--clean-text) !important;
+  border: 2px solid var(--clean-accent) !important;
+  box-shadow: none !important;
+}
+
+/* Navigation active : jamais fond blanc */
+header .top-actions button.active,
+header .top-actions .btn-light.active,
+header .top-actions .btn-outline.active,
+#btn-home.active,
+#btn-teams.active,
+#btn-myteams.active,
+#btn-bureau.active,
+#btn-coach.active{
+  background: color-mix(in srgb, var(--clean-accent) 14%, rgba(0,0,0,.42)) !important;
+  color: var(--clean-text) !important;
+  border-color: var(--clean-accent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--clean-accent) 70%, transparent) !important;
+}
+
+header .top-actions button *,
+header .header-mini-actions button *,
+main .back *,
+main .secondary *,
+main .ghost *,
+main .cancel *,
+main .send.cancel *,
+main .gm-cancel *,
+main .gj-cancel *,
+main .modal-close *,
+main #mapsLink *,
+main .link-btn:not(.primary):not(.action-primary) *,
+main .social-link *,
+main .social-btn *,
+main .network-btn *{
+  color: var(--clean-text) !important;
+}
+
+/* CARTES : contenu et cartes cliquables restent des cartes */
+main .card,
+main .home-info-card,
+main .player-help-card,
+main .home-week-card,
+main .home-match-card,
+main .weekend-match,
+main .match-card,
+main .item,
+main .menu-btn,
+main .role-menu-card,
+main .gestion-home-tile,
+main .gestion-settings-tile,
+main .list-card,
+main .team-card,
+main .player-card,
+main .gj-player-card,
+main .ge-team-card,
+main .bureau-member-card,
+main .convocation-card,
+main .response-card,
+main .gm-lock-card,
+main .apports-card,
+main .club-event-card,
+main .reglages-preview-card{
+  background: linear-gradient(180deg, rgba(18,18,18,.72), rgba(4,4,4,.84)) !important;
+  color: var(--clean-text) !important;
+  border-color: color-mix(in srgb, var(--clean-accent) 65%, transparent) !important;
+  box-shadow: none !important;
+}
+
+main .card *,
+main .home-info-card *,
+main .player-help-card *,
+main .home-week-card *,
+main .home-match-card *,
+main .weekend-match *,
+main .match-card *,
+main .item *,
+main .menu-btn *,
+main .role-menu-card *,
+main .gestion-home-tile *,
+main .gestion-settings-tile *,
+main .list-card *,
+main .team-card *,
+main .player-card *,
+main .gj-player-card *,
+main .ge-team-card *,
+main .bureau-member-card *,
+main .convocation-card *,
+main .response-card *,
+main .gm-lock-card *,
+main .apports-card *,
+main .club-event-card *,
+main .reglages-preview-card *{
+  color: inherit;
+}
+
+main .muted,
+main .small,
+main small,
+main .card .muted,
+main .card .small,
+main .home-match-sub,
+main .home-match-meta,
+main .item .meta,
+main .item .sub,
+main .note{
+  color: var(--clean-muted) !important;
+}
+
+/* Titres secondaires, lignes et accents */
+main .section-title,
+main .home-section-title,
+main .home-info-title,
+main .player-help-title,
+main .gestion-home-kicker,
+main .kicker,
+main .card-kicker,
+main .officials-thanks,
+main .apports-ok,
+main .bureau-member-role,
+main .home-match-time,
+main .home-match-date,
+main .officials-label,
+main .detail-label{
+  color: var(--clean-accent) !important;
+}
+
+main hr,
+main .divider,
+main .section-line{
+  border-color: var(--clean-accent) !important;
+  background: var(--clean-accent) !important;
+}
+
+/* BADGES */
+main .pill,
+main .badge,
+main .badge-away,
+main .badge-home,
+main .status-badge,
+main .gm-status-badge{
+  background: color-mix(in srgb, var(--clean-accent) 12%, rgba(0,0,0,.35)) !important;
+  color: var(--clean-accent) !important;
+  border-color: color-mix(in srgb, var(--clean-accent) 70%, transparent) !important;
+}
+
+/* CHAMPS */
+main input,
+main select,
+main textarea{
+  background: rgba(0,0,0,.40) !important;
+  color: var(--clean-text) !important;
+  border-color: var(--clean-accent) !important;
+}
+main input::placeholder,
+main textarea::placeholder{
+  color: color-mix(in srgb, var(--clean-text) 48%, transparent) !important;
+}
+
+/* ACTIONS PRINCIPALES : seuls ces éléments peuvent utiliser couleur_principale */
+main .send:not(.cancel),
+main .gm-submit,
+main .gm-save,
+main .gj-save,
+main #grSaveBtn,
+main .save,
+main .primary,
+main .btn-primary,
+main .action-primary,
+main .convoc-action,
+main .whatsapp-btn,
+main #btnReponseMatch,
+main #btnFaireConvocationCoach,
+main #btnValiderConvocation,
+main #btnWhatsAppConvocation,
+main #btnEnvoyerWhatsApp,
+main #btnAjouterMatchWhatsApp,
+main #btnModifierMatchWhatsApp,
+main #btnAjouterMatch,
+main #btnModifierMatch,
+main #btnAjouterJoueur,
+main #btnModifierJoueur,
+main #btnAjouterEquipe,
+main #btnModifierEquipe,
+main #btnAjouterAdversaire,
+main #btnModifierAdversaire,
+main button[type="submit"]{
+  background: var(--clean-action-bg) !important;
+  color: var(--clean-action-text) !important;
+  border-color: var(--clean-action-bg) !important;
+  box-shadow: none !important;
+}
+
+main .send:not(.cancel) *,
+main .gm-submit *,
+main .gm-save *,
+main .gj-save *,
+main #grSaveBtn *,
+main .save *,
+main .primary *,
+main .btn-primary *,
+main .action-primary *,
+main .convoc-action *,
+main .whatsapp-btn *,
+main #btnReponseMatch *,
+main #btnFaireConvocationCoach *,
+main #btnValiderConvocation *,
+main #btnWhatsAppConvocation *,
+main #btnEnvoyerWhatsApp *,
+main #btnAjouterMatchWhatsApp *,
+main #btnModifierMatchWhatsApp *,
+main #btnAjouterMatch *,
+main #btnModifierMatch *,
+main #btnAjouterJoueur *,
+main #btnModifierJoueur *,
+main #btnAjouterEquipe *,
+main #btnModifierEquipe *,
+main #btnAjouterAdversaire *,
+main #btnModifierAdversaire *,
+main button[type="submit"] *{
+  color: var(--clean-action-text) !important;
+}
+</style>
+
 </head>
 <body class="loading gestion-app">
 
@@ -2614,7 +2914,7 @@ main textarea::placeholder{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.25 GESTION</button>
+    ">V65.26 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -7124,7 +7424,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.25 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.26 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -7906,7 +8206,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.25-GESTION-DESIGN-ROLES";
+window.CAM_BASKET_VERSION = "V65.26-GESTION-CLEAN-SYSTEM";
 
 </script>
 
@@ -8088,6 +8388,56 @@ window.CAM_BASKET_VERSION = "V65.25-GESTION-DESIGN-ROLES";
       }
     }
   };
+})();
+</script>
+
+
+<script id="_clean_contrast_and_order_v23">
+(function(){
+  function hexToRgb(v){
+    v = String(v || "").trim();
+    var m = v.match(/^#?([0-9a-f]{6})$/i);
+    if(!m) return null;
+    var n = parseInt(m[1],16);
+    return [(n>>16)&255,(n>>8)&255,n&255];
+  }
+  function lum(rgb){
+    if(!rgb) return null;
+    var a = rgb.map(function(x){
+      x/=255;
+      return x <= .03928 ? x/12.92 : Math.pow((x+.055)/1.055,2.4);
+    });
+    return .2126*a[0]+.7152*a[1]+.0722*a[2];
+  }
+  function contrast(a,b){
+    var la = lum(hexToRgb(a)), lb = lum(hexToRgb(b));
+    if(la === null || lb === null) return 99;
+    var hi = Math.max(la,lb), lo = Math.min(la,lb);
+    return (hi+.05)/(lo+.05);
+  }
+  function autoText(bg){
+    var l = lum(hexToRgb(bg));
+    if(l === null) return "#000000";
+    return l > .55 ? "#000000" : "#ffffff";
+  }
+  function run(){
+    var root = document.documentElement;
+    var cs = getComputedStyle(root);
+    var bg = (cs.getPropertyValue("--button-bg") || cs.getPropertyValue("--app-primary") || "#ffffff").trim();
+    var txt = (cs.getPropertyValue("--button-text") || cs.getPropertyValue("--app-button-text") || "#000000").trim();
+    if(contrast(bg, txt) < 3.8){
+      var fixed = autoText(bg);
+      root.style.setProperty("--button-text", fixed);
+      root.style.setProperty("--app-button-text", fixed);
+    }
+    ["_clean_design_system_v23","_form_clean_system_v61_26"].forEach(function(id){
+      var st = document.getElementById(id);
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    });
+  }
+  document.addEventListener("DOMContentLoaded", run);
+  window.addEventListener("load", run);
+  [0,250,700,1500,3000,5000].forEach(function(t){ setTimeout(run,t); });
 })();
 </script>
 
