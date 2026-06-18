@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.47-JOUEURS-ROLE-SYSTEM-V28" />
+  <meta name="app-version" content="V62.48-JOUEURS-MES-EQUIPES-ACTION-VISIBLE" />
   <style>
     :root{
       --bg:#050505;
@@ -1708,7 +1708,7 @@ button:disabled,
 
 
 
-/* V62.47 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V62.48 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1811,7 +1811,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.47 JOUEURS - stabilisation parcours */
+/* V62.48 JOUEURS - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1839,7 +1839,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.47 JOUEURS - interface allégée + Bureau visible */
+/* V62.48 JOUEURS - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1868,7 +1868,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V62.47 JOUEURS - Sous-titre piloté par CONFIG */
+/* V62.48 JOUEURS - Sous-titre piloté par CONFIG */
 body.player-app #appSubtitle{
   display:none;
 }
@@ -1877,7 +1877,7 @@ body.player-app.subtitle-visible #appSubtitle{
 }
 
 
-/* V62.47 JOUEURS - Bureau dynamique + événement texte vide */
+/* V62.48 JOUEURS - Bureau dynamique + événement texte vide */
 body.player-app #btn-bureau{display:none!important;}
 body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-title:empty,
@@ -1886,7 +1886,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-card.event-no-text .club-event-text{display:none!important;}
 
 
-/* V62.47 JOUEURS - Image événement affichée entière */
+/* V62.48 JOUEURS - Image événement affichée entière */
 .club-event-img{
   object-fit:contain!important;
   max-height:none!important;
@@ -3319,7 +3319,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.47 JOUEURS</button>
+    ">V62.48 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -8008,7 +8008,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.47 JOUEURS — Accueil club + mes espaces séparés
+// V62.48 JOUEURS — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -8260,7 +8260,7 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.47 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.48 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
@@ -8622,7 +8622,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.47-JOUEURS-ROLE-SYSTEM-V28";
+window.CAM_BASKET_VERSION = "V62.48-JOUEURS-MES-EQUIPES-ACTION-VISIBLE";
 
 </script>
 
@@ -9177,6 +9177,130 @@ html body header .header-mini-actions button#btn-update *{
   document.addEventListener('click',function(){setTimeout(fixNav,0);setTimeout(fixNav,80);setTimeout(fixNav,250);},true);
   [0,150,400,900,1500,3000,6000,10000,15000].forEach(function(t){setTimeout(fixNav,t);});
   window.APP_FIX_NAV_V28 = fixNav;
+})();
+</script>
+
+
+<style id="_joueurs_mes_equipes_action_v30">
+/* V30 — Mes équipes :
+   Le bouton Valider mes équipes est un bouton action.
+   Il doit rester lisible même si Couleur principale = blanc.
+*/
+
+body.player-app .player-team-select-actions button,
+body.player-app .player-team-select-actions .btn-light,
+body.player-app button.player-inline-action{
+  background:var(--button-bg,#ffffff)!important;
+  color:var(--button-text,#000000)!important;
+  -webkit-text-fill-color:var(--button-text,#000000)!important;
+  border:2px solid var(--button-bg,#ffffff)!important;
+  box-shadow:none!important;
+  font-weight:950!important;
+}
+
+body.player-app .player-team-select-actions button *,
+body.player-app .player-team-select-actions .btn-light *,
+body.player-app button.player-inline-action *{
+  color:var(--button-text,#000000)!important;
+  -webkit-text-fill-color:var(--button-text,#000000)!important;
+}
+
+/* Les cartes équipes restent des cartes cliquables, pas des boutons action */
+body.player-app #teamsList .item,
+body.player-app #teamsList .team-item{
+  background:linear-gradient(180deg, rgba(18,18,18,.86), rgba(5,5,5,.94))!important;
+  color:var(--text,#ffffff)!important;
+  border-color:rgba(var(--accent-rgb,90,24,154),.62)!important;
+  box-shadow:none!important;
+}
+
+body.player-app #teamsList .item.player-team-card-selected,
+body.player-app #teamsList .team-item.player-team-card-selected{
+  background:rgba(var(--accent-rgb,90,24,154),.16)!important;
+  border-color:var(--accent,#5A189A)!important;
+  box-shadow:inset 0 0 0 1px var(--accent,#5A189A)!important;
+}
+
+body.player-app #teamsList .player-team-check{
+  color:var(--accent,#5A189A)!important;
+  -webkit-text-fill-color:var(--accent,#5A189A)!important;
+  border-color:rgba(var(--accent-rgb,90,24,154),.55)!important;
+}
+
+/* Champ recherche = champ, jamais bouton */
+body.player-app #teamSearch{
+  background:rgba(0,0,0,.42)!important;
+  color:var(--text,#ffffff)!important;
+  -webkit-text-fill-color:var(--text,#ffffff)!important;
+  border-color:var(--accent,#5A189A)!important;
+}
+</style>
+
+
+<script id="_joueurs_mes_equipes_action_v30_js">
+(function(){
+  function rgb(h){
+    h=String(h||"").trim();
+    var m=h.match(/^#?([0-9a-f]{6})$/i);
+    if(!m)return null;
+    var n=parseInt(m[1],16);
+    return[(n>>16)&255,(n>>8)&255,n&255];
+  }
+  function lum(r){
+    if(!r)return null;
+    var a=r.map(function(x){
+      x/=255;
+      return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);
+    });
+    return .2126*a[0]+.7152*a[1]+.0722*a[2];
+  }
+  function contrast(a,b){
+    var la=lum(rgb(a)), lb=lum(rgb(b));
+    if(la===null||lb===null)return 99;
+    var hi=Math.max(la,lb), lo=Math.min(la,lb);
+    return (hi+.05)/(lo+.05);
+  }
+  function autoText(bg){
+    var l=lum(rgb(bg));
+    return l!==null && l>.55 ? "#000000" : "#ffffff";
+  }
+  function cv(name,fallback){
+    var v=getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v||fallback;
+  }
+  function fixMesEquipes(){
+    try{
+      var bg=cv("--button-bg","#ffffff");
+      var txt=cv("--button-text","#000000");
+      if(contrast(bg,txt)<3.8){
+        txt=autoText(bg);
+        document.documentElement.style.setProperty("--button-text",txt);
+      }
+
+      document.querySelectorAll("body.player-app .player-team-select-actions button, body.player-app button.player-inline-action").forEach(function(b){
+        if(!b.textContent.trim()){
+          b.textContent="Valider mes équipes";
+        }
+        b.classList.remove("role-nav","role-secondary");
+        b.classList.add("role-action");
+        b.style.setProperty("background",bg,"important");
+        b.style.setProperty("border-color",bg,"important");
+        b.style.setProperty("color",txt,"important");
+        b.style.setProperty("-webkit-text-fill-color",txt,"important");
+      });
+
+      var st=document.getElementById("_joueurs_mes_equipes_action_v30");
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    }catch(e){}
+  }
+  document.addEventListener("DOMContentLoaded", fixMesEquipes);
+  window.addEventListener("load", fixMesEquipes);
+  document.addEventListener("click", function(){
+    setTimeout(fixMesEquipes,0);
+    setTimeout(fixMesEquipes,150);
+    setTimeout(fixMesEquipes,400);
+  }, true);
+  [0,250,700,1500,3000,6000,10000].forEach(function(t){setTimeout(fixMesEquipes,t);});
 })();
 </script>
 
