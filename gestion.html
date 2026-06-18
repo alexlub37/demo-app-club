@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.28-GESTION-ROLE-SYSTEM-V28" />
+  <meta name="app-version" content="V65.29-GESTION-VERSION-5-MODS" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.28 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.29 GESTION - Accueil direct + écran Réglages app préparé */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.28 GESTION - Réglages CONFIG connectés */
+/* V65.29 GESTION - Réglages CONFIG connectés */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.28 GESTION</button>
+    ">V65.29 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -7578,16 +7578,16 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.28 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.29 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 12/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 18/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.23 — Gestion : règle couleurs officielle appliquée</li>
-        <li>V65.22 — Gestion : fenêtre version simplifiée à 5 dernières modifications</li>
-        <li>V65.21 — Gestion : cartes modules sombres, séparées des boutons</li>
-        <li>V65.20 — Gestion : boutons et cartes rendus plus sobres</li>
-        <li>V65.19 — Gestion : boutons globaux sécurisés via CONFIG</li>
+        <li>V65.29 — Gestion : fenêtre version mise à jour avec 5 dernières modifications et bouton Fermer lisible</li>
+        <li>V65.28 — Gestion : navigation Gestion verrouillée en bouton secondaire</li>
+        <li>V65.27 — Gestion : système de rôles visuels ajouté</li>
+        <li>V65.26 — Gestion : nettoyage visuel cartes et boutons</li>
+        <li>V65.25 — Gestion : design par rôles et cohérence boutons / cartes</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8360,7 +8360,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.28-GESTION-ROLE-SYSTEM-V28";
+window.CAM_BASKET_VERSION = "V65.29-GESTION-VERSION-5-MODS";
 
 </script>
 
@@ -8862,6 +8862,55 @@ html body header .header-mini-actions button#btn-update *{
   window.APP_FIX_NAV_V28 = fixNav;
 })();
 </script>
+
+
+<style id="_version_modal_fix_v32">
+/* V32 — fenêtre version : bouton fermer lisible + 5 dernières modifications */
+html body #infoModal .modal-card,
+html body .modal-overlay .modal-card{
+  max-height:82vh!important;
+  overflow:auto!important;
+}
+
+html body #infoModal .modal-list,
+html body .modal-overlay .modal-list{
+  margin:10px 0 16px 18px!important;
+  padding:0!important;
+}
+
+html body #infoModal .modal-list li,
+html body .modal-overlay .modal-list li{
+  margin:8px 0!important;
+  line-height:1.28!important;
+}
+
+html body #infoModal button.modal-close,
+html body .modal-overlay button.modal-close{
+  display:block!important;
+  width:100%!important;
+  min-height:56px!important;
+  background:rgba(0,0,0,.42)!important;
+  color:var(--text,#ffffff)!important;
+  -webkit-text-fill-color:var(--text,#ffffff)!important;
+  border:2px solid var(--accent,#5A189A)!important;
+  border-radius:16px!important;
+  font-size:18px!important;
+  font-weight:950!important;
+  text-align:center!important;
+  box-shadow:none!important;
+}
+
+html body #infoModal button.modal-close::before,
+html body .modal-overlay button.modal-close::before{
+  content:"✕ ";
+}
+
+html body #infoModal .modal-credit,
+html body .modal-overlay .modal-credit{
+  color:rgba(255,255,255,.72)!important;
+  font-size:14px!important;
+}
+</style>
 
 </body>
 </html>

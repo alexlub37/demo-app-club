@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.29-DEMO-FORM-QUOTA-COMPLET - Design nettoyé -->
+<!-- Démo App Club formulaire V61.30-DEMO-FORM-CONFIRMATION-ENVOI - Design nettoyé -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.29-DEMO-FORM-QUOTA-COMPLET</title>
+<title>Formulaire Match V61.30-DEMO-FORM-CONFIRMATION-ENVOI</title>
 
 <style>
 :root{
@@ -1793,6 +1793,21 @@ function getApportFinal(){
 
 let sending = false;
 
+
+function afficherConfirmationEnvoi(){
+  document.body.innerHTML = `
+    <div class="success-screen">
+      <div class="success-card">
+        <div class="success-icon">✅</div>
+        <h1>Réponse enregistrée</h1>
+        <p>Merci, ta réponse a bien été prise en compte.</p>
+        <p class="success-small">Retour automatique à l’application...</p>
+        <button class="success-return" onclick="window.location.href = APP_HOME_URL">Retour à l’application</button>
+      </div>
+    </div>
+  `;
+}
+
 async function envoyerFormulaire() {
   if (sending) return;
 
@@ -1869,11 +1884,10 @@ async function envoyerFormulaire() {
   .then(res => res.text())
   .then(txt => {
     if (txt !== "OK") throw new Error(txt);
-    document.body.innerHTML = "<h2 style='color:var(--app-primary);text-align:center;margin-top:50px;'>Réponse envoyée 👍<br>Retour...</h2>";
+    afficherConfirmationEnvoi();
     setTimeout(() => {
-      try { window.close(); } catch(e) {}
       window.location.href = APP_HOME_URL;
-    }, 1200);
+    }, 2200);
   })
   .catch((err) => {
     sending = false;
@@ -2649,6 +2663,71 @@ function appliquerQuotaBouton(label, complet){
   [0,250,700,1500,3000,6000].forEach(function(t){ setTimeout(improveQuotaLabels, t); });
 })();
 </script>
+
+
+<style id="_form_confirmation_v61_30">
+/* V61.30 — écran de confirmation après envoi */
+.success-screen{
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px 18px;
+  background:#000000;
+  color:#ffffff;
+  box-sizing:border-box;
+}
+
+.success-card{
+  width:min(680px, 100%);
+  border:2px solid var(--app-secondary,#5A189A);
+  border-radius:28px;
+  background:linear-gradient(180deg, rgba(18,18,18,.96), rgba(4,4,4,.98));
+  padding:34px 22px;
+  text-align:center;
+  box-shadow:0 16px 46px rgba(0,0,0,.50);
+}
+
+.success-icon{
+  font-size:56px;
+  line-height:1;
+  margin-bottom:16px;
+}
+
+.success-card h1{
+  color:#ffffff!important;
+  font-size:clamp(30px, 7vw, 46px);
+  line-height:1.12;
+  margin:0 0 16px;
+}
+
+.success-card p{
+  color:rgba(255,255,255,.86);
+  font-size:20px;
+  line-height:1.35;
+  margin:0 0 12px;
+}
+
+.success-small{
+  color:var(--app-secondary,#5A189A)!important;
+  font-weight:900;
+  font-size:17px!important;
+}
+
+.success-return{
+  margin-top:18px;
+  width:100%;
+  min-height:58px;
+  border-radius:18px;
+  border:2px solid var(--app-primary,#ffffff);
+  background:var(--app-primary,#ffffff);
+  color:var(--app-button-text,#000000);
+  -webkit-text-fill-color:var(--app-button-text,#000000);
+  font-size:18px;
+  font-weight:950;
+}
+</style>
 
 </body>
 </html>
