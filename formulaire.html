@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.28-DEMO-FORM-ROLE-SYSTEM-V28 - Design nettoyé -->
+<!-- Démo App Club formulaire V61.29-DEMO-FORM-QUOTA-COMPLET - Design nettoyé -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.28-DEMO-FORM-ROLE-SYSTEM-V28</title>
+<title>Formulaire Match V61.29-DEMO-FORM-QUOTA-COMPLET</title>
 
 <style>
 :root{
@@ -2529,6 +2529,124 @@ function appliquerQuotaBouton(label, complet){
   window.addEventListener('load',fixChoices);
   document.addEventListener('click',function(){setTimeout(fixChoices,0);setTimeout(fixChoices,80);setTimeout(fixChoices,250);},true);
   [0,150,400,900,1500,3000,6000].forEach(function(t){setTimeout(fixChoices,t);});
+})();
+</script>
+
+
+<style id="_form_quota_complet_v61_29">
+/* V61.29 — Information quota complet.
+   Ne modifie pas la logique : uniquement affichage clair pour le joueur.
+*/
+
+#apportGroup .choice-btn.disabled,
+#apportGroup .choice-btn[aria-disabled="true"]{
+  opacity:1!important;
+  pointer-events:none!important;
+  cursor:not-allowed!important;
+  background:linear-gradient(180deg, rgba(6,6,6,.96), rgba(0,0,0,.98))!important;
+  color:rgba(255,255,255,.42)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.42)!important;
+  border:2px solid rgba(var(--accent-rgb,90,24,154),.42)!important;
+  box-shadow:none!important;
+  position:relative!important;
+  padding-right:150px!important;
+}
+
+#apportGroup .choice-btn.disabled::after,
+#apportGroup .choice-btn[aria-disabled="true"]::after{
+  content:"Complet";
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  min-width:92px;
+  height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  background:rgba(31,170,89,.20)!important;
+  color:#64f08c!important;
+  -webkit-text-fill-color:#64f08c!important;
+  border:1px solid rgba(100,240,140,.55)!important;
+  font-size:15px!important;
+  font-weight:900!important;
+  letter-spacing:.02em;
+}
+
+#apportGroup .choice-btn.disabled::before,
+#apportGroup .choice-btn[aria-disabled="true"]::before{
+  content:"Quota atteint";
+  position:absolute;
+  right:18px;
+  top:calc(50% + 30px);
+  color:rgba(255,255,255,.50)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.50)!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  line-height:1;
+  display:block!important;
+  background:transparent!important;
+}
+
+/* Choix disponible : reste clairement cliquable */
+#apportGroup .choice-btn:not(.disabled):not([aria-disabled="true"]){
+  opacity:1!important;
+  cursor:pointer!important;
+}
+
+/* Sélection disponible : garde la coche claire */
+#apportGroup .choice-btn.active:not(.disabled)::after{
+  content:"✓";
+  position:absolute;
+  right:22px;
+  top:50%;
+  transform:translateY(-50%);
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  background:#ffffff!important;
+  color:#000000!important;
+  -webkit-text-fill-color:#000000!important;
+  font-weight:1000;
+  font-size:22px;
+  border:0!important;
+}
+</style>
+
+
+<script id="_form_quota_complet_v61_29_js">
+(function(){
+  function improveQuotaLabels(){
+    try{
+      var group = document.getElementById("apportGroup");
+      if(!group) return;
+      group.querySelectorAll(".choice-btn").forEach(function(el){
+        var isDisabled = el.classList.contains("disabled");
+        if(isDisabled){
+          el.setAttribute("aria-disabled", "true");
+          el.setAttribute("title", "Quota atteint : ce choix est déjà complet");
+        }else{
+          el.removeAttribute("aria-disabled");
+          el.removeAttribute("title");
+        }
+      });
+      var st = document.getElementById("_form_quota_complet_v61_29");
+      if(st && st.parentNode) st.parentNode.appendChild(st);
+    }catch(e){}
+  }
+  document.addEventListener("DOMContentLoaded", improveQuotaLabels);
+  window.addEventListener("load", improveQuotaLabels);
+  document.addEventListener("click", function(){
+    setTimeout(improveQuotaLabels, 0);
+    setTimeout(improveQuotaLabels, 150);
+    setTimeout(improveQuotaLabels, 500);
+  }, true);
+  [0,250,700,1500,3000,6000].forEach(function(t){ setTimeout(improveQuotaLabels, t); });
 })();
 </script>
 
