@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.49-JOUEURS-VERSION-5-MODS" />
+  <meta name="app-version" content="V62.51-JOUEURS-COULEUR-ACTIVE-35" />
   <style>
     :root{
       --bg:#050505;
@@ -625,7 +625,7 @@
       gap: 10px;
       align-items: center;
       background: rgba(0,0,0,.20);
-      border: 1px solid rgba(var(--accent-rgb),.20);
+      border: 1px solid rgba(var(--accent-rgb),.35);
       border-radius: 12px;
       padding: 9px 10px;
       margin-bottom: 0;
@@ -1708,7 +1708,7 @@ button:disabled,
 
 
 
-/* V62.49 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V62.51 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1811,7 +1811,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.49 JOUEURS - stabilisation parcours */
+/* V62.51 JOUEURS - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1839,7 +1839,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.49 JOUEURS - interface allégée + Bureau visible */
+/* V62.51 JOUEURS - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1868,7 +1868,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V62.49 JOUEURS - Sous-titre piloté par CONFIG */
+/* V62.51 JOUEURS - Sous-titre piloté par CONFIG */
 body.player-app #appSubtitle{
   display:none;
 }
@@ -1877,7 +1877,7 @@ body.player-app.subtitle-visible #appSubtitle{
 }
 
 
-/* V62.49 JOUEURS - Bureau dynamique + événement texte vide */
+/* V62.51 JOUEURS - Bureau dynamique + événement texte vide */
 body.player-app #btn-bureau{display:none!important;}
 body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-title:empty,
@@ -1886,7 +1886,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-card.event-no-text .club-event-text{display:none!important;}
 
 
-/* V62.49 JOUEURS - Image événement affichée entière */
+/* V62.51 JOUEURS - Image événement affichée entière */
 .club-event-img{
   object-fit:contain!important;
   max-height:none!important;
@@ -1985,7 +1985,7 @@ button.primary *,
   background:rgba(var(--accent-rgb),.12)!important;
 }
 hr,.separator{
-  border-color:rgba(var(--accent-rgb),.20)!important;
+  border-color:rgba(var(--accent-rgb),.35)!important;
 }
 /* Fond sport : les bordures dessinées suivent l'accent, pas un jaune fixe */
 #camSvgBackground path[fill="#ffffff"],
@@ -2645,7 +2645,7 @@ body.player-app #btn-home.active,
 body.player-app #btn-teams.active,
 body.player-app #btn-myteams.active,
 body.player-app #btn-bureau.active{
-  background:rgba(90,24,154,.14)!important;
+  background:rgba(var(--accent-rgb),.35)!important;
   color:var(--text,#ffffff)!important;
   border-color:var(--accent,#5A189A)!important;
   box-shadow:inset 0 0 0 1px var(--accent,#5A189A)!important;
@@ -3319,7 +3319,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.49 JOUEURS</button>
+    ">V62.51 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
@@ -8008,7 +8008,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.49 JOUEURS — Accueil club + mes espaces séparés
+// V62.51 JOUEURS — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -8260,16 +8260,16 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.49 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.51 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 18/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V62.49 — Joueurs : fenêtre version mise à jour avec 5 dernières modifications et bouton Fermer lisible</li>
+        <li>V62.51 — Joueurs : intensité du fond actif portée à 35 % de la couleur secondaire</li>
+        <li>V62.50 — Joueurs : fond du bouton actif lié automatiquement à la couleur secondaire du club</li>
+        <li>V62.49 — Joueurs : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
         <li>V62.48 — Joueurs : bouton Valider mes équipes rendu lisible</li>
         <li>V62.47 — Joueurs : navigation Joueurs verrouillée en bouton secondaire</li>
-        <li>V62.46 — Joueurs : système de rôles visuels ajouté</li>
-        <li>V62.45 — Joueurs : correction écran blanc iPhone</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8617,7 +8617,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.49-JOUEURS-VERSION-5-MODS";
+window.CAM_BASKET_VERSION = "V62.51-JOUEURS-COULEUR-ACTIVE-35";
 
 </script>
 
@@ -8884,7 +8884,7 @@ window.CAM_BASKET_VERSION = "V62.49-JOUEURS-VERSION-5-MODS";
         e.style.setProperty('color',text,'important');
         e.style.setProperty('border-color',accent,'important');
         e.style.setProperty('box-shadow','none','important');
-        e.style.setProperty('background',e.classList.contains('active')?'rgba(90,24,154,.16)':'rgba(0,0,0,.40)','important');
+        e.style.setProperty('background',e.classList.contains('active')?'rgba(var(--accent-rgb),.35)':'rgba(0,0,0,.40)','important');
       });
       var maps=document.getElementById('mapsLink');
       if(maps){
@@ -8976,7 +8976,7 @@ window.CAM_BASKET_VERSION = "V62.49-JOUEURS-VERSION-5-MODS";
       important(el, "color", text);
       important(el, "border-color", secondary);
       important(el, "box-shadow", "none");
-      important(el, "background", el.classList.contains("active") ? "rgba(90,24,154,.16)" : "rgba(0,0,0,.40)");
+      important(el, "background", el.classList.contains("active") ? "rgba(var(--accent-rgb),.35)" : "rgba(0,0,0,.40)");
     });
 
     qsa(".role-secondary").forEach(function(el){
@@ -9157,7 +9157,7 @@ html body header .header-mini-actions button#btn-update *{
         e.style.setProperty('-webkit-text-fill-color',txt,'important');
         e.style.setProperty('border-color',accent,'important');
         e.style.setProperty('box-shadow','none','important');
-        e.style.setProperty('background', e.classList.contains('active') ? 'rgba(90,24,154,.18)' : 'rgba(0,0,0,.40)', 'important');
+        e.style.setProperty('background', e.classList.contains('active') ? 'rgba(var(--accent-rgb),.35)' : 'rgba(0,0,0,.40)', 'important');
         Array.prototype.slice.call(e.children||[]).forEach(function(c){
           c.style.setProperty('color',txt,'important');
           c.style.setProperty('-webkit-text-fill-color',txt,'important');
@@ -9345,6 +9345,21 @@ html body #infoModal .modal-credit,
 html body .modal-overlay .modal-credit{
   color:rgba(255,255,255,.72)!important;
   font-size:14px!important;
+}
+</style>
+
+
+<style id="_joueurs_active_club_color_v33">
+/* V62.50 — l'état actif suit toujours Couleur secondaire */
+body.player-app header .top-actions button.active,
+body.player-app #btn-home.active,
+body.player-app #btn-teams.active,
+body.player-app #btn-myteams.active,
+body.player-app #btn-bureau.active{
+  background:rgba(var(--accent-rgb),.35)!important;
+  border-color:var(--accent)!important;
+  color:var(--text)!important;
+  -webkit-text-fill-color:var(--text)!important;
 }
 </style>
 
