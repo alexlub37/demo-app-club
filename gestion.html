@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.29-GESTION-VERSION-5-MODS" />
+  <meta name="app-version" content="V65.30-GESTION-COULEUR-ACTIVE-CLUB" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.29 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.30 GESTION - Accueil direct + écran Réglages app préparé */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.29 GESTION - Réglages CONFIG connectés */
+/* V65.30 GESTION - Réglages CONFIG connectés */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.29 GESTION</button>
+    ">V65.30 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
@@ -7578,16 +7578,16 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.29 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.30 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 18/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.29 — Gestion : fenêtre version mise à jour avec 5 dernières modifications et bouton Fermer lisible</li>
+        <li>V65.30 — Gestion : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
+        <li>V65.29 — Gestion : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
         <li>V65.28 — Gestion : navigation Gestion verrouillée en bouton secondaire</li>
         <li>V65.27 — Gestion : système de rôles visuels ajouté</li>
         <li>V65.26 — Gestion : nettoyage visuel cartes et boutons</li>
-        <li>V65.25 — Gestion : design par rôles et cohérence boutons / cartes</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8360,7 +8360,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.29-GESTION-VERSION-5-MODS";
+window.CAM_BASKET_VERSION = "V65.30-GESTION-COULEUR-ACTIVE-CLUB";
 
 </script>
 
@@ -8664,7 +8664,7 @@ window.CAM_BASKET_VERSION = "V65.29-GESTION-VERSION-5-MODS";
       important(el, "color", text);
       important(el, "border-color", secondary);
       important(el, "box-shadow", "none");
-      important(el, "background", el.classList.contains("active") ? "rgba(90,24,154,.16)" : "rgba(0,0,0,.40)");
+      important(el, "background", el.classList.contains("active") ? "rgba(var(--accent-rgb),.35)" : "rgba(0,0,0,.40)");
     });
 
     qsa(".role-secondary").forEach(function(el){
@@ -8845,7 +8845,7 @@ html body header .header-mini-actions button#btn-update *{
         e.style.setProperty('-webkit-text-fill-color',txt,'important');
         e.style.setProperty('border-color',accent,'important');
         e.style.setProperty('box-shadow','none','important');
-        e.style.setProperty('background', e.classList.contains('active') ? 'rgba(90,24,154,.18)' : 'rgba(0,0,0,.40)', 'important');
+        e.style.setProperty('background', e.classList.contains('active') ? 'rgba(var(--accent-rgb),.35)' : 'rgba(0,0,0,.40)', 'important');
         Array.prototype.slice.call(e.children||[]).forEach(function(c){
           c.style.setProperty('color',txt,'important');
           c.style.setProperty('-webkit-text-fill-color',txt,'important');
