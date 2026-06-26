@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.51-JOUEURS-COULEUR-ACTIVE-35" />
+  <meta name="app-version" content="V62.52-JOUEURS-LOGO-HORS-BOUTON" />
   <style>
     :root{
       --bg:#050505;
@@ -1708,7 +1708,7 @@ button:disabled,
 
 
 
-/* V62.51 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V62.52 JOUEURS - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1811,7 +1811,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V62.51 JOUEURS - stabilisation parcours */
+/* V62.52 JOUEURS - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1839,7 +1839,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V62.51 JOUEURS - interface allégée + Bureau visible */
+/* V62.52 JOUEURS - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1868,7 +1868,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V62.51 JOUEURS - Sous-titre piloté par CONFIG */
+/* V62.52 JOUEURS - Sous-titre piloté par CONFIG */
 body.player-app #appSubtitle{
   display:none;
 }
@@ -1877,7 +1877,7 @@ body.player-app.subtitle-visible #appSubtitle{
 }
 
 
-/* V62.51 JOUEURS - Bureau dynamique + événement texte vide */
+/* V62.52 JOUEURS - Bureau dynamique + événement texte vide */
 body.player-app #btn-bureau{display:none!important;}
 body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-title:empty,
@@ -1886,7 +1886,7 @@ body.player-app.bureau-visible #btn-bureau{display:block!important;}
 .club-event-card.event-no-text .club-event-text{display:none!important;}
 
 
-/* V62.51 JOUEURS - Image événement affichée entière */
+/* V62.52 JOUEURS - Image événement affichée entière */
 .club-event-img{
   object-fit:contain!important;
   max-height:none!important;
@@ -3319,12 +3319,16 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.51 JOUEURS</button>
+    ">V62.52 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
-        <button class="hero-logo-btn" aria-label="Informations Démo App Club" onclick="openInfoModal()" style="cursor:pointer;">
+        <div class="hero-logo-btn" role="button" tabindex="0"
+          aria-label="Informations Démo App Club"
+          onclick="openInfoModal()"
+          onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();openInfoModal();}"
+          style="cursor:pointer;">
           <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
-        </button>
+        </div>
         <div id="heroSlogan" style="
           display:none;
           position:absolute;
@@ -8008,7 +8012,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V62.51 JOUEURS — Accueil club + mes espaces séparés
+// V62.52 JOUEURS — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -8260,16 +8264,16 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.51 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.52 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.52 — Joueurs : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V62.51 — Joueurs : intensité du fond actif portée à 35 % de la couleur secondaire</li>
-        <li>V62.50 — Joueurs : fond du bouton actif lié automatiquement à la couleur secondaire du club</li>
+        <li>V62.50 — Joueurs : fond du bouton actif lié à la couleur secondaire du club</li>
         <li>V62.49 — Joueurs : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
         <li>V62.48 — Joueurs : bouton Valider mes équipes rendu lisible</li>
-        <li>V62.47 — Joueurs : navigation Joueurs verrouillée en bouton secondaire</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8617,7 +8621,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.51-JOUEURS-COULEUR-ACTIVE-35";
+window.CAM_BASKET_VERSION = "V62.52-JOUEURS-LOGO-HORS-BOUTON";
 
 </script>
 
@@ -9360,6 +9364,56 @@ body.player-app #btn-bureau.active{
   border-color:var(--accent)!important;
   color:var(--text)!important;
   -webkit-text-fill-color:var(--text)!important;
+}
+</style>
+
+
+<style id="_logo_wrapper_neutre_v36">
+/* V36 — Le logo n'est plus un élément button.
+   Il ne peut donc plus hériter des couleurs, fonds ou contours des boutons. */
+header .hero .hero-logo-btn,
+header .hero-logo-btn,
+.hero-logo-btn{
+  display:inline-block!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0 0 8px 0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  filter:none!important;
+  transform:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+header .hero .hero-logo-btn::before,
+header .hero .hero-logo-btn::after,
+header .hero-logo-btn::before,
+header .hero-logo-btn::after{
+  content:none!important;
+  display:none!important;
+}
+
+header .hero-logo-btn > img,
+header img.hero-logo,
+header #mainLogo{
+  display:block!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  filter:none!important;
+  margin:0 auto!important;
 }
 </style>
 

@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.30-GESTION-COULEUR-ACTIVE-CLUB" />
+  <meta name="app-version" content="V65.31-GESTION-LOGO-HORS-BOUTON" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.30 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.31 GESTION - Accueil direct + écran Réglages app préparé */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.30 GESTION - Réglages CONFIG connectés */
+/* V65.31 GESTION - Réglages CONFIG connectés */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -3068,12 +3068,12 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.30 GESTION</button>
+    ">V65.31 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
-        <button class="hero-logo-btn" aria-label="Logo Démo App Club" style="cursor:default;">
+        <div class="hero-logo-btn" aria-label="Logo Démo App Club">
           <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
-        </button>
+        </div>
         <div id="heroSlogan" style="
           display:none;
           position:absolute;
@@ -7578,16 +7578,16 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.30 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.31 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.31 — Gestion : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V65.30 — Gestion : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
         <li>V65.29 — Gestion : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
         <li>V65.28 — Gestion : navigation Gestion verrouillée en bouton secondaire</li>
         <li>V65.27 — Gestion : système de rôles visuels ajouté</li>
-        <li>V65.26 — Gestion : nettoyage visuel cartes et boutons</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8360,7 +8360,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.30-GESTION-COULEUR-ACTIVE-CLUB";
+window.CAM_BASKET_VERSION = "V65.31-GESTION-LOGO-HORS-BOUTON";
 
 </script>
 
@@ -8909,6 +8909,56 @@ html body #infoModal .modal-credit,
 html body .modal-overlay .modal-credit{
   color:rgba(255,255,255,.72)!important;
   font-size:14px!important;
+}
+</style>
+
+
+<style id="_logo_wrapper_neutre_v36">
+/* V36 — Le logo n'est plus un élément button.
+   Il ne peut donc plus hériter des couleurs, fonds ou contours des boutons. */
+header .hero .hero-logo-btn,
+header .hero-logo-btn,
+.hero-logo-btn{
+  display:inline-block!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  margin:0 0 8px 0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  filter:none!important;
+  transform:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+header .hero .hero-logo-btn::before,
+header .hero .hero-logo-btn::after,
+header .hero-logo-btn::before,
+header .hero-logo-btn::after{
+  content:none!important;
+  display:none!important;
+}
+
+header .hero-logo-btn > img,
+header img.hero-logo,
+header #mainLogo{
+  display:block!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  filter:none!important;
+  margin:0 auto!important;
 }
 </style>
 
