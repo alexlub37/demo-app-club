@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.30-DEMO-FORM-CONFIRMATION-ENVOI - Design nettoyé -->
+<!-- Démo App Club formulaire V61.31-DEMO-FORM-COULEUR-CLUB - Design nettoyé -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.30-DEMO-FORM-CONFIRMATION-ENVOI</title>
+<title>Formulaire Match V61.31-DEMO-FORM-COULEUR-CLUB</title>
 
 <style>
 :root{
@@ -2452,100 +2452,136 @@ function appliquerQuotaBouton(label, complet){
 </script>
 
 
-<style id="_roles_v28_form_choice_fix">
-/* V28 — Formulaire : l'option choisie doit être très visible. */
-.choice-btn{
-  position:relative!important;
-  background:linear-gradient(180deg, rgba(12,12,12,.98), rgba(0,0,0,.98))!important;
+
+<style id="_form_couleur_club_v61_31">
+/* ==========================================================
+   V61.31 — FORMULAIRE COULEUR CLUB
+   Les choix suivent Couleur secondaire.
+   Aucune logique métier n'est modifiée.
+   ========================================================== */
+
+/* Champs */
+input,
+select,
+textarea{
+  background-color:rgba(0,0,0,.48)!important;
   color:#ffffff!important;
   -webkit-text-fill-color:#ffffff!important;
-  border:2px solid var(--app-secondary,var(--role-secondary,#5A189A))!important;
+  border:2px solid var(--app-secondary,var(--accent,#4E8A47))!important;
+  box-shadow:none!important;
+}
+
+/* Flèche du sélecteur visible sur iPhone */
+select{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  padding-right:54px!important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 18px center!important;
+  background-size:22px 22px!important;
+}
+
+/* Choix disponible mais non sélectionné */
+.choice-btn{
+  position:relative!important;
+  background:linear-gradient(180deg,rgba(10,10,10,.98),rgba(0,0,0,.98))!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:2px solid var(--app-secondary,var(--accent,#4E8A47))!important;
   box-shadow:none!important;
   opacity:1!important;
 }
 
-.choice-btn.active,
-.choice-btn.selected,
-.choice-btn.is-selected,
-.choice-btn[aria-pressed="true"]{
-  background:linear-gradient(90deg,
-    rgba(var(--accent-rgb,90,24,154),.52),
-    rgba(var(--accent-rgb,90,24,154),.22)
-  )!important;
+/* Choix sélectionné : couleur secondaire du club à 35 % */
+.choice-btn.active:not(.disabled),
+.choice-btn.selected:not(.disabled),
+.choice-btn.is-selected:not(.disabled),
+.choice-btn[aria-pressed="true"]:not(.disabled){
+  background:rgba(var(--accent-rgb,78,138,71),.35)!important;
   color:#ffffff!important;
   -webkit-text-fill-color:#ffffff!important;
   border:3px solid #ffffff!important;
-  box-shadow:0 0 0 3px rgba(var(--accent-rgb,90,24,154),.55)!important;
+  box-shadow:0 0 0 3px rgba(var(--accent-rgb,78,138,71),.58)!important;
 }
 
-.choice-btn.active::after,
-.choice-btn.selected::after,
-.choice-btn.is-selected::after,
-.choice-btn[aria-pressed="true"]::after{
+/* Coche uniquement sur le choix réellement sélectionné */
+.choice-btn.active:not(.disabled)::after,
+.choice-btn.selected:not(.disabled)::after,
+.choice-btn.is-selected:not(.disabled)::after,
+.choice-btn[aria-pressed="true"]:not(.disabled)::after{
   content:"✓";
   position:absolute;
   right:22px;
   top:50%;
   transform:translateY(-50%);
-  width:34px;
-  height:34px;
+  width:38px;
+  height:38px;
   border-radius:50%;
-  display:flex;
+  display:flex!important;
   align-items:center;
   justify-content:center;
-  background:#ffffff;
-  color:#000000;
-  -webkit-text-fill-color:#000000;
+  background:#ffffff!important;
+  color:#000000!important;
+  -webkit-text-fill-color:#000000!important;
+  border:0!important;
+  font-size:25px;
   font-weight:1000;
-  font-size:22px;
 }
 
-.choice-btn.disabled,
-.choice-btn[aria-disabled="true"]{
-  opacity:.42!important;
+/* Quota atteint : conserver l'information Complet et empêcher le clic */
+#apportGroup .choice-btn.disabled,
+#apportGroup .choice-btn[aria-disabled="true"]{
+  pointer-events:none!important;
+  cursor:not-allowed!important;
+  opacity:1!important;
+  background:linear-gradient(180deg,rgba(6,6,6,.96),rgba(0,0,0,.98))!important;
+  color:rgba(255,255,255,.42)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.42)!important;
+  border:2px solid rgba(var(--accent-rgb,78,138,71),.42)!important;
+  box-shadow:none!important;
+  padding-right:150px!important;
 }
 
-.choice-btn.disabled::after,
-.choice-btn[aria-disabled="true"]::after{
-  content:"";
-  display:none!important;
+#apportGroup .choice-btn.disabled::after,
+#apportGroup .choice-btn[aria-disabled="true"]::after{
+  content:"Complet";
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  min-width:92px;
+  height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  background:rgba(var(--accent-rgb,78,138,71),.22)!important;
+  color:#7BE69A!important;
+  -webkit-text-fill-color:#7BE69A!important;
+  border:1px solid rgba(123,230,154,.60)!important;
+  font-size:15px!important;
+  font-weight:950!important;
 }
 
-/* Les choix complets boisson/nourriture/maillots doivent rester visuellement désactivés */
-.choice-btn.disabled,
-.choice-btn.disabled *{
-  color:rgba(255,255,255,.52)!important;
-  -webkit-text-fill-color:rgba(255,255,255,.52)!important;
+/* Bouton principal Envoyer */
+.send:not(.cancel){
+  background:var(--app-primary,#70A663)!important;
+  color:var(--app-button-text,#000000)!important;
+  -webkit-text-fill-color:var(--app-button-text,#000000)!important;
+  border:2px solid var(--app-primary,#70A663)!important;
+}
+
+/* Bouton secondaire Annuler */
+.send.cancel{
+  background:rgba(0,0,0,.46)!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:2px solid var(--app-secondary,var(--accent,#4E8A47))!important;
 }
 </style>
-
-
-<script id="_roles_v28_form_choice_fix_js">
-(function(){
-  function fixChoices(){
-    try{
-      document.querySelectorAll('.choice-btn').forEach(function(el){
-        el.classList.remove('role-action');
-        el.classList.add('role-choice');
-        if(el.classList.contains('active') || el.getAttribute('aria-pressed') === 'true'){
-          el.style.setProperty('background','linear-gradient(90deg, rgba(90,24,154,.52), rgba(90,24,154,.22))','important');
-          el.style.setProperty('border','3px solid #ffffff','important');
-          el.style.setProperty('box-shadow','0 0 0 3px rgba(90,24,154,.55)','important');
-        }else{
-          el.style.removeProperty('box-shadow');
-        }
-      });
-      var st=document.getElementById('_roles_v28_form_choice_fix');
-      if(st && st.parentNode) st.parentNode.appendChild(st);
-    }catch(e){}
-  }
-  document.addEventListener('DOMContentLoaded',fixChoices);
-  window.addEventListener('load',fixChoices);
-  document.addEventListener('click',function(){setTimeout(fixChoices,0);setTimeout(fixChoices,80);setTimeout(fixChoices,250);},true);
-  [0,150,400,900,1500,3000,6000].forEach(function(t){setTimeout(fixChoices,t);});
-})();
-</script>
-
 
 <style id="_form_quota_complet_v61_29">
 /* V61.29 — Information quota complet.
