@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.31-DEMO-FORM-COULEUR-CLUB - Design nettoyé -->
+<!-- Démo App Club formulaire V61.32-DEMO-FORM-CONFIRMATION-CLUB - Design nettoyé -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.31-DEMO-FORM-COULEUR-CLUB</title>
+<title>Formulaire Match V61.32-DEMO-FORM-CONFIRMATION-CLUB</title>
 
 <style>
 :root{
@@ -1795,14 +1795,147 @@ let sending = false;
 
 
 function afficherConfirmationEnvoi(){
+  const accent = getComputedStyle(document.documentElement).getPropertyValue("--app-secondary").trim() || "#70A663";
+  const primary = getComputedStyle(document.documentElement).getPropertyValue("--app-primary").trim() || "#70A663";
+  const buttonText = getComputedStyle(document.documentElement).getPropertyValue("--app-button-text").trim() || "#000000";
+  const clubName = String(APP_HOME_CLUB_NAME || APP_CLUB_NAME || "le club").trim();
+
   document.body.innerHTML = `
+    <style id="success-inline-v61-32">
+      :root{ color-scheme:dark; }
+      body{
+        margin:0;
+        min-height:100vh;
+        min-height:100dvh;
+        background:#000000;
+        color:#ffffff;
+        font-family:Arial,Helvetica,sans-serif;
+      }
+      .success-screen{
+        min-height:100vh;
+        min-height:100dvh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:24px 16px 34px;
+        box-sizing:border-box;
+        background:
+          radial-gradient(circle at top center, rgba(255,255,255,.05), transparent 34%),
+          radial-gradient(circle at 50% 20%, color-mix(in srgb, ${accent} 22%, transparent), transparent 38%),
+          #000000;
+      }
+      .success-card{
+        width:min(720px, 100%);
+        background:linear-gradient(180deg, rgba(20,20,20,.96), rgba(6,6,6,.98));
+        border:2px solid ${accent};
+        border-radius:30px;
+        box-shadow:0 18px 50px rgba(0,0,0,.55);
+        overflow:hidden;
+      }
+      .success-head{
+        padding:30px 22px 18px;
+        text-align:center;
+        background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+      }
+      .success-badge{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:74px;
+        height:74px;
+        border-radius:50%;
+        margin:0 auto 14px;
+        background:${primary};
+        color:${buttonText};
+        font-size:38px;
+        font-weight:900;
+        box-shadow:0 0 0 6px rgba(255,255,255,.08);
+      }
+      .success-title{
+        margin:0;
+        color:#ffffff;
+        font-size:clamp(30px, 7vw, 44px);
+        line-height:1.08;
+        font-weight:1000;
+      }
+      .success-subtitle{
+        margin:10px 0 0;
+        color:${accent};
+        font-size:clamp(16px, 3.5vw, 22px);
+        font-weight:800;
+      }
+      .success-divider{
+        width:130px;
+        height:6px;
+        border-radius:999px;
+        background:${accent};
+        margin:18px auto 0;
+      }
+      .success-body{
+        padding:22px;
+      }
+      .success-message{
+        margin:0 0 14px;
+        color:#ffffff;
+        font-size:clamp(21px, 5vw, 28px);
+        line-height:1.35;
+        font-weight:800;
+      }
+      .success-text{
+        margin:0 0 14px;
+        color:rgba(255,255,255,.88);
+        font-size:clamp(18px, 4.5vw, 22px);
+        line-height:1.45;
+      }
+      .success-note{
+        margin:0 0 22px;
+        color:${accent};
+        font-size:clamp(16px, 4vw, 20px);
+        font-weight:900;
+      }
+      .success-actions{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+      }
+      .success-return,
+      .success-home{
+        width:100%;
+        min-height:58px;
+        border-radius:18px;
+        font-size:18px;
+        font-weight:950;
+      }
+      .success-return{
+        border:2px solid ${primary};
+        background:${primary};
+        color:${buttonText};
+        -webkit-text-fill-color:${buttonText};
+      }
+      .success-home{
+        border:2px solid ${accent};
+        background:rgba(0,0,0,.42);
+        color:#ffffff;
+        -webkit-text-fill-color:#ffffff;
+      }
+    </style>
     <div class="success-screen">
       <div class="success-card">
-        <div class="success-icon">✅</div>
-        <h1>Réponse enregistrée</h1>
-        <p>Merci, ta réponse a bien été prise en compte.</p>
-        <p class="success-small">Retour automatique à l’application...</p>
-        <button class="success-return" onclick="window.location.href = APP_HOME_URL">Retour à l’application</button>
+        <div class="success-head">
+          <div class="success-badge">✓</div>
+          <h1 class="success-title">Réponse enregistrée</h1>
+          <p class="success-subtitle">${clubName}</p>
+          <div class="success-divider"></div>
+        </div>
+        <div class="success-body">
+          <p class="success-message">Merci, ta réponse a bien été prise en compte.</p>
+          <p class="success-text">Ton choix a été enregistré dans l’application du club.</p>
+          <p class="success-note">Retour automatique à l’application…</p>
+          <div class="success-actions">
+            <button class="success-return" onclick="window.location.href = APP_HOME_URL">Retour à l’application</button>
+            <button class="success-home" onclick="window.location.href = APP_HOME_URL">Accueil du club</button>
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -2701,8 +2834,8 @@ select{
 </script>
 
 
-<style id="_form_confirmation_v61_30">
-/* V61.30 — écran de confirmation après envoi */
+<style id="_form_confirmation_v61_32">
+/* V61.32 — ancien bloc conservé, styles principaux injectés dynamiquement */
 .success-screen{
   min-height:100vh;
   min-height:100dvh;
