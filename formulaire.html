@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.32-DEMO-FORM-CONFIRMATION-CLUB - Design nettoyé -->
+<!-- Démo App Club formulaire V61.33-DEMO-FORM-CONFIRMATION-COMPACTE - Design nettoyé -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.32-DEMO-FORM-CONFIRMATION-CLUB</title>
+<title>Formulaire Match V61.33-DEMO-FORM-CONFIRMATION-COMPACTE</title>
 
 <style>
 :root{
@@ -1400,6 +1400,9 @@ const APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
 const APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
 const APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
 const APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
+let FORM_CLUB_NAME = APP_HOME_CLUB_NAME;
+let FORM_LOGO_URL = "Image PNG.png";
+
 function appEscapeRegExp(str){
   return String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -1502,6 +1505,9 @@ async function chargerConfigOrganisation(){
     const res = await fetch(url, { cache: "no-store" });
     const cfg = await res.json();
     appliquerThemeFormulaire(cfg);
+
+    FORM_CLUB_NAME = configValueForm(cfg, "nom_club", APP_HOME_CLUB_NAME);
+    FORM_LOGO_URL = configValueForm(cfg, "logo_url", "Image PNG.png");
 
     organisationConfig = {
       maillots: configIntForm(cfg, "quota_maillots", 1),
@@ -1795,146 +1801,172 @@ let sending = false;
 
 
 function afficherConfirmationEnvoi(){
-  const accent = getComputedStyle(document.documentElement).getPropertyValue("--app-secondary").trim() || "#70A663";
+  const accent = getComputedStyle(document.documentElement).getPropertyValue("--app-secondary").trim() || "#4E8A47";
   const primary = getComputedStyle(document.documentElement).getPropertyValue("--app-primary").trim() || "#70A663";
   const buttonText = getComputedStyle(document.documentElement).getPropertyValue("--app-button-text").trim() || "#000000";
-  const clubName = String(APP_HOME_CLUB_NAME || APP_CLUB_NAME || "le club").trim();
+  const clubName = String(FORM_CLUB_NAME || APP_HOME_CLUB_NAME || APP_CLUB_NAME || "Le club").trim();
+  const logoUrl = String(FORM_LOGO_URL || "Image PNG.png").trim();
 
   document.body.innerHTML = `
-    <style id="success-inline-v61-32">
+    <style id="success-inline-v61-33">
       :root{ color-scheme:dark; }
-      body{
+      html,body{
         margin:0;
-        min-height:100vh;
-        min-height:100dvh;
+        min-height:100%;
         background:#000000;
         color:#ffffff;
         font-family:Arial,Helvetica,sans-serif;
+      }
+      body{
+        min-height:100vh;
+        min-height:100dvh;
       }
       .success-screen{
         min-height:100vh;
         min-height:100dvh;
         display:flex;
-        align-items:center;
+        align-items:flex-start;
         justify-content:center;
-        padding:24px 16px 34px;
         box-sizing:border-box;
+        padding:
+          max(14px, env(safe-area-inset-top))
+          14px
+          max(16px, env(safe-area-inset-bottom));
         background:
-          radial-gradient(circle at top center, rgba(255,255,255,.05), transparent 34%),
-          radial-gradient(circle at 50% 20%, color-mix(in srgb, ${accent} 22%, transparent), transparent 38%),
+          radial-gradient(circle at 50% 0%, color-mix(in srgb, ${accent} 22%, transparent), transparent 34%),
           #000000;
+        overflow:auto;
       }
       .success-card{
-        width:min(720px, 100%);
-        background:linear-gradient(180deg, rgba(20,20,20,.96), rgba(6,6,6,.98));
+        width:min(680px,100%);
+        max-height:calc(100dvh - max(30px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
+        margin:auto 0;
+        overflow:auto;
+        box-sizing:border-box;
+        background:linear-gradient(180deg,rgba(18,18,18,.97),rgba(4,4,4,.99));
         border:2px solid ${accent};
-        border-radius:30px;
-        box-shadow:0 18px 50px rgba(0,0,0,.55);
-        overflow:hidden;
+        border-radius:24px;
+        box-shadow:0 16px 42px rgba(0,0,0,.55);
       }
       .success-head{
-        padding:30px 22px 18px;
+        padding:18px 18px 12px;
         text-align:center;
-        background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+      }
+      .success-logo{
+        display:block;
+        width:78px;
+        height:78px;
+        object-fit:contain;
+        margin:0 auto 8px;
+        background:transparent;
+        border:0;
+        box-shadow:none;
       }
       .success-badge{
         display:inline-flex;
         align-items:center;
         justify-content:center;
-        width:74px;
-        height:74px;
+        width:46px;
+        height:46px;
         border-radius:50%;
-        margin:0 auto 14px;
+        margin:0 auto 8px;
         background:${primary};
         color:${buttonText};
-        font-size:38px;
-        font-weight:900;
-        box-shadow:0 0 0 6px rgba(255,255,255,.08);
+        font-size:27px;
+        font-weight:1000;
       }
       .success-title{
         margin:0;
         color:#ffffff;
-        font-size:clamp(30px, 7vw, 44px);
+        font-size:clamp(27px,6.5vw,40px);
         line-height:1.08;
         font-weight:1000;
       }
       .success-subtitle{
-        margin:10px 0 0;
+        margin:7px 0 0;
         color:${accent};
-        font-size:clamp(16px, 3.5vw, 22px);
-        font-weight:800;
-      }
-      .success-divider{
-        width:130px;
-        height:6px;
-        border-radius:999px;
-        background:${accent};
-        margin:18px auto 0;
-      }
-      .success-body{
-        padding:22px;
-      }
-      .success-message{
-        margin:0 0 14px;
-        color:#ffffff;
-        font-size:clamp(21px, 5vw, 28px);
-        line-height:1.35;
-        font-weight:800;
-      }
-      .success-text{
-        margin:0 0 14px;
-        color:rgba(255,255,255,.88);
-        font-size:clamp(18px, 4.5vw, 22px);
-        line-height:1.45;
-      }
-      .success-note{
-        margin:0 0 22px;
-        color:${accent};
-        font-size:clamp(16px, 4vw, 20px);
+        font-size:clamp(15px,3.8vw,20px);
         font-weight:900;
       }
-      .success-actions{
-        display:flex;
-        flex-direction:column;
-        gap:12px;
+      .success-divider{
+        width:100px;
+        height:5px;
+        border-radius:999px;
+        background:${accent};
+        margin:12px auto 0;
       }
-      .success-return,
-      .success-home{
-        width:100%;
-        min-height:58px;
-        border-radius:18px;
-        font-size:18px;
-        font-weight:950;
+      .success-body{
+        padding:15px 18px 18px;
+      }
+      .success-message{
+        margin:0 0 9px;
+        color:#ffffff;
+        font-size:clamp(20px,4.8vw,26px);
+        line-height:1.3;
+        font-weight:900;
+      }
+      .success-text{
+        margin:0 0 10px;
+        color:rgba(255,255,255,.84);
+        font-size:clamp(16px,4vw,20px);
+        line-height:1.4;
+      }
+      .success-note{
+        margin:0 0 14px;
+        color:${accent};
+        font-size:clamp(15px,3.8vw,18px);
+        font-weight:900;
       }
       .success-return{
+        width:100%;
+        min-height:54px;
+        border-radius:16px;
         border:2px solid ${primary};
         background:${primary};
         color:${buttonText};
         -webkit-text-fill-color:${buttonText};
+        font-size:17px;
+        font-weight:950;
       }
-      .success-home{
-        border:2px solid ${accent};
-        background:rgba(0,0,0,.42);
-        color:#ffffff;
-        -webkit-text-fill-color:#ffffff;
+
+      @media (max-height:700px){
+        .success-screen{ padding-top:max(8px,env(safe-area-inset-top)); }
+        .success-head{ padding:12px 14px 8px; }
+        .success-logo{ width:58px;height:58px;margin-bottom:5px; }
+        .success-badge{ width:38px;height:38px;font-size:23px;margin-bottom:5px; }
+        .success-title{ font-size:25px; }
+        .success-subtitle{ font-size:14px; }
+        .success-divider{ margin-top:8px;height:4px; }
+        .success-body{ padding:10px 14px 14px; }
+        .success-message{ font-size:18px;margin-bottom:6px; }
+        .success-text{ font-size:15px;margin-bottom:7px; }
+        .success-note{ font-size:14px;margin-bottom:10px; }
+        .success-return{ min-height:48px;font-size:16px; }
       }
     </style>
+
     <div class="success-screen">
       <div class="success-card">
         <div class="success-head">
+          <img
+            class="success-logo"
+            src="${logoUrl}"
+            alt="Logo ${clubName}"
+            onerror="this.onerror=null;this.src='Image PNG.png';"
+          >
           <div class="success-badge">✓</div>
           <h1 class="success-title">Réponse enregistrée</h1>
           <p class="success-subtitle">${clubName}</p>
           <div class="success-divider"></div>
         </div>
+
         <div class="success-body">
           <p class="success-message">Merci, ta réponse a bien été prise en compte.</p>
           <p class="success-text">Ton choix a été enregistré dans l’application du club.</p>
           <p class="success-note">Retour automatique à l’application…</p>
-          <div class="success-actions">
-            <button class="success-return" onclick="window.location.href = APP_HOME_URL">Retour à l’application</button>
-            <button class="success-home" onclick="window.location.href = APP_HOME_URL">Accueil du club</button>
-          </div>
+          <button class="success-return" onclick="window.location.href = APP_HOME_URL">
+            Retour à l’application
+          </button>
         </div>
       </div>
     </div>
@@ -2834,7 +2866,7 @@ select{
 </script>
 
 
-<style id="_form_confirmation_v61_32">
+<style id="_form_confirmation_v61_33">
 /* V61.32 — ancien bloc conservé, styles principaux injectés dynamiquement */
 .success-screen{
   min-height:100vh;
