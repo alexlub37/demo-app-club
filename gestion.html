@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.31-GESTION-LOGO-HORS-BOUTON" />
+  <meta name="app-version" content="V65.32-GESTION-REGLAGES-PARAMETRES-CLUB" />
   <style>
     :root{
       --bg:#050505;
@@ -1694,7 +1694,7 @@ button:disabled,
 }
 
 
-/* V65.31 GESTION - Accueil direct + écran Réglages app préparé */
+/* V65.32 GESTION - Accueil direct + Réglages app sécurisés */
 .gestion-top-actions{grid-template-columns:minmax(0,220px)!important;}
 #appSubtitle{display:none!important;}
 #btn-teams,#btn-coach,#btn-gestion,#btn-bureau,#btn-benevoles{display:none!important;}
@@ -1721,7 +1721,7 @@ button:disabled,
 }
 
 
-/* V65.31 GESTION - Réglages CONFIG connectés */
+/* V65.32 GESTION - Réglages via PARAMETRES_CLUB sans écraser CONFIG */
 .reglages-preview-card h3{margin:0 0 12px;color:var(--accent);font-size:18px;}
 .reglages-preview-card input,
 .reglages-preview-card select,
@@ -3128,9 +3128,9 @@ small{
       </div>
 
       <div class="gestion-home-grid gestion-home-grid-single">
-        <div class="menu-btn gestion-home-tile gestion-settings-tile" role="button" tabindex="0" onclick="openGestionReglagesPreview()">
-          <span class="big">⚙️ Réglages app</span>
-          <span class="small">Écran préparé — raccordement serveur plus tard</span>
+        <div id="gestionHomeReglages" class="menu-btn gestion-home-tile gestion-settings-tile" role="button" tabindex="0" onclick="openGestionReglagesPreview()">
+          <span id="gestionHomeReglagesTitle" class="big">⚙️ Réglages app</span>
+          <span id="gestionHomeReglagesText" class="small">Modifier les textes et informations de l’application</span>
         </div>
       </div>
     </section>
@@ -3141,7 +3141,7 @@ small{
       <div class="card gestion-home-hero">
         <div class="gestion-home-kicker">Configuration</div>
         <h2>Réglages app</h2>
-        <div class="muted">Modifie les textes principaux sans aller dans Google Sheets. Les changements sont enregistrés dans CONFIG.</div>
+        <div class="muted">Modifie les textes principaux sans aller dans Google Sheets. Les valeurs sont enregistrées dans PARAMETRES_CLUB ; CONFIG conserve ses formules.</div>
       </div>
 
       <div id="grMessage" class="gm-message"></div>
@@ -3151,12 +3151,12 @@ small{
         <div class="gm-field">
           <label>Nom / phrase principale</label>
           <input id="grNomClub" type="text" placeholder="Nom du club ou phrase principale">
-          <small>CONFIG : nom_club</small>
+          <small>Clé de lecture CONFIG : nom_club</small>
         </div>
         <div class="gm-field">
           <label>Message accueil</label>
           <input id="grMessageAccueil" type="text" placeholder="Ex : Tous en jaune ! 🏀">
-          <small>CONFIG : message_accueil</small>
+          <small>Clé de lecture CONFIG : message_accueil</small>
         </div>
         <div class="gm-field">
           <label>Sous-titre actif</label>
@@ -3164,12 +3164,12 @@ small{
             <option value="Oui">Oui</option>
             <option value="Non">Non</option>
           </select>
-          <small>CONFIG : app_sous_titre_actif</small>
+          <small>Clé de lecture CONFIG : app_sous_titre_actif</small>
         </div>
         <div class="gm-field">
           <label>Sous-titre application</label>
           <input id="grAppSousTitre" type="text" placeholder="Ex : Équipes • Joueurs • Matchs">
-          <small>CONFIG : app_sous_titre</small>
+          <small>Clé de lecture CONFIG : app_sous_titre</small>
         </div>
       </div>
 
@@ -3181,17 +3181,17 @@ small{
             <option value="Oui">Oui</option>
             <option value="Non">Non</option>
           </select>
-          <small>CONFIG : accueil_carte_actif</small>
+          <small>Clé de lecture CONFIG : accueil_carte_actif</small>
         </div>
         <div class="gm-field">
           <label>Titre accueil</label>
           <input id="grAccueilTitre" type="text" placeholder="Accueil">
-          <small>CONFIG : accueil_titre</small>
+          <small>Clé de lecture CONFIG : accueil_titre</small>
         </div>
         <div class="gm-field">
           <label>Texte accueil</label>
           <input id="grAccueilTexte" type="text" placeholder="Match du week-end 🎉">
-          <small>CONFIG : accueil_texte</small>
+          <small>Clé de lecture CONFIG : accueil_texte</small>
         </div>
         <div class="gm-field">
           <label>Info club active</label>
@@ -3199,12 +3199,12 @@ small{
             <option value="Oui">Oui</option>
             <option value="Non">Non</option>
           </select>
-          <small>CONFIG : accueil_infos_actif</small>
+          <small>Clé de lecture CONFIG : accueil_infos_actif</small>
         </div>
         <div class="gm-field">
           <label>Texte info club</label>
           <textarea id="grAccueilInfosTexte" rows="3" placeholder="Message temporaire du club"></textarea>
-          <small>CONFIG : accueil_infos_texte</small>
+          <small>Clé de lecture CONFIG : accueil_infos_texte</small>
         </div>
       </div>
 
@@ -3216,37 +3216,37 @@ small{
             <option value="Oui">Oui</option>
             <option value="Non">Non</option>
           </select>
-          <small>CONFIG : club_event_actif</small>
+          <small>Clé de lecture CONFIG : club_event_actif</small>
         </div>
         <div class="gm-field">
           <label>Titre événement</label>
           <input id="grClubEventTitre" type="text" placeholder="Titre événement">
-          <small>CONFIG : club_event_titre</small>
+          <small>Clé de lecture CONFIG : club_event_titre</small>
         </div>
         <div class="gm-field">
           <label>Date / heure événement</label>
           <input id="grClubEventDate" type="text" placeholder="Samedi 16 mai — 14h">
-          <small>CONFIG : club_event_date</small>
+          <small>Clé de lecture CONFIG : club_event_date</small>
         </div>
         <div class="gm-field">
           <label>Lieu événement</label>
           <input id="grClubEventLieu" type="text" placeholder="Gymnase du club">
-          <small>CONFIG : club_event_lieu</small>
+          <small>Clé de lecture CONFIG : club_event_lieu</small>
         </div>
         <div class="gm-field">
           <label>Texte événement</label>
           <textarea id="grClubEventTexte" rows="3" placeholder="Venez encourager..."></textarea>
-          <small>CONFIG : club_event_texte</small>
+          <small>Clé de lecture CONFIG : club_event_texte</small>
         </div>
         <div class="gm-field">
           <label>Image événement</label>
           <input id="grClubEventImage" type="text" placeholder="evenement_club.jpg ou URL complète">
-          <small>CONFIG : club_event_image</small>
+          <small>Clé de lecture CONFIG : club_event_image</small>
         </div>
         <div class="gm-field">
           <label>Lien événement</label>
           <input id="grClubEventLien" type="text" placeholder="Facultatif">
-          <small>CONFIG : club_event_lien</small>
+          <small>Clé de lecture CONFIG : club_event_lien</small>
         </div>
       </div>
 
@@ -3258,22 +3258,22 @@ small{
             <option value="Oui">Oui</option>
             <option value="Non">Non</option>
           </select>
-          <small>CONFIG : reseaux_actif</small>
+          <small>Clé de lecture CONFIG : reseaux_actif</small>
         </div>
         <div class="gm-field">
           <label>Titre réseaux</label>
           <input id="grReseauxTitre" type="text" placeholder="Suivre le club">
-          <small>CONFIG : reseaux_titre</small>
+          <small>Clé de lecture CONFIG : reseaux_titre</small>
         </div>
         <div class="gm-field">
           <label>Facebook</label>
           <input id="grFacebookUrl" type="text" placeholder="Lien Facebook">
-          <small>CONFIG : facebook_url</small>
+          <small>Clé de lecture CONFIG : facebook_url</small>
         </div>
         <div class="gm-field">
           <label>Instagram</label>
           <input id="grInstagramUrl" type="text" placeholder="Lien Instagram">
-          <small>CONFIG : instagram_url</small>
+          <small>Clé de lecture CONFIG : instagram_url</small>
         </div>
       </div>
 
@@ -7583,6 +7583,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.32 — Gestion : Réglages app vers PARAMETRES_CLUB et bouton piloté par CONFIG</li>
         <li>V65.31 — Gestion : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V65.30 — Gestion : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
         <li>V65.29 — Gestion : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
@@ -8279,6 +8280,11 @@ function appliquerConfig() {
   applyGestionMenuVisibility("gestionMenuEquipes", "gestion_menu_equipes_actif", true);
   applyGestionMenuVisibility("gestionMenuAdversaires", "gestion_menu_adversaires_actif", true);
   applyGestionMenuVisibility("gestionMenuOfficiels", "gestion_menu_officiels_actif", false);
+
+  // V65.32 — la clé reste administrée directement dans CONFIG.
+  // Oui : le vrai bouton Réglages app apparaît.
+  // Non : le bouton disparaît complètement.
+  applyGestionMenuVisibility("gestionHomeReglages", "gestion_menu_reglages_actif", true);
   applyGestionMenuVisibility("gestionMenuReglages", "gestion_menu_reglages_actif", false);
 
   setCfgText("gestionMenuMatchsTitle", "gestion_menu_matchs_titre", "🏀 Matchs");
@@ -8286,6 +8292,7 @@ function appliquerConfig() {
   setCfgText("gestionMenuEquipesTitle", "gestion_menu_equipes_titre", "🏷️ Équipes");
   setCfgText("gestionMenuAdversairesTitle", "gestion_menu_adversaires_titre", "📍 Adversaires / Gymnases");
   setCfgText("gestionMenuOfficielsTitle", "gestion_menu_officiels_titre", "👨‍⚖️ Officiels");
+  setCfgText("gestionHomeReglagesTitle", "gestion_menu_reglages_titre", "⚙️ Réglages app");
   setCfgText("gestionMenuReglagesTitle", "gestion_menu_reglages_titre", "⚙️ Réglages");
 
   setCfgText("gestionMenuMatchsText", "gestion_menu_matchs_texte", "Ajouter ou modifier les matchs.");
@@ -8293,6 +8300,7 @@ function appliquerConfig() {
   setCfgText("gestionMenuEquipesText", "gestion_menu_equipes_texte", "Gérer équipes, coachs et entraînements.");
   setCfgText("gestionMenuAdversairesText", "gestion_menu_adversaires_texte", "Ajouter ou modifier les clubs adverses et leurs adresses.");
   setCfgText("gestionMenuOfficielsText", "gestion_menu_officiels_texte", "Préparé pour arbitres, chrono et table.");
+  setCfgText("gestionHomeReglagesText", "gestion_menu_reglages_texte", "Modifier les textes et informations de l’application.");
   setCfgText("gestionMenuReglagesText", "gestion_menu_reglages_texte", "Préparé pour modifier CONFIG depuis l’app.");
   setCfgText("gjMainTitle", "gestion_joueurs_titre", "👥 Joueurs / Licences");
   setCfgText("gjMainText", "gestion_joueurs_texte", "Ajouter, modifier ou désactiver un joueur sans toucher directement au tableau.", "gestion_joueurs_texte_actif");
@@ -8360,7 +8368,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.31-GESTION-LOGO-HORS-BOUTON";
+window.CAM_BASKET_VERSION = "V65.32-GESTION-REGLAGES-PARAMETRES-CLUB";
 
 </script>
 
@@ -8519,7 +8527,16 @@ window.CAM_BASKET_VERSION = "V65.31-GESTION-LOGO-HORS-BOUTON";
       }
 
       if (txt !== "OK" && !txt.startsWith("OK")) {
+        if (txt.startsWith("FORMULE_PARAMETRES_CLUB_ABSENTE:")) {
+          const keys = txt.split(":").slice(1).join(":");
+          throw new Error("Formule PARAMETRES_CLUB absente dans CONFIG pour : " + keys);
+        }
         throw new Error(txt || "Erreur serveur.");
+      }
+
+      if (txt.includes("|NON_ENREGISTRES=")) {
+        const nonEnregistres = txt.split("|NON_ENREGISTRES=")[1] || "";
+        grSetMessage("Enregistrement partiel. Vérifie les formules CONFIG pour : " + nonEnregistres, false);
       }
 
       if (!window.state) window.state = {};
@@ -8529,7 +8546,9 @@ window.CAM_BASKET_VERSION = "V65.31-GESTION-LOGO-HORS-BOUTON";
         window.grInitialConfigValues[key] = String(entries[key] || "").trim();
       });
 
-      grSetMessage("Réglages enregistrés ✅", true);
+      if (!txt.includes("|NON_ENREGISTRES=")) {
+        grSetMessage("Réglages enregistrés dans PARAMETRES_CLUB ✅", true);
+      }
       if (typeof applyConfig === "function") applyConfig();
       if (typeof appliquerConfig === "function") appliquerConfig();
     } catch(err) {
