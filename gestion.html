@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.23 - Gestion - couleurs officielles -->
+<!-- Démo App Club V65.33 - Gestion - masquage Réglages par CONFIG -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.32-GESTION-BOUTON-REGLAGES-CONFIG" />
+  <meta name="app-version" content="V65.33-GESTION-MASQUAGE-REGLAGES-CONFIG" />
   <style>
     :root{
       --bg:#050505;
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.31 GESTION</button>
+    ">V65.33 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo Démo App Club">
@@ -7582,16 +7582,16 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.31 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.33 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 28/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.33 — Gestion : masquage fiable de Réglages app avec la clé gestion_menu_reglages_actif</li>
         <li>V65.31 — Gestion : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V65.30 — Gestion : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
         <li>V65.29 — Gestion : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
         <li>V65.28 — Gestion : navigation Gestion verrouillée en bouton secondaire</li>
-        <li>V65.27 — Gestion : système de rôles visuels ajouté</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -7985,7 +7985,7 @@ function appliquerConfig() {
         div.role-menu-card,
         div.gestion-home-tile,
         div.gestion-settings-tile {
-          display: block !important;
+          /* V65.33 : ne pas forcer display, afin que gestion-menu-hidden reste prioritaire. */
           background: linear-gradient(180deg, rgba(18,18,18,.94), rgba(8,8,8,.94)) !important;
           color: var(--text) !important;
           border: 1.5px solid rgba(var(--accent-rgb), .60) !important;
@@ -8367,7 +8367,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.31-GESTION-LOGO-HORS-BOUTON";
+window.CAM_BASKET_VERSION = "V65.33-GESTION-MASQUAGE-REGLAGES-CONFIG";
 
 </script>
 
