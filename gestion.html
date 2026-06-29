@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.33 - Gestion - masquage Réglages par CONFIG -->
+<!-- Démo App Club V65.34 - Gestion - réglages reliés à PARAMETRES_CLUB -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.33-GESTION-MASQUAGE-REGLAGES-CONFIG" />
+  <meta name="app-version" content="V65.34-GESTION-REGLAGES-PARAMETRES-CLUB" />
   <style>
     :root{
       --bg:#050505;
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.33 GESTION</button>
+    ">V65.34 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo Démo App Club">
@@ -3145,7 +3145,7 @@ small{
       <div class="card gestion-home-hero">
         <div class="gestion-home-kicker">Configuration</div>
         <h2>Réglages app</h2>
-        <div class="muted">Modifie les textes principaux sans aller dans Google Sheets. Les changements sont enregistrés dans CONFIG.</div>
+        <div class="muted">Modifie les textes principaux sans aller dans Google Sheets. Les valeurs sont enregistrées dans PARAMETRES_CLUB, puis reprises automatiquement par CONFIG.</div>
       </div>
 
       <div id="grMessage" class="gm-message"></div>
@@ -3283,7 +3283,7 @@ small{
 
       <div class="card reglages-preview-card">
         <button id="grSaveBtn" class="btn-light" onclick="saveGestionReglagesConfig()">Enregistrer les réglages</button>
-        <div class="reglages-preview-note">Après enregistrement, clique sur “Mettre à jour” ou rouvre l’app pour voir les changements partout. Sécurité : seuls les champs réellement modifiés depuis le chargement CONFIG sont enregistrés. Sécurité : seuls les champs réellement modifiés depuis le chargement CONFIG sont enregistrés.</div>
+        <div class="reglages-preview-note">Après enregistrement, clique sur “Mettre à jour” ou rouvre l’app pour voir les changements partout. Seuls les champs réellement modifiés depuis le chargement de CONFIG sont enregistrés.</div>
       </div>
     </section>
 
@@ -7582,11 +7582,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.33 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.34 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 28/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.34 — Gestion : réglages enregistrés dans PARAMETRES_CLUB et repris par les formules de CONFIG</li>
         <li>V65.33 — Gestion : masquage fiable de Réglages app avec la clé gestion_menu_reglages_actif</li>
         <li>V65.31 — Gestion : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V65.30 — Gestion : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
@@ -8367,7 +8368,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.33-GESTION-MASQUAGE-REGLAGES-CONFIG";
+window.CAM_BASKET_VERSION = "V65.34-GESTION-REGLAGES-PARAMETRES-CLUB";
 
 </script>
 
