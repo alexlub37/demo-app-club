@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.54 - Joueurs - module bénévoles piloté par CONFIG -->
+<!-- Démo App Club V62.56 - Joueurs - libellés visibles neutralisés -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.54-JOUEURS-BENEVOLES-CONFIG" />
+  <meta name="app-version" content="V62.56-JOUEURS-LIBELLES-NEUTRES" />
   <style>
     :root{
       --bg:#050505;
@@ -3319,7 +3319,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.54 JOUEURS</button>
+    ">V62.56 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3917,7 +3917,7 @@ small{
             <option value="date_heure">Date / heure modifiée — le match reste programmé</option>
             <option value="reporte">Match reporté — match repoussé ou en attente</option>
             <option value="forfait_adverse">Forfait adverse — l’adversaire déclare forfait</option>
-            <option value="forfait_cam">Forfait CAM — notre équipe déclare forfait</option>
+            <option id="optionForfaitClub" value="forfait_cam">Forfait club — notre équipe déclare forfait</option>
           </select>
           <small id="gmMotifHelp">Le motif mettra à jour automatiquement la colonne Statut match.</small>
           <div id="gmReconfirmNote" class="gm-reconfirm-note">Si la date, l’heure, le lieu ou l’équipe changent, les anciennes réponses seront marquées “À reconfirmer”.</div>
@@ -4048,6 +4048,10 @@ small{
     }
 
 
+    function libelleForfaitClub() {
+      return "Forfait du club";
+    }
+
     function cfgRawValue(key, fallback = "") {
       const cfg = state.config || {};
       const k = String(key || "").trim().toLowerCase();
@@ -4060,6 +4064,14 @@ small{
       APP_NAME = cfgValue("app_name", APP_NAME || clubFromConfig);
       APP_CLUB_NAME = cfgValue("club_name", clubFromConfig);
       APP_HOME_CLUB_NAME = cfgValue("home_club_name", APP_CLUB_NAME);
+
+      const versionTitle = document.getElementById("versionAppTitle");
+      if (versionTitle) versionTitle.textContent = "Application Démo App Club";
+
+      const optionForfait = document.getElementById("optionForfaitClub");
+      if (optionForfait) {
+        optionForfait.textContent = libelleForfaitClub() + " — notre équipe déclare forfait";
+      }
 
       const rawIcon = cfgRawValue("whatsapp_icon", "__APP_CONFIG_FALLBACK__");
       if (rawIcon !== "__APP_CONFIG_FALLBACK__") APP_WHATSAPP_ICON = rawIcon;
@@ -7554,7 +7566,7 @@ function renderWeekend() {
       return { label: "Forfait adv.", cls: "forfait-adverse" };
     }
     if (s === "forfait cam") {
-      return { label: "Forfait CAM", cls: "forfait-cam" };
+      return { label: libelleForfaitClub(), cls: "forfait-cam" };
     }
     return null;
   }
@@ -8264,12 +8276,14 @@ openMatches = function(){
   </script>
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
-      <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.54 JOUEURS</div>
+      <h3 id="versionAppTitle">Application Démo App Club</h3>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.56 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 30/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.56 — Joueurs : libellés visibles neutralisés, sans nom de club dans le forfait</li>
+        <li>V62.55 — Joueurs : essai de libellés pilotés par nom_club, remplacé par la neutralisation V62.56</li>
         <li>V62.54 — Joueurs : le module Bénévoles respecte activer_benevoles = Oui/Non</li>
         <li>V62.53 — Joueurs : la carte événement respecte immédiatement club_event_actif = Oui/Non, sans cache</li>
         <li>V62.52 — Joueurs : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
@@ -8624,7 +8638,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.54-JOUEURS-BENEVOLES-CONFIG";
+window.CAM_BASKET_VERSION = "V62.56-JOUEURS-LIBELLES-NEUTRES";
 
 </script>
 
