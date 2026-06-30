@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.39 - Joueurs - couleurs officielles -->
+<!-- Démo App Club V62.54 - Joueurs - module bénévoles piloté par CONFIG -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.52-JOUEURS-LOGO-HORS-BOUTON" />
+  <meta name="app-version" content="V62.54-JOUEURS-BENEVOLES-CONFIG" />
   <style>
     :root{
       --bg:#050505;
@@ -1847,14 +1847,12 @@ button:disabled,
 .player-team-card-selected{border-color:var(--button-bg)!important;background:rgba(var(--accent-rgb),.12)!important;}
 .player-team-check{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);color:var(--accent);font-size:12px;font-weight:950;}
 body.player-app #btn-coach,
-body.player-app #btn-gestion,
-body.player-app #btn-benevoles{display:none!important;}
+body.player-app #btn-gestion{display:none!important;}
 body.player-app #btnCoachSpace,
 body.player-app #playersScreen,
 body.player-app #coachTeamsScreen,
 body.player-app #coachSpaceScreen,
-body.player-app #gestionClubScreen,
-body.player-app #benevolesScreen{display:none!important;}
+body.player-app #gestionClubScreen{display:none!important;}
 body.player-app .team-actions-grid{grid-template-columns:1fr!important;}
 body.player-app .team-actions-grid button:first-child,
 body.player-app .team-actions-grid .coach-action{display:none!important;}
@@ -1878,8 +1876,10 @@ body.player-app.subtitle-visible #appSubtitle{
 
 
 /* V62.52 JOUEURS - Bureau dynamique + événement texte vide */
-body.player-app #btn-bureau{display:none!important;}
-body.player-app.bureau-visible #btn-bureau{display:block!important;}
+body.player-app #btn-bureau,
+body.player-app #btn-benevoles{display:none!important;}
+body.player-app.bureau-visible #btn-bureau,
+body.player-app.benevoles-visible #btn-benevoles{display:block!important;}
 .club-event-title:empty,
 .club-event-text:empty{display:none!important;}
 .club-event-card.event-no-text .club-event-title,
@@ -3319,7 +3319,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.52 JOUEURS</button>
+    ">V62.54 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3352,6 +3352,7 @@ small{
         <button id="btn-teams" class="btn-outline" onclick="openMyTeamPlayer()">Mes matchs</button>
         <button id="btn-myteams" class="btn-outline" onclick="openMyTeamsSettingsPlayer()">Mes équipes</button>
         <button id="btn-bureau" class="btn-outline" onclick="setActiveButton('bureau'); showScreen('bureauScreen')">Bureau</button>
+        <button id="btn-benevoles" class="btn-outline" onclick="setActiveButton('benevoles'); showScreen('benevolesScreen')">Bénévoles</button>
       </div>
       <div class="header-mini-actions"><button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
@@ -4544,7 +4545,7 @@ small{
 
         // Pré-charger CONFIG immédiatement
         try {
-          const r0 = await fetch(APPS_SCRIPT_URL + "?action=getConfig");
+          const r0 = await fetch(APPS_SCRIPT_URL + "?action=getConfig&t=" + Date.now(), { cache: "no-store" });
           const cfg0 = await r0.json();
           state.config = {};
           Object.entries(cfg0).forEach(([k,v]) => { state.config[k.trim().toLowerCase()] = String(v); });
@@ -4585,7 +4586,7 @@ small{
             try {
               const ctrl = new AbortController();
               const timer = setTimeout(() => ctrl.abort(), 8000); // timeout 8s
-              const r = await fetch(APPS_SCRIPT_URL + "?action=getConfig", {signal: ctrl.signal});
+              const r = await fetch(APPS_SCRIPT_URL + "?action=getConfig&t=" + Date.now(), { signal: ctrl.signal, cache: "no-store" });
               clearTimeout(timer);
               const cfg = await r.json();
               return Object.entries(cfg).map(([k, v]) => [k, String(v)]);
@@ -8264,11 +8265,13 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.52 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.54 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.54 — Joueurs : le module Bénévoles respecte activer_benevoles = Oui/Non</li>
+        <li>V62.53 — Joueurs : la carte événement respecte immédiatement club_event_actif = Oui/Non, sans cache</li>
         <li>V62.52 — Joueurs : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V62.51 — Joueurs : intensité du fond actif portée à 35 % de la couleur secondaire</li>
         <li>V62.50 — Joueurs : fond du bouton actif lié à la couleur secondaire du club</li>
@@ -8430,7 +8433,7 @@ function appliquerConfig() {
   if (eventCard && eventImg && eventTitle && eventText && eventLink) {
     const defaultTitle = "Événement du club";
     const defaultText = "Date, lieu et informations à compléter dans CONFIG.";
-    const active = cfgBool("club_event_actif", cfgBool("evenement_club_actif", true));
+    const active = cfgBool("club_event_actif", cfgBool("evenement_club_actif", false));
     const imgUrl = cfgValue("club_event_image", cfgValue("evenement_club_image_url", "evenement_club.jpg"));
     const title = cfgValue("club_event_titre", cfgValue("evenement_club_titre", defaultTitle));
     const date = cfgValue("club_event_date", "");
@@ -8448,7 +8451,7 @@ function appliquerConfig() {
     eventLink.textContent = btn || "Voir";
     eventLink.href = hasEventLink ? link : "#";
     eventLink.style.display = hasEventLink ? "inline-block" : "none";
-    eventCard.style.display = (active && (title || text || imgUrl)) ? "block" : "none";
+    eventCard.style.setProperty("display", (active && (title || text || imgUrl)) ? "block" : "none", "important");
   }
 
   // V62.06 — Accueil joueur : réseaux sociaux pilotés par CONFIG
@@ -8621,7 +8624,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.52-JOUEURS-LOGO-HORS-BOUTON";
+window.CAM_BASKET_VERSION = "V62.54-JOUEURS-BENEVOLES-CONFIG";
 
 </script>
 
@@ -8706,6 +8709,20 @@ window.CAM_BASKET_VERSION = "V62.52-JOUEURS-LOGO-HORS-BOUTON";
     const btnBureau = document.getElementById("btn-bureau");
     if (btnBureau) btnBureau.style.setProperty("display", bureauVisible ? "block" : "none", "important");
 
+    const benevolesVisible = cfgBoolLocal("activer_benevoles", false);
+    document.body.classList.toggle("benevoles-visible", !!benevolesVisible);
+
+    const btnBenevoles = document.getElementById("btn-benevoles");
+    if (btnBenevoles) btnBenevoles.style.setProperty("display", benevolesVisible ? "block" : "none", "important");
+
+    if (!benevolesVisible) {
+      const benevolesScreen = document.getElementById("benevolesScreen");
+      if (benevolesScreen && benevolesScreen.classList.contains("active")) {
+        if (typeof setActiveButton === "function") setActiveButton("home");
+        if (typeof showScreen === "function") showScreen("homeScreen");
+      }
+    }
+
     const eventCard = document.getElementById("clubEventCard");
     const eventTitle = document.getElementById("clubEventTitle");
     const eventText = document.getElementById("clubEventText");
@@ -8724,7 +8741,11 @@ window.CAM_BASKET_VERSION = "V62.52-JOUEURS-LOGO-HORS-BOUTON";
       eventText.style.setProperty("display", parts.length ? "" : "none", "important");
     }
 
-    if (eventCard) eventCard.classList.toggle("event-no-text", !cfgClean("club_event_titre") && parts.length === 0);
+    if (eventCard) {
+      const eventActive = cfgBoolLocal("club_event_actif", cfgBoolLocal("evenement_club_actif", false));
+      eventCard.classList.toggle("event-no-text", !cfgClean("club_event_titre") && parts.length === 0);
+      eventCard.style.setProperty("display", eventActive ? "block" : "none", "important");
+    }
 
     if (eventLink) {
       const link = cfgClean("club_event_lien");
