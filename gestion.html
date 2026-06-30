@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.34 - Gestion - réglages reliés à PARAMETRES_CLUB -->
+<!-- Démo App Club V65.36 - Gestion - libellé forfait neutre -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.34-GESTION-REGLAGES-PARAMETRES-CLUB" />
+  <meta name="app-version" content="V65.36-GESTION-FORFAIT-NEUTRE" />
   <style>
     :root{
       --bg:#050505;
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.34 GESTION</button>
+    ">V65.36 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo Démo App Club">
@@ -3278,6 +3278,21 @@ small{
           <label>Instagram</label>
           <input id="grInstagramUrl" type="text" placeholder="Lien Instagram">
           <small>CONFIG : instagram_url</small>
+        </div>
+        <div class="gm-field">
+          <label>TikTok</label>
+          <input id="grTiktokUrl" type="text" placeholder="Lien TikTok">
+          <small>CONFIG : tiktok_url</small>
+        </div>
+        <div class="gm-field">
+          <label>YouTube</label>
+          <input id="grYoutubeUrl" type="text" placeholder="Lien YouTube">
+          <small>CONFIG : youtube_url</small>
+        </div>
+        <div class="gm-field">
+          <label>Site internet</label>
+          <input id="grSiteInternetUrl" type="text" placeholder="Lien du site officiel">
+          <small>CONFIG : site_internet_url</small>
         </div>
       </div>
 
@@ -3799,7 +3814,7 @@ small{
             <option value="date_heure">Date / heure modifiée — le match reste programmé</option>
             <option value="reporte">Match reporté — match repoussé ou en attente</option>
             <option value="forfait_adverse">Forfait adverse — l’adversaire déclare forfait</option>
-            <option value="forfait_cam">Forfait CAM — notre équipe déclare forfait</option>
+            <option value="forfait_cam">Forfait du club — notre équipe déclare forfait</option>
           </select>
           <small id="gmMotifHelp">Le motif mettra à jour automatiquement la colonne Statut match.</small>
           <div id="gmReconfirmNote" class="gm-reconfirm-note">Si la date, l’heure, le lieu ou l’équipe changent, les anciennes réponses seront marquées “À reconfirmer”.</div>
@@ -5081,7 +5096,7 @@ small{
 
     function statutMatchBloqueReponse_(statut){
       const s = normalize(statut || "Programmé");
-      return s === "forfait adverse" || s === "forfait cam";
+      return s === "forfait adverse" || s === "forfait cam" || s === "forfait du club" || s === "forfait club";
     }
 
     function statutMatchAutoriseReponse_(statut){
@@ -6735,7 +6750,7 @@ function gmStatutToAction(statut){
   const s = normalize(statut);
   if (s === "reporte" || s === "reporté") return "reporte";
   if (s === "forfait adverse") return "forfait_adverse";
-  if (s === "forfait cam") return "forfait_cam";
+  if (s === "forfait cam" || s === "forfait du club" || s === "forfait club") return "forfait_cam";
   return "simple";
 }
 
@@ -7116,8 +7131,8 @@ function renderWeekend() {
     if (s === "forfait adverse") {
       return { label: "Forfait adv.", cls: "forfait-adverse" };
     }
-    if (s === "forfait cam") {
-      return { label: "Forfait CAM", cls: "forfait-cam" };
+    if (s === "forfait cam" || s === "forfait du club" || s === "forfait club") {
+      return { label: "Forfait du club", cls: "forfait-cam" };
     }
     return null;
   }
@@ -7582,11 +7597,13 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.34 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.36 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 28/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 30/06/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.36 — Gestion : libellé neutre « Forfait du club » sans modifier la logique existante</li>
+        <li>V65.35 — Gestion : TikTok, YouTube et site internet ajoutés aux Réglages app</li>
         <li>V65.34 — Gestion : réglages enregistrés dans PARAMETRES_CLUB et repris par les formules de CONFIG</li>
         <li>V65.33 — Gestion : masquage fiable de Réglages app avec la clé gestion_menu_reglages_actif</li>
         <li>V65.31 — Gestion : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
@@ -8368,7 +8385,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.34-GESTION-REGLAGES-PARAMETRES-CLUB";
+window.CAM_BASKET_VERSION = "V65.36-GESTION-FORFAIT-NEUTRE";
 
 </script>
 
@@ -8397,7 +8414,10 @@ window.CAM_BASKET_VERSION = "V65.34-GESTION-REGLAGES-PARAMETRES-CLUB";
     reseaux_actif: "grReseauxActif",
     reseaux_titre: "grReseauxTitre",
     facebook_url: "grFacebookUrl",
-    instagram_url: "grInstagramUrl"
+    instagram_url: "grInstagramUrl",
+    tiktok_url: "grTiktokUrl",
+    youtube_url: "grYoutubeUrl",
+    site_internet_url: "grSiteInternetUrl"
   };
 
   window.grInitialConfigValues = window.grInitialConfigValues || {};
