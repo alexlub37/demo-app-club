@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.59 - Joueurs - affichage forfait épuré -->
+<!-- Démo App Club V62.60 - Joueurs - badge forfait dans la liste -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.59-JOUEURS-FORFAIT-AFFICHAGE-EPURE" />
+  <meta name="app-version" content="V62.60-JOUEURS-BADGE-FORFAIT-LISTE" />
   <style>
     :root{
       --bg:#050505;
@@ -1651,6 +1651,36 @@ button:disabled,
 .weekend-match.has-forfait{
   opacity:.82;
   border-left-color:#ff9f1c;
+}
+
+/* V62.60 - Statut forfait visible directement dans Mes matchs */
+.match-list-status{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  white-space:normal;
+}
+.match-list-status.forfait-adverse{
+  background:rgba(var(--accent-rgb),.16);
+  color:var(--accent);
+  border:1px solid rgba(var(--accent-rgb),.65);
+}
+.match-list-status.forfait-cam{
+  background:rgba(224,64,64,.18);
+  color:#ffb3b3;
+  border:1px solid rgba(224,64,64,.78);
+}
+.item.has-forfait{
+  border-left:5px solid #ff9f1c!important;
 }
 
 
@@ -3319,7 +3349,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.59 JOUEURS</button>
+    ">V62.60 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -5512,6 +5542,17 @@ small{
       return s === "forfait adverse" || s === "forfait cam" || s === "forfait du club" || s === "forfait club";
     }
 
+    function statutMatchListeInfo_(m){
+      const s = normalize(m && m.statut);
+      if (s === "forfait adverse") {
+        return { label: "Forfait adverse", cls: "forfait-adverse" };
+      }
+      if (s === "forfait cam" || s === "forfait du club" || s === "forfait club") {
+        return { label: libelleForfaitClub(), cls: "forfait-cam" };
+      }
+      return null;
+    }
+
     function statutMatchAutoriseReponse_(statut){
       const s = normalize(statut || "Programmé");
       return !s || s === "programme" || s === "reporte";
@@ -5581,9 +5622,14 @@ small{
               const typeInfo = badgeForType(m.type);
               const lieuLigne = [m.gymnase, m.ville].filter(Boolean).join(" • ");
               const pastBadge = past ? '<span class="match-lock">PASSÉ 🔒</span>' : "";
+              const statutInfo = statutMatchListeInfo_(m);
+              const statutBadge = statutInfo
+                ? `<div class="match-list-status ${statutInfo.cls}">❌ ${escapeHtml(statutInfo.label)}</div>`
+                : "";
               return `
-                <div class="item ${past ? "match-past" : ""}" data-idx="${realIdx}">
+                <div class="item ${past ? "match-past" : ""} ${statutInfo ? "has-forfait" : ""}" data-idx="${realIdx}">
                   <div class="item-title">${escapeHtml(m.date)} ${typeInfo.badge}${pastBadge}</div>
+                  ${statutBadge}
                   <div class="item-sub">${escapeHtml(m.heure)} • ${escapeHtml(buildMatchDisplay(m))}</div>
                   ${!isHomeType(m.type) ? `<div class="item-sub">${escapeHtml(lieuLigne || m.adresse)}</div>` : ""}
                 </div>
@@ -8251,9 +8297,14 @@ function openMyFollowedMatches(){
           const typeInfo = badgeForType(m.type);
           const lieuLigne = [m.gymnase, m.ville].filter(Boolean).join(" • ");
           const pastBadge = past ? '<span class="match-lock">PASSÉ 🔒</span>' : "";
+          const statutInfo = statutMatchListeInfo_(m);
+          const statutBadge = statutInfo
+            ? `<div class="match-list-status ${statutInfo.cls}">❌ ${escapeHtml(statutInfo.label)}</div>`
+            : "";
           return `
-            <div class="item ${past ? "match-past" : ""}" data-idx="${realIdx}">
+            <div class="item ${past ? "match-past" : ""} ${statutInfo ? "has-forfait" : ""}" data-idx="${realIdx}">
               <div class="item-title">${escapeHtml(m.equipe || "Équipe")} — ${escapeHtml(m.date)} ${typeInfo.badge}${pastBadge}</div>
+              ${statutBadge}
               <div class="item-sub">${escapeHtml(m.heure)} • ${escapeHtml(buildMatchDisplay(m))}</div>
               ${!isHomeType(m.type) ? `<div class="item-sub">${escapeHtml(lieuLigne || m.adresse)}</div>` : ""}
             </div>
@@ -8293,11 +8344,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.59 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.60 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.60 — Joueurs : badge Forfait adverse / Forfait du club visible dans la liste Mes matchs</li>
         <li>V62.59 — Joueurs : matchs en forfait sans bloc organisation ni bouton itinéraire</li>
         <li>V62.58 — Joueurs : titres WhatsApp liés à nom_club et fond de secours neutre</li>
         <li>V62.57 — Joueurs : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
@@ -8657,7 +8709,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.59-JOUEURS-FORFAIT-AFFICHAGE-EPURE";
+window.CAM_BASKET_VERSION = "V62.60-JOUEURS-BADGE-FORFAIT-LISTE";
 
 </script>
 
