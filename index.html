@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.58 - Joueurs - neutralisation complète contrôlée -->
+<!-- Démo App Club V62.59 - Joueurs - affichage forfait épuré -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.58-JOUEURS-DEMO-NEUTRE-CONTROLE" />
+  <meta name="app-version" content="V62.59-JOUEURS-FORFAIT-AFFICHAGE-EPURE" />
   <style>
     :root{
       --bg:#050505;
@@ -3319,7 +3319,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.58 JOUEURS</button>
+    ">V62.59 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -5650,6 +5650,7 @@ small{
       setDetailRowVisible("detailSeason", hasText(m.saison));
 
       const isHome = ["d","dom","domicile"].includes(normalize(m.type));
+      const isForfait = statutMatchBloqueReponse_(m.statut);
 
       const addressRow = document.getElementById("detailAddress")?.closest(".detail-row");
       const mapsBlock = document.getElementById("mapsBlock");
@@ -5659,7 +5660,9 @@ small{
       // une piste exploitable (adresse complète, gymnase/ville, adversaire/ville, adversaire).
       const mapsQuery = fullAddress || [m.gymnase, m.ville].filter(Boolean).join(", ") || [m.adversaire, m.ville].filter(Boolean).join(", ") || m.adversaire || "";
       const hasAwayAddress = !isHome && hasText(fullAddress);
-      const hasAwayRoute = !isHome && hasText(mapsQuery);
+      // V62.59 — Un match en forfait reste consultable, mais l’itinéraire est masqué
+      // pour éviter de laisser croire que le déplacement est maintenu.
+      const hasAwayRoute = !isHome && !isForfait && hasText(mapsQuery);
       if (addressRow) addressRow.style.display = hasAwayAddress ? "" : "none";
       if (mapsBlock) mapsBlock.style.display = hasAwayRoute ? "" : "none";
 
@@ -5751,7 +5754,13 @@ if (!reponseOuverte) {
 afficherConvocationDansMatch([]);
 coachCardReset();
 chargerConvocationEnregistree(m);
-      loadApportsDomicile();
+      // V62.59 — Pour un match annulé par forfait, masquer toute l’organisation
+      // déjà enregistrée (maillots, boisson, nourriture) au lieu de la recharger.
+      if (isForfait) {
+        resetApportsDomicile();
+      } else {
+        loadApportsDomicile();
+      }
       loadReconfirmationNotice(m);
 
       // Injecter l'indicateur de refresh si pas encore présent
@@ -6073,6 +6082,12 @@ showScreen("matchDetailScreen");
       const m = state.currentOpenMatch;
       const card = document.getElementById("matchApportsCard");
       if (!card || !m) {
+        resetApportsDomicile();
+        return;
+      }
+
+      // Sécurité supplémentaire : ne jamais afficher les quotas d’un match annulé.
+      if (statutMatchBloqueReponse_(m.statut)) {
         resetApportsDomicile();
         return;
       }
@@ -8278,11 +8293,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.58 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.59 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.59 — Joueurs : matchs en forfait sans bloc organisation ni bouton itinéraire</li>
         <li>V62.58 — Joueurs : titres WhatsApp liés à nom_club et fond de secours neutre</li>
         <li>V62.57 — Joueurs : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
         <li>V62.56 — Joueurs : libellés visibles neutralisés, sans nom de club dans le forfait</li>
@@ -8641,7 +8657,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.58-JOUEURS-DEMO-NEUTRE-CONTROLE";
+window.CAM_BASKET_VERSION = "V62.59-JOUEURS-FORFAIT-AFFICHAGE-EPURE";
 
 </script>
 
