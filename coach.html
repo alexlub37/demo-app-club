@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.34 - Coach - neutralisation complète contrôlée -->
+<!-- Démo App Club V63.35 - Coach - matchs forfait neutralisés -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.34-COACH-DEMO-NEUTRE-CONTROLE" />
+  <meta name="cam-basket-version" content="V63.35-COACH-FORFAIT-Epure" />
   <style>
     :root{
       --bg:#050505;
@@ -395,6 +395,26 @@
       font-size:11px;
       font-weight:900;
       white-space:nowrap;
+    }
+    /* V63.35 - Matchs en forfait neutralisés dans l’espace Coach */
+    .coach-space-match.has-forfait{
+      opacity:.82;
+      border-style:dashed!important;
+    }
+    .coach-forfait-state{
+      color:var(--accent);
+      font-size:15px;
+      font-weight:950;
+      line-height:1.05;
+      white-space:nowrap;
+    }
+    .coach-forfait-label{
+      color:var(--muted);
+      font-size:10px;
+      font-weight:850;
+      line-height:1.15;
+      text-align:right;
+      max-width:92px;
     }
     .coach-match-header{
       margin-bottom:14px;
@@ -3413,7 +3433,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.34 COACH</button>
+    ">V63.35 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -4912,6 +4932,19 @@ small{
       }
 
       list.innerHTML = matchs.map((m, i) => {
+        const forfait = statutMatchBloqueReponse_(m.statut);
+        if (forfait) {
+          const statutNormalise = normalize(m.statut || "");
+          const libelleForfait = statutNormalise === "forfait adverse"
+            ? "Forfait adverse"
+            : "Forfait du club";
+          const sideForfait = `
+            <div class="coach-forfait-state">Annulé</div>
+            <div class="coach-forfait-label">${escapeHtml(libelleForfait)}</div>
+          `;
+          return coachCardBase(m, i, sideForfait, "coach-space-match has-forfait");
+        }
+
         const s = computeResponseSummaryForMatch(m, responseObjects);
         const reponsesLabel = s.effectif ? `${s.reponses} / ${s.effectif}` : `${s.reponses}`;
         const side = `
@@ -4940,6 +4973,26 @@ small{
       }
       coachCardReset();
       showScreen("coachMatchScreen");
+
+      // V63.35 : un match en forfait reste consultable, mais ne doit plus
+      // présenter de réponses, d’organisation ou de convocation.
+      if (statutMatchBloqueReponse_(m.statut)) {
+        const statutNormalise = normalize(m.statut || "");
+        const libelleForfait = statutNormalise === "forfait adverse"
+          ? "Forfait adverse"
+          : "Forfait du club";
+        const card = document.getElementById("coachResponsesCard");
+        const title = document.getElementById("coachResponsesTitle");
+        const msg = document.getElementById("coachMsg");
+        const savedConvoc = document.getElementById("matchConvocationCard");
+        const annulerConvoc = document.getElementById("btnAnnulerConvocation");
+        if (card) card.style.display = "block";
+        if (title) title.textContent = "Match annulé";
+        if (msg) msg.textContent = `${libelleForfait} — aucune réponse ni convocation n’est demandée.`;
+        if (savedConvoc) savedConvoc.style.display = "none";
+        if (annulerConvoc) annulerConvoc.style.display = "none";
+        return;
+      }
 
       // V60.61 : depuis l'Espace coach, le clic sur le match ouvre directement
       // la sélection de convocation, sans passer par le bouton intermédiaire.
@@ -5000,10 +5053,10 @@ small{
       const adversaire = escapeHtml(m.adversaire || "-");
 
       if (isHomeType(m.type)) {
-        return `<span class="vs-line">${homeClub}</span><span class="vs-small">vs</span><span class="vs-line">${adversaire}</span>`;
+        return `<span class="vs-line">${homeClub}</span><span class="vs-small"> vs </span><span class="vs-line">${adversaire}</span>`;
       }
 
-      return `<span class="vs-line">${adversaire}</span><span class="vs-small">vs</span><span class="vs-line">${homeClub}</span>`;
+      return `<span class="vs-line">${adversaire}</span><span class="vs-small"> vs </span><span class="vs-line">${homeClub}</span>`;
     }
 
 
@@ -8183,11 +8236,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.34 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.35 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.35 — Coach : matchs en forfait clairement annulés, réponses, organisation et convocations masquées</li>
         <li>V63.34 — Coach : titres WhatsApp liés à nom_club et fond de secours neutre</li>
         <li>V63.33 — Coach : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
         <li>V63.32 — Coach : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
@@ -8840,7 +8894,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.34-COACH-DEMO-NEUTRE-CONTROLE";
+window.CAM_BASKET_VERSION = "V63.35-COACH-FORFAIT-EPURE";
 
 </script>
 
