@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.23 - Coach - couleurs officielles -->
+<!-- Démo App Club V63.34 - Coach - neutralisation complète contrôlée -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.32-COACH-LOGO-HORS-BOUTON" />
+  <meta name="cam-basket-version" content="V63.34-COACH-DEMO-NEUTRE-CONTROLE" />
   <style>
     :root{
       --bg:#050505;
@@ -1712,7 +1712,7 @@ button:disabled,
 
 
 
-/* V63.32 COACH - Accueil nettoyé : événement + réseaux compacts avec icônes */
+/* V63.33 COACH - Accueil nettoyé : événement + réseaux compacts avec icônes */
 .club-event-card,
 .club-social-card{
   display:none;
@@ -1815,7 +1815,7 @@ button:disabled,
   .club-social-btn{font-size:12px;padding:7px 11px;min-height:36px;}
 }
 
-/* V63.32 COACH - stabilisation parcours */
+/* V63.33 COACH - stabilisation parcours */
 .player-help-card{
   border:1px solid rgba(var(--accent-rgb),.34)!important;
   background:rgba(0,0,0,.32)!important;
@@ -1843,7 +1843,7 @@ button:disabled,
   font-weight:950!important;
 }
 
-/* V63.32 COACH - interface allégée + Bureau visible */
+/* V63.33 COACH - interface allégée + Bureau visible */
 .player-actions{grid-template-columns:repeat(2,minmax(0,170px))!important;}
 .player-favorite-card{display:block;}
 .player-favorite-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
@@ -1872,7 +1872,7 @@ body.player-app .team-actions-grid button{width:100%;}
 #versionBadge:hover{opacity:1;}
 
 
-/* V63.32 COACH - séparation propre, sans mélange joueur */
+/* V63.33 COACH - séparation propre, sans mélange joueur */
 body.coach-app #btn-teams,
 body.coach-app #btn-myteams,
 body.coach-app #btn-bureau,
@@ -1904,7 +1904,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.32 COACH - Résumé logistique avant convocation */
+/* V63.33 COACH - Résumé logistique avant convocation */
 .coach-logistique-card{
   display:none;
   margin:12px 0 14px;
@@ -1980,7 +1980,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.32 COACH - Logistique propre domicile / extérieur */
+/* V63.33 COACH - Logistique propre domicile / extérieur */
 .coach-logistique-list{
   display:grid;
   gap:5px;
@@ -2002,7 +2002,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.32 COACH - logistique utile sans compteurs */
+/* V63.33 COACH - logistique utile sans compteurs */
 .coach-logistique-resume{display:none!important;}
 .coach-logistique-card{padding:14px!important;}
 .coach-logistique-title{margin-bottom:4px!important;}
@@ -2019,7 +2019,7 @@ body.coach-app #weekendCard{
 }
 
 
-/* V63.32 COACH - Résumé compact sans doublon */
+/* V63.33 COACH - Résumé compact sans doublon */
 .coach-logistique-resume{display:none!important;}
 .coach-summary-mini{
   display:grid;
@@ -2047,7 +2047,7 @@ body.coach-app #weekendCard{
 <link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
 <meta name="apple-mobile-web-app-title" content="Démo App Club">
 
-<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNBTSBCYXNrZXQgTW9udHJpY2hhcmQiLAogICJzaG9ydF9uYW1lIjogIkNBTSBCYXNrZXQiLAogICJzdGFydF91cmwiOiAiLi9pbmRleC5odG1sIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDAwMDAwIiwKICAidGhlbWVfY29sb3IiOiAiI2ZmZDQwMCIsCiAgImljb25zIjogWwogICAgeyJzcmMiOiAibG9nb18xOTIucG5nIiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifSwKICAgIHsic3JjIjogImxvZ29fNTEyLnBuZyIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIn0KICBdCn0=">
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkTDqW1vIEFwcCBDbHViIiwKICAic2hvcnRfbmFtZSI6ICJBcHAgQ2x1YiIsCiAgInN0YXJ0X3VybCI6ICIuL2luZGV4Lmh0bWwiLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjMDAwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAibG9nb18xOTIucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImxvZ29fNTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
 
 <style id="_color_cleanup_v2">
 /* V-COLOR-CLEANUP-2 : supprime les anciens jaunes fixes et applique les couleurs CONFIG */
@@ -3413,11 +3413,11 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.32 COACH</button>
+    ">V63.34 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
-          aria-label="Informations Démo App Club"
+          aria-label="Informations de l’application"
           onclick="openInfoModal()"
           onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();openInfoModal();}"
           style="cursor:pointer;">
@@ -3438,7 +3438,7 @@ small{
           text-shadow: 0 2px 6px rgba(0,0,0,0.8);
           pointer-events: none;
           white-space: nowrap;
-        ">Tous<br>en Jaune&nbsp;!</div>
+        ">Bienvenue<br>au club&nbsp;!</div>
       </div>
       <h1 class="hero-title">Démo Coach<br>Club</h1>      <div id="appSubtitle" class="hero-sub" style="display:none"></div>
       <div class="top-actions coach-actions">
@@ -3480,7 +3480,7 @@ small{
 
 
       <div id="weekendCard" class="card">
-        <div class="weekend-title"><span id="homeUpcomingTitle">🏀 Matchs à venir</span><span id="homeUpcomingLabel">7 jours</span></div>
+        <div class="weekend-title"><span id="homeUpcomingTitle">📅 Matchs à venir</span><span id="homeUpcomingLabel">7 jours</span></div>
         <div id="weekendList"></div>
       </div>
 
@@ -3582,7 +3582,7 @@ small{
       
         <div id="pastMatchNotice" class="empty" style="display:none;margin-bottom:12px;">Match passé — réponses et convocation désactivées.</div>
         <div id="matchApportsCard" class="apports-card">
-        <div id="apportsMainTitle" class="apports-title">🏀 🏀 Merci à vous</div>
+        <div id="apportsMainTitle" class="apports-title">🤝 Merci à vous</div>
         <div id="apportsSubtitle" class="apports-subtitle">Objectif : 2 boissons / 2 nourritures</div>
 
         <div class="apports-grid">
@@ -3764,7 +3764,7 @@ small{
       </div>
       <div class="role-grid">
         <button id="gestionMenuMatchs" class="menu-btn role-menu-card" onclick="showGestionMatchsScreen()">
-          <span id="gestionMenuMatchsTitle" class="big">🏀 Matchs</span>
+          <span id="gestionMenuMatchsTitle" class="big">📅 Matchs</span>
           <span id="gestionMenuMatchsText" class="small">Ajouter ou modifier les matchs.</span>
         </button>
         <button id="gestionMenuJoueurs" class="menu-btn role-menu-card" onclick="showGestionJoueursScreen()">
@@ -3957,7 +3957,7 @@ small{
     <section id="gestionMatchsScreen" class="screen">
       <button class="back" onclick="setActiveButton('gestion'); showScreen('gestionClubScreen')">← Retour gestion club</button>
       <div class="card">
-        <h2 id="gmMainTitle">🏀 Gestion matchs</h2>
+        <h2 id="gmMainTitle">📅 Gestion matchs</h2>
         <div id="gmMainText" class="muted">Ajouter ou modifier un match sans sortir de l’application.</div>
       </div>
 
@@ -4014,7 +4014,7 @@ small{
             <option value="date_heure">Date / heure modifiée — le match reste programmé</option>
             <option value="reporte">Match reporté — match repoussé ou en attente</option>
             <option value="forfait_adverse">Forfait adverse — l’adversaire déclare forfait</option>
-            <option value="forfait_cam">Forfait CAM — notre équipe déclare forfait</option>
+            <option value="forfait_cam">Forfait du club — notre équipe déclare forfait</option>
           </select>
           <small id="gmMotifHelp">Le motif mettra à jour automatiquement la colonne Statut match.</small>
           <div id="gmReconfirmNote" class="gm-reconfirm-note">Si la date, l’heure, le lieu ou l’équipe changent, les anciennes réponses seront marquées “À reconfirmer”.</div>
@@ -4082,11 +4082,11 @@ small{
     let APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
     let APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
     let APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
-    let APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
-    let APP_WHATSAPP_MATCH_ADDED_TITLE = APP_CONFIG.WHATSAPP_MATCH_ADDED_TITLE || ("Nouveau match " + APP_CLUB_NAME);
-    let APP_WHATSAPP_MATCH_MODIFIED_TITLE = APP_CONFIG.WHATSAPP_MATCH_MODIFIED_TITLE || ("Match modifié " + APP_CLUB_NAME);
+    let APP_WHATSAPP_CONVOCATION_TITLE = "Convocation " + APP_CLUB_NAME;
+    let APP_WHATSAPP_MATCH_ADDED_TITLE = "Nouveau match " + APP_CLUB_NAME;
+    let APP_WHATSAPP_MATCH_MODIFIED_TITLE = "Match modifié " + APP_CLUB_NAME;
     let APP_WHATSAPP_MATCH_REPLY_TEXT = APP_CONFIG.WHATSAPP_MATCH_REPLY_TEXT || "Merci de répondre dans l’application :";
-    let APP_WHATSAPP_ICON = APP_CONFIG.WHATSAPP_ICON !== undefined ? String(APP_CONFIG.WHATSAPP_ICON || "") : "🏀";
+    let APP_WHATSAPP_ICON = APP_CONFIG.WHATSAPP_ICON !== undefined ? String(APP_CONFIG.WHATSAPP_ICON || "") : "📣";
     function appEscapeRegExp(str){
       return String(str || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
@@ -4154,16 +4154,19 @@ small{
 
     function syncClubTextConfigFromSheet() {
       const clubFromConfig = cfgValue("nom_club", APP_CLUB_NAME || APP_NAME || "Démo App Club");
-      APP_NAME = cfgValue("app_name", APP_NAME || clubFromConfig);
-      APP_CLUB_NAME = cfgValue("club_name", clubFromConfig);
-      APP_HOME_CLUB_NAME = cfgValue("home_club_name", APP_CLUB_NAME);
+      const versionTitle = document.getElementById("versionAppTitle");
+      if (versionTitle) versionTitle.textContent = "Application " + clubFromConfig;
+      // Une seule source d’identité : CONFIG → nom_club.
+      APP_NAME = clubFromConfig;
+      APP_CLUB_NAME = clubFromConfig;
+      APP_HOME_CLUB_NAME = clubFromConfig;
 
       const rawIcon = cfgRawValue("whatsapp_icon", "__APP_CONFIG_FALLBACK__");
       if (rawIcon !== "__APP_CONFIG_FALLBACK__") APP_WHATSAPP_ICON = rawIcon;
 
-      APP_WHATSAPP_CONVOCATION_TITLE = cfgValue("whatsapp_convocation_title", "Convocation " + APP_CLUB_NAME);
-      APP_WHATSAPP_MATCH_ADDED_TITLE = cfgValue("whatsapp_match_added_title", "Nouveau match " + APP_CLUB_NAME);
-      APP_WHATSAPP_MATCH_MODIFIED_TITLE = cfgValue("whatsapp_match_modified_title", "Match modifié " + APP_CLUB_NAME);
+      APP_WHATSAPP_CONVOCATION_TITLE = "Convocation " + APP_CLUB_NAME;
+      APP_WHATSAPP_MATCH_ADDED_TITLE = "Nouveau match " + APP_CLUB_NAME;
+      APP_WHATSAPP_MATCH_MODIFIED_TITLE = "Match modifié " + APP_CLUB_NAME;
       APP_WHATSAPP_MATCH_REPLY_TEXT = cfgValue("whatsapp_match_reply_text", "Merci de répondre dans l’application :");
     }
 
@@ -5214,7 +5217,7 @@ small{
         return [equipe, adversaire, badgeForType(t).label, date, heure].map(x => normalize(x)).join("|");
       }
 
-      // Format actuel formulaire : "Montrichard U18M-1 vs Montils - 18/05/2026 - 20h00 - Domicile"
+      // Format actuel formulaire : "Nom du club U18M-1 vs Adversaire - 18/05/2026 - 20h00 - Domicile"
       const dashParts = txt.split(" - ").map(x => x.trim());
       const title = dashParts[0] || txt;
 
@@ -5297,7 +5300,7 @@ small{
 
     function statutMatchBloqueReponse_(statut){
       const s = normalize(statut || "Programmé");
-      return s === "forfait adverse" || s === "forfait cam";
+      return s === "forfait adverse" || s === "forfait cam" || s === "forfait du club" || s === "forfait club";
     }
 
     function statutMatchAutoriseReponse_(statut){
@@ -7087,7 +7090,7 @@ function gmStatutToAction(statut){
   const s = normalize(statut);
   if (s === "reporte" || s === "reporté") return "reporte";
   if (s === "forfait adverse") return "forfait_adverse";
-  if (s === "forfait cam") return "forfait_cam";
+  if (s === "forfait cam" || s === "forfait du club" || s === "forfait club") return "forfait_cam";
   return "simple";
 }
 
@@ -7468,8 +7471,8 @@ function renderWeekend() {
     if (s === "forfait adverse") {
       return { label: "Forfait adv.", cls: "forfait-adverse" };
     }
-    if (s === "forfait cam") {
-      return { label: "Forfait CAM", cls: "forfait-cam" };
+    if (s === "forfait cam" || s === "forfait du club" || s === "forfait club") {
+      return { label: "Forfait du club", cls: "forfait-cam" };
     }
     return null;
   }
@@ -7928,7 +7931,7 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 
 
 // ═══════════════════════════════════════
-// V63.32 COACH — Accueil club + mes espaces séparés
+// V63.33 COACH — Accueil club + mes espaces séparés
 // Objectif : accueil = club complet, Mes matchs/Mes équipes = filtrage local joueur.
 // ═══════════════════════════════════════
 const PLAYER_FAV_KEY = "cam_basket_equipes_suivies_v62";
@@ -8179,12 +8182,14 @@ openMatches = function(){
   </script>
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
-      <h3>Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.32 COACH</div>
+      <h3 id="versionAppTitle">Application Démo App Club</h3>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.34 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/06/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.34 — Coach : titres WhatsApp liés à nom_club et fond de secours neutre</li>
+        <li>V63.33 — Coach : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
         <li>V63.32 — Coach : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
         <li>V63.31 — Coach : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
         <li>V63.30 — Coach : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
@@ -8549,17 +8554,17 @@ function appliquerCouleursConfigCoach(cfg) {
 // ⚙️ CONFIG
 // ══════════════════════════════════
 function normaliserFondType(valeur) {
-  const v = String(valeur || "basket").trim().toLowerCase();
+  const v = String(valeur || "neutre").trim().toLowerCase();
   if (["basket", "basketball"].includes(v)) return "basket";
   if (["hand", "handball", "hand-ball"].includes(v)) return "hand";
   if (["foot", "football", "soccer"].includes(v)) return "foot";
   if (["neutre", "neutral", "simple", "none", "noir", "black"].includes(v)) return "neutre";
-  return "basket";
+  return "neutre";
 }
 
 function appliquerFondSportConfig(cfg) {
   const fondType = normaliserFondType(
-    (cfg && (cfg["fond_type"] || cfg["fond_sport"] || cfg["sport_club"])) || "basket"
+    (cfg && (cfg["fond_type"] || cfg["fond_sport"] || cfg["sport_club"])) || "neutre"
   );
   document.body.setAttribute("data-fond-type", fondType);
 }
@@ -8719,7 +8724,7 @@ function appliquerConfig() {
   }
 
   setCfgText("appSubtitle", "app_sous_titre", "", "app_sous_titre_actif");
-  setCfgText("homeUpcomingTitle", "accueil_matchs_titre", "🏀 Matchs à venir", "accueil_matchs_titre_actif");
+  setCfgText("homeUpcomingTitle", "accueil_matchs_titre", "📅 Matchs à venir", "accueil_matchs_titre_actif");
   setCfgTitleWithSeason("teamsCardTitle", "equipes_titre", "Équipes");
   setCfgText("teamsCardText", "equipes_texte", "Saison active uniquement.", "equipes_texte_actif");
   // Infos complémentaires des cartes Équipes : les données viennent de la feuille EQUIPES, l'affichage est piloté par CONFIG.
@@ -8730,7 +8735,7 @@ function appliquerConfig() {
   setCfgText("playersCardText", "joueurs_texte", "Liste filtrée sur l’équipe sélectionnée et la saison active.", "joueurs_texte_actif");
   setCfgText("matchesCardText", "matchs_texte", "Clique sur un match pour voir le détail et ouvrir l’itinéraire.", "matchs_texte_actif");
   setCfgText("matchConvocationTitle", "convocation_titre", "Convocation");
-  setCfgText("apportsMainTitle", "apports_titre", "🏀 🏀 Merci à vous");
+  setCfgText("apportsMainTitle", "apports_titre", "🤝 Merci à vous");
   setCfgText("apportsSubtitle", "apports_sous_titre", "Objectif : 2 boissons / 2 nourritures", "apports_sous_titre_actif");
   setCfgText("officialsThanksTitle", "officiels_titre", "👏 Merci aux officiels", "officiels_titre_actif");
   setCfgText("coachResponsesTitle", "coach_reponses_titre", "Réponses coach", "coach_reponses_titre_actif");
@@ -8756,7 +8761,7 @@ function appliquerConfig() {
   applyGestionMenuVisibility("gestionMenuOfficiels", "gestion_menu_officiels_actif", false);
   applyGestionMenuVisibility("gestionMenuReglages", "gestion_menu_reglages_actif", false);
 
-  setCfgText("gestionMenuMatchsTitle", "gestion_menu_matchs_titre", "🏀 Matchs");
+  setCfgText("gestionMenuMatchsTitle", "gestion_menu_matchs_titre", "📅 Matchs");
   setCfgText("gestionMenuJoueursTitle", "gestion_menu_joueurs_titre", "👥 Joueurs / Licences");
   setCfgText("gestionMenuEquipesTitle", "gestion_menu_equipes_titre", "🏷️ Équipes");
   setCfgText("gestionMenuAdversairesTitle", "gestion_menu_adversaires_titre", "📍 Adversaires / Gymnases");
@@ -8773,7 +8778,7 @@ function appliquerConfig() {
   setCfgText("gjMainText", "gestion_joueurs_texte", "Ajouter, modifier ou désactiver un joueur sans toucher directement au tableau.", "gestion_joueurs_texte_actif");
   setCfgText("geMainTitle", "gestion_equipes_titre", "🏷️ Équipes");
   setCfgText("geMainText", "gestion_equipes_texte", "Ajouter ou modifier les équipes, coachs et entraînements.", "gestion_equipes_texte_actif");
-  setCfgText("gmMainTitle", "gestion_matchs_titre", "🏀 Gestion matchs");
+  setCfgText("gmMainTitle", "gestion_matchs_titre", "📅 Gestion matchs");
   setCfgText("gmMainText", "gestion_matchs_texte", "Ajouter ou modifier un match sans sortir de l’application.", "gestion_matchs_texte_actif");
   setCfgText("gmAddTitle", "gestion_matchs_ajouter_titre", "Ajouter un match");
   setCfgText("gmEditTitle", "gestion_matchs_modifier_titre", "Modifier un match");
@@ -8835,7 +8840,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.32-COACH-LOGO-HORS-BOUTON";
+window.CAM_BASKET_VERSION = "V63.34-COACH-DEMO-NEUTRE-CONTROLE";
 
 </script>
 

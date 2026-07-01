@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.33-DEMO-FORM-CONFIRMATION-COMPACTE - Design nettoyé -->
+<!-- Démo App Club formulaire V61.34-DEMO-FORM-IDENTITE-CONFIG - identité pilotée par CONFIG -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Formulaire Match V61.33-DEMO-FORM-CONFIRMATION-COMPACTE</title>
+<meta name="app-version" content="V61.34-DEMO-FORM-IDENTITE-CONFIG">
+<title>Réponse — Démo App Club</title>
 
 <style>
 :root{
@@ -1508,6 +1509,7 @@ async function chargerConfigOrganisation(){
 
     FORM_CLUB_NAME = configValueForm(cfg, "nom_club", APP_HOME_CLUB_NAME);
     FORM_LOGO_URL = configValueForm(cfg, "logo_url", "Image PNG.png");
+    document.title = "Réponse — " + (FORM_CLUB_NAME || "Démo App Club");
 
     organisationConfig = {
       maillots: configIntForm(cfg, "quota_maillots", 1),
