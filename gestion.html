@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.40 - Gestion - récupération fiable des données joueur -->
+<!-- Démo App Club V65.41 - Gestion - lecture joueurs via Apps Script -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.40-GESTION-RECUPERATION-JOUEUR-FIABLE" />
+  <meta name="app-version" content="V65.41-GESTION-LECTURE-JOUEURS-APPS-SCRIPT" />
   <style>
     :root{
       --bg:#050505;
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.40 GESTION</button>
+    ">V65.41 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -4134,6 +4134,27 @@ small{
         .map(row => row.map(cell => String(cell || "").trim()));
     }
 
+    // V65.41 : lecture des joueurs par Apps Script, sans inférence de type GViz.
+    // Le backend utilise getDisplayValues(), ce qui conserve le téléphone tel qu'il
+    // apparaît dans Google Sheets, y compris son zéro initial.
+    async function fetchJoueursGestion(){
+      try {
+        const sep = APPS_SCRIPT_URL.includes("?") ? "&" : "?";
+        const url = APPS_SCRIPT_URL + sep + "action=getJoueursGestion&_=" + Date.now();
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (!data || data.ok !== true || !Array.isArray(data.rows)) {
+          throw new Error((data && data.error) || "REPONSE_JOUEURS_INVALIDE");
+        }
+        return data.rows;
+      } catch (e) {
+        console.warn("Lecture JOUEURS via Apps Script échouée, secours GViz CSV :", e);
+        const csvRows = await fetchRowsCsv(SHEETS.joueurs);
+        return csvRows.slice(1).map((values, index) => ({ row: index + 2, values }));
+      }
+    }
+
     function findSeason(paramRows){
       for (const row of paramRows) {
         const left = normalize(row[0]);
@@ -4179,9 +4200,8 @@ small{
         const [paramRows, eqRows, jrRows, mtRows, bureauRows, benevoleRows, convocationRows, adversaireRows, officielsRows, configRows] = await Promise.all([
           fetchRows(SHEETS.parametres),
           fetchRows(SHEETS.equipes),
-          // V65.40 : JSON GViz avec valeurs affichées (cell.f prioritaire)
-          // pour conserver les zéros initiaux et obtenir les vrais numéros de ligne.
-          fetchRows(SHEETS.joueurs),
+          // V65.41 : lecture directe via Apps Script / getDisplayValues().
+          fetchJoueursGestion(),
           fetchRows(SHEETS.matchs),
           fetchRows(SHEETS.bureau),
           fetchRows(SHEETS.benevoles),
@@ -4227,24 +4247,27 @@ small{
           afficherInfosEquipe: String(r[12] || "Oui").trim() || "Oui"
         })).filter(x => x.equipe && normalize(x.saison) !== "saison");
 
-        state.joueurs = jrRows.map((r, i) => ({
-          row: i + 2,
-          saison: String(r[0] || "").trim(),
-          equipe: String(r[1] || "").trim(),
-          joueur: String(r[2] || "").trim(),
-          licence: String(r[3] || "").trim(),
-          numero: String(r[4] || "").trim(),
-          poste: String(r[5] || "").trim(),
-          code: String(r[6] || "").trim(),
-          statutLicence: String(r[7] || "").trim(),
-          dateNaissance: String(r[8] || "").trim(),
-          telephoneParent: String(r[9] || "").trim(),
-          emailParent: String(r[10] || "").trim(),
-          actif: String(r[11] || "").trim(),
-          commentaire: String(r[12] || "").trim(),
-          dateCreation: String(r[13] || "").trim(),
-          derniereModification: String(r[14] || "").trim()
-        })).filter(x => x.joueur && normalize(x.saison) !== "saison");
+        state.joueurs = jrRows.map((entry, i) => {
+          const r = Array.isArray(entry) ? entry : (Array.isArray(entry?.values) ? entry.values : []);
+          return {
+            row: Number(entry?.row) || i + 2,
+            saison: String(r[0] || "").trim(),
+            equipe: String(r[1] || "").trim(),
+            joueur: String(r[2] || "").trim(),
+            licence: String(r[3] || "").trim(),
+            numero: String(r[4] || "").trim(),
+            poste: String(r[5] || "").trim(),
+            code: String(r[6] || "").trim(),
+            statutLicence: String(r[7] || "").trim(),
+            dateNaissance: String(r[8] || "").trim(),
+            telephoneParent: String(r[9] || "").trim(),
+            emailParent: String(r[10] || "").trim(),
+            actif: String(r[11] || "").trim(),
+            commentaire: String(r[12] || "").trim(),
+            dateCreation: String(r[13] || "").trim(),
+            derniereModification: String(r[14] || "").trim()
+          };
+        }).filter(x => x.joueur && normalize(x.saison) !== "saison");
 
         // MATCHS attendu :
         // A Saison | B Équipe | C Date | D Heure | E Adversaire | F Domicile/Extérieur
@@ -7633,11 +7656,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.40 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.41 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 02/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
         <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
         <li>V65.39 — Gestion : titres WhatsApp liés à nom_club et fond de secours neutre</li>
         <li>V65.38 — Gestion : démonstration neutralisée, identité pilotée par CONFIG et statuts cohérents avec Code.gs</li>
@@ -8425,7 +8449,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.40-GESTION-RECUPERATION-JOUEUR-FIABLE";
+window.CAM_BASKET_VERSION = "V65.41-GESTION-LECTURE-JOUEURS-APPS-SCRIPT";
 
 </script>
 
