@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.39 - Gestion - neutralisation complète contrôlée -->
+<!-- Démo App Club V65.40 - Gestion - récupération fiable des données joueur -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.39-GESTION-DEMO-NEUTRE-CONTROLE" />
+  <meta name="app-version" content="V65.40-GESTION-RECUPERATION-JOUEUR-FIABLE" />
   <style>
     :root{
       --bg:#050505;
@@ -3068,7 +3068,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.39 GESTION</button>
+    ">V65.40 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -4075,8 +4075,8 @@ small{
     }
 
     async function fetchRows(sheetName){
-      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json`;
-      const res = await fetch(url);
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tqx=out:json&_=${Date.now()}`;
+      const res = await fetch(url, { cache: "no-store" });
       const txt = await res.text();
       const json = JSON.parse(txt.substring(txt.indexOf("{"), txt.lastIndexOf("}") + 1));
       const cols = json.table.cols.map(c => c.label || c.id || "");
@@ -4123,8 +4123,8 @@ small{
     }
 
     async function fetchRowsCsv(sheetName){
-      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
-      const res = await fetch(url);
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&_=${Date.now()}`;
+      const res = await fetch(url, { cache: "no-store" });
       const txt = await res.text();
       return txt
         .replace(/^\uFEFF/, "")
@@ -4179,7 +4179,9 @@ small{
         const [paramRows, eqRows, jrRows, mtRows, bureauRows, benevoleRows, convocationRows, adversaireRows, officielsRows, configRows] = await Promise.all([
           fetchRows(SHEETS.parametres),
           fetchRows(SHEETS.equipes),
-          fetchRowsCsv(SHEETS.joueurs),
+          // V65.40 : JSON GViz avec valeurs affichées (cell.f prioritaire)
+          // pour conserver les zéros initiaux et obtenir les vrais numéros de ligne.
+          fetchRows(SHEETS.joueurs),
           fetchRows(SHEETS.matchs),
           fetchRows(SHEETS.bureau),
           fetchRows(SHEETS.benevoles),
@@ -7631,11 +7633,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.39 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.40 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 02/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
         <li>V65.39 — Gestion : titres WhatsApp liés à nom_club et fond de secours neutre</li>
         <li>V65.38 — Gestion : démonstration neutralisée, identité pilotée par CONFIG et statuts cohérents avec Code.gs</li>
         <li>V65.37 — Gestion : WhatsApp forfait = message d’annulation sans demande de réponse ni lien direct</li>
@@ -8422,7 +8425,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.39-GESTION-DEMO-NEUTRE-CONTROLE";
+window.CAM_BASKET_VERSION = "V65.40-GESTION-RECUPERATION-JOUEUR-FIABLE";
 
 </script>
 
