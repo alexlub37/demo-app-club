@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.35-DEMO-FORM-CODE-ZERO-INITIAL -->
+<!-- Démo App Club formulaire V61.36-DEMO-FORM-STATUT-CODE-SERVEUR -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="app-version" content="V61.35-DEMO-FORM-CODE-ZERO-INITIAL">
+<meta name="app-version" content="V61.36-DEMO-FORM-STATUT-CODE-SERVEUR">
 <title>Réponse — Démo App Club</title>
 
 <style>
@@ -1616,31 +1616,88 @@ function codeValideFormat(code){
   return /^\d{4}$/.test(String(code || "").trim());
 }
 
+async function obtenirStatutCodeJoueur(prenom){
+  const res = await fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "getJoueurCodeStatus",
+      equipe: getParam("equipe"),
+      prenom: prenom
+    })
+  });
+
+  const data = await res.json();
+  if (!data || data.ok !== true) {
+    throw new Error((data && data.error) || "STATUT_CODE_INDISPONIBLE");
+  }
+
+  return data.hasCode === true;
+}
+
+async function verifierCodeJoueurServeur(prenom, code){
+  const res = await fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "codeJoueurValide",
+      equipe: getParam("equipe"),
+      prenom: prenom,
+      code: String(code || "").trim()
+    })
+  });
+
+  const data = await res.json();
+  return !!(data && data.ok === true);
+}
+
 async function verifierCodeJoueur(){
   const select = document.getElementById("joueur");
   const option = select.options[select.selectedIndex];
   const prenom = option ? option.value : "";
-  const codeExistant = option ? normaliserCodeAccesJoueur(option.dataset.code) : "";
 
   resetValidationCodeJoueur();
 
   if (!prenom) return;
 
-  if (codeExistant) {
+  let codeExiste = false;
+  try {
+    codeExiste = await obtenirStatutCodeJoueur(prenom);
+  } catch(e) {
+    alert("Impossible de vérifier le code du joueur. Clique sur Mettre à jour puis réessaie.");
+    select.value = "";
+    return;
+  }
+
+  if (codeExiste) {
     const saisie = prompt("Entre ton code d'accès pour " + prenom + " :");
     if (saisie === null) {
       select.value = "";
       return;
     }
 
-    if (String(saisie).trim() !== codeExistant) {
+    const codeSaisi = String(saisie).trim();
+    if (!codeValideFormat(codeSaisi)) {
+      alert("Le code doit contenir exactement 4 chiffres.");
+      select.value = "";
+      return;
+    }
+
+    let codeValide = false;
+    try {
+      codeValide = await verifierCodeJoueurServeur(prenom, codeSaisi);
+    } catch(e) {
+      alert("Impossible de vérifier le code du joueur. Réessaie.");
+      select.value = "";
+      return;
+    }
+
+    if (!codeValide) {
       alert("Code incorrect ❌");
       select.value = "";
       return;
     }
 
     playerCodeValidated = true;
-    playerCodeValue = codeExistant;
+    playerCodeValue = codeSaisi;
     return;
   }
 
