@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.35 - Coach - matchs forfait neutralisés -->
+<!-- Démo App Club V63.36 - Coach - effectif/licences par équipe sélectionnée -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.35-COACH-FORFAIT-Epure" />
+  <meta name="cam-basket-version" content="V63.36-COACH-EFFECTIF-LICENCES" />
   <style>
     :root{
       --bg:#050505;
@@ -396,7 +396,55 @@
       font-weight:900;
       white-space:nowrap;
     }
-    /* V63.35 - Matchs en forfait neutralisés dans l’espace Coach */
+    
+/* V63.36 - Effectif / licences accessible depuis l’équipe choisie par le coach */
+.coach-effectif-entry{
+  margin:0 0 16px;
+}
+.coach-effectif-btn{
+  width:100%;
+  min-height:76px;
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:5px;
+}
+.coach-effectif-btn .big{
+  font-size:17px;
+  font-weight:950;
+}
+.coach-effectif-btn .small{
+  font-size:13px;
+  line-height:1.35;
+}
+.coach-effectif-summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+.coach-effectif-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(var(--accent-rgb),.5);
+  color:var(--accent);
+  font-size:12px;
+  font-weight:950;
+}
+.coach-player-license-status{
+  margin-top:5px;
+  font-weight:800;
+}
+
+/* V63.35 - Matchs en forfait neutralisés dans l’espace Coach */
     .coach-space-match.has-forfait{
       opacity:.82;
       border-style:dashed!important;
@@ -3433,7 +3481,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.35 COACH</button>
+    ">V63.36 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3671,11 +3719,31 @@ small{
         <div id="coachSpaceText" class="muted">Suivi des réponses et convocations de l’équipe.</div>
       </div>
 
+      <div id="coachPlayersEntry" class="coach-effectif-entry">
+        <button class="menu-btn coach-effectif-btn" type="button" onclick="openCoachPlayers()">
+          <span id="coachPlayersMenuTitle" class="big">👥 Effectif / licences</span>
+          <span id="coachPlayersMenuText" class="small">Voir les joueurs actifs de l’équipe sélectionnée.</span>
+        </button>
+      </div>
+
       <div class="coach-space-section-head">
         <span>Réponses matchs</span>
         <small>Réponses / joueurs prêts</small>
       </div>
       <div id="coachMatchesList" class="list"></div>
+    </section>
+
+    <section id="coachPlayersScreen" class="screen">
+      <button class="back" onclick="showScreen('coachSpaceScreen'); setActiveButton('coach')">← Retour espace coach</button>
+      <div class="card">
+        <h2 id="coachPlayersTitle">Effectif / licences</h2>
+        <div id="coachPlayersCardText" class="muted">Joueurs actifs de l’équipe sélectionnée pour la saison en cours.</div>
+        <div class="coach-effectif-summary">
+          <span id="coachPlayersTeam" class="muted"></span>
+          <span id="coachPlayersCount" class="coach-effectif-count">0 joueur</span>
+        </div>
+      </div>
+      <div id="coachPlayersList" class="list"></div>
     </section>
 
     <section id="coachMatchScreen" class="screen">
@@ -4870,6 +4938,66 @@ small{
         org,
         quotas
       };
+    }
+
+    function openCoachPlayers(){
+      if (!cfgBool("coach_joueurs_actif", true)) return;
+
+      const t = getSelectedTeamData();
+      const team = String(t?.equipe || t?.team || state.selectedTeam?.team || "").trim();
+      if (!team) {
+        alert("Sélectionne une équipe d’abord.");
+        return;
+      }
+
+      const rows = (state.joueurs || [])
+        .filter(j =>
+          isJoueurActif(j) &&
+          cleanCompare(j.equipe) === cleanCompare(team) &&
+          (!state.season || sameSeason(j.saison, state.season))
+        )
+        .sort((a, b) => {
+          const na = String(a.numero || "").trim();
+          const nb = String(b.numero || "").trim();
+          if (na || nb) {
+            const byNumber = na.localeCompare(nb, "fr", { numeric: true, sensitivity: "base" });
+            if (byNumber !== 0) return byNumber;
+          }
+          return String(a.joueur || "").localeCompare(String(b.joueur || ""), "fr", { sensitivity: "base" });
+        });
+
+      const title = document.getElementById("coachPlayersTitle");
+      const teamEl = document.getElementById("coachPlayersTeam");
+      const count = document.getElementById("coachPlayersCount");
+      const list = document.getElementById("coachPlayersList");
+
+      if (title) title.textContent = cfgValue("coach_joueurs_titre", "Effectif / licences");
+      if (teamEl) teamEl.textContent = team + (state.season ? " • " + state.season : "");
+      if (count) count.textContent = rows.length + " joueur" + (rows.length > 1 ? "s" : "");
+
+      if (list) {
+        if (!rows.length) {
+          list.innerHTML = '<div class="empty">Aucun joueur actif trouvé pour cette équipe et cette saison.</div>';
+        } else {
+          list.innerHTML = rows.map(j => {
+            const licence = String(j.licence || "").trim();
+            const statut = String(j.statutLicence || "").trim();
+            const poste = String(j.poste || "").trim();
+            const numberPrefix = String(j.numero || "").trim() ? "#" + escapeHtml(j.numero) + " — " : "";
+            return `
+              <div class="item coach-player-row">
+                <div class="item-title">${numberPrefix}${escapeHtml(j.joueur || "Joueur")}</div>
+                <div class="item-sub">${licence ? "Licence : " + escapeHtml(licence) : "Licence non renseignée"}</div>
+                ${statut ? `<div class="item-sub coach-player-license-status">Statut licence : ${escapeHtml(statut)}</div>` : ""}
+                ${poste ? `<div class="item-sub">Poste : ${escapeHtml(poste)}</div>` : ""}
+              </div>
+            `;
+          }).join("");
+        }
+      }
+
+      showScreen("coachPlayersScreen");
+      setActiveButton("coach");
     }
 
     async function renderCoachSpace(){
@@ -8236,11 +8364,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.35 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.36 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 02/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.36 — Coach : section Effectif / licences configurable, limitée à l’équipe sélectionnée</li>
         <li>V63.35 — Coach : matchs en forfait clairement annulés, réponses, organisation et convocations masquées</li>
         <li>V63.34 — Coach : titres WhatsApp liés à nom_club et fond de secours neutre</li>
         <li>V63.33 — Coach : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
@@ -8793,6 +8922,14 @@ function appliquerConfig() {
   setCfgText("apportsSubtitle", "apports_sous_titre", "Objectif : 2 boissons / 2 nourritures", "apports_sous_titre_actif");
   setCfgText("officialsThanksTitle", "officiels_titre", "👏 Merci aux officiels", "officiels_titre_actif");
   setCfgText("coachResponsesTitle", "coach_reponses_titre", "Réponses coach", "coach_reponses_titre_actif");
+
+  // V63.36 — Effectif du coach piloté par CONFIG.
+  // coach_joueurs_actif = Oui/Non. L’effectif reste strictement limité à l’équipe choisie après identification coach.
+  const coachPlayersEntry = document.getElementById("coachPlayersEntry");
+  if (coachPlayersEntry) coachPlayersEntry.style.display = cfgBool("coach_joueurs_actif", true) ? "" : "none";
+  setCfgText("coachPlayersMenuTitle", "coach_joueurs_titre", "👥 Effectif / licences");
+  setCfgText("coachPlayersMenuText", "coach_joueurs_texte", "Voir les joueurs actifs de l’équipe sélectionnée.", "coach_joueurs_texte_actif");
+  setCfgText("coachPlayersCardText", "coach_joueurs_page_texte", "Joueurs actifs de l’équipe sélectionnée pour la saison en cours.", "coach_joueurs_page_texte_actif");
   setCfgText("convocationSelectionText", "convocation_selection_texte", "Les joueurs présents sont pré-cochés. Tu peux ajuster.", "convocation_selection_texte_actif");
   setCfgText("bureauCardTitle", "bureau_titre", "Bureau");
   setCfgText("bureauCardText", "bureau_texte", "Membres du bureau de l’association.", "bureau_texte_actif");
@@ -8894,7 +9031,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.35-COACH-FORFAIT-EPURE";
+window.CAM_BASKET_VERSION = "V63.36-COACH-EFFECTIF-LICENCES";
 
 </script>
 
