@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.34-DEMO-FORM-IDENTITE-CONFIG - identité pilotée par CONFIG -->
+<!-- Démo App Club formulaire V61.35-DEMO-FORM-CODE-ZERO-INITIAL -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="app-version" content="V61.34-DEMO-FORM-IDENTITE-CONFIG">
+<meta name="app-version" content="V61.35-DEMO-FORM-CODE-ZERO-INITIAL">
 <title>Réponse — Démo App Club</title>
 
 <style>
@@ -1572,6 +1572,13 @@ function getParam(param) {
   return urlParams.get(param) || "";
 }
 
+function normaliserCodeAccesJoueur(code) {
+  const valeur = String(code === null || code === undefined ? "" : code).trim();
+  if (!valeur) return "";
+  if (/^\d{1,4}$/.test(valeur)) return valeur.padStart(4, "0");
+  return valeur;
+}
+
 function chargerJoueurs() {
   const joueursParam = getParam("joueurs");
   const select = document.getElementById("joueur");
@@ -1587,7 +1594,7 @@ function chargerJoueurs() {
   liste.forEach(j => {
     const [prenomRaw, codeRaw] = j.split("§");
     const prenom = String(prenomRaw || "").trim();
-    const code = String(codeRaw || "").trim();
+    const code = normaliserCodeAccesJoueur(codeRaw);
 
     const option = document.createElement("option");
     option.value = prenom;
@@ -1613,7 +1620,7 @@ async function verifierCodeJoueur(){
   const select = document.getElementById("joueur");
   const option = select.options[select.selectedIndex];
   const prenom = option ? option.value : "";
-  const codeExistant = option ? String(option.dataset.code || "").trim() : "";
+  const codeExistant = option ? normaliserCodeAccesJoueur(option.dataset.code) : "";
 
   resetValidationCodeJoueur();
 
