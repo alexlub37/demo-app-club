@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.36 - Coach - effectif/licences par équipe sélectionnée -->
+<!-- Démo App Club V63.37 - Coach - bouton effectif/licences sobre -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.36-COACH-EFFECTIF-LICENCES" />
+  <meta name="cam-basket-version" content="V63.37-COACH-EFFECTIF-SOBRE" />
   <style>
     :root{
       --bg:#050505;
@@ -397,27 +397,57 @@
       white-space:nowrap;
     }
     
-/* V63.36 - Effectif / licences accessible depuis l’équipe choisie par le coach */
+/* V63.37 - Accès Effectif / licences sobre, compact et secondaire */
 .coach-effectif-entry{
-  margin:0 0 16px;
+  margin:0 0 14px;
 }
 .coach-effectif-btn{
   width:100%;
-  min-height:76px;
+  min-height:0;
+  padding:13px 16px!important;
+  border-radius:18px!important;
   text-align:left;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  gap:5px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:auto auto;
+  align-items:center;
+  column-gap:12px;
+  row-gap:2px;
+  background:rgba(0,0,0,.40)!important;
+  border:1.5px solid rgba(var(--accent-rgb),.58)!important;
+  box-shadow:none!important;
+}
+.coach-effectif-btn::after{
+  content:"›";
+  grid-column:2;
+  grid-row:1 / span 2;
+  align-self:center;
+  color:var(--accent);
+  font-size:28px;
+  font-weight:500;
+  line-height:1;
+  opacity:.82;
 }
 .coach-effectif-btn .big{
-  font-size:17px;
-  font-weight:950;
+  grid-column:1;
+  grid-row:1;
+  margin:0!important;
+  font-size:16px;
+  line-height:1.2;
+  font-weight:900;
+  color:var(--text)!important;
 }
 .coach-effectif-btn .small{
-  font-size:13px;
-  line-height:1.35;
+  grid-column:1;
+  grid-row:2;
+  margin:0!important;
+  font-size:12px;
+  line-height:1.3;
+  font-weight:550;
+  color:color-mix(in srgb, var(--text) 66%, transparent)!important;
+}
+.coach-effectif-btn:active{
+  background:rgba(var(--accent-rgb),.10)!important;
 }
 .coach-effectif-summary{
   display:flex;
@@ -3481,7 +3511,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.36 COACH</button>
+    ">V63.37 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3720,8 +3750,8 @@ small{
       </div>
 
       <div id="coachPlayersEntry" class="coach-effectif-entry">
-        <button class="menu-btn coach-effectif-btn" type="button" onclick="openCoachPlayers()">
-          <span id="coachPlayersMenuTitle" class="big">👥 Effectif / licences</span>
+        <button class="menu-btn secondary coach-effectif-btn" type="button" onclick="openCoachPlayers()">
+          <span id="coachPlayersMenuTitle" class="big">Effectif / licences</span>
           <span id="coachPlayersMenuText" class="small">Voir les joueurs actifs de l’équipe sélectionnée.</span>
         </button>
       </div>
@@ -8364,11 +8394,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.36 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.37 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 02/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.37 — Coach : accès Effectif / licences rendu plus sobre et compact</li>
         <li>V63.36 — Coach : section Effectif / licences configurable, limitée à l’équipe sélectionnée</li>
         <li>V63.35 — Coach : matchs en forfait clairement annulés, réponses, organisation et convocations masquées</li>
         <li>V63.34 — Coach : titres WhatsApp liés à nom_club et fond de secours neutre</li>
@@ -8923,11 +8954,11 @@ function appliquerConfig() {
   setCfgText("officialsThanksTitle", "officiels_titre", "👏 Merci aux officiels", "officiels_titre_actif");
   setCfgText("coachResponsesTitle", "coach_reponses_titre", "Réponses coach", "coach_reponses_titre_actif");
 
-  // V63.36 — Effectif du coach piloté par CONFIG.
+  // V63.37 — Effectif du coach piloté par CONFIG, accès visuel secondaire et sobre.
   // coach_joueurs_actif = Oui/Non. L’effectif reste strictement limité à l’équipe choisie après identification coach.
   const coachPlayersEntry = document.getElementById("coachPlayersEntry");
   if (coachPlayersEntry) coachPlayersEntry.style.display = cfgBool("coach_joueurs_actif", true) ? "" : "none";
-  setCfgText("coachPlayersMenuTitle", "coach_joueurs_titre", "👥 Effectif / licences");
+  setCfgText("coachPlayersMenuTitle", "coach_joueurs_titre", "Effectif / licences");
   setCfgText("coachPlayersMenuText", "coach_joueurs_texte", "Voir les joueurs actifs de l’équipe sélectionnée.", "coach_joueurs_texte_actif");
   setCfgText("coachPlayersCardText", "coach_joueurs_page_texte", "Joueurs actifs de l’équipe sélectionnée pour la saison en cours.", "coach_joueurs_page_texte_actif");
   setCfgText("convocationSelectionText", "convocation_selection_texte", "Les joueurs présents sont pré-cochés. Tu peux ajuster.", "convocation_selection_texte_actif");
@@ -9031,7 +9062,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.36-COACH-EFFECTIF-LICENCES";
+window.CAM_BASKET_VERSION = "V63.37-COACH-EFFECTIF-SOBRE";
 
 </script>
 
