@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.41 - Gestion - lecture joueurs via Apps Script -->
+<!-- Démo App Club V65.42 - Gestion - couleurs boutons Gestion matchs -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.41-GESTION-LECTURE-JOUEURS-APPS-SCRIPT" />
+  <meta name="app-version" content="V65.42-GESTION-COULEURS-BOUTONS-MATCHS" />
   <style>
     :root{
       --bg:#050505;
@@ -2954,6 +2954,58 @@ small{
 }
 </style>
 
+
+<style id="_v6542_gestion_matchs_button_colors">
+/* V65.42 — Gestion matchs : hiérarchie visuelle et contraste pilotés par CONFIG.
+   - Onglet actif : couleur_principale + couleur_bouton_texte
+   - Onglet inactif : fond sombre + couleur_texte + contour couleur_secondaire
+   - WhatsApp : couleur_principale + couleur_bouton_texte
+*/
+html body main #gestionMatchsScreen .gm-tabs button.gm-tab:not(.active){
+  background:rgba(0,0,0,.36)!important;
+  color:var(--text,#ffffff)!important;
+  border:1.5px solid var(--accent,#669900)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html body main #gestionMatchsScreen .gm-tabs button.gm-tab:not(.active) *{
+  color:var(--text,#ffffff)!important;
+}
+html body main #gestionMatchsScreen .gm-tabs button.gm-tab.active{
+  background:var(--button-bg,#ffffff)!important;
+  color:var(--button-text,#000000)!important;
+  border:1.5px solid var(--button-bg,#ffffff)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html body main #gestionMatchsScreen .gm-tabs button.gm-tab.active *{
+  color:var(--button-text,#000000)!important;
+}
+html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button.gm-share-action,
+html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button{
+  display:block!important;
+  width:100%!important;
+  min-height:50px!important;
+  background:var(--button-bg,#ffffff)!important;
+  color:var(--button-text,#000000)!important;
+  border:1.5px solid var(--button-bg,#ffffff)!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  font-size:16px!important;
+  font-weight:950!important;
+  line-height:1.2!important;
+  text-indent:0!important;
+  -webkit-text-fill-color:var(--button-text,#000000)!important;
+}
+html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button.gm-share-action *,
+html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
+  color:var(--button-text,#000000)!important;
+  -webkit-text-fill-color:var(--button-text,#000000)!important;
+}
+</style>
+
 </head>
 <body class="loading gestion-app">
 
@@ -3068,7 +3120,7 @@ small{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.41 GESTION</button>
+    ">V65.42 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -5003,6 +5055,7 @@ small{
 
       const btn = document.createElement("button");
       btn.type = "button";
+      btn.className = "gm-share-action role-action";
       btn.textContent = "Envoyer l’info WhatsApp";
       btn.onclick = function(){
         ouvrirWhatsappEquipeMatch(m, mode, actionMatch);
@@ -7656,11 +7709,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.41 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.42 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 02/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
         <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
         <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
         <li>V65.39 — Gestion : titres WhatsApp liés à nom_club et fond de secours neutre</li>
@@ -8449,7 +8503,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.41-GESTION-LECTURE-JOUEURS-APPS-SCRIPT";
+window.CAM_BASKET_VERSION = "V65.42-GESTION-COULEURS-BOUTONS-MATCHS";
 
 </script>
 
