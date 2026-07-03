@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.37-DEMO-FORM-APPORTS-EXTERIEUR -->
+<!-- Démo App Club formulaire V61.38-DEMO-FORM-APPORTS-EXTERIEUR-ROBUSTE -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="app-version" content="V61.37-DEMO-FORM-APPORTS-EXTERIEUR">
+<meta name="app-version" content="V61.38-DEMO-FORM-APPORTS-EXTERIEUR-ROBUSTE">
 <title>Réponse — Démo App Club</title>
 
 <style>
@@ -1330,7 +1330,7 @@ small{
 
 
 <style id="_form_apports_exterieur_v61_37">
-/* V61.37 — Sur un match extérieur, Boisson et Nourriture sont masquées.
+/* V61.37 — première tentative de masquage CSS (conservée pour historique).
    La classe utilise !important pour rester prioritaire sur le thème des cartes. */
 #apportGroup .choice-btn.apport-option-hidden{
   display:none!important;
@@ -3009,6 +3009,91 @@ select{
   font-weight:950;
 }
 </style>
+
+
+<style id="_form_apports_exterieur_v61_38">
+/* V61.38 — sécurité finale : les apports domicile interdits à l'extérieur
+   ne doivent jamais réapparaître à cause d'une règle CSS tardive. */
+#apportGroup .apport-away-forbidden{
+  display:none!important;
+  visibility:hidden!important;
+}
+</style>
+
+<script id="_form_apports_exterieur_v61_38_js">
+(function(){
+  "use strict";
+
+  function normalizeV6138(value){
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLowerCase();
+  }
+
+  function matchExterieurV6138(){
+    try{
+      if (typeof isAwayMatch === "function" && isAwayMatch()) return true;
+    }catch(e){}
+
+    var params = new URLSearchParams(window.location.search || "");
+    var type = normalizeV6138(params.get("type"));
+    if (["e", "ext", "exterieur"].indexOf(type) !== -1) return true;
+
+    var display = normalizeV6138(params.get("display") || params.get("match"));
+    return /(^|\s|\|)exterieur($|\s|\|)/.test(display);
+  }
+
+  function appliquerRegleV6138(){
+    var group = document.getElementById("apportGroup");
+    if (!group) return;
+
+    var away = matchExterieurV6138();
+    var buttons = Array.prototype.slice.call(group.querySelectorAll(".choice-btn"));
+
+    buttons.forEach(function(btn){
+      var label = normalizeV6138(btn.textContent);
+      var interdit = away && (label.indexOf("boisson") !== -1 || label.indexOf("nourriture") !== -1);
+
+      if (interdit){
+        btn.classList.remove("active", "selected", "is-selected", "disabled");
+        btn.classList.add("apport-option-hidden", "apport-away-forbidden");
+        btn.setAttribute("hidden", "hidden");
+        btn.setAttribute("aria-hidden", "true");
+        btn.style.setProperty("display", "none", "important");
+
+        /* Suppression physique : aucune feuille de style tardive ne peut le réafficher. */
+        if (btn.parentNode) btn.parentNode.removeChild(btn);
+      }
+    });
+
+    if (away){
+      var note = document.querySelector(".apport-note");
+      var q = null;
+      try{ q = (typeof getOrganisationQuotas === "function") ? getOrganisationQuotas() : null; }catch(e){}
+      var quotaMaillots = q && Number(q.maillots) > 0 ? Number(q.maillots) : 1;
+      var maillotsActifs = !q || q.activerMaillots !== false;
+      if (note){
+        note.textContent = maillotsActifs
+          ? "Optionnel — objectif : " + quotaMaillots + " personne(s) pour les maillots."
+          : "Aucun apport demandé pour ce match extérieur.";
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", appliquerRegleV6138);
+  window.addEventListener("load", appliquerRegleV6138);
+  [0, 100, 350, 800, 1500, 3000, 6000].forEach(function(delay){
+    setTimeout(appliquerRegleV6138, delay);
+  });
+
+  document.addEventListener("click", function(){
+    setTimeout(appliquerRegleV6138, 0);
+    setTimeout(appliquerRegleV6138, 250);
+  }, true);
+})();
+</script>
 
 </body>
 </html>
