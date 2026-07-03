@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.60 - Joueurs - badge forfait dans la liste -->
+<!-- Démo App Club V62.61 - Joueurs - rafraîchissement fiable de Mes matchs -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.60-JOUEURS-BADGE-FORFAIT-LISTE" />
+  <meta name="app-version" content="V62.61-JOUEURS-RAFRAICHISSEMENT-MES-MATCHS" />
   <style>
     :root{
       --bg:#050505;
@@ -3349,7 +3349,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.60 JOUEURS</button>
+    ">V62.61 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -4787,6 +4787,24 @@ small{
         // CONFIG déjà appliquée au début du chargement
         setTimeout(appliquerConfig, 300);
         setSeasonStatus();
+
+        // V62.61 : si les données viennent d'être rechargées pendant que
+        // l'utilisateur est déjà sur « Mes matchs », reconstruire immédiatement
+        // la liste. Avant cette correction, l'état était actualisé mais l'écran
+        // conservait parfois le message « Aucun match trouvé » jusqu'à un aller-retour
+        // par l'accueil.
+        const activeScreenAfterReload = document.querySelector(".screen.active");
+        if (activeScreenAfterReload && activeScreenAfterReload.id === "matchesScreen") {
+          const matchesTitleAfterReload = String(
+            (document.getElementById("matchesTitle") || {}).textContent || ""
+          ).trim();
+
+          if (matchesTitleAfterReload.indexOf("—") !== -1 && state.selectedTeam) {
+            openMatches();
+          } else {
+            openMyFollowedMatches();
+          }
+        }
       } catch(err){
         console.error(err);
         setStatus("Erreur de chargement");
@@ -8344,11 +8362,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.60 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.61 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 01/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 03/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.61 — Joueurs : Mes matchs se reconstruit automatiquement après chargement ou clic sur Mettre à jour</li>
         <li>V62.60 — Joueurs : badge Forfait adverse / Forfait du club visible dans la liste Mes matchs</li>
         <li>V62.59 — Joueurs : matchs en forfait sans bloc organisation ni bouton itinéraire</li>
         <li>V62.58 — Joueurs : titres WhatsApp liés à nom_club et fond de secours neutre</li>
@@ -8709,7 +8728,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.60-JOUEURS-BADGE-FORFAIT-LISTE";
+window.CAM_BASKET_VERSION = "V62.61-JOUEURS-RAFRAICHISSEMENT-MES-MATCHS";
 
 </script>
 
