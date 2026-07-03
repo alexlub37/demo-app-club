@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.36-DEMO-FORM-STATUT-CODE-SERVEUR -->
+<!-- Démo App Club formulaire V61.37-DEMO-FORM-APPORTS-EXTERIEUR -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="app-version" content="V61.36-DEMO-FORM-STATUT-CODE-SERVEUR">
+<meta name="app-version" content="V61.37-DEMO-FORM-APPORTS-EXTERIEUR">
 <title>Réponse — Démo App Club</title>
 
 <style>
@@ -1328,6 +1328,14 @@ small{
 }
 </style>
 
+
+<style id="_form_apports_exterieur_v61_37">
+/* V61.37 — Sur un match extérieur, Boisson et Nourriture sont masquées.
+   La classe utilise !important pour rester prioritaire sur le thème des cartes. */
+#apportGroup .choice-btn.apport-option-hidden{
+  display:none!important;
+}
+</style>
 </head>
 
 <body>
@@ -1774,10 +1782,14 @@ function afficherOptionsOrganisation(){
       visible = false;
     }
 
-    btn.style.display = visible ? "block" : "none";
+    // Une classe avec !important est nécessaire : le thème applique
+    // display:flex!important sur .choice-btn.
+    btn.classList.toggle("apport-option-hidden", !visible);
+    btn.style.removeProperty("display");
     if (!visible) {
       btn.classList.remove("active");
       btn.classList.remove("disabled");
+      btn.removeAttribute("aria-disabled");
     }
   });
 
@@ -2397,7 +2409,9 @@ function appliquerQuotaBouton(label, complet){
       if (!isOrganisationOptionEnabled(btn.textContent) || getQuotaByLabel(label) <= 0) {
         btn.classList.remove("active");
         btn.classList.remove("disabled");
-        btn.style.display = "none";
+        btn.classList.add("apport-option-hidden");
+        btn.style.removeProperty("display");
+        btn.removeAttribute("aria-disabled");
         return;
       }
 
