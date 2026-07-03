@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Démo App Club formulaire V61.38-DEMO-FORM-APPORTS-EXTERIEUR-ROBUSTE -->
+<!-- Démo App Club formulaire V61.39-DEMO-FORM-QUOTAS-MODIFICATION-REPONSE -->
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="app-version" content="V61.38-DEMO-FORM-APPORTS-EXTERIEUR-ROBUSTE">
+<meta name="app-version" content="V61.39-DEMO-FORM-QUOTAS-MODIFICATION-REPONSE">
 <title>Réponse — Démo App Club</title>
 
 <style>
@@ -2311,6 +2311,23 @@ function memeMatchQuota(rowMatch){
 }
 
 
+function getJoueurSelectionneQuota(){
+  const select = document.getElementById("joueur");
+  return normalizeQuota(select && select.value ? select.value : "");
+}
+
+function compterQuotaHorsJoueurActuel(total, joueurs){
+  const totalNum = Math.max(0, Number(total || 0));
+  const joueurActuel = getJoueurSelectionneQuota();
+  if (!joueurActuel || !Array.isArray(joueurs)) return totalNum;
+
+  const possedeDeja = joueurs.some(function(prenom){
+    return normalizeQuota(prenom) === joueurActuel;
+  });
+
+  return Math.max(0, totalNum - (possedeDeja ? 1 : 0));
+}
+
 async function chargerQuotasOrganisationDepuisServeur(){
   try{
     const params = new URLSearchParams();
@@ -2329,10 +2346,19 @@ async function chargerQuotasOrganisationDepuisServeur(){
 
     const q = getOrganisationQuotas();
     const counts = data.counts || {};
+    const joueurs = data.joueurs || {};
 
-    appliquerQuotaBouton("Boisson", Number(counts.boisson || 0) >= q.boisson);
-    appliquerQuotaBouton("Nourriture", Number(counts.nourriture || 0) >= q.nourriture);
-    appliquerQuotaBouton("Maillots", Number(counts.maillots || 0) >= q.maillots);
+    // V61.39 : lors de la modification d'une réponse, les apports déjà
+    // attribués au joueur courant ne doivent pas bloquer ses propres boutons.
+    // On les retire uniquement du calcul visuel ; le contrôle serveur final
+    // exclut déjà ce même joueur avant d'accepter la mise à jour.
+    const boisson = compterQuotaHorsJoueurActuel(counts.boisson, joueurs.boisson);
+    const nourriture = compterQuotaHorsJoueurActuel(counts.nourriture, joueurs.nourriture);
+    const maillots = compterQuotaHorsJoueurActuel(counts.maillots, joueurs.maillots);
+
+    appliquerQuotaBouton("Boisson", boisson >= q.boisson);
+    appliquerQuotaBouton("Nourriture", nourriture >= q.nourriture);
+    appliquerQuotaBouton("Maillots", maillots >= q.maillots);
 
     return true;
   }catch(e){
@@ -2374,6 +2400,11 @@ async function chargerQuotasOrganisation(){
 
       const prenom = normalizeQuota(getRowQuota(row, "Prénom") || getRowQuota(row, "Prenom"));
       const code = normalizeQuota(getRowQuota(row, "Code accès") || getRowQuota(row, "Code acces") || getRowQuota(row, "Code"));
+      const joueurActuel = getJoueurSelectionneQuota();
+
+      // V61.39 : en mode modification, ne pas compter la réponse actuelle
+      // du joueur dans les quotas qui lui sont présentés.
+      if (joueurActuel && prenom === joueurActuel) return;
 
       // V60.39 : on déduplique par joueur, pas par code.
       // Plusieurs joueurs peuvent avoir le même code en test : si on déduplique par code,
@@ -3010,6 +3041,8 @@ select{
 }
 </style>
 
+
+<!-- V61.39 : correction des quotas lors de la modification d'une réponse existante. -->
 
 <style id="_form_apports_exterieur_v61_38">
 /* V61.38 — sécurité finale : les apports domicile interdits à l'extérieur
