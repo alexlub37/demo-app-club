@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.39 - Coach - WhatsApp convocation complet + CONFIG respectée -->
+<!-- Démo App Club V63.40 - Coach - Commentaire WhatsApp fiable + CONFIG respectée -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.39-COACH-WHATSAPP-CONVOCATION-CONFIG" />
+  <meta name="cam-basket-version" content="V63.40-COACH-COMMENTAIRE-WHATSAPP-FIABLE" />
   <style>
     :root{
       --bg:#050505;
@@ -3511,7 +3511,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.39 COACH</button>
+    ">V63.40 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -7589,7 +7589,7 @@ async function annulerConvocation() {
   }
 }
 
-// V63.39 — WhatsApp convocation enrichi + respect des clés CONFIG existantes.
+// V63.40 — WhatsApp convocation enrichi, CONFIG respectée et commentaire coach récupéré de façon fiable.
 function whatsappUniqueNames(names) {
   const seen = new Set();
   return (names || []).map(v => String(v || "").trim()).filter(name => {
@@ -7601,8 +7601,40 @@ function whatsappUniqueNames(names) {
 }
 
 function getWhatsappConvocationComment(m) {
-  const rows = getConvocationsForMatch(m);
-  const row = rows.find(c => String(c.commentaire || "").trim());
+  // 1) Priorité au champ actuellement affiché : juste après la génération,
+  // il contient la valeur la plus récente même avant un rechargement complet.
+  const textarea = document.getElementById("convocationCommentaire");
+  const textareaValue = textarea ? String(textarea.value || "").trim() : "";
+  if (textareaValue) return textareaValue;
+
+  // 2) Si la page a été rechargée, le commentaire peut déjà être rendu
+  // dans la carte de convocation sans être recopié dans le textarea.
+  const renderedComment = document.querySelector("#matchConvocationSub .match-convoc-comment");
+  const renderedValue = renderedComment ? String(renderedComment.textContent || "").trim() : "";
+  if (renderedValue) return renderedValue;
+
+  // 3) Lecture dans les données chargées. On conserve la recherche exacte,
+  // puis un secours souple pour tolérer les anciennes variantes de clé match.
+  const exactRows = getConvocationsForMatch(m);
+  let row = exactRows.find(c => String(c.commentaire || "").trim());
+  if (row) return String(row.commentaire || "").trim();
+
+  const expectedTeam = cleanCompare(m && m.equipe || "");
+  const expectedDate = normalize(m && m.date || "");
+  const expectedTime = normalize(m && m.heure || "");
+  const expectedOpponent = normalize(m && m.adversaire || "");
+
+  row = (state.convocations || []).find(c => {
+    if (normalize(c.statut || "").includes("annul")) return false;
+    if (cleanCompare(c.equipe || "") !== expectedTeam) return false;
+    if (!String(c.commentaire || "").trim()) return false;
+
+    const storedMatch = normalize(c.match || "");
+    return (!expectedDate || storedMatch.includes(expectedDate)) &&
+           (!expectedTime || storedMatch.includes(expectedTime)) &&
+           (!expectedOpponent || storedMatch.includes(expectedOpponent));
+  });
+
   return row ? String(row.commentaire || "").trim() : "";
 }
 
@@ -8468,11 +8500,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.39 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.40 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 04/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.40 — Coach : récupération fiable du commentaire coach dans le message WhatsApp</li>
         <li>V63.39 — Coach : titres et icône WhatsApp à nouveau pilotés par CONFIG</li>
         <li>V63.38 — Coach : message WhatsApp de convocation enrichi avec commentaire coach et organisation</li>
         <li>V63.37 — Coach : accès Effectif / licences rendu plus sobre et compact</li>
@@ -9138,7 +9171,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.39-COACH-WHATSAPP-CONVOCATION-CONFIG";
+window.CAM_BASKET_VERSION = "V63.40-COACH-COMMENTAIRE-WHATSAPP-FIABLE";
 
 </script>
 
