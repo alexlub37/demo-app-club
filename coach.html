@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.37 - Coach - bouton effectif/licences sobre -->
+<!-- Démo App Club V63.39 - Coach - WhatsApp convocation complet + CONFIG respectée -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.37-COACH-EFFECTIF-SOBRE" />
+  <meta name="cam-basket-version" content="V63.39-COACH-WHATSAPP-CONVOCATION-CONFIG" />
   <style>
     :root{
       --bg:#050505;
@@ -3511,7 +3511,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.37 COACH</button>
+    ">V63.39 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -4200,9 +4200,9 @@ small{
     let APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
     let APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
     let APP_HOME_CLUB_NAME = APP_CONFIG.HOME_CLUB_NAME || APP_CLUB_NAME;
-    let APP_WHATSAPP_CONVOCATION_TITLE = "Convocation " + APP_CLUB_NAME;
-    let APP_WHATSAPP_MATCH_ADDED_TITLE = "Nouveau match " + APP_CLUB_NAME;
-    let APP_WHATSAPP_MATCH_MODIFIED_TITLE = "Match modifié " + APP_CLUB_NAME;
+    let APP_WHATSAPP_CONVOCATION_TITLE = APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME);
+    let APP_WHATSAPP_MATCH_ADDED_TITLE = APP_CONFIG.WHATSAPP_MATCH_ADDED_TITLE || ("Nouveau match " + APP_CLUB_NAME);
+    let APP_WHATSAPP_MATCH_MODIFIED_TITLE = APP_CONFIG.WHATSAPP_MATCH_MODIFIED_TITLE || ("Match modifié " + APP_CLUB_NAME);
     let APP_WHATSAPP_MATCH_REPLY_TEXT = APP_CONFIG.WHATSAPP_MATCH_REPLY_TEXT || "Merci de répondre dans l’application :";
     let APP_WHATSAPP_ICON = APP_CONFIG.WHATSAPP_ICON !== undefined ? String(APP_CONFIG.WHATSAPP_ICON || "") : "📣";
     function appEscapeRegExp(str){
@@ -4282,10 +4282,32 @@ small{
       const rawIcon = cfgRawValue("whatsapp_icon", "__APP_CONFIG_FALLBACK__");
       if (rawIcon !== "__APP_CONFIG_FALLBACK__") APP_WHATSAPP_ICON = rawIcon;
 
-      APP_WHATSAPP_CONVOCATION_TITLE = "Convocation " + APP_CLUB_NAME;
-      APP_WHATSAPP_MATCH_ADDED_TITLE = "Nouveau match " + APP_CLUB_NAME;
-      APP_WHATSAPP_MATCH_MODIFIED_TITLE = "Match modifié " + APP_CLUB_NAME;
-      APP_WHATSAPP_MATCH_REPLY_TEXT = cfgValue("whatsapp_match_reply_text", "Merci de répondre dans l’application :");
+      // Les libellés WhatsApp restent personnalisables depuis CONFIG / PARAMETRES_CLUB.
+      // Les alias garantissent la compatibilité avec les anciennes copies du classeur.
+      const cfgFirst = (keys, fallback) => {
+        for (const key of keys) {
+          const value = cfgRawValue(key, "");
+          if (value !== "") return value;
+        }
+        return fallback;
+      };
+
+      APP_WHATSAPP_CONVOCATION_TITLE = cfgFirst(
+        ["whatsapp_convocation_title", "whatsapp_titre_convocation", "titre_convocation"],
+        APP_CONFIG.WHATSAPP_CONVOCATION_TITLE || ("Convocation " + APP_CLUB_NAME)
+      );
+      APP_WHATSAPP_MATCH_ADDED_TITLE = cfgFirst(
+        ["whatsapp_match_added_title", "whatsapp_titre_nouveau_match", "titre_nouveau_match"],
+        APP_CONFIG.WHATSAPP_MATCH_ADDED_TITLE || ("Nouveau match " + APP_CLUB_NAME)
+      );
+      APP_WHATSAPP_MATCH_MODIFIED_TITLE = cfgFirst(
+        ["whatsapp_match_modified_title", "whatsapp_titre_match_modifie", "titre_match_modifie"],
+        APP_CONFIG.WHATSAPP_MATCH_MODIFIED_TITLE || ("Match modifié " + APP_CLUB_NAME)
+      );
+      APP_WHATSAPP_MATCH_REPLY_TEXT = cfgFirst(
+        ["whatsapp_match_reply_text", "whatsapp_texte_reponse", "texte_reponse"],
+        APP_CONFIG.WHATSAPP_MATCH_REPLY_TEXT || "Merci de répondre dans l’application :"
+      );
     }
 
     function getOrganisationQuotas() {
@@ -7567,6 +7589,48 @@ async function annulerConvocation() {
   }
 }
 
+// V63.39 — WhatsApp convocation enrichi + respect des clés CONFIG existantes.
+function whatsappUniqueNames(names) {
+  const seen = new Set();
+  return (names || []).map(v => String(v || "").trim()).filter(name => {
+    const key = normalize(name);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function getWhatsappConvocationComment(m) {
+  const rows = getConvocationsForMatch(m);
+  const row = rows.find(c => String(c.commentaire || "").trim());
+  return row ? String(row.commentaire || "").trim() : "";
+}
+
+function getWhatsappConvocationOrganisation(m) {
+  const isHome = isHomeType(m && m.type);
+  const organisation = { maillots: [], boisson: [], nourriture: [] };
+
+  (lastCoachPresentPlayers || []).forEach(player => {
+    const prenom = String(player.prenom || "").trim();
+    const apport = normalize(player.apport || "");
+    if (!prenom || !apport) return;
+
+    if (apport.includes("maillot")) organisation.maillots.push(prenom);
+    if (isHome && apport.includes("boisson")) organisation.boisson.push(prenom);
+    if (isHome && apport.includes("nourriture")) organisation.nourriture.push(prenom);
+  });
+
+  organisation.maillots = whatsappUniqueNames(organisation.maillots);
+  organisation.boisson = whatsappUniqueNames(organisation.boisson);
+  organisation.nourriture = whatsappUniqueNames(organisation.nourriture);
+
+  const lines = [];
+  if (organisation.maillots.length) lines.push(`• Maillots : ${organisation.maillots.join(", ")}`);
+  if (organisation.boisson.length) lines.push(`• Boisson : ${organisation.boisson.join(", ")}`);
+  if (organisation.nourriture.length) lines.push(`• Nourriture : ${organisation.nourriture.join(", ")}`);
+  return lines;
+}
+
 function envoyerWhatsappConvocation() {
   const m = state.currentOpenMatch;
   if (!m) return;
@@ -7579,20 +7643,30 @@ function envoyerWhatsappConvocation() {
     joueurs = getConvocationsForMatch(m).map(c => c.joueur).filter(Boolean);
   }
 
+  joueurs = whatsappUniqueNames(joueurs);
   if (!joueurs.length) { alert("Aucun joueur convoqué."); return; }
 
   const titreMatch = buildMatchDisplay(m);
-  const message =
-`${APP_WHATSAPP_ICON ? APP_WHATSAPP_ICON + " " : ""}${APP_WHATSAPP_CONVOCATION_TITLE}
+  const commentaireCoach = getWhatsappConvocationComment(m);
+  const organisationLines = getWhatsappConvocationOrganisation(m);
+  const convocationIcon = APP_WHATSAPP_ICON || "📣";
 
-${titreMatch}
-${m.date || ""} ${m.heure || ""}
+  const sections = [
+    `${convocationIcon} ${APP_WHATSAPP_CONVOCATION_TITLE}`,
+    `${titreMatch}\n${m.date || ""} ${m.heure || ""}`,
+    `Équipe : ${m.equipe || ""}`,
+    `Joueurs convoqués :\n${joueurs.map(j => "• " + j).join("\n")}`
+  ];
 
-Équipe : ${m.equipe || ""}
+  if (commentaireCoach) {
+    sections.push(`📢 Info coach :\n${commentaireCoach}`);
+  }
 
-Joueurs convoqués :
-${joueurs.map(j => "• " + j).join("\n")}`;
+  if (organisationLines.length) {
+    sections.push(`📋 Organisation :\n${organisationLines.join("\n")}`);
+  }
 
+  const message = sections.join("\n\n");
   window.open("https://wa.me/?text=" + encodeURIComponent(message), "_blank");
 }
 
@@ -8394,11 +8468,13 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.37 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.39 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 02/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 04/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.39 — Coach : titres et icône WhatsApp à nouveau pilotés par CONFIG</li>
+        <li>V63.38 — Coach : message WhatsApp de convocation enrichi avec commentaire coach et organisation</li>
         <li>V63.37 — Coach : accès Effectif / licences rendu plus sobre et compact</li>
         <li>V63.36 — Coach : section Effectif / licences configurable, limitée à l’équipe sélectionnée</li>
         <li>V63.35 — Coach : matchs en forfait clairement annulés, réponses, organisation et convocations masquées</li>
@@ -9062,7 +9138,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.37-COACH-EFFECTIF-SOBRE";
+window.CAM_BASKET_VERSION = "V63.39-COACH-WHATSAPP-CONVOCATION-CONFIG";
 
 </script>
 
