@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.40 - Coach - Commentaire WhatsApp fiable + CONFIG respectée -->
+<!-- Démo App Club V63.41 - Coach - Convocation restaurée et statut À remplacer visible -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.40-COACH-COMMENTAIRE-WHATSAPP-FIABLE" />
+  <meta name="cam-basket-version" content="V63.41-COACH-CONVOCATION-RESTAUREE" />
   <style>
     :root{
       --bg:#050505;
@@ -3511,7 +3511,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.40 COACH</button>
+    ">V63.41 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -4938,12 +4938,7 @@ small{
     }
 
     function getConvocationsForMatch(m){
-      const key = buildMatchKey(m);
-      return (state.convocations || []).filter(c =>
-        String(c.match || "").trim() === key &&
-        cleanCompare(c.equipe) === cleanCompare(m.equipe || "") &&
-        !normalize(c.statut).includes("annul")
-      );
+      return getConvocationRowsForMatch(m);
     }
 
     function computeResponseSummaryForMatch(m, responseRows){
@@ -7567,8 +7562,7 @@ async function annulerConvocation() {
 
     // Vider localement
     state.convocations = (state.convocations || []).filter(c =>
-      !(c.match === buildMatchKey(m) &&
-        cleanCompare(c.equipe) === cleanCompare(m.equipe || ""))
+      !convocationMatchesCurrentMatch(c, m)
     );
     // On garde state.codeCoach en mémoire pour pouvoir refaire une convocation
     chargerConvocationEnregistree(m);
@@ -7589,6 +7583,7 @@ async function annulerConvocation() {
   }
 }
 
+// V63.41 — Restauration fiable de la convocation dans Coach après rechargement, avec statut « À remplacer ».
 // V63.40 — WhatsApp convocation enrichi, CONFIG respectée et commentaire coach récupéré de façon fiable.
 function whatsappUniqueNames(names) {
   const seen = new Set();
@@ -7940,90 +7935,6 @@ function cleanCompare(v){
       return normalize(v).replace(/[^a-z0-9]/g, "");
     }
 
-
-function uniqueNamesClean(names){
-      const seen = new Set();
-      const out = [];
-
-      (names || []).forEach(name => {
-        const cleanName = String(name || "").trim();
-        const key = cleanCompare(cleanName);
-        if (!cleanName || seen.has(key)) return;
-        seen.add(key);
-        out.push(cleanName);
-      });
-
-      return out;
-    }
-
-
-    function chargerConvocationEnregistree(m){
-      const card = document.getElementById("matchConvocationCard");
-      const sub = document.getElementById("matchConvocationSub");
-      const list = document.getElementById("matchConvocationList");
-      const btnAnnuler = document.getElementById("btnAnnulerConvocation");
-
-
-      if (!card || !sub || !list || !m) return;
-
-      const key = buildMatchKey(m);
-
-      // DEBUG temporaire — à supprimer après vérification
-      console.log("=== DEBUG CONVOC ===");
-      console.log("key attendue:", key);
-      console.log("convocations dans state:", state.convocations.length);
-      state.convocations.slice(0,3).forEach((c,i) => console.log(`convoc[${i}].match:`, c.match, "| equipe:", c.equipe));
-
-      // Recherche souple : clé complète OU équipe+date+heure
-      const rows = (state.convocations || []).filter(c => {
-        const cKey = String(c.match || "").trim().toLowerCase()
-          .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-        const mKey = key.trim().toLowerCase()
-          .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-        if (cKey === mKey) return true;
-        // Fallback : même équipe + même date + même heure
-        return cleanCompare(c.equipe) === cleanCompare(m.equipe || "") &&
-               String(c.match || "").includes(String(m.date || "")) &&
-               String(c.match || "").includes(String(m.heure || "").replace("h","h"));
-      });
-
-      const hasConvoc = rows.length > 0;
-      // Boutons dans section coach
-      const btnWA = document.getElementById("btnWhatsappCoach");
-      if (btnAnnuler)  btnAnnuler.style.display  = hasConvoc ? "block" : "none";
-
-      if (btnWA)       btnWA.style.display       = hasConvoc ? "block" : "none";
-
-      if (!rows.length) {
-        card.style.display = "none";
-        sub.textContent = "";
-        list.innerHTML = "";
-        return;
-      }
-
-      const joueurs = rows.map(r => r.joueur).filter(Boolean);
-      const commentaire = rows.find(r => r.commentaire)?.commentaire || "";
-
-      card.style.display = "block";
-      // Bouton annuler — visible dès que la convocation est affichée
-      if (btnAnnuler)  btnAnnuler.style.display  = "block";
-      if (btnAnnuler2) btnAnnuler2.style.display = "block";
-      sub.textContent = joueurs.length + " joueur(s) convoqué(s)";
-      list.innerHTML = joueurs.map((j, idx) =>
-        `<div class="match-convoc-player">${idx + 1}. ${escapeHtml(j)}</div>`
-      ).join("");
-
-      if (commentaire) {
-        sub.innerHTML = `${joueurs.length} joueur(s) convoqué(s)<br><span style="color:var(--accent);font-weight:700;">${escapeHtml(commentaire)}</span>`;
-      }
-    }
-
-
-    
-function cleanCompare(v){
-      return normalize(v).replace(/[^a-z0-9]/g, "");
-    }
-
     function uniqueNamesClean(names){
       const seen = new Set();
       const out = [];
@@ -8037,24 +7948,65 @@ function cleanCompare(v){
       return out;
     }
 
+    // V63.41 — une convocation peut avoir été enregistrée avec une ancienne
+    // représentation du type, de l'heure ou de la clé match. On la compare
+    // avec le même parseur robuste que les réponses joueurs.
+    function convocationMatchesCurrentMatch(convocation, match){
+      if (!convocation || !match) return false;
+
+      if (cleanCompare(convocation.equipe) !== cleanCompare(match.equipe || "")) return false;
+
+      const storedRaw = String(convocation.match || "").trim();
+      const expectedRaw = buildMatchKey(match);
+      if (storedRaw === expectedRaw) return true;
+
+      const storedKey = buildResponseMatchKeyFromText(storedRaw);
+      const expectedKey = buildMatchKey(match);
+      if (storedKey && expectedKey && storedKey === expectedKey) return true;
+
+      // Dernier secours strict : équipe déjà contrôlée + adversaire + date + heure.
+      // Cela reste assez précis pour ne pas mélanger deux matchs le même jour.
+      const raw = normalize(storedRaw).replace(/:/g, "h");
+      const expectedDate = normalize(match.date || "");
+      const expectedHour = normalize(String(match.heure || "").replace(":", "h"));
+      const expectedOpponent = normalize(match.adversaire || "");
+      const expectedType = normalize(badgeForType(match.type).label || match.type || "");
+
+      return !!expectedDate && !!expectedHour && !!expectedOpponent &&
+        raw.includes(expectedDate) &&
+        raw.includes(expectedHour) &&
+        raw.includes(expectedOpponent) &&
+        (!expectedType || raw.includes(expectedType));
+    }
+
+    function getConvocationRowsForMatch(match, includeCancelled = false){
+      return (state.convocations || []).filter(c => {
+        if (!convocationMatchesCurrentMatch(c, match)) return false;
+        return includeCancelled || !normalize(c.statut).includes("annul");
+      });
+    }
+
     function chargerConvocationEnregistree(m){
       const card = document.getElementById("matchConvocationCard");
       const list = document.getElementById("matchConvocationList");
       const sub = document.getElementById("matchConvocationSub");
+      const btnAnnuler = document.getElementById("btnAnnulerConvocation");
+      const btnWA = document.getElementById("btnWhatsappCoach");
+
       if (!card || !list || !m) return;
 
-      const key = buildMatchKey(m);
-      const rows = (state.convocations || []).filter(c =>
-        String(c.match || "").trim() === key &&
-        cleanCompare(c.equipe) === cleanCompare(m.equipe || "")
-      );
-
-      const items = rows
-        .filter(r => !normalize(r.statut).includes("annul"))
-        .map(r => ({ nom: r.joueur, statut: r.statut || "Convoqué" }));
+      const rows = getConvocationRowsForMatch(m);
+      const items = rows.map(r => ({
+        nom: String(r.joueur || "").trim(),
+        statut: String(r.statut || "Convoqué").trim()
+      })).filter(x => x.nom);
       const commentaire = rows.find(r => String(r.commentaire || "").trim())?.commentaire || "";
+      const hasConvoc = items.length > 0;
 
-      if (!items.length) {
+      if (btnAnnuler) btnAnnuler.style.display = hasConvoc ? "block" : "none";
+      if (btnWA) btnWA.style.display = hasConvoc ? "block" : "none";
+
+      if (!hasConvoc) {
         card.style.display = "none";
         list.innerHTML = "";
         if (sub) sub.textContent = "";
@@ -8073,12 +8025,17 @@ function cleanCompare(v){
       const card = document.getElementById("matchConvocationCard");
       const list = document.getElementById("matchConvocationList");
       const sub = document.getElementById("matchConvocationSub");
+      const btnAnnuler = document.getElementById("btnAnnulerConvocation");
+      const btnWA = document.getElementById("btnWhatsappCoach");
 
       if (!card || !list) return;
 
       const items = (joueurs || []).map(j => {
         if (typeof j === "string") return { nom: j, statut: "Convoqué" };
-        return { nom: String(j.nom || j.joueur || "").trim(), statut: String(j.statut || "Convoqué").trim() };
+        return {
+          nom: String(j.nom || j.joueur || "").trim(),
+          statut: String(j.statut || "Convoqué").trim()
+        };
       }).filter(x => x.nom);
 
       const seen = new Set();
@@ -8094,11 +8051,15 @@ function cleanCompare(v){
         card.style.display = "none";
         list.innerHTML = "";
         if (sub) sub.textContent = "";
+        if (btnAnnuler) btnAnnuler.style.display = "none";
+        if (btnWA) btnWA.style.display = "none";
         return;
       }
 
       const nbRemplacer = cleanItems.filter(x => statutConvocationRemplacement(x.statut)).length;
       card.style.display = "block";
+      if (btnAnnuler) btnAnnuler.style.display = "block";
+      if (btnWA) btnWA.style.display = "block";
 
       if (sub) {
         sub.innerHTML = `
@@ -8153,7 +8114,7 @@ function cleanCompare(v){
 
         const key = buildMatchKey(m);
         state.convocations = (state.convocations || []).filter(c =>
-          !(String(c.match || "").trim() === key && cleanCompare(c.equipe) === cleanCompare(m.equipe || ""))
+          !convocationMatchesCurrentMatch(c, m)
         );
 
         joueursClean.forEach(j => {
@@ -8500,11 +8461,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.40 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.41 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 04/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 06/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.41 — Coach : convocation restaurée après rechargement et statut « À remplacer » visible côté Coach</li>
         <li>V63.40 — Coach : récupération fiable du commentaire coach dans le message WhatsApp</li>
         <li>V63.39 — Coach : titres et icône WhatsApp à nouveau pilotés par CONFIG</li>
         <li>V63.38 — Coach : message WhatsApp de convocation enrichi avec commentaire coach et organisation</li>
@@ -9171,7 +9133,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.40-COACH-COMMENTAIRE-WHATSAPP-FIABLE";
+window.CAM_BASKET_VERSION = "V63.41-COACH-CONVOCATION-RESTAUREE";
 
 </script>
 
