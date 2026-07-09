@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.64 - Joueurs - couleurs distinctes Domicile/Extérieur et forfaits rouges -->
+<!-- Démo App Club V62.65 - Joueurs - couleurs distinctes Domicile/Extérieur et forfaits/liserés rouges -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.64-JOUEURS-DOM-EXT-FORFAITS-ROUGES" />
+  <meta name="app-version" content="V62.65-JOUEURS-DOM-EXT-FORFAITS-LISERES-ROUGES" />
   <style>
     :root{
       --bg:#050505;
@@ -3349,7 +3349,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.64 JOUEURS</button>
+    ">V62.65 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -8362,11 +8362,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.64 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.65 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.65 — Joueurs : le liseré des cartes en forfait est rouge, comme le badge de forfait</li>
         <li>V62.64 — Joueurs : tous les badges de forfait sont rouges (forfait adverse et forfait du club)</li>
         <li>V62.63 — Joueurs : badges Domicile en bleu et Extérieur en orange, indépendants des couleurs du club</li>
         <li>V62.62 — Joueurs : le badge Forfait du club reste rouge après rafraîchissement</li>
@@ -8731,7 +8732,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.64-JOUEURS-DOM-EXT-FORFAITS-ROUGES";
+window.CAM_BASKET_VERSION = "V62.65-JOUEURS-DOM-EXT-FORFAITS-LISERES-ROUGES";
 
 </script>
 
@@ -9605,6 +9606,17 @@ html body .match-list-status.forfait-cam.role-badge{
   -webkit-text-fill-color:#ffb3b3!important;
   border-color:rgba(224,64,64,.82)!important;
   box-shadow:none!important;
+}
+</style>
+
+<style id="_liseres_forfaits_rouges_v6265">
+/* V62.65 — Le liseré d'alerte des cartes en forfait utilise
+   le même rouge sémantique que les badges de forfait. */
+html body .item.has-forfait{
+  border-left:5px solid #e04040!important;
+}
+html body .weekend-match.has-forfait{
+  border-left-color:#e04040!important;
 }
 </style>
 
