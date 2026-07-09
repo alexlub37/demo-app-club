@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.62 - Joueurs - forfait du club rouge après rafraîchissement -->
+<!-- Démo App Club V62.63 - Joueurs - couleurs distinctes Domicile et Extérieur -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.62-JOUEURS-COULEUR-FORFAIT-CLUB" />
+  <meta name="app-version" content="V62.63-JOUEURS-COULEURS-DOM-EXT" />
   <style>
     :root{
       --bg:#050505;
@@ -3349,7 +3349,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.62 JOUEURS</button>
+    ">V62.63 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -8362,11 +8362,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.62 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.63 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 03/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V62.63 — Joueurs : badges Domicile en bleu et Extérieur en orange, indépendants des couleurs du club</li>
         <li>V62.62 — Joueurs : le badge Forfait du club reste rouge après rafraîchissement</li>
         <li>V62.61 — Joueurs : Mes matchs se reconstruit automatiquement après chargement ou clic sur Mettre à jour</li>
         <li>V62.60 — Joueurs : badge Forfait adverse / Forfait du club visible dans la liste Mes matchs</li>
@@ -8729,7 +8730,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.62-JOUEURS-COULEUR-FORFAIT-CLUB";
+window.CAM_BASKET_VERSION = "V62.63-JOUEURS-COULEURS-DOM-EXT";
 
 </script>
 
@@ -9555,6 +9556,33 @@ html body .match-list-status.forfait-cam.role-badge{
   color:#ffb3b3!important;
   -webkit-text-fill-color:#ffb3b3!important;
   border-color:rgba(224,64,64,.78)!important;
+  box-shadow:none!important;
+}
+</style>
+
+
+<style id="_couleurs_dom_ext_v6263">
+/* V62.63 — Couleurs sémantiques fixes pour distinguer immédiatement
+   le lieu du match, même lorsque la couleur secondaire du club est verte. */
+html body .weekend-match-type.type-dom,
+html body .weekend-match-type.type-dom.role-badge,
+html body .badge-home,
+html body .badge-home.role-badge{
+  background:rgba(59,130,246,.22)!important;
+  color:#9dccff!important;
+  -webkit-text-fill-color:#9dccff!important;
+  border-color:rgba(59,130,246,.92)!important;
+  box-shadow:none!important;
+}
+
+html body .weekend-match-type.type-ext,
+html body .weekend-match-type.type-ext.role-badge,
+html body .badge-away,
+html body .badge-away.role-badge{
+  background:rgba(255,138,31,.22)!important;
+  color:#ffc078!important;
+  -webkit-text-fill-color:#ffc078!important;
+  border-color:rgba(255,138,31,.94)!important;
   box-shadow:none!important;
 }
 </style>
