@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.43 - Gestion - couleurs Domicile/Extérieur et forfaits cohérentes -->
+<!-- Démo App Club V65.44 - Gestion - portail unique et bouton Mes espaces -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.43-GESTION-COULEURS-DOM-EXT-FORFAITS" />
+  <meta name="app-version" content="V65.44-GESTION-PORTAIL-UNIQUE" />
   <style>
     :root{
       --bg:#050505;
@@ -3006,8 +3006,43 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 }
 </style>
 
+
+<style id="_portail_unique_switch_v1">
+/* Portail unique V1.00 — accès commun aux espaces Joueur, Coach et Gestion. */
+.portal-spaces-switch{
+  position:fixed;
+  top:calc(env(safe-area-inset-top, 0px) + 8px);
+  right:8px;
+  z-index:2147483000;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  padding:7px 11px;
+  border:1px solid rgba(var(--accent-rgb, 102,153,0),.72);
+  border-radius:999px;
+  background:rgba(0,0,0,.76);
+  color:var(--text,#fff)!important;
+  -webkit-text-fill-color:var(--text,#fff)!important;
+  text-decoration:none!important;
+  font:800 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 6px 18px rgba(0,0,0,.38);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  touch-action:manipulation;
+}
+.portal-spaces-switch:active{ transform:scale(.97); }
+.portal-spaces-switch__icon{font-size:15px;line-height:1}
+@media(max-width:420px){
+  .portal-spaces-switch{padding:7px 9px;font-size:11px}
+}
+</style>
+
 </head>
 <body class="loading gestion-app">
+<a class="portal-spaces-switch" href="portail.html" aria-label="Ouvrir Mes espaces" onclick="try{localStorage.setItem('demo_app_club_last_space_v1','gestion')}catch(e){}"><span class="portal-spaces-switch__icon">⇄</span><span>Mes espaces</span></a>
+
 
 <!-- ══ SPLASH SCREEN ══ -->
 <div id="splashScreen" style="
@@ -3120,7 +3155,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.43 GESTION</button>
+    ">V65.44 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -7709,11 +7744,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.43 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.44 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.44 — Gestion : ajout du bouton « Mes espaces » pour revenir au portail unique</li>
         <li>V65.43 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
         <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
@@ -8504,7 +8540,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.43-GESTION-COULEURS-DOM-EXT-FORFAITS";
+window.CAM_BASKET_VERSION = "V65.44-GESTION-PORTAIL-UNIQUE";
 
 </script>
 

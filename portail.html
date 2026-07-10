@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!-- Démo App Club — Portail unique V1.00 -->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="App Club">
+  <meta name="app-version" content="V1.00-PORTAIL-UNIQUE">
+  <title>Application du club</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
+  <link rel="manifest" href="manifest-portail.webmanifest">
+  <style>
+    :root{
+      --bg:#050505;--text:#fff;--muted:#cfcfcf;--accent:#4e8a47;--accent-rgb:78,138,71;
+      --primary:#70a663;--primary-text:#000;--panel:rgba(14,18,15,.88);--panel2:rgba(22,27,23,.82);
+      --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    body{min-height:100dvh;overflow-x:hidden;background:
+      radial-gradient(circle at 50% -10%,rgba(var(--accent-rgb),.20),transparent 44%),var(--bg)}
+    body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.23;background:
+      linear-gradient(135deg,transparent 0 45%,rgba(var(--accent-rgb),.18) 45.4% 46%,transparent 46.4% 100%),
+      radial-gradient(ellipse at 14% 40%,transparent 0 20%,rgba(var(--accent-rgb),.18) 20.5% 21%,transparent 21.5%),
+      radial-gradient(ellipse at 86% 70%,transparent 0 22%,rgba(var(--accent-rgb),.16) 22.5% 23%,transparent 23.5%)}
+    body[data-fond="neutre"]::before{display:none}
+    .app{position:relative;z-index:1;width:min(100%,680px);margin:0 auto;padding:calc(var(--safe-top) + 18px) 16px calc(var(--safe-bottom) + 28px)}
+    .topbar{display:flex;justify-content:flex-end;min-height:30px}
+    .version{font-size:10px;font-weight:800;color:var(--muted);opacity:.72;border:1px solid rgba(var(--accent-rgb),.42);border-radius:999px;padding:5px 8px}
+    .hero{text-align:center;padding:0 10px 22px}
+    .logo{display:block;width:132px;height:132px;object-fit:contain;margin:0 auto 10px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.42))}
+    .club-name{margin:0;color:var(--accent);font-size:13px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+    h1{margin:13px 0 8px;font-size:clamp(31px,8.6vw,50px);line-height:1.02;font-weight:950;letter-spacing:-.035em}
+    .subtitle{margin:0 auto;max-width:520px;color:var(--muted);font-size:17px;line-height:1.4}
+    .helper{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:17px;color:color-mix(in srgb,var(--text) 80%,transparent);font-size:14px}
+    .helper svg{width:19px;color:var(--accent)}
+    .panel{background:linear-gradient(180deg,var(--panel),rgba(4,6,5,.82));border:1px solid rgba(var(--accent-rgb),.48);box-shadow:0 18px 42px rgba(0,0,0,.34);border-radius:28px;padding:18px;margin:0 0 16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    .section-title{display:flex;align-items:center;gap:10px;margin:0 0 13px;font-size:21px;font-weight:900}
+    .section-title::before{content:"";width:5px;height:28px;border-radius:999px;background:var(--accent)}
+    .role-list{display:grid;gap:12px}
+    .role-card{width:100%;display:grid;grid-template-columns:64px 1fr 42px;gap:13px;align-items:center;text-align:left;border:1.5px solid rgba(255,255,255,.20);background:var(--panel2);color:var(--text);border-radius:22px;padding:15px;min-height:102px;cursor:pointer;box-shadow:none;transition:.16s ease}
+    .role-card:active{transform:scale(.985)}
+    .role-card.selected{border-color:var(--accent);background:linear-gradient(110deg,rgba(var(--accent-rgb),.25),rgba(var(--accent-rgb),.08));box-shadow:0 0 0 1px rgba(var(--accent-rgb),.18) inset}
+    .role-card[hidden]{display:none}
+    .role-icon{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:rgba(var(--accent-rgb),.16);color:var(--accent)}
+    .role-card:not(.selected) .role-icon{color:color-mix(in srgb,var(--text) 70%,transparent);background:rgba(255,255,255,.07)}
+    .role-icon svg{width:34px;height:34px}
+    .role-title{font-size:20px;font-weight:900;line-height:1.15;margin-bottom:5px}
+    .role-desc{font-size:14px;line-height:1.35;color:var(--muted)}
+    .selector{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.42);display:grid;place-items:center;color:#fff;font-size:21px;font-weight:900}
+    .selected .selector{background:var(--accent);border-color:var(--accent)}
+    .primary-btn,.outline-btn{width:100%;border-radius:20px;min-height:58px;padding:13px 18px;font-size:19px;font-weight:950;cursor:pointer}
+    .primary-btn{border:1px solid var(--primary);background:var(--primary);color:var(--primary-text);box-shadow:0 12px 28px rgba(0,0,0,.28)}
+    .outline-btn{border:1.5px solid var(--accent);background:rgba(0,0,0,.28);color:var(--text);margin-top:11px}
+    .text-btn{width:100%;border:0;background:transparent;color:var(--accent);font-size:15px;font-weight:850;padding:14px 8px;cursor:pointer}
+    .notice{display:flex;gap:11px;align-items:flex-start;margin-top:14px;padding:13px 14px;border:1px solid rgba(255,255,255,.16);border-radius:17px;color:var(--muted);background:rgba(255,255,255,.035);font-size:13px;line-height:1.4}
+    .notice svg{width:22px;min-width:22px;color:var(--accent)}
+    .active-summary{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+    .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--accent);border-radius:999px;padding:8px 11px;background:rgba(var(--accent-rgb),.12);font-weight:800;font-size:13px}
+    .spaces{display:grid;gap:12px}
+    .space-link{display:grid;grid-template-columns:52px 1fr 28px;align-items:center;gap:13px;text-decoration:none;color:var(--text);border:1.5px solid var(--accent);border-radius:20px;padding:14px;background:linear-gradient(110deg,rgba(var(--accent-rgb),.20),rgba(0,0,0,.20));min-height:86px}
+    .space-link:active{transform:scale(.985)}
+    .space-link .role-icon{width:50px;height:50px}
+    .space-title{font-size:18px;font-weight:900;margin-bottom:4px}
+    .space-desc{color:var(--muted);font-size:13px;line-height:1.3}
+    .chevron{font-size:30px;color:var(--accent);text-align:center}
+    .empty{padding:18px;text-align:center;color:var(--muted)}
+    .status{min-height:24px;text-align:center;color:#ffcf70;font-weight:750;font-size:13px;margin:8px 0 0}
+    .loading-cover{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:var(--bg);transition:opacity .2s}
+    .loading-cover.done{opacity:0;pointer-events:none}
+    .spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.18);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(min-width:650px){.app{padding-left:26px;padding-right:26px}.panel{padding:24px}.role-card{padding:18px 20px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.spinner{animation:none}}
+  </style>
+</head>
+<body data-fond="neutre">
+<div class="loading-cover" id="loadingCover"><div class="spinner" aria-label="Chargement"></div></div>
+<main class="app">
+  <div class="topbar"><span class="version">PORTAIL V1.00</span></div>
+  <section class="hero">
+    <img id="clubLogo" class="logo" src="logo.png" alt="Logo du club">
+    <p id="clubName" class="club-name">Démo App Club</p>
+    <h1 id="mainTitle">Bienvenue dans l’application du club</h1>
+    <p id="mainSubtitle" class="subtitle">Sélectionnez vos rôles pour personnaliser vos espaces.</p>
+    <div class="helper" id="selectionHelper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Vous pouvez sélectionner plusieurs rôles
+    </div>
+  </section>
+
+  <section id="setupPanel" class="panel" hidden>
+    <h2 class="section-title">Mes rôles</h2>
+    <div class="role-list" id="roleChooser"></div>
+    <div class="status" id="setupStatus" aria-live="polite"></div>
+    <button class="primary-btn" id="continueBtn" type="button">Continuer ›</button>
+    <div class="notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Le choix d’un rôle affiche l’espace correspondant. Les accès Coach et Gestion restent protégés par leurs codes.</span>
+    </div>
+  </section>
+
+  <section id="spacesPanel" hidden>
+    <div class="panel">
+      <h2 class="section-title">Mes espaces</h2>
+      <div class="active-summary" id="activeSummary"></div>
+    </div>
+    <div class="panel">
+      <h2 class="section-title">Ouvrir un espace</h2>
+      <div class="spaces" id="spaceLinks"></div>
+      <button class="outline-btn" id="editRolesBtn" type="button">Modifier mes rôles</button>
+      <button class="text-btn" id="resetBtn" type="button">Réinitialiser ce téléphone</button>
+    </div>
+    <div class="notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>La sélection est mémorisée uniquement sur ce téléphone. Elle ne remplace pas les codes de sécurité.</span>
+    </div>
+  </section>
+</main>
+<script src="app-config.js"></script>
+<script>
+(() => {
+  'use strict';
+  const STORAGE_KEY = 'demo_app_club_roles_v1';
+  const LAST_KEY = 'demo_app_club_last_space_v1';
+  const icon = {
+    player:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>',
+    coach:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h7l3-4h4l3 3-3 3h-4l-3-2H3z"/><circle cx="6" cy="12" r="2"/><path d="M18 6V3M21 7l2-2M16 5l-1-2"/></svg>',
+    gestion:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.09A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.09A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.09A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.4.27.75.6 1 .99.24.39.39.83.4 1.3V12h.2v4h-.09A1.7 1.7 0 0 0 19.4 15z"/></svg>'
+  };
+  const roles = {
+    player:{id:'player',title:'Joueur / Parent',desc:'Consulter les matchs et répondre',spaceDesc:'Matchs, réponses et organisation',file:'index.html',icon:icon.player},
+    coach:{id:'coach',title:'Coach',desc:'Suivre les réponses et gérer les convocations',spaceDesc:'Convocations, réponses et suivi d’équipe',file:'coach.html',icon:icon.coach},
+    gestion:{id:'gestion',title:'Gestion',desc:'Administrer les matchs, joueurs et paramètres',spaceDesc:'Administration du club',file:'gestion.html',icon:icon.gestion}
+  };
+  let config = {};
+  let available = {player:true,coach:true,gestion:true};
+  let draft = [];
+
+  const $ = id => document.getElementById(id);
+  const normalize = v => String(v ?? '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const boolCfg = (key, fallback=true) => {
+    const v = normalize(config[key]);
+    if (!v) return fallback;
+    if (['oui','true','1','yes','actif','active'].includes(v)) return true;
+    if (['non','false','0','no','inactif','inactive'].includes(v)) return false;
+    return fallback;
+  };
+  const color = (key, fallback) => {
+    const v=String(config[key]||'').trim();
+    if (/^#[0-9a-f]{6}$/i.test(v)) return v;
+    if (/^[0-9a-f]{6}$/i.test(v)) return '#'+v;
+    return fallback;
+  };
+  const rgb = hex => { const v=hex.replace('#',''); return [0,2,4].map(i=>parseInt(v.slice(i,i+2),16)).join(','); };
+  const loadRoles = () => {
+    try { const a=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); return Array.isArray(a)?a.filter(r=>roles[r]&&available[r]):[]; }
+    catch(e){ return []; }
+  };
+  const saveRoles = list => localStorage.setItem(STORAGE_KEY,JSON.stringify([...new Set(list.filter(r=>roles[r]&&available[r]))]));
+  const urlFor = role => roles[role].file + '?from=portail&t=' + Date.now();
+
+  function applyConfig(){
+    available.player=true;
+    available.coach=boolCfg('activer_coach',boolCfg('activer_menu_coach',true));
+    available.gestion=boolCfg('activer_gestion_club',boolCfg('activer_menu_gestion',true));
+    const bg=color('couleur_fond','#050505'), accent=color('couleur_secondaire','#4e8a47'), primary=color('couleur_principale','#70a663'), text=color('couleur_texte','#ffffff'), ptext=color('couleur_bouton_texte','#000000');
+    const root=document.documentElement;
+    root.style.setProperty('--bg',bg); root.style.setProperty('--text',text); root.style.setProperty('--accent',accent); root.style.setProperty('--accent-rgb',rgb(accent)); root.style.setProperty('--primary',primary); root.style.setProperty('--primary-text',ptext);
+    document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
+    document.body.dataset.fond=normalize(config.fond_type||'neutre');
+    $('clubName').textContent=config.nom_club||'Démo App Club';
+    $('clubLogo').src=config.logo_url||'logo.png';
+    $('clubLogo').onerror=()=>{$('clubLogo').src='logo.png'};
+    const sub=(config.app_sous_titre_actif && !boolCfg('app_sous_titre_actif',true)) ? '' : String(config.app_sous_titre||'').trim();
+    if(sub) $('mainSubtitle').textContent=sub + ' — sélectionnez vos rôles.';
+    document.title=(config.nom_club||'Application du club')+' — Mes espaces';
+  }
+
+  async function fetchConfig(){
+    const app=window.APP_CONFIG||{};
+    const url=String(app.APPS_SCRIPT_URL||'').trim();
+    if(!url) return;
+    const ctrl=new AbortController(); const timer=setTimeout(()=>ctrl.abort(),7000);
+    try{
+      const res=await fetch(url+'?action=getConfig&t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const data=await res.json();
+      if(data && typeof data==='object') config=data;
+    }catch(e){ console.warn('Portail: configuration non chargée',e); }
+    finally{clearTimeout(timer)}
+  }
+
+  function roleCard(role, selected){
+    const r=roles[role];
+    const b=document.createElement('button'); b.type='button'; b.className='role-card'+(selected?' selected':''); b.dataset.role=role; b.hidden=!available[role];
+    b.setAttribute('aria-pressed',selected?'true':'false');
+    b.innerHTML='<span class="role-icon">'+r.icon+'</span><span><div class="role-title">'+r.title+'</div><div class="role-desc">'+r.desc+'</div></span><span class="selector">'+(selected?'✓':'')+'</span>';
+    b.addEventListener('click',()=>{ const i=draft.indexOf(role); if(i>=0) draft.splice(i,1); else draft.push(role); renderChooser(); });
+    return b;
+  }
+  function renderChooser(){
+    const c=$('roleChooser'); c.innerHTML=''; ['player','coach','gestion'].forEach(r=>c.appendChild(roleCard(r,draft.includes(r))));
+  }
+  function showSetup(current){
+    draft=[...(current||loadRoles())]; renderChooser(); $('spacesPanel').hidden=true; $('setupPanel').hidden=false; $('setupStatus').textContent=''; $('mainTitle').textContent=current&&current.length?'Modifier mes rôles':'Bienvenue dans l’application du club'; $('selectionHelper').style.display='flex'; window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function chip(role){ const r=roles[role]; const s=document.createElement('span'); s.className='chip'; s.innerHTML=r.icon+r.title+' ✓'; return s; }
+  function spaceLink(role){
+    const r=roles[role]; const a=document.createElement('a'); a.className='space-link'; a.href=urlFor(role); a.addEventListener('click',()=>{try{localStorage.setItem(LAST_KEY,role)}catch(e){}});
+    a.innerHTML='<span class="role-icon">'+r.icon+'</span><span><div class="space-title">Espace '+(role==='player'?'Joueur / Parent':r.title)+'</div><div class="space-desc">'+r.spaceDesc+'</div></span><span class="chevron">›</span>';
+    return a;
+  }
+  function showSpaces(){
+    const saved=loadRoles(); if(!saved.length){showSetup([]);return;}
+    $('setupPanel').hidden=true; $('spacesPanel').hidden=false; $('mainTitle').textContent='Mes espaces'; $('mainSubtitle').textContent='Choisissez l’espace que vous souhaitez ouvrir.'; $('selectionHelper').style.display='none';
+    const sum=$('activeSummary'); sum.innerHTML=''; saved.forEach(r=>sum.appendChild(chip(r)));
+    const list=$('spaceLinks'); list.innerHTML=''; saved.forEach(r=>list.appendChild(spaceLink(r)));
+  }
+
+  $('continueBtn').addEventListener('click',()=>{
+    if(!draft.length){$('setupStatus').textContent='Sélectionnez au moins un rôle.';return;}
+    saveRoles(draft); showSpaces();
+  });
+  $('editRolesBtn').addEventListener('click',()=>showSetup(loadRoles()));
+  $('resetBtn').addEventListener('click',()=>{
+    if(confirm('Effacer les rôles mémorisés sur ce téléphone ?')){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(LAST_KEY);showSetup([]);}
+  });
+
+  (async()=>{
+    await fetchConfig(); applyConfig();
+    const edit=new URLSearchParams(location.search).get('edit')==='1';
+    const saved=loadRoles();
+    if(edit||!saved.length) showSetup(saved); else showSpaces();
+    requestAnimationFrame(()=>$('loadingCover').classList.add('done'));
+    setTimeout(()=>$('loadingCover')?.remove(),350);
+  })();
+})();
+</script>
+</body>
+</html>
