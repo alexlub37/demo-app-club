@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.47 - Gestion - portail unique, réglages iPhone du ZIP source -->
+<!-- Démo App Club V65.49 - Gestion - portail unique ajouté sur base source stricte -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.47-GESTION-PORTAIL-UNIQUE-IPHONE-SOURCE" />
+  <meta name="app-version" content="V65.49-GESTION-PORTAIL-SOURCE-STRICTE" />
   <style>
     :root{
       --bg:#050505;
@@ -1737,6 +1737,34 @@ button:disabled,
 #grSaveBtn{width:100%;min-height:52px!important;border-radius:18px!important;background:var(--button-bg)!important;color:var(--button-text)!important;border:2px solid #fff!important;font-weight:950!important;}
 #grSaveBtn:disabled{opacity:.65!important;}
 
+
+/* V1.05 — Portail unique : lien intégré dans la navigation normale du header.
+   Aucun positionnement fixe/absolu et aucune modification de la safe area source. */
+.header-mini-actions{
+  gap:8px;
+  flex-wrap:wrap;
+}
+.portal-spaces-inline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:auto!important;
+  padding:6px 12px!important;
+  border:2px solid var(--accent)!important;
+  border-radius:999px!important;
+  background:#0b0b0b!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-decoration:none!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  line-height:1.2!important;
+  opacity:.86;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.portal-spaces-inline:active{transform:scale(.97)}
+
 </style>
 
 
@@ -3006,47 +3034,6 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 }
 </style>
 
-
-<style id="_portail_unique_switch_v103">
-/* Portail unique V1.03 — bouton dans le flux normal du header.
-   Réglages iPhone repris du ZIP source : aucune bande artificielle et aucun décalage fixe du body. */
-.portal-switch-row{
-  position:relative;
-  z-index:50;
-  width:min(100%,900px);
-  margin:0 auto 8px;
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-}
-.portal-spaces-switch{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  min-height:44px;
-  padding:9px 14px;
-  border:2px solid rgba(var(--accent-rgb,102,153,0),.72);
-  border-radius:999px;
-  background:rgba(0,0,0,.82);
-  color:var(--text,#fff)!important;
-  -webkit-text-fill-color:var(--text,#fff)!important;
-  text-decoration:none!important;
-  font:900 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  letter-spacing:.01em;
-  box-shadow:0 6px 18px rgba(0,0,0,.38);
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-  cursor:pointer;
-}
-.portal-spaces-switch:active{transform:scale(.97);filter:brightness(1.12)}
-.portal-spaces-switch__icon{font-size:17px;line-height:1}
-@media(max-width:420px){
-  .portal-switch-row{margin-bottom:6px}
-  .portal-spaces-switch{padding:9px 13px;font-size:12px}
-}
-</style>
-
 </head>
 <body class="loading gestion-app">
 
@@ -3146,11 +3133,6 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 </div>
 
   <header>
-    <div class="portal-switch-row">
-      <a class="portal-spaces-switch" href="./portail.html?from=gestion" target="_self" aria-label="Ouvrir Mes espaces" onclick="try{localStorage.setItem('demo_app_club_last_space_v1','gestion')}catch(e){}">
-        <span class="portal-spaces-switch__icon" aria-hidden="true">⇄</span><span>Mes espaces</span>
-      </a>
-    </div>
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       position:absolute;
@@ -3166,7 +3148,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.47 GESTION</button>
+    ">V65.49 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -3193,7 +3175,10 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       <div class="top-actions gestion-top-actions">
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
       </div>
-      <div class="header-mini-actions"><button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
+      <div class="header-mini-actions">
+        <a class="btn-outline mini-update portal-spaces-inline" href="portail.html" aria-label="Ouvrir Mes espaces" onclick="try{localStorage.setItem('demo_app_club_last_space_v1','gestion')}catch(e){}">⇄ Mes espaces</a>
+        <button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button>
+      </div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -7755,13 +7740,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.47 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.49 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.47 — Gestion : bouton « Mes espaces » intégré au header ; réglages iPhone identiques au ZIP source</li>
-        <li>V65.43 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
+        <li>V65.49 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
         <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
         <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
@@ -8551,7 +8535,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.47-GESTION-PORTAIL-UNIQUE-IPHONE-SOURCE";
+window.CAM_BASKET_VERSION = "V65.49-GESTION-PORTAIL-SOURCE-STRICTE";
 
 </script>
 
@@ -9158,7 +9142,7 @@ header #mainLogo{
 
 
 <style id="_couleurs_semantiques_matchs_v6543">
-/* V65.43 — Couleurs sémantiques fixes, indépendantes des couleurs du club.
+/* V65.49 — Couleurs sémantiques fixes, indépendantes des couleurs du club.
    Domicile = bleu, Extérieur = orange, forfaits = rouge. */
 html body .weekend-match-type.type-dom,
 html body .weekend-match-type.type-dom.role-badge,
