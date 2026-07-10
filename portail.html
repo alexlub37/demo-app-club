@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<!-- Démo App Club — Portail unique V1.01 — bande noire iPhone -->
+<!-- Démo App Club — Portail unique V1.03 — réglages iPhone identiques au ZIP source -->
 <html lang="fr">
 <head>
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#050505">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-title" content="App Club">
-  <meta name="app-version" content="V1.01-PORTAIL-UNIQUE-BANDE-NOIRE">
+  <meta name="app-version" content="V1.03-PORTAIL-UNIQUE-IPHONE-SOURCE">
   <title>Application du club</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
-  <link rel="manifest" href="manifest-portail.webmanifest">
+  <link rel="manifest" href="manifest-portail.webmanifest?v=103">
   <style>
     :root{
       --bg:#050505;--text:#fff;--muted:#cfcfcf;--accent:#4e8a47;--accent-rgb:78,138,71;
@@ -20,7 +22,7 @@
       --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    html{background:#000}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
     body{min-height:100dvh;overflow-x:hidden;background:
       radial-gradient(circle at 50% -10%,rgba(var(--accent-rgb),.20),transparent 44%),var(--bg)}
     body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.23;background:
@@ -28,7 +30,7 @@
       radial-gradient(ellipse at 14% 40%,transparent 0 20%,rgba(var(--accent-rgb),.18) 20.5% 21%,transparent 21.5%),
       radial-gradient(ellipse at 86% 70%,transparent 0 22%,rgba(var(--accent-rgb),.16) 22.5% 23%,transparent 23.5%)}
     body[data-fond="neutre"]::before{display:none}
-    .app{position:relative;z-index:1;width:min(100%,680px);margin:0 auto;padding:calc(var(--safe-top) + 18px) 16px calc(var(--safe-bottom) + 28px)}
+    .app{position:relative;z-index:1;width:min(100%,680px);margin:0 auto;padding:max(18px, env(safe-area-inset-top)) 16px calc(env(safe-area-inset-bottom) + 28px)}
     .topbar{display:flex;justify-content:flex-end;min-height:30px}
     .version{font-size:10px;font-weight:800;color:var(--muted);opacity:.72;border:1px solid rgba(var(--accent-rgb),.42);border-radius:999px;padding:5px 8px}
     .hero{text-align:center;padding:0 10px 22px}
@@ -81,7 +83,7 @@
 <body data-fond="neutre">
 <div class="loading-cover" id="loadingCover"><div class="spinner" aria-label="Chargement"></div></div>
 <main class="app">
-  <div class="topbar"><span class="version">PORTAIL V1.01</span></div>
+  <div class="topbar"><span class="version">PORTAIL V1.03</span></div>
   <section class="hero">
     <img id="clubLogo" class="logo" src="logo.png" alt="Logo du club">
     <p id="clubName" class="club-name">Démo App Club</p>
@@ -171,7 +173,6 @@
     const bg=color('couleur_fond','#050505'), accent=color('couleur_secondaire','#4e8a47'), primary=color('couleur_principale','#70a663'), text=color('couleur_texte','#ffffff'), ptext=color('couleur_bouton_texte','#000000');
     const root=document.documentElement;
     root.style.setProperty('--bg',bg); root.style.setProperty('--text',text); root.style.setProperty('--accent',accent); root.style.setProperty('--accent-rgb',rgb(accent)); root.style.setProperty('--primary',primary); root.style.setProperty('--primary-text',ptext);
-    document.querySelector('meta[name="theme-color"]').setAttribute('content',bg);
     document.body.dataset.fond=normalize(config.fond_type||'neutre');
     $('clubName').textContent=config.nom_club||'Démo App Club';
     $('clubLogo').src=config.logo_url||'logo.png';

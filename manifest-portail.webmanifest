@@ -1,11 +1,11 @@
 {
   "name": "Application du club — Mes espaces",
   "short_name": "App Club",
-  "start_url": "./portail.html",
+  "start_url": "./portail.html?v=103",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#050505",
-  "theme_color": "#050505",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "logo_192.png",
