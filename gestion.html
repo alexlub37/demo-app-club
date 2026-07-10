@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.49 - Gestion - portail unique ajouté sur base source stricte -->
+<!-- Démo App Club V65.50 - Gestion - portail unique ajouté sur base source stricte -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.49-GESTION-PORTAIL-SOURCE-STRICTE" />
+  <meta name="app-version" content="V65.50-GESTION-PORTAIL-SOURCE-STRICTE" />
   <style>
     :root{
       --bg:#050505;
@@ -1738,32 +1738,43 @@ button:disabled,
 #grSaveBtn:disabled{opacity:.65!important;}
 
 
-/* V1.05 — Portail unique : lien intégré dans la navigation normale du header.
-   Aucun positionnement fixe/absolu et aucune modification de la safe area source. */
+/* V1.06 — Boutons Mes espaces / Mettre à jour strictement identiques.
+   Même élément HTML, même largeur, même hauteur et même contour. */
 .header-mini-actions{
-  gap:8px;
-  flex-wrap:wrap;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,170px))!important;
+  justify-content:center!important;
+  gap:8px!important;
+  margin-top:10px!important;
 }
-.portal-spaces-inline{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:auto!important;
-  padding:6px 12px!important;
+.header-mini-actions .mini-update{
+  width:100%!important;
+  min-height:42px!important;
+  height:42px!important;
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:6px 10px!important;
   border:2px solid var(--accent)!important;
   border-radius:999px!important;
-  background:#0b0b0b!important;
-  color:#fff!important;
-  -webkit-text-fill-color:#fff!important;
-  text-decoration:none!important;
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,#ffffff)!important;
+  -webkit-text-fill-color:var(--text,#ffffff)!important;
   font-size:12px!important;
   font-weight:900!important;
-  line-height:1.2!important;
-  opacity:.86;
+  line-height:1!important;
+  opacity:.86!important;
+  white-space:nowrap!important;
+  box-shadow:none!important;
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
-.portal-spaces-inline:active{transform:scale(.97)}
+.header-mini-actions .mini-update:active{transform:scale(.97)}
+@media(max-width:390px){
+  .header-mini-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .header-mini-actions .mini-update{font-size:11px!important;padding:6px 7px!important;}
+}
 
 </style>
 
@@ -3148,7 +3159,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.49 GESTION</button>
+    ">V65.50 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -3176,7 +3187,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
       </div>
       <div class="header-mini-actions">
-        <a class="btn-outline mini-update portal-spaces-inline" href="portail.html" aria-label="Ouvrir Mes espaces" onclick="try{localStorage.setItem('demo_app_club_last_space_v1','gestion')}catch(e){}">⇄ Mes espaces</a>
+        <button type="button" id="btn-spaces" class="btn-outline mini-update" onclick="openPortalFromSpace('gestion')">⇄ Mes espaces</button>
         <button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button>
       </div>
       <div id="status" class="status">Chargement…</div>
@@ -7740,12 +7751,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.49 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.50 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.49 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
+        <li>V65.50 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
         <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
         <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
@@ -8535,7 +8546,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.49-GESTION-PORTAIL-SOURCE-STRICTE";
+window.CAM_BASKET_VERSION = "V65.50-GESTION-PORTAIL-SOURCE-STRICTE";
 
 </script>
 
@@ -9142,7 +9153,7 @@ header #mainLogo{
 
 
 <style id="_couleurs_semantiques_matchs_v6543">
-/* V65.49 — Couleurs sémantiques fixes, indépendantes des couleurs du club.
+/* V65.50 — Couleurs sémantiques fixes, indépendantes des couleurs du club.
    Domicile = bleu, Extérieur = orange, forfaits = rouge. */
 html body .weekend-match-type.type-dom,
 html body .weekend-match-type.type-dom.role-badge,
@@ -9182,5 +9193,12 @@ html body .weekend-match.has-forfait{
 }
 </style>
 
+
+<script id="_portal_button_v106_js">
+function openPortalFromSpace(space){
+  try{ localStorage.setItem('demo_app_club_last_space_v1', space || 'gestion'); }catch(e){}
+  window.location.href = 'portail.html?v=105';
+}
+</script>
 </body>
 </html>
