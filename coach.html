@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.45 - Coach - portail unique et bouton Mes espaces -->
+<!-- Démo App Club V63.46 - Coach - portail unique, bande noire iPhone et bouton Mes espaces fiable -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.45-COACH-PORTAIL-UNIQUE" />
+  <meta name="cam-basket-version" content="V63.46-COACH-PORTAIL-IPHONE-BANDE-NOIRE" />
   <style>
     :root{
       --bg:#050505;
@@ -3410,41 +3410,77 @@ small{
 </style>
 
 
-<style id="_portail_unique_switch_v1">
-/* Portail unique V1.00 — accès commun aux espaces Joueur, Coach et Gestion. */
+<style id="_portail_unique_switch_v2">
+/* Portail unique V1.01 — retour tactile fiable et respect de la zone sûre iPhone. */
 .portal-spaces-switch{
-  position:fixed;
-  top:calc(env(safe-area-inset-top, 0px) + 8px);
-  right:8px;
-  z-index:2147483000;
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  min-height:34px;
-  padding:7px 11px;
-  border:1px solid rgba(var(--accent-rgb, 102,153,0),.72);
-  border-radius:999px;
-  background:rgba(0,0,0,.76);
+  position:fixed!important;
+  top:10px!important;
+  left:10px!important;
+  right:auto!important;
+  z-index:2147483646!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-width:0!important;
+  min-height:44px!important;
+  padding:10px 15px!important;
+  border:2px solid rgba(var(--accent-rgb, 102,153,0),.76)!important;
+  border-radius:999px!important;
+  background:rgba(0,0,0,.86)!important;
   color:var(--text,#fff)!important;
   -webkit-text-fill-color:var(--text,#fff)!important;
   text-decoration:none!important;
-  font:800 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  letter-spacing:.01em;
-  box-shadow:0 6px 18px rgba(0,0,0,.38);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  touch-action:manipulation;
+  font:900 13px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif!important;
+  letter-spacing:.01em!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.46)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  cursor:pointer!important;
+  isolation:isolate!important;
 }
-.portal-spaces-switch:active{ transform:scale(.97); }
-.portal-spaces-switch__icon{font-size:15px;line-height:1}
+.portal-spaces-switch:active{transform:scale(.96)!important;filter:brightness(1.16)!important}
+.portal-spaces-switch__icon{font-size:17px!important;line-height:1!important}
 @media(max-width:420px){
-  .portal-spaces-switch{padding:7px 9px;font-size:11px}
+  .portal-spaces-switch{left:8px!important;padding:9px 13px!important;font-size:12px!important}
 }
 </style>
 
 </head>
 <body class="loading coach-app">
-<a class="portal-spaces-switch" href="portail.html" aria-label="Ouvrir Mes espaces" onclick="try{localStorage.setItem('demo_app_club_last_space_v1','coach')}catch(e){}"><span class="portal-spaces-switch__icon">⇄</span><span>Mes espaces</span></a>
+<a id="portalSpacesSwitch" class="portal-spaces-switch" href="./portail.html?from=coach" aria-label="Ouvrir Mes espaces" data-space-role="coach" target="_self"><span class="portal-spaces-switch__icon">⇄</span><span>Mes espaces</span></a>
+<script id="_portail_unique_navigation_v2">
+(function(){
+  var button=document.getElementById('portalSpacesSwitch');
+  if(!button) return;
+  var role=button.getAttribute('data-space-role')||'coach';
+  var opening=false;
+  function openPortal(event){
+    if(event){event.preventDefault();event.stopPropagation();}
+    if(opening) return false;
+    opening=true;
+    try{localStorage.setItem('demo_app_club_last_space_v1',role);}catch(e){}
+    try{
+      var target=new URL('portail.html',window.location.href);
+      target.searchParams.set('from',role);
+      target.searchParams.set('t',String(Date.now()));
+      window.location.assign(target.toString());
+    }catch(e){
+      window.location.href='./portail.html?from='+encodeURIComponent(role)+'&t='+Date.now();
+    }
+    window.setTimeout(function(){opening=false;},1200);
+    return false;
+  }
+  button.addEventListener('touchend',openPortal,{passive:false});
+  button.addEventListener('click',openPortal,false);
+})();
+</script>
 
 
 <!-- ══ SPLASH SCREEN ══ -->
@@ -3546,7 +3582,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.45 COACH</button>
+    ">V63.46 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -8515,11 +8551,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.45 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.46 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V63.46 — Coach : conservation de la bande noire iPhone et correction tactile du bouton « Mes espaces »</li>
         <li>V63.45 — Coach : ajout du bouton « Mes espaces » pour revenir au portail unique</li>
         <li>V63.44 — Coach : carte Réseaux sociaux retirée de l’accueil Coach</li>
         <li>V63.43 — Coach : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
@@ -9172,7 +9209,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.45-COACH-PORTAIL-UNIQUE";
+window.CAM_BASKET_VERSION = "V63.46-COACH-PORTAIL-IPHONE-BANDE-NOIRE";
 
 </script>
 
