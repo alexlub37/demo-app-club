@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.46 - Coach - portail et accès sécurisé -->
+<!-- Démo App Club V63.45 - Coach - portail Mes espaces -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.46-COACH-PORTAIL-ACCES-SECURISE" />
+  <meta name="cam-basket-version" content="V63.45-COACH-PORTAIL-MES-ESPACES" />
   <style>
     :root{
       --bg:#050505;
@@ -3511,7 +3511,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.46 COACH</button>
+    ">V63.45 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -8480,12 +8480,13 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.46 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.45 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V63.46 — Coach : carte Réseaux sociaux retirée de l’accueil Coach</li>
+        <li>V63.45 — Coach : ajout du bouton ⇄ Mes espaces, sans modification du fonctionnement Coach</li>
+        <li>V63.44 — Coach : carte Réseaux sociaux retirée de l’accueil Coach</li>
         <li>V63.43 — Coach : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V63.42 — Coach : bloc Convocation ajouté dans le véritable écran Coach ; alerte et joueur « À remplacer » visibles après rechargement</li>
         <li>V63.41 — Coach : convocation restaurée après rechargement et statut « À remplacer » visible côté Coach</li>
@@ -9136,7 +9137,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.46-COACH-SANS-RESEAUX-SOCIAUX";
+window.CAM_BASKET_VERSION = "V63.45-COACH-PORTAIL-MES-ESPACES";
 
 </script>
 
@@ -9661,38 +9662,6 @@ html body .coach-forfait-label{
   -webkit-text-fill-color:#ffb3b3!important;
 }
 </style>
-
-
-<script id="portal-coach-access-guard-v1">
-(function(){
-  const PORTAL_URL = "portail.html";
-  function clean(v){ return String(v || "").trim(); }
-  function validCoachCode(code){
-    const c = clean(code);
-    if (!c || typeof state === "undefined" || !Array.isArray(state.equipes)) return false;
-    return state.equipes.some(function(t){
-      const sameSeason = !state.season || String(t.saison || "").trim() === String(state.season || "").trim();
-      return sameSeason && clean(t.codeCoach) === c;
-    });
-  }
-  function waitForData(){
-    if (typeof state === "undefined" || !Array.isArray(state.equipes) || !state.equipes.length){
-      setTimeout(waitForData,120); return;
-    }
-    let code = clean(sessionStorage.getItem("cam_coach_code"));
-    if (!validCoachCode(code)){
-      sessionStorage.removeItem("cam_coach_code");
-      code = clean(prompt("Code équipe Coach :") || "");
-      if (!validCoachCode(code)){
-        alert("Code Coach incorrect ou aucune équipe active liée à ce code ❌");
-        location.replace(PORTAL_URL); return;
-      }
-      sessionStorage.setItem("cam_coach_code",code);
-    }
-  }
-  document.addEventListener("DOMContentLoaded",waitForData,{once:true});
-})();
-</script>
 
 </body>
 </html>

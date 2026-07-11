@@ -2,35 +2,74 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#000000">
 <title>Démo App Club — Mes espaces</title>
 <script src="app-config.js"></script>
 <style>
-:root{--accent:#5fa558;--accent2:#75ae68;--text:#fff;--card:rgba(4,16,7,.88)}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#000;color:var(--text);font-family:Arial,Helvetica,sans-serif}body{padding:calc(env(safe-area-inset-top) + 18px) 14px calc(env(safe-area-inset-bottom) + 24px);background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.72)),url('Image PNG.png') center/cover fixed}.shell{max-width:560px;margin:auto;background:rgba(0,0,0,.78);border:1px solid rgba(95,165,88,.5);border-radius:34px;padding:24px 18px;box-shadow:0 0 0 10px rgba(0,0,0,.25)}h1{font-size:34px;margin:8px 0 28px;color:var(--accent);display:flex;gap:14px;align-items:center}h1:before{content:"";width:10px;height:46px;border-radius:8px;background:var(--accent)}.role,.space{width:100%;display:flex;align-items:center;gap:18px;text-align:left;background:var(--card);border:4px solid var(--accent);border-radius:34px;padding:24px 20px;margin:0 0 18px;color:white}.role{cursor:pointer}.role.off{opacity:.45}.ico{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:rgba(95,165,88,.18);font-size:38px;flex:0 0 auto}.txt{flex:1}.title{font-size:28px;font-weight:800;line-height:1.08}.sub{font-size:20px;line-height:1.35;color:#ddd;margin-top:10px}.check,.arrow{font-size:38px;color:var(--accent2);font-weight:bold}.continue{width:100%;border:0;border-radius:28px;padding:24px;background:var(--accent2);font-size:28px;font-weight:900;margin:12px 0 22px}.note{border:1px solid rgba(95,165,88,.45);border-radius:26px;padding:20px;color:#ddd;font-size:18px;line-height:1.45}.hidden{display:none}.secondary{width:100%;background:transparent;color:#fff;border:3px solid var(--accent);border-radius:26px;padding:18px;font-size:22px;font-weight:800;margin-top:12px}.reset{width:100%;background:transparent;border:0;color:var(--accent);font-size:20px;font-weight:800;padding:24px 8px 8px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.open{display:flex}.box{width:min(440px,100%);background:#090d0a;border:3px solid var(--accent);border-radius:28px;padding:24px}.box h2{margin:0 0 12px;color:var(--accent);font-size:28px}.box input{width:100%;font-size:24px;padding:16px;border-radius:16px;border:2px solid var(--accent);background:#000;color:#fff;margin:14px 0}.row{display:flex;gap:10px}.row button{flex:1;padding:16px;border-radius:16px;border:0;font-size:18px;font-weight:800}.cancel{background:#222;color:#fff}.ok{background:var(--accent2);color:#000}.msg{min-height:24px;color:#ff7777;font-weight:700}.version{text-align:center;color:#777;margin-top:18px;font-size:13px}
-</style></head><body>
+:root{--accent:#5fa558;--accent2:#75ae68;--text:#fff;--card:rgba(4,16,7,.88)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#000;color:var(--text);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+body{padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 24px);background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.72)),url('Image PNG.png') center/cover fixed}
+.shell{width:100%;max-width:560px;margin:0 auto;background:rgba(0,0,0,.78);border:1px solid rgba(95,165,88,.5);border-radius:34px;padding:22px 18px;box-shadow:0 0 0 10px rgba(0,0,0,.25);overflow:hidden}
+h1{font-size:clamp(32px,9vw,46px);line-height:1.05;margin:8px 0 28px;color:var(--accent);display:flex;gap:14px;align-items:center}
+h1:before{content:"";width:10px;height:1.25em;border-radius:8px;background:var(--accent);flex:0 0 auto}
+.role,.space{appearance:none;-webkit-appearance:none;width:100%;display:grid;grid-template-columns:76px minmax(0,1fr) 42px;align-items:center;column-gap:18px;text-align:left;background:var(--card);border:4px solid var(--accent);border-radius:34px;padding:22px 18px;margin:0 0 18px;color:#fff;overflow:hidden}
+.role{cursor:pointer}.role.off{opacity:.45}
+.ico{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:rgba(95,165,88,.18);font-size:38px}
+.txt{display:block;min-width:0;overflow:hidden}.title,.sub{display:block;max-width:100%;overflow-wrap:anywhere;word-break:normal}.title{font-size:clamp(25px,7vw,31px);font-weight:800;line-height:1.08}.sub{font-size:clamp(18px,5.2vw,22px);line-height:1.35;color:#ddd;margin-top:10px}
+.check,.arrow{display:block;text-align:center;font-size:38px;color:var(--accent2);font-weight:bold}
+.continue{width:100%;border:0;border-radius:28px;padding:22px;background:var(--accent2);color:#000;font-size:28px;font-weight:900;margin:12px 0 22px}
+.note{border:1px solid rgba(95,165,88,.45);border-radius:26px;padding:20px;color:#ddd;font-size:18px;line-height:1.45;overflow-wrap:anywhere}
+.hidden{display:none!important}.secondary{width:100%;background:transparent;color:#fff;border:3px solid var(--accent);border-radius:26px;padding:18px;font-size:22px;font-weight:800;margin-top:12px}.reset{width:100%;background:transparent;border:0;color:var(--accent);font-size:20px;font-weight:800;padding:24px 8px 8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal.open{display:flex}.box{width:min(440px,100%);background:#090d0a;border:3px solid var(--accent);border-radius:28px;padding:24px}.box h2{margin:0 0 12px;color:var(--accent);font-size:28px}.box input{width:100%;font-size:24px;padding:16px;border-radius:16px;border:2px solid var(--accent);background:#000;color:#fff;margin:14px 0}.row{display:flex;gap:10px}.row button{flex:1;padding:16px;border-radius:16px;border:0;font-size:18px;font-weight:800}.cancel{background:#222;color:#fff}.ok{background:var(--accent2);color:#000}.msg{min-height:24px;color:#ff7777;font-weight:700}.version{text-align:center;color:#777;margin-top:18px;font-size:13px}
+@media(max-width:410px){body{padding-left:10px;padding-right:10px}.shell{padding:20px 14px;border-radius:30px}.role,.space{grid-template-columns:66px minmax(0,1fr) 34px;column-gap:12px;padding:20px 14px;border-radius:30px}.ico{width:66px;height:66px;font-size:33px}.check,.arrow{font-size:34px}}
+</style>
+</head>
+<body>
 <div class="shell">
-<section id="choose"><h1>Choisir mes rôles</h1>
+<section id="choose">
+<h1>Choisir mes rôles</h1>
 <button class="role" data-role="joueur"><span class="ico">♙</span><span class="txt"><span class="title">Joueur / Parent</span><span class="sub">Consulter les matchs et répondre</span></span><span class="check">✓</span></button>
 <button class="role" data-role="coach"><span class="ico">⌁</span><span class="txt"><span class="title">Coach</span><span class="sub">Suivre les réponses et gérer les convocations</span></span><span class="check">✓</span></button>
 <button class="role" data-role="gestion"><span class="ico">⚙</span><span class="txt"><span class="title">Gestion</span><span class="sub">Administrer les matchs, joueurs et paramètres</span></span><span class="check">✓</span></button>
-<button class="continue" id="continue">Continuer</button><div class="note">🔒 La sélection affiche les espaces souhaités. Les accès Coach et Gestion restent protégés par leurs codes.</div></section>
-<section id="spaces" class="hidden"><h1>Ouvrir un espace</h1><div id="spaceList"></div><button class="secondary" id="modify">Modifier mes rôles</button><button class="reset" id="reset">Réinitialiser ce téléphone</button><div class="note">🔒 Les rôles sont mémorisés uniquement sur ce téléphone. Un code est contrôlé à chaque première ouverture protégée de la session.</div></section>
-<div class="version">Portail V1.12</div></div>
+<button class="continue" id="continue">Continuer</button>
+<div class="note">🔒 La sélection affiche les espaces souhaités. Les accès Coach et Gestion restent protégés par leurs codes.</div>
+</section>
+<section id="spaces" class="hidden">
+<h1>Ouvrir un espace</h1>
+<div id="spaceList"></div>
+<button class="secondary" id="modify">Modifier mes rôles</button>
+<button class="reset" id="reset">Réinitialiser ce téléphone</button>
+<div class="note">🔒 Les rôles sont mémorisés uniquement sur ce téléphone. Le code est demandé à la première ouverture d’un espace protégé pendant la session.</div>
+</section>
+<div class="version">Portail V1.13</div>
+</div>
 <div class="modal" id="modal"><div class="box"><h2 id="modalTitle">Code requis</h2><div id="modalText"></div><input id="code" inputmode="numeric" autocomplete="one-time-code" placeholder="Saisir le code"><div class="msg" id="msg"></div><div class="row"><button class="cancel" id="cancel">Annuler</button><button class="ok" id="validate">Valider</button></div></div></div>
 <script>
-const KEY='demo_app_club_roles_v1'; const selected=new Set(JSON.parse(localStorage.getItem(KEY)||'["joueur"]')); let pending='';
-const $=id=>document.getElementById(id); const app=window.APP_CONFIG||{};
-function sync(){document.querySelectorAll('.role').forEach(b=>{const on=selected.has(b.dataset.role);b.classList.toggle('off',!on);b.querySelector('.check').textContent=on?'✓':''})}
-document.querySelectorAll('.role').forEach(b=>b.onclick=()=>{selected.has(b.dataset.role)?selected.delete(b.dataset.role):selected.add(b.dataset.role);sync()});
-function showSpaces(){ if(!selected.size) selected.add('joueur'); localStorage.setItem(KEY,JSON.stringify([...selected])); $('choose').classList.add('hidden');$('spaces').classList.remove('hidden');renderSpaces() }
-function renderSpaces(){const data={joueur:['♙','Espace Joueur / Parent','Matchs, réponses et organisation'],coach:['⌁','Espace Coach','Convocations, réponses et suivi d’équipe'],gestion:['⚙','Espace Gestion','Administration du club']};$('spaceList').innerHTML=[...selected].map(r=>{const d=data[r];return `<button class="space" data-open="${r}"><span class="ico">${d[0]}</span><span class="txt"><span class="title">${d[1]}</span><span class="sub">${d[2]}</span></span><span class="arrow">›</span></button>`}).join('');document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openSpace(b.dataset.open))}
-function openSpace(r){if(r==='joueur'){location.href='index.html';return} pending=r;$('modalTitle').textContent=r==='coach'?'Accès Coach':'Accès Gestion';$('modalText').textContent=r==='coach'?'Saisissez le code équipe Coach. Un même code peut ouvrir plusieurs équipes.':'Saisissez le code Gestion.';$('code').value='';$('msg').textContent='';$('modal').classList.add('open');setTimeout(()=>$('code').focus(),100)}
-async function verifyCoach(code){try{const url=`https://docs.google.com/spreadsheets/d/${app.SHEET_ID}/gviz/tq?sheet=EQUIPES&tqx=out:json`;const t=await (await fetch(url)).text();const j=JSON.parse(t.substring(t.indexOf('{'),t.lastIndexOf('}')+1));return (j.table.rows||[]).some(r=>String(r.c&&r.c[4]&&(r.c[4].f??r.c[4].v)||'').trim()===code)}catch(e){return false}}
-async function verifyGestion(code){try{const r=await fetch(app.APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'verifierCodeGestionMatchs',codeGestionMatchs:code})});const t=String(await r.text()||'').trim();try{return JSON.parse(t).ok===true}catch(e){return t==='OK'}}catch(e){return false}}
-$('validate').onclick=async()=>{const code=$('code').value.trim();if(!code){$('msg').textContent='Saisissez un code.';return}$('validate').disabled=true;$('msg').textContent='Vérification…';const ok=pending==='coach'?await verifyCoach(code):await verifyGestion(code);$('validate').disabled=false;if(!ok){$('msg').textContent='Code incorrect.';return}if(pending==='coach'){sessionStorage.setItem('cam_coach_code',code);location.href='coach.html'}else{sessionStorage.setItem('cam_gestion_matchs_code',code);location.href='gestion.html'}};
-$('cancel').onclick=()=> $('modal').classList.remove('open');$('continue').onclick=showSpaces;$('modify').onclick=()=>{$('spaces').classList.add('hidden');$('choose').classList.remove('hidden')};$('reset').onclick=()=>{localStorage.removeItem(KEY);sessionStorage.removeItem('cam_coach_code');sessionStorage.removeItem('cam_gestion_matchs_code');selected.clear();selected.add('joueur');sync();$('spaces').classList.add('hidden');$('choose').classList.remove('hidden')};
-sync(); if(localStorage.getItem(KEY)) showSpaces();
-</script></body></html>
+(function(){
+'use strict';
+const KEY='demo_app_club_roles_v1', ORDER=['joueur','coach','gestion'], ALLOWED=new Set(ORDER);
+const $=id=>document.getElementById(id), app=window.APP_CONFIG||{};
+let pending='';
+function loadRoles(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(v)){return new Set(v.filter(r=>ALLOWED.has(r)))}}catch(e){}return new Set(['joueur'])}
+const selected=loadRoles();
+function sync(){document.querySelectorAll('.role').forEach(b=>{const on=selected.has(b.dataset.role);b.classList.toggle('off',!on);b.setAttribute('aria-pressed',String(on));b.querySelector('.check').textContent=on?'✓':''})}
+document.querySelectorAll('.role').forEach(b=>b.addEventListener('click',()=>{const r=b.dataset.role;selected.has(r)?selected.delete(r):selected.add(r);sync()}));
+function renderSpaces(){const data={joueur:['♙','Espace Joueur / Parent','Matchs, réponses et organisation'],coach:['⌁','Espace Coach','Convocations, réponses et suivi d’équipe'],gestion:['⚙','Espace Gestion','Administration du club']};const roles=ORDER.filter(r=>selected.has(r));$('spaceList').innerHTML=roles.map(r=>{const d=data[r];return `<button class="space" data-open="${r}"><span class="ico">${d[0]}</span><span class="txt"><span class="title">${d[1]}</span><span class="sub">${d[2]}</span></span><span class="arrow">›</span></button>`}).join('');document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openSpace(b.dataset.open)))}
+function showSpaces(){if(!selected.size){alert('Sélectionne au moins un rôle.');return}localStorage.setItem(KEY,JSON.stringify(ORDER.filter(r=>selected.has(r))));$('choose').classList.add('hidden');$('spaces').classList.remove('hidden');renderSpaces();window.scrollTo(0,0)}
+function showChoose(){$('spaces').classList.add('hidden');$('choose').classList.remove('hidden');sync();window.scrollTo(0,0)}
+function openSpace(r){if(r==='joueur'){location.href='index.html';return}pending=r;$('modalTitle').textContent=r==='coach'?'Accès Coach':'Accès Gestion';$('modalText').textContent=r==='coach'?'Saisissez le code équipe. Le même code peut donner accès à plusieurs équipes.':'Saisissez le code Gestion.';$('code').value='';$('msg').textContent='';$('modal').classList.add('open');setTimeout(()=>$('code').focus(),100)}
+async function verifyCoach(code){try{if(!app.SHEET_ID) return false;const url=`https://docs.google.com/spreadsheets/d/${encodeURIComponent(app.SHEET_ID)}/gviz/tq?sheet=EQUIPES&tqx=out:json&_=${Date.now()}`;const res=await fetch(url,{cache:'no-store'});if(!res.ok) return false;const text=await res.text();const start=text.indexOf('{'),end=text.lastIndexOf('}');if(start<0||end<start)return false;const json=JSON.parse(text.slice(start,end+1));return (json.table.rows||[]).some(row=>String(row.c&&row.c[4]&&(row.c[4].f??row.c[4].v)||'').trim()===code)}catch(e){return false}}
+async function verifyGestion(code){try{if(!app.APPS_SCRIPT_URL)return false;const res=await fetch(app.APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'verifierCodeGestionMatchs',codeGestionMatchs:code})});const text=String(await res.text()||'').trim();try{return JSON.parse(text).ok===true}catch(e){return text==='OK'}}catch(e){return false}}
+$('validate').addEventListener('click',async()=>{const code=$('code').value.trim();if(!code){$('msg').textContent='Saisissez un code.';return}$('validate').disabled=true;$('msg').textContent='Vérification…';const ok=pending==='coach'?await verifyCoach(code):await verifyGestion(code);$('validate').disabled=false;if(!ok){$('msg').textContent='Code incorrect ou vérification impossible.';return}if(pending==='coach'){sessionStorage.setItem('cam_coach_code',code);location.href='coach.html'}else{sessionStorage.setItem('cam_gestion_matchs_code',code);location.href='gestion.html'}});
+$('code').addEventListener('keydown',e=>{if(e.key==='Enter')$('validate').click()});
+$('cancel').addEventListener('click',()=>{$('modal').classList.remove('open');pending=''});
+$('continue').addEventListener('click',showSpaces);$('modify').addEventListener('click',showChoose);
+$('reset').addEventListener('click',()=>{localStorage.removeItem(KEY);sessionStorage.removeItem('cam_coach_code');sessionStorage.removeItem('cam_gestion_matchs_code');selected.clear();selected.add('joueur');showChoose()});
+sync();if(localStorage.getItem(KEY)&&selected.size)showSpaces();
+})();
+</script>
+</body></html>
