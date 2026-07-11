@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.67 - Joueurs - portail séparé et bouton Mes espaces -->
+<!-- Démo App Club V62.67 - Joueurs - portail séparé, base source conservée -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.67-JOUEURS-PORTAIL-MES-ESPACES" />
+  <meta name="app-version" content="V62.67-JOUEURS-PORTAIL-SOURCE-INTEGRALE" />
   <style>
     :root{
       --bg:#050505;
@@ -3257,37 +3257,9 @@ small{
 </style>
 
 
-<style id="_portal_source_clean_nav_css">
-/* Portail V1.09 — ajout minimal sur base source : aucune modification du contour ni des modules. */
-header .header-mini-actions.portal-mini-actions{
-  display:grid!important;
-  grid-template-columns:repeat(2,minmax(0,170px))!important;
-  justify-content:center!important;
-  gap:8px!important;
-  margin-top:10px!important;
-}
-html body header .header-mini-actions.portal-mini-actions button#btn-spaces,
-html body header .header-mini-actions.portal-mini-actions button#btn-update{
-  width:100%!important;
-  min-width:0!important;
-  min-height:auto!important;
-  padding:6px 10px!important;
-  border-radius:999px!important;
-  font-size:12px!important;
-  line-height:1.2!important;
-  opacity:.86!important;
-  background:rgba(0,0,0,.40)!important;
-  color:var(--text,var(--app-text,#ffffff))!important;
-  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
-  border:2px solid var(--accent,var(--app-secondary,#5A189A))!important;
-  box-shadow:none!important;
-  touch-action:manipulation!important;
-}
-@media(max-width:380px){
-  header .header-mini-actions.portal-mini-actions{gap:6px!important;grid-template-columns:repeat(2,minmax(0,155px))!important}
-  html body header .header-mini-actions.portal-mini-actions button#btn-spaces,
-  html body header .header-mini-actions.portal-mini-actions button#btn-update{font-size:11px!important;padding:6px 7px!important}
-}
+<style id="portal-source-integral-actions-v1">
+/* Portail V1.11 : même style source pour les deux actions, sans modifier le contour global. */
+.header-mini-actions{gap:8px;flex-wrap:wrap;}
 </style>
 </head>
 <body class="loading player-app">
@@ -3426,7 +3398,7 @@ html body header .header-mini-actions.portal-mini-actions button#btn-update{
         <button id="btn-bureau" class="btn-outline" onclick="setActiveButton('bureau'); showScreen('bureauScreen')">Bureau</button>
         <button id="btn-benevoles" class="btn-outline" onclick="setActiveButton('benevoles'); showScreen('benevolesScreen')">Bénévoles</button>
       </div>
-      <div class="header-mini-actions portal-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="openClubPortal()">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
+      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="window.location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -8421,7 +8393,7 @@ openMatches = function(){
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V62.67 — Joueurs : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier les modules existants</li>
+        <li>V62.67 — Joueurs : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier la mise en page ni les modules de la source</li>
         <li>V62.66 — Joueurs : la carte Réseaux sociaux affiche Facebook, Instagram, TikTok, YouTube et le site internet uniquement lorsque leurs liens sont renseignés</li>
         <li>V62.65 — Joueurs : le liseré des cartes en forfait est rouge, comme le badge de forfait</li>
         <li>V62.64 — Joueurs : tous les badges de forfait sont rouges (forfait adverse et forfait du club)</li>
@@ -8806,7 +8778,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.67-JOUEURS-PORTAIL-MES-ESPACES";
+window.CAM_BASKET_VERSION = "V62.67-JOUEURS-PORTAIL-SOURCE-INTEGRALE";
 
 </script>
 
@@ -9694,17 +9666,5 @@ html body .weekend-match.has-forfait{
 }
 </style>
 
-
-<script id="_portal_source_clean_nav_js">
-function openClubPortal(){
-  try{
-    var url=new URL('portail.html',window.location.href);
-    url.searchParams.set('t',Date.now());
-    window.location.assign(url.href);
-  }catch(e){
-    window.location.href='portail.html?t='+Date.now();
-  }
-}
-</script>
 </body>
 </html>

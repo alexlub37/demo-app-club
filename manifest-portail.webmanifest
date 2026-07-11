@@ -1,5 +1,5 @@
 {
-  "name": "Application du club",
+  "name": "Démo App Club — Mes espaces",
   "short_name": "App Club",
   "start_url": "./portail.html",
   "scope": "./",
