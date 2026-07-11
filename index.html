@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.67 - Joueurs - portail séparé, base source conservée -->
+<!-- Démo App Club V62.68 - Joueurs - portail et accès sécurisés -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.67-JOUEURS-PORTAIL-SOURCE-INTEGRALE" />
+  <meta name="app-version" content="V62.68-JOUEURS-PORTAIL-ACCES-SECURISES" />
   <style>
     :root{
       --bg:#050505;
@@ -3256,11 +3256,6 @@ small{
 }
 </style>
 
-
-<style id="portal-source-integral-actions-v1">
-/* Portail V1.11 : même style source pour les deux actions, sans modifier le contour global. */
-.header-mini-actions{gap:8px;flex-wrap:wrap;}
-</style>
 </head>
 <body class="loading player-app">
 
@@ -3363,7 +3358,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.67 JOUEURS</button>
+    ">V62.68 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3398,7 +3393,7 @@ small{
         <button id="btn-bureau" class="btn-outline" onclick="setActiveButton('bureau'); showScreen('bureauScreen')">Bureau</button>
         <button id="btn-benevoles" class="btn-outline" onclick="setActiveButton('benevoles'); showScreen('benevolesScreen')">Bénévoles</button>
       </div>
-      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="window.location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
+      <div class="header-mini-actions" style="gap:8px"><button class="btn-outline mini-update" onclick="location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -8388,13 +8383,12 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.67 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.68 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V62.67 — Joueurs : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier la mise en page ni les modules de la source</li>
-        <li>V62.66 — Joueurs : la carte Réseaux sociaux affiche Facebook, Instagram, TikTok, YouTube et le site internet uniquement lorsque leurs liens sont renseignés</li>
+        <li>V62.68 — Joueurs : la carte Réseaux sociaux affiche Facebook, Instagram, TikTok, YouTube et le site internet uniquement lorsque leurs liens sont renseignés</li>
         <li>V62.65 — Joueurs : le liseré des cartes en forfait est rouge, comme le badge de forfait</li>
         <li>V62.64 — Joueurs : tous les badges de forfait sont rouges (forfait adverse et forfait du club)</li>
         <li>V62.63 — Joueurs : badges Domicile en bleu et Extérieur en orange, indépendants des couleurs du club</li>
@@ -8590,7 +8584,7 @@ function appliquerConfig() {
     eventCard.style.setProperty("display", (active && (title || text || imgUrl)) ? "block" : "none", "important");
   }
 
-  // V62.66 — Accueil joueur : tous les supports sociaux pilotés par CONFIG.
+  // V62.68 — Accueil joueur : tous les supports sociaux pilotés par CONFIG.
   // Chaque bouton est affiché uniquement lorsque son URL est réellement renseignée.
   const socialCard = document.getElementById("clubSocialCard");
   const socialTitle = document.getElementById("clubSocialTitle");
@@ -8778,7 +8772,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.67-JOUEURS-PORTAIL-SOURCE-INTEGRALE";
+window.CAM_BASKET_VERSION = "V62.68-JOUEURS-RESEAUX-SOCIAUX-COMPLETS";
 
 </script>
 

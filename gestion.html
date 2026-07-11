@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.44 - Gestion - portail séparé, base source conservée -->
+<!-- Démo App Club V65.45 - Gestion - portail et accès sécurisé -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.44-GESTION-PORTAIL-SOURCE-INTEGRALE" />
+  <meta name="app-version" content="V65.45-GESTION-PORTAIL-ACCES-SECURISE" />
   <style>
     :root{
       --bg:#050505;
@@ -3006,11 +3006,6 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 }
 </style>
 
-
-<style id="portal-source-integral-actions-v1">
-/* Portail V1.11 : même style source pour les deux actions, sans modifier le contour global. */
-.header-mini-actions{gap:8px;flex-wrap:wrap;}
-</style>
 </head>
 <body class="loading gestion-app">
 
@@ -3125,7 +3120,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.44 GESTION</button>
+    ">V65.45 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -3152,7 +3147,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       <div class="top-actions gestion-top-actions">
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
       </div>
-      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="window.location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
+      <div class="header-mini-actions" style="gap:8px"><button class="btn-outline mini-update" onclick="location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -7714,13 +7709,12 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.44 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.45 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.44 — Gestion : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier la mise en page ni les modules de la source</li>
-        <li>V65.43 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
+        <li>V65.45 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
         <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
         <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
@@ -8510,7 +8504,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.44-GESTION-PORTAIL-SOURCE-INTEGRALE";
+window.CAM_BASKET_VERSION = "V65.45-GESTION-COULEURS-DOM-EXT-FORFAITS";
 
 </script>
 
@@ -9117,7 +9111,7 @@ header #mainLogo{
 
 
 <style id="_couleurs_semantiques_matchs_v6543">
-/* V65.43 — Couleurs sémantiques fixes, indépendantes des couleurs du club.
+/* V65.45 — Couleurs sémantiques fixes, indépendantes des couleurs du club.
    Domicile = bleu, Extérieur = orange, forfaits = rouge. */
 html body .weekend-match-type.type-dom,
 html body .weekend-match-type.type-dom.role-badge,
@@ -9156,6 +9150,36 @@ html body .weekend-match.has-forfait{
   border-left-color:#e04040!important;
 }
 </style>
+
+
+<script id="portal-gestion-access-guard-v1">
+(function(){
+  const PORTAL_URL = "portail.html";
+  async function verify(code){
+    const clean = String(code || "").trim();
+    if (!clean) return false;
+    try{
+      const res = await fetch(getScriptUrl(),{method:"POST",body:JSON.stringify({action:"verifierCodeGestionMatchs",codeGestionMatchs:clean})});
+      const txt = String(await res.text() || "").trim();
+      try { const obj = JSON.parse(txt); return !!(obj && obj.ok === true); }
+      catch(e){ return txt === "OK"; }
+    }catch(e){ return false; }
+  }
+  async function run(){
+    let code = String(sessionStorage.getItem("cam_gestion_matchs_code") || "").trim();
+    if (!(await verify(code))){
+      sessionStorage.removeItem("cam_gestion_matchs_code");
+      code = String(prompt("Code Gestion :") || "").trim();
+      if (!(await verify(code))){
+        alert("Code Gestion incorrect ❌");
+        location.replace(PORTAL_URL); return;
+      }
+      sessionStorage.setItem("cam_gestion_matchs_code",code);
+    }
+  }
+  document.addEventListener("DOMContentLoaded",run,{once:true});
+})();
+</script>
 
 </body>
 </html>
