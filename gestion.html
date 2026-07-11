@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.51 - Gestion - accès portail unique intégré à l’index -->
+<!-- Démo App Club V65.44 - Gestion - portail séparé et bouton Mes espaces -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.51-GESTION-PORTAIL-INTEGRE" />
+  <meta name="app-version" content="V65.44-GESTION-PORTAIL-MES-ESPACES" />
   <style>
     :root{
       --bg:#050505;
@@ -3006,6 +3006,39 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 }
 </style>
 
+
+<style id="_portal_source_clean_nav_css">
+/* Portail V1.09 — ajout minimal sur base source : aucune modification du contour ni des modules. */
+header .header-mini-actions.portal-mini-actions{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,170px))!important;
+  justify-content:center!important;
+  gap:8px!important;
+  margin-top:10px!important;
+}
+html body header .header-mini-actions.portal-mini-actions button#btn-spaces,
+html body header .header-mini-actions.portal-mini-actions button#btn-update{
+  width:100%!important;
+  min-width:0!important;
+  min-height:auto!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  opacity:.86!important;
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+  border:2px solid var(--accent,var(--app-secondary,#5A189A))!important;
+  box-shadow:none!important;
+  touch-action:manipulation!important;
+}
+@media(max-width:380px){
+  header .header-mini-actions.portal-mini-actions{gap:6px!important;grid-template-columns:repeat(2,minmax(0,155px))!important}
+  html body header .header-mini-actions.portal-mini-actions button#btn-spaces,
+  html body header .header-mini-actions.portal-mini-actions button#btn-update{font-size:11px!important;padding:6px 7px!important}
+}
+</style>
 </head>
 <body class="loading gestion-app">
 
@@ -3120,7 +3153,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.51 GESTION</button>
+    ">V65.44 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" aria-label="Logo de l’application">
@@ -3147,10 +3180,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       <div class="top-actions gestion-top-actions">
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
       </div>
-      <div class="header-mini-actions" style="gap:8px;flex-wrap:wrap;">
-        <button type="button" id="btn-spaces" class="btn-outline mini-update" onclick="openUnifiedSpaces()">⇄ Mes espaces</button>
-        <button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button>
-      </div>
+      <div class="header-mini-actions portal-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="openClubPortal()">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -7712,12 +7742,13 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.51 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.44 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V65.51 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
+        <li>V65.44 — Gestion : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier les modules Gestion</li>
+        <li>V65.43 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
         <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
         <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
@@ -8507,7 +8538,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.51-GESTION-PORTAIL-INTEGRE";
+window.CAM_BASKET_VERSION = "V65.44-GESTION-PORTAIL-MES-ESPACES";
 
 </script>
 
@@ -9155,10 +9186,15 @@ html body .weekend-match.has-forfait{
 </style>
 
 
-<script id="unified_spaces_return_js">
-function openUnifiedSpaces(){
-  try{localStorage.setItem('demo_app_club_last_space_v1', document.body.classList.contains('coach-app')?'coach':'gestion');}catch(e){}
-  window.location.href='index.html?spaces=1';
+<script id="_portal_source_clean_nav_js">
+function openClubPortal(){
+  try{
+    var url=new URL('portail.html',window.location.href);
+    url.searchParams.set('t',Date.now());
+    window.location.assign(url.href);
+  }catch(e){
+    window.location.href='portail.html?t='+Date.now();
+  }
 }
 </script>
 </body>

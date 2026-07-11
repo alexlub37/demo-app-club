@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.52 - Coach - accès portail unique intégré à l’index -->
+<!-- Démo App Club V63.45 - Coach - portail séparé et bouton Mes espaces -->
 
 <html lang="fr">
 <head>
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.52-COACH-PORTAIL-INTEGRE" />
+  <meta name="cam-basket-version" content="V63.45-COACH-PORTAIL-MES-ESPACES" />
   <style>
     :root{
       --bg:#050505;
@@ -3409,6 +3409,39 @@ small{
 }
 </style>
 
+
+<style id="_portal_source_clean_nav_css">
+/* Portail V1.09 — ajout minimal sur base source : aucune modification du contour ni des modules. */
+header .header-mini-actions.portal-mini-actions{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,170px))!important;
+  justify-content:center!important;
+  gap:8px!important;
+  margin-top:10px!important;
+}
+html body header .header-mini-actions.portal-mini-actions button#btn-spaces,
+html body header .header-mini-actions.portal-mini-actions button#btn-update{
+  width:100%!important;
+  min-width:0!important;
+  min-height:auto!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  opacity:.86!important;
+  background:rgba(0,0,0,.40)!important;
+  color:var(--text,var(--app-text,#ffffff))!important;
+  -webkit-text-fill-color:var(--text,var(--app-text,#ffffff))!important;
+  border:2px solid var(--accent,var(--app-secondary,#5A189A))!important;
+  box-shadow:none!important;
+  touch-action:manipulation!important;
+}
+@media(max-width:380px){
+  header .header-mini-actions.portal-mini-actions{gap:6px!important;grid-template-columns:repeat(2,minmax(0,155px))!important}
+  html body header .header-mini-actions.portal-mini-actions button#btn-spaces,
+  html body header .header-mini-actions.portal-mini-actions button#btn-update{font-size:11px!important;padding:6px 7px!important}
+}
+</style>
 </head>
 <body class="loading coach-app">
 
@@ -3511,7 +3544,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.52 COACH</button>
+    ">V63.45 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3543,10 +3576,7 @@ small{
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
         <button id="btn-coach" class="btn-outline" onclick="openCoachMain()">Coach</button>
       </div>
-      <div class="header-mini-actions" style="gap:8px;flex-wrap:wrap;">
-        <button type="button" id="btn-spaces" class="btn-outline mini-update" onclick="openUnifiedSpaces()">⇄ Mes espaces</button>
-        <button id="btn-update" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button>
-      </div>
+      <div class="header-mini-actions portal-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="openClubPortal()">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -8483,12 +8513,13 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.52 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.45 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
       <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V63.52 — Coach : carte Réseaux sociaux retirée de l’accueil Coach</li>
+        <li>V63.45 — Coach : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier les fonctions Coach</li>
+        <li>V63.44 — Coach : carte Réseaux sociaux retirée de l’accueil Coach</li>
         <li>V63.43 — Coach : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
         <li>V63.42 — Coach : bloc Convocation ajouté dans le véritable écran Coach ; alerte et joueur « À remplacer » visibles après rechargement</li>
         <li>V63.41 — Coach : convocation restaurée après rechargement et statut « À remplacer » visible côté Coach</li>
@@ -9139,7 +9170,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.52-COACH-PORTAIL-INTEGRE";
+window.CAM_BASKET_VERSION = "V63.45-COACH-PORTAIL-MES-ESPACES";
 
 </script>
 
@@ -9666,10 +9697,15 @@ html body .coach-forfait-label{
 </style>
 
 
-<script id="unified_spaces_return_js">
-function openUnifiedSpaces(){
-  try{localStorage.setItem('demo_app_club_last_space_v1', document.body.classList.contains('coach-app')?'coach':'gestion');}catch(e){}
-  window.location.href='index.html?spaces=1';
+<script id="_portal_source_clean_nav_js">
+function openClubPortal(){
+  try{
+    var url=new URL('portail.html',window.location.href);
+    url.searchParams.set('t',Date.now());
+    window.location.assign(url.href);
+  }catch(e){
+    window.location.href='portail.html?t='+Date.now();
+  }
 }
 </script>
 </body>
