@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Démo App Club V65.44 - Gestion - portail séparé, base source conservée -->
+<!-- Démo App Club V65.49 - Gestion - logo cliquable sans fond -->
 
 <html lang="fr">
 <head>
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="apple-touch-icon" sizes="180x180" href="logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
+<link rel="apple-touch-icon" href="assets/logos/clubs/demo-app-club.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logos/clubs/demo-app-club.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/app-32.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Gestion Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V65.44-GESTION-PORTAIL-SOURCE-INTEGRALE" />
+  <meta name="app-version" content="V65.49-GESTION-LOGO-SANS-FOND" />
   <style>
     :root{
       --bg:#050505;
@@ -1743,9 +1743,9 @@ button:disabled,
 
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="logo_192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/app-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/app-180.png">
 <meta name="apple-mobile-web-app-title" content="Démo App Club">
 
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkTDqW1vIEFwcCBDbHViIiwKICAic2hvcnRfbmFtZSI6ICJBcHAgQ2x1YiIsCiAgInN0YXJ0X3VybCI6ICIuL2luZGV4Lmh0bWwiLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjMDAwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAibG9nb18xOTIucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImxvZ29fNTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
@@ -3011,6 +3011,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 /* Portail V1.11 : même style source pour les deux actions, sans modifier le contour global. */
 .header-mini-actions{gap:8px;flex-wrap:wrap;}
 </style>
+  <link rel="stylesheet" href="design-system-v1.css">
 </head>
 <body class="loading gestion-app">
 
@@ -3026,21 +3027,18 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
   justify-content:center;
   transition:opacity 0.4s ease;
 ">
-  <img id="splashLogo" src="Image PNG.png" alt="Logo" style="
-    width:160px;
-    height:160px;
+  <img id="splashLogo" src="assets/logos/clubs/demo-app-club.png" alt="Logo" style="
+    display:block;
+    width:128px;
+    height:128px;
+    min-width:0;
+    min-height:0;
+    max-width:38vw;
+    max-height:38vw;
+    margin:0;
+    padding:0;
     object-fit:contain;
-    animation:splashPulse 1.5s ease-in-out infinite;
   ">
-  <div style="
-    margin-top:24px;
-    display:flex;
-    gap:8px;
-  ">
-    <div class="splash-dot"></div>
-    <div class="splash-dot" style="animation-delay:0.2s"></div>
-    <div class="splash-dot" style="animation-delay:0.4s"></div>
-  </div>
 </div>
 
 <div id="camSvgBackground" aria-hidden="true" style="opacity:0;transition:opacity 0.2s ease;">
@@ -3111,7 +3109,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
 
   <header>
     <!-- Badge version cliquable — haut gauche -->
-    <button onclick="openInfoModal()" id="versionBadge" style="
+    <button onclick="openInfoModal()" id="versionBadge" aria-hidden="true" tabindex="-1" style="display:none;
       position:absolute;
       top:10px;
       left:12px;
@@ -3125,11 +3123,14 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       cursor:pointer;
       z-index:10;
       letter-spacing:0.3px;
-    ">V65.44 GESTION</button>
+    ">V65.49 GESTION</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
-        <div class="hero-logo-btn" aria-label="Logo de l’application">
-          <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
+        <div class="hero-logo-btn" role="button" tabindex="0"
+             aria-label="Afficher les informations de version"
+             onclick="openInfoModal()"
+             onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();openInfoModal();}">
+          <img src="assets/logos/clubs/demo-app-club.png" alt="Logo" class="hero-logo" id="mainLogo">
         </div>
         <div id="heroSlogan" style="
           display:none;
@@ -3152,7 +3153,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
       <div class="top-actions gestion-top-actions">
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
       </div>
-      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="window.location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
+      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="openExternalPageWithTransition('portail.html')">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -3913,7 +3914,8 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
     </section>
   </main>
 
-  <script src="app-config.js"></script>
+  <script src="assets/js/logo-paths.js"></script>
+<script src="app-config.js"></script>
   <script>
     const APP_CONFIG = window.APP_CONFIG || {};
     const SHEET_ID = APP_CONFIG.SHEET_ID || "1-Jc5y_mSHZSOk4Lm1ptz8NjqTowsFh9n_NRb3rIuu8g";
@@ -3935,6 +3937,22 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
     const RESPONSE_SHEET_NAME = "REPONSES";
     const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
     function getScriptUrl() { return APP_CONFIG.APPS_SCRIPT_URL || window._configScriptUrl || APPS_SCRIPT_URL; }
+
+    // V65.47 — transition externe sécurisée : écran noir + logo, sans modifier le scroll.
+    function showExternalTransition() {
+      const splash = document.getElementById("splashScreen");
+      if (!splash) return;
+      splash.style.display = "flex";
+      splash.style.opacity = "1";
+      splash.style.pointerEvents = "auto";
+    }
+
+    function openExternalPageWithTransition(url) {
+      showExternalTransition();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 40);
+    }
 
     let APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
     let APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
@@ -4233,7 +4251,7 @@ html body main #gestionMatchsScreen #gmSharePrompt.gm-share-prompt button *{
           Object.entries(cfg0).forEach(([k,v]) => { state.config[k.trim().toLowerCase()] = String(v); });
           syncClubTextConfigFromSheet();
           // Mettre à jour logo splash si logo_url défini
-          const logoUrl = state.config["logo_url"];
+          const logoUrl = resolveClubLogoUrl(state.config["logo_url"]);
           if (logoUrl) {
             const splashLogo = document.getElementById("splashLogo");
             if (splashLogo) splashLogo.src = logoUrl;
@@ -6795,6 +6813,7 @@ async function gmAjouterMatch(){
     chrono: document.getElementById("gmAddChrono").value.trim(),
     table: document.getElementById("gmAddTable").value.trim()
   };
+  if (!data.equipe) { gmShowMessage("Sélectionne une équipe avant d’enregistrer le match.", false); return; }
   if (!data.adversaire && !data.nouveauClubNom) { gmShowMessage("Choisis un adversaire ou indique le nouveau club.", false); return; }
   if (!data.lieu) { gmShowMessage("Choisis Domicile ou Extérieur.", false); return; }
   if (!gmValidateOfficiels("gmAdd")) return;
@@ -6899,6 +6918,7 @@ async function gmModifierMatch(){
     chrono: document.getElementById("gmEditChrono").value.trim(),
     table: document.getElementById("gmEditTable").value.trim()
   };
+  if (!data.equipe) { gmShowMessage("Sélectionne une équipe avant d’enregistrer le match.", false); return; }
   if (!gmValidateOfficiels("gmEdit")) return;
   const btn = document.getElementById("gmEditBtn");
   const oldTxt = btn ? btn.textContent : "";
@@ -7714,27 +7734,16 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V65.44 GESTION</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V65.49 GESTION</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 09/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
+        <li>V65.49 — Gestion : version accessible par clic sur le logo, sans fond coloré autour du logo</li>
+        <li>V65.47 — Gestion : transition sécurisée avec écran noir et logo lors du chargement et du retour vers Mes espaces</li>
+        <li>V65.46 — Gestion : équipe obligatoire lors de l’ajout ou de la modification d’un match, avec contrôle côté interface et serveur</li>
+        <li>V65.45 — Gestion : harmonisation globale des tailles, espacements, cartes, boutons et champs selon Design System V1.00</li>
         <li>V65.44 — Gestion : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier la mise en page ni les modules de la source</li>
-        <li>V65.43 — Gestion : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
-        <li>V65.42 — Gestion : couleurs lisibles des onglets Ajouter / Modifier et du bouton WhatsApp dans Gestion matchs</li>
-        <li>V65.41 — Gestion : lecture directe de JOUEURS via Apps Script pour récupérer exactement le téléphone et les autres champs</li>
-        <li>V65.40 — Gestion : récupération fiable et non mise en cache des données JOUEURS avant modification</li>
-        <li>V65.39 — Gestion : titres WhatsApp liés à nom_club et fond de secours neutre</li>
-        <li>V65.38 — Gestion : démonstration neutralisée, identité pilotée par CONFIG et statuts cohérents avec Code.gs</li>
-        <li>V65.37 — Gestion : WhatsApp forfait = message d’annulation sans demande de réponse ni lien direct</li>
-        <li>V65.36 — Gestion : libellé neutre « Forfait du club » sans modifier la logique existante</li>
-        <li>V65.35 — Gestion : TikTok, YouTube et site internet ajoutés aux Réglages app</li>
-        <li>V65.34 — Gestion : réglages enregistrés dans PARAMETRES_CLUB et repris par les formules de CONFIG</li>
-        <li>V65.33 — Gestion : masquage fiable de Réglages app avec la clé gestion_menu_reglages_actif</li>
-        <li>V65.31 — Gestion : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
-        <li>V65.30 — Gestion : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
-        <li>V65.29 — Gestion : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
-        <li>V65.28 — Gestion : navigation Gestion verrouillée en bouton secondaire</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8458,7 +8467,7 @@ function appliquerConfig() {
   setCfgText("benevolesCardText", "benevoles_texte", "Bénévoles du club.", "benevoles_texte_actif");
 
   // Logo
-  const logoSrc = cfg["logo_url"] || "Image PNG.png";
+  const logoSrc = resolveClubLogoUrl(cfg["logo_url"]);
   const ml = document.getElementById("mainLogo");
   const sl = document.getElementById("splashLogo");
   if (ml) ml.src = logoSrc;
@@ -8510,7 +8519,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V65.44-GESTION-PORTAIL-SOURCE-INTEGRALE";
+window.CAM_BASKET_VERSION = "V65.49-GESTION-LOGO-SANS-FOND";
 
 </script>
 

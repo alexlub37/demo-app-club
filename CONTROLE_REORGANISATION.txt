@@ -1,0 +1,17 @@
+DÉMO APP CLUB — CONTRÔLE DE RÉORGANISATION
+
+Base utilisée : app-Demo-Club-V1-250726.zip
+
+Modifications :
+- logo principal déplacé vers assets/logos/clubs/demo-app-club.png
+- icônes PWA déplacées vers assets/icons/
+- favicon déplacé vers assets/icons/favicon.ico
+- doublon Image PNG.png supprimé (strictement identique à logo.png)
+- références corrigées dans index.html, coach.html, gestion.html, formulaire.html, portail.html et manifest-portail.webmanifest
+- aucune logique métier modifiée
+
+Contrôles :
+- toutes les références locales HTML vérifiées
+- toutes les références JavaScript vers assets vérifiées
+- manifeste JSON valide
+- toutes les images référencées existent
