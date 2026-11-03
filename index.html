@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Démo App Club V62.67 - Joueurs - portail séparé, base source conservée -->
+<!-- Démo App Club V62.87 - Joueurs - transition sécurisée -->
 
 <html lang="fr">
 <head>
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="apple-touch-icon" sizes="180x180" href="logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
+<link rel="apple-touch-icon" href="assets/logos/clubs/demo-app-club.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logos/clubs/demo-app-club.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/app-32.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo App Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="app-version" content="V62.67-JOUEURS-PORTAIL-SOURCE-INTEGRALE" />
+  <meta name="app-version" content="V62.87-JOUEURS-TRANSITION-SECURISEE" />
   <style>
     :root{
       --bg:#050505;
@@ -1942,9 +1942,9 @@ body.player-app.benevoles-visible #btn-benevoles{display:block!important;}
 
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="logo_192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/app-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/app-180.png">
 <meta name="apple-mobile-web-app-title" content="Démo App Club">
 
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkTDqW1vIEFwcCBDbHViIiwKICAic2hvcnRfbmFtZSI6ICJBcHAgQ2x1YiIsCiAgInN0YXJ0X3VybCI6ICIuL2luZGV4Lmh0bWwiLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjMDAwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAibG9nb18xOTIucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImxvZ29fNTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
@@ -3261,6 +3261,631 @@ small{
 /* Portail V1.11 : même style source pour les deux actions, sans modifier le contour global. */
 .header-mini-actions{gap:8px;flex-wrap:wrap;}
 </style>
+
+<style id="_detail_match_logos_v62_69">
+/* V62.69 — détail match : même identité visuelle que le formulaire. */
+#matchDetailScreen .card{
+  overflow:hidden!important;
+}
+.match-detail-header-v6269{
+  margin:-4px -4px 18px!important;
+  padding:18px 14px 16px!important;
+  border:1.5px solid var(--accent)!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 50% 18%,rgba(var(--accent-rgb),.18),transparent 52%),
+    linear-gradient(180deg,rgba(13,22,14,.94),rgba(3,7,4,.96))!important;
+}
+.detail-match-type-v6269{
+  display:inline-flex!important;
+  align-items:center!important;
+  padding:6px 11px!important;
+  border-radius:999px!important;
+  background:rgba(var(--accent-rgb),.17)!important;
+  border:1px solid rgba(var(--accent-rgb),.55)!important;
+  color:var(--accent)!important;
+  font-size:11px!important;
+  font-weight:950!important;
+  text-transform:uppercase!important;
+}
+/* V62.86 — code couleur officiel du badge dans le détail du match. */
+.detail-match-type-v6269.detail-type-home-v6286{
+  background:rgba(47,128,237,.16)!important;
+  border-color:#2f80ed!important;
+  color:#8fc2ff!important;
+}
+.detail-match-type-v6269.detail-type-away-v6286{
+  background:rgba(255,159,28,.16)!important;
+  border-color:#ff9f1c!important;
+  color:#ffb65c!important;
+}
+.detail-match-type-v6269.detail-type-forfeit-v6286{
+  background:rgba(230,57,70,.16)!important;
+  border-color:#e63946!important;
+  color:#ff9aa3!important;
+}
+.detail-teams-v6269{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin:14px 0 16px!important;
+}
+.detail-team-v6269{
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  text-align:center!important;
+}
+.detail-team-logo-v6269{
+  width:82px!important;
+  height:82px!important;
+  object-fit:contain!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.detail-team-name-v6269{
+  width:100%!important;
+  color:#fff!important;
+  font-size:clamp(18px,5vw,24px)!important;
+  line-height:1.08!important;
+  font-weight:950!important;
+  overflow-wrap:anywhere!important;
+}
+.detail-vs-v6269{
+  color:var(--accent)!important;
+  font-size:29px!important;
+  font-weight:1000!important;
+  text-align:center!important;
+}
+.detail-date-time-v6269{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:9px!important;
+}
+.detail-date-v6269,
+.detail-time-v6269{
+  min-height:54px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:9px!important;
+  padding:9px!important;
+  border-radius:14px!important;
+  background:rgba(0,0,0,.34)!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+}
+.detail-date-v6269 strong,
+.detail-time-v6269 strong{
+  color:#fff!important;
+  font-size:15px!important;
+  font-weight:950!important;
+}
+@media(max-width:390px){
+  .detail-team-logo-v6269{width:72px!important;height:72px!important;}
+  .detail-team-name-v6269{font-size:18px!important;}
+}
+</style>
+
+
+<style id="_detail_match_logos_final_v62_70">
+/* V62.70 — verrouillage final du détail match.
+   Le logo reste toujours attaché au même nom, quelle que soit la position. */
+#matchDetailScreen .match-detail-header-v6269{
+  display:block!important;
+}
+#matchDetailScreen .detail-teams-v6269{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr)!important;
+  align-items:center!important;
+}
+#matchDetailScreen .detail-team-v6269{
+  min-width:0!important;
+}
+#matchDetailScreen .detail-team-logo-v6269{
+  display:block;
+  width:86px!important;
+  height:86px!important;
+  max-width:100%!important;
+  object-fit:contain!important;
+}
+#matchDetailScreen .detail-team-logo-v6269[style*="display:none"],
+#matchDetailScreen .detail-team-logo-v6269:not([src]){
+  display:none!important;
+}
+#matchDetailScreen .detail-team-name-v6269{
+  min-height:48px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+}
+#matchDetailScreen .detail-vs-v6269{
+  align-self:center!important;
+}
+@media(max-width:390px){
+  #matchDetailScreen .detail-team-logo-v6269{
+    width:76px!important;
+    height:76px!important;
+  }
+}
+</style>
+
+
+<style id="_detail_match_mobile_empile_v62_71">
+/* V62.71 — sur mobile, les équipes sont empilées.
+   Chaque logo reste collé à son nom et les noms longs utilisent toute la largeur. */
+@media(max-width:520px){
+  #matchDetailScreen .detail-teams-v6269{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:10px!important;
+    margin:14px 0 14px!important;
+  }
+
+  #matchDetailScreen .detail-team-v6269{
+    display:grid!important;
+    grid-template-columns:82px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:14px!important;
+    min-height:84px!important;
+    padding:8px 12px!important;
+    border-radius:16px!important;
+    background:rgba(0,0,0,.22)!important;
+    border:1px solid rgba(255,255,255,.08)!important;
+    text-align:left!important;
+  }
+
+  #matchDetailScreen .detail-team-logo-v6269{
+    width:74px!important;
+    height:74px!important;
+    justify-self:center!important;
+  }
+
+  #matchDetailScreen .detail-team-name-v6269{
+    min-height:0!important;
+    display:block!important;
+    text-align:left!important;
+    font-size:21px!important;
+    line-height:1.12!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+
+  #matchDetailScreen .detail-vs-v6269{
+    width:56px!important;
+    height:38px!important;
+    margin:0 auto!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border-radius:999px!important;
+    background:rgba(var(--accent-rgb),.16)!important;
+    font-size:24px!important;
+  }
+
+  #matchDetailScreen .detail-date-time-v6269{
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+
+  #matchDetailScreen .detail-date-v6269,
+  #matchDetailScreen .detail-time-v6269{
+    min-height:50px!important;
+    padding:8px!important;
+  }
+
+  #matchDetailScreen .detail-date-v6269 strong,
+  #matchDetailScreen .detail-time-v6269 strong{
+    font-size:14px!important;
+  }
+}
+</style>
+
+
+<style id="_detail_match_harmonise_v62_72">
+/* V62.72 — détail match harmonisé sur mobile.
+   Une seule carte large, équipes côte à côte et texte plus doux. */
+@media(max-width:520px){
+
+  /* Corrige le décalage général de la première photo. */
+  #matchDetailScreen{
+    width:100%!important;
+    max-width:none!important;
+    padding-left:10px!important;
+    padding-right:10px!important;
+    box-sizing:border-box!important;
+  }
+
+  #matchDetailScreen > .card{
+    width:100%!important;
+    max-width:none!important;
+    margin:10px 0 0!important;
+    padding:12px!important;
+    box-sizing:border-box!important;
+    border-radius:24px!important;
+  }
+
+  #matchDetailScreen .match-detail-header-v6269{
+    width:100%!important;
+    margin:0 0 16px!important;
+    padding:15px 12px 14px!important;
+    box-sizing:border-box!important;
+    border-radius:20px!important;
+  }
+
+  #matchDetailScreen .detail-match-type-v6269{
+    font-size:10px!important;
+    padding:5px 10px!important;
+  }
+
+  #matchDetailScreen .detail-teams-v6269{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:6px!important;
+    margin:12px 0 14px!important;
+  }
+
+  #matchDetailScreen .detail-team-v6269{
+    min-width:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:7px!important;
+    padding:0!important;
+    background:transparent!important;
+    border:0!important;
+    text-align:center!important;
+  }
+
+  #matchDetailScreen .detail-team-logo-v6269{
+    width:72px!important;
+    height:72px!important;
+    object-fit:contain!important;
+  }
+
+  #matchDetailScreen .detail-team-name-v6269{
+    width:100%!important;
+    min-height:40px!important;
+    display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    overflow:hidden!important;
+    text-align:center!important;
+    font-size:16px!important;
+    line-height:1.12!important;
+    font-weight:850!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+
+  #matchDetailScreen .detail-vs-v6269{
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    background:transparent!important;
+    font-size:23px!important;
+    line-height:1!important;
+  }
+
+  #matchDetailScreen .detail-date-time-v6269{
+    grid-template-columns:1.35fr .75fr!important;
+    gap:7px!important;
+  }
+
+  #matchDetailScreen .detail-date-v6269,
+  #matchDetailScreen .detail-time-v6269{
+    min-height:48px!important;
+    padding:7px 8px!important;
+    border-radius:13px!important;
+  }
+
+  #matchDetailScreen .detail-date-v6269 strong,
+  #matchDetailScreen .detail-time-v6269 strong{
+    font-size:13px!important;
+  }
+
+  /* Réduit les marges visuelles des informations pratiques. */
+  #matchDetailScreen .detail-row{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  #matchDetailScreen .detail-back{
+    margin-left:0!important;
+  }
+}
+
+@media(max-width:370px){
+  #matchDetailScreen .detail-team-logo-v6269{
+    width:64px!important;
+    height:64px!important;
+  }
+  #matchDetailScreen .detail-team-name-v6269{
+    font-size:15px!important;
+  }
+}
+</style>
+
+
+
+
+
+
+<style id="_accueil_nav_cartes_centrees_v62_80">
+html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+#homeScreen,#homeScreen *{box-sizing:border-box!important}
+
+/* Navigation haute */
+.player-actions-v6280{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+.player-nav-row-v6280{display:grid!important;gap:10px!important;width:100%!important}
+.player-nav-two-v6280{grid-template-columns:1fr 1fr!important}
+.player-nav-one-v6280{grid-template-columns:1fr!important}
+.player-nav-row-v6280>button{width:100%!important;min-width:0!important;margin:0!important;min-height:52px!important;
+display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;
+padding:11px 13px!important;border-radius:18px!important;white-space:nowrap!important}
+.player-actions-v6280>#btn-bureau,.player-actions-v6280>#btn-benevoles{display:none!important}
+
+/* Liste */
+.weekend-list-compact{display:grid!important;gap:15px!important}
+.weekend-title-line span:last-child{opacity:.68!important;font-size:.92em!important;font-weight:750!important}
+
+/* Carte +7 px */
+.weekend-match-v6276{
+position:relative!important;width:100%!important;max-width:100%!important;min-height:139px!important;
+display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:stretch!important;gap:10px!important;
+margin:0!important;padding:12px 11px 12px 15px!important;overflow:hidden!important;
+border:1px solid rgba(var(--accent-rgb),.28)!important;border-radius:15px!important;
+background:linear-gradient(135deg,rgba(255,255,255,.028),rgba(255,255,255,0) 52%),rgba(0,0,0,.28)!important;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 6px 18px rgba(0,0,0,.12)!important}
+.weekend-match-v6276::before{content:""!important;position:absolute!important;z-index:5!important;left:0!important;top:0!important;
+bottom:0!important;width:6px!important;display:block!important;border-radius:15px 0 0 15px!important;opacity:1!important;
+visibility:visible!important;pointer-events:none!important}
+.weekend-match-v6276.is-home-v6276::before{background:#2F80ED!important}
+.weekend-match-v6276.is-away-v6276::before{background:#F28C28!important}
+.weekend-match-v6276.is-forfait-v6276::before{background:#E63946!important}
+.weekend-match-v6276>*{position:relative!important;z-index:2!important}
+
+/* Répartition verticale exacte : équipe / VS / adversaire */
+.weekend-main-v6276{min-width:0!important;display:grid!important;
+grid-template-rows:minmax(0,1fr) 18px minmax(0,1fr)!important;align-items:stretch!important;gap:0!important;height:100%!important}
+.weekend-team-row-v6276{min-width:0!important;display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;
+align-items:center!important;gap:9px!important}
+.weekend-team-logo-v6276,.weekend-logo-placeholder-v6276{width:38px!important;height:38px!important;border-radius:50%!important}
+.weekend-team-logo-v6276{object-fit:contain!important;padding:2px!important;background:rgba(255,255,255,.035)!important;
+border:1px solid rgba(255,255,255,.07)!important;box-shadow:0 2px 10px rgba(0,0,0,.18)!important}
+.weekend-logo-placeholder-v6276{display:block!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.weekend-team-name-v6276{min-width:0!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;
+-webkit-line-clamp:2!important;overflow:hidden!important;white-space:normal!important;line-height:1.08!important;
+text-transform:uppercase!important;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
+.weekend-club-name-v6276{color:#fff!important;font-size:clamp(13px,3.55vw,16px)!important;font-weight:900!important}
+.weekend-opponent-name-v6276{color:rgba(255,255,255,.90)!important;font-size:clamp(12px,3.3vw,14px)!important;font-weight:800!important}
+.weekend-vs-v6276{display:flex!important;align-items:center!important;justify-content:center!important;margin:0 0 0 47px!important}
+.weekend-vs-v6276 strong{color:rgba(255,255,255,.48)!important;font-size:10px!important;line-height:1!important;font-weight:950!important}
+
+/* Date / heure */
+.weekend-meta-v6276{min-width:70px!important;display:grid!important;align-content:center!important;gap:9px!important;justify-items:end!important}
+.weekend-date-v6276{width:100%!important;color:var(--accent)!important;font-size:12px!important;line-height:1.05!important;
+font-weight:900!important;text-align:right!important;white-space:nowrap!important}
+.weekend-date-v6276 small{display:block!important;margin-top:5px!important;color:#fff!important;font-size:18px!important;line-height:1!important;font-weight:950!important}
+
+/* Badges */
+.weekend-match-v6276 .weekend-match-type{min-width:44px!important;padding:4px 9px!important;border-radius:999px!important;
+font-size:10px!important;line-height:1.15!important;font-weight:950!important;text-align:center!important;white-space:nowrap!important}
+.weekend-match-v6276 .type-dom{background:rgba(47,128,237,.16)!important;color:#8FBEFF!important;border:1px solid rgba(47,128,237,.76)!important}
+.weekend-match-v6276 .type-ext{background:rgba(242,140,40,.16)!important;color:#FFB15C!important;border:1px solid rgba(242,140,40,.76)!important}
+.weekend-match-v6276 .badge-forfait-v6276{background:rgba(230,57,70,.16)!important;color:#FF9AA3!important;border:1px solid rgba(230,57,70,.78)!important}
+
+@keyframes accueilMatchInV6280{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.weekend-match-v6276{animation:accueilMatchInV6280 .18s ease-out both!important}
+.weekend-match-v6276:nth-child(2){animation-delay:.035s!important}
+.weekend-match-v6276:nth-child(3){animation-delay:.07s!important}
+@media(prefers-reduced-motion:reduce){.weekend-match-v6276{animation:none!important}}
+
+@media(max-width:370px){
+.player-nav-row-v6280{gap:8px!important}
+.player-nav-row-v6280>button{padding-left:9px!important;padding-right:9px!important;font-size:clamp(13px,3.8vw,15px)!important}
+.weekend-match-v6276{min-height:133px!important;padding-right:9px!important}
+.weekend-team-row-v6276{grid-template-columns:35px minmax(0,1fr)!important;gap:8px!important}
+.weekend-team-logo-v6276,.weekend-logo-placeholder-v6276{width:35px!important;height:35px!important}
+.weekend-vs-v6276{margin-left:43px!important}
+.weekend-meta-v6276{min-width:66px!important}
+.weekend-date-v6276 small{font-size:17px!important}}
+</style>
+
+
+<style id="_mes_matchs_compact_v62_83">
+/* V62.84 — Mes matchs : liste épurée d’accès direct au détail. */
+#matchesScreen .matches-app-intro-v6281{
+  position:relative!important;
+  overflow:hidden!important;
+  padding:16px 18px!important;
+}
+#matchesScreen .matches-app-intro-v6281::after{display:none!important}
+#matchesScreen .matches-app-intro-v6281 h2{
+  margin:0 0 6px!important;
+  font-size:28px!important;
+  line-height:1.05!important;
+}
+#matchesScreen .matches-app-intro-v6281 .muted{
+  font-size:14px!important;
+  line-height:1.35!important;
+}
+#matchesScreen .match-section-title{
+  margin:18px 3px 9px!important;
+  color:var(--accent)!important;
+  font-size:14px!important;
+  font-weight:950!important;
+  letter-spacing:.05em!important;
+}
+#matchesScreen #matchesList{display:grid!important;gap:10px!important}
+.player-match-card-v6281{
+  --match-state:#F28C28;
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-areas:
+    "badge arrow"
+    "team arrow"
+    "opponent arrow"
+    "meta arrow"!important;
+  gap:5px 12px!important;
+  padding:10px 15px 10px 18px!important;
+  border-radius:20px!important;
+  border:1px solid rgba(var(--accent-rgb),.48)!important;
+  background:linear-gradient(145deg,rgba(20,20,20,.90),rgba(3,3,3,.94))!important;
+  cursor:pointer!important;
+}
+.player-match-card-v6281::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--match-state)
+}
+.player-match-card-v6281.match-home-v6281{--match-state:#2F80ED}
+.player-match-card-v6281.match-away-v6281{--match-state:#F28C28}
+.player-match-card-v6281.match-forfait-v6281{--match-state:#E63946}
+.player-match-card-v6281.match-past-v6281{opacity:.55}
+.player-match-badge-v6281{
+  grid-area:badge;justify-self:start;display:inline-flex;align-items:center;gap:6px;
+  width:max-content;max-width:100%;padding:4px 9px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--match-state) 78%,transparent);
+  background:color-mix(in srgb,var(--match-state) 15%,transparent);
+  color:#fff!important;font-size:10px;line-height:1.1;font-weight:950;
+  text-transform:uppercase;letter-spacing:.03em;white-space:nowrap
+}
+.player-match-badge-v6281.forfait{color:#ffb2b8!important}
+.player-match-team-v6281{grid-area:team;min-width:0}
+.player-match-opponent-v6281{grid-area:opponent;min-width:0}
+.player-match-team-name-v6281{
+  color:#fff!important;font-size:19px!important;line-height:1.08!important;font-weight:950!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+.player-match-opponent-name-v6281{
+  color:rgba(255,255,255,.88)!important;font-size:16px!important;line-height:1.12!important;font-weight:800!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+.player-match-meta-v6281{
+  grid-area:meta;display:flex;align-items:center;gap:8px;min-width:0;color:var(--muted)!important;
+  font-size:14px!important;line-height:1.15!important;font-weight:750!important
+}
+.player-match-meta-v6281 strong{color:#fff!important;font-size:15px!important;font-weight:950!important}
+.player-match-arrow-v6281{
+  grid-area:arrow;align-self:center;justify-self:end;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.42);
+  color:var(--accent)!important;font-size:29px;font-weight:800;line-height:1
+}
+.player-match-past-v6281{
+  display:inline-flex;align-items:center;width:max-content;padding:3px 7px;border-radius:999px;
+  border:1px solid rgba(var(--accent-rgb),.35);color:var(--accent)!important;font-size:10px;font-weight:900
+}
+.player-match-card-v6281:active{transform:scale(.985)!important;filter:brightness(1.08)!important}
+@media(max-width:370px){
+  .player-match-card-v6281{padding-right:12px!important;gap:6px 9px!important}
+  .player-match-team-name-v6281{font-size:18px!important}
+  .player-match-opponent-name-v6281{font-size:15px!important}
+  .player-match-meta-v6281{font-size:13px!important}
+  .player-match-arrow-v6281{width:31px;height:31px;font-size:22px!important}
+}
+</style>
+
+
+<style id="_mes_matchs_design_system_v62_85">
+/* V62.85 — Harmonisation visuelle ciblée de Mes matchs.
+   Aucun fonctionnement, badge métier ou autre écran n'est modifié. */
+
+/* Retour : action compacte et légèrement teintée, sans devenir une carte. */
+#matchesScreen > .back{
+  width:auto!important;
+  min-height:44px!important;
+  margin:0 0 12px!important;
+  padding:9px 14px!important;
+  border-radius:18px!important;
+  background:linear-gradient(135deg,rgba(var(--accent-rgb),.12),rgba(0,0,0,.72))!important;
+  border:1.5px solid rgba(var(--accent-rgb),.72)!important;
+  color:#fff!important;
+  font-size:14px!important;
+  line-height:1.1!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.16)!important;
+}
+
+/* Le grand cartouche devient un titre de section identique au Design System V2. */
+#matchesScreen .matches-app-intro-v6281{
+  min-height:0!important;
+  margin:0 0 14px!important;
+  padding:8px 4px 8px 22px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+#matchesScreen .matches-app-intro-v6281::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:3px!important;
+  top:7px!important;
+  bottom:7px!important;
+  width:6px!important;
+  border-radius:999px!important;
+  background:var(--accent)!important;
+  box-shadow:0 0 14px rgba(var(--accent-rgb),.20)!important;
+}
+#matchesScreen .matches-app-intro-v6281 h2{
+  margin:0!important;
+  color:var(--accent)!important;
+  font-size:clamp(27px,8vw,34px)!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:-.02em!important;
+}
+#matchesScreen .matches-app-intro-v6281 .muted{display:none!important}
+
+/* Sections et liste légèrement resserrées. */
+#matchesScreen .match-section-title{
+  margin:14px 3px 8px!important;
+}
+#matchesScreen #matchesList{
+  gap:9px!important;
+}
+
+/* Même carte, simplement 6–8 px moins haute. */
+#matchesScreen .player-match-card-v6281{
+  gap:4px 12px!important;
+  padding:8px 14px 8px 18px!important;
+  border-radius:20px!important;
+}
+
+/* Chevron renforcé de 10 %, sans changer son rôle. */
+#matchesScreen .player-match-arrow-v6281{
+  width:42px!important;
+  height:42px!important;
+  font-size:31px!important;
+  border-width:1.5px!important;
+  background:rgba(var(--accent-rgb),.035)!important;
+}
+
+@media(max-width:370px){
+  #matchesScreen > .back{min-height:42px!important;padding:8px 12px!important}
+  #matchesScreen .matches-app-intro-v6281{padding-left:19px!important;margin-bottom:12px!important}
+  #matchesScreen .matches-app-intro-v6281 h2{font-size:27px!important}
+  #matchesScreen .player-match-card-v6281{padding:8px 11px 8px 17px!important;gap:4px 9px!important}
+  #matchesScreen .player-match-arrow-v6281{width:35px!important;height:35px!important;font-size:25px!important}
+}
+</style>
+
 </head>
 <body class="loading player-app">
 
@@ -3276,21 +3901,18 @@ small{
   justify-content:center;
   transition:opacity 0.4s ease;
 ">
-  <img id="splashLogo" src="Image PNG.png" alt="Logo" style="
-    width:160px;
-    height:160px;
+  <img id="splashLogo" src="assets/logos/clubs/demo-app-club.png" alt="Logo" style="
+    display:block;
+    width:128px;
+    height:128px;
+    min-width:0;
+    min-height:0;
+    max-width:38vw;
+    max-height:38vw;
+    margin:0;
+    padding:0;
     object-fit:contain;
-    animation:splashPulse 1.5s ease-in-out infinite;
   ">
-  <div style="
-    margin-top:24px;
-    display:flex;
-    gap:8px;
-  ">
-    <div class="splash-dot"></div>
-    <div class="splash-dot" style="animation-delay:0.2s"></div>
-    <div class="splash-dot" style="animation-delay:0.4s"></div>
-  </div>
 </div>
 
 <div id="camSvgBackground" aria-hidden="true" style="opacity:0;transition:opacity 0.2s ease;">
@@ -3363,7 +3985,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V62.67 JOUEURS</button>
+    ">V62.87 JOUEURS</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3371,7 +3993,7 @@ small{
           onclick="openInfoModal()"
           onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();openInfoModal();}"
           style="cursor:pointer;">
-          <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
+          <img src="assets/logos/clubs/demo-app-club.png" alt="Logo" class="hero-logo" id="mainLogo">
         </div>
         <div id="heroSlogan" style="
           display:none;
@@ -3391,14 +4013,21 @@ small{
         ">Bienvenue<br>au club&nbsp;!</div>
       </div>
       <h1 class="hero-title">Démo App<br>Club</h1>      <div id="appSubtitle" class="hero-sub" style="display:none"></div>
-      <div class="top-actions player-actions">
-        <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
-        <button id="btn-teams" class="btn-outline" onclick="openMyTeamPlayer()">Mes matchs</button>
-        <button id="btn-myteams" class="btn-outline" onclick="openMyTeamsSettingsPlayer()">Mes équipes</button>
+      <div class="top-actions player-actions player-actions-v6280">
+        <div class="player-nav-row-v6280 player-nav-two-v6280">
+          <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">⌂ Accueil</button>
+          <button id="btn-teams" class="btn-outline" onclick="openMyTeamPlayer()">▣ Mes matchs</button>
+        </div>
+        <div class="player-nav-row-v6280 player-nav-one-v6280">
+          <button id="btn-myteams" class="btn-outline" onclick="openMyTeamsSettingsPlayer()">♟ Mes équipes</button>
+        </div>
+        <div class="player-nav-row-v6280 player-nav-two-v6280">
+          <button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="openExternalPageWithTransition('portail.html')">⇄ Mes espaces</button>
+          <button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button>
+        </div>
         <button id="btn-bureau" class="btn-outline" onclick="setActiveButton('bureau'); showScreen('bureauScreen')">Bureau</button>
         <button id="btn-benevoles" class="btn-outline" onclick="setActiveButton('benevoles'); showScreen('benevolesScreen')">Bénévoles</button>
       </div>
-      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="window.location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -3513,7 +4142,7 @@ small{
 
     <section id="matchesScreen" class="screen">
       <button class="back" onclick="showScreen('teamMenuScreen')">← Retour au menu équipe</button>
-      <div class="card">
+      <div class="card matches-app-intro-v6281">
         <h2 id="matchesTitle">Matchs</h2>
         <div id="matchesCardText" class="muted">Clique sur un match pour voir le détail et ouvrir l’itinéraire.</div>
       </div>
@@ -3523,18 +4152,39 @@ small{
     <section id="matchDetailScreen" class="screen">
       <button class="back detail-back" onclick="goBackFromMatchDetail()">← Retour</button>
       <div class="card">
-        <div class="match-detail-header">
-          <div class="match-top-line">
-            <div id="detailSeasonTop" class="match-season-top">SAISON</div>
-            <div></div>
-            <div id="detailTeamInline" class="match-team-inline"></div>
+        <div class="match-detail-header match-detail-header-v6269">
+          <div class="detail-match-type-v6269" id="detailTypeBadgeV6269">MATCH</div>
+
+          <div class="detail-teams-v6269">
+            <div class="detail-team-v6269">
+              <img id="detailLeftLogoV6269" class="detail-team-logo-v6269" alt="" style="display:none;">
+              <div id="detailLeftNameV6269" class="detail-team-name-v6269">Équipe</div>
+            </div>
+
+            <div class="detail-vs-v6269">VS</div>
+
+            <div class="detail-team-v6269">
+              <img id="detailRightLogoV6269" class="detail-team-logo-v6269" alt="" style="display:none;">
+              <div id="detailRightNameV6269" class="detail-team-name-v6269">Adversaire</div>
+            </div>
           </div>
-          <h2 id="detailTitle" class="match-detail-title">Détail match</h2>
-          <div class="match-date-time-row">
-            <span id="detailDateTop"></span>
-            <span id="detailTimeTop"></span>
+
+          <div class="detail-date-time-v6269">
+            <div class="detail-date-v6269">
+              <span>📅</span>
+              <strong id="detailDateTop"></strong>
+            </div>
+            <div class="detail-time-v6269">
+              <span>🕒</span>
+              <strong id="detailTimeTop"></strong>
+            </div>
           </div>
-          <div id="detailTypeTop" class="match-type-top"></div>
+
+          <!-- IDs historiques conservés pour compatibilité -->
+          <div id="detailSeasonTop" style="display:none"></div>
+          <div id="detailTeamInline" style="display:none"></div>
+          <h2 id="detailTitle" class="match-detail-title" style="display:none">Détail match</h2>
+          <div id="detailTypeTop" style="display:none"></div>
         </div>
 
 <div id="matchConvocationCard" class="match-convoc-card">
@@ -3908,6 +4558,12 @@ small{
           <div class="gj-field"><label>Code postal</label><input id="gaCodePostal" type="text" inputmode="numeric" placeholder="Ex : 18000"></div>
           <div class="gj-field"><label>Ville</label><input id="gaVille" type="text" placeholder="Ex : Bourges"></div>
         </div>
+        <input id="gaOrigLogo" type="hidden">
+        <div class="gj-field">
+          <label>Logo adversaire</label>
+          <input id="gaLogo" type="text" placeholder="Ex : assets/logos/adversaires/ada_blois.png">
+          <div class="gj-search-note">Chemin du fichier PNG dans GitHub.</div>
+        </div>
         <button id="gaSaveBtn" class="gj-save" onclick="gaSaveAdversaire()">Enregistrer l’adversaire</button>
         <button id="gaCancelBtn" class="gj-cancel" onclick="gaHideForm()">Annuler</button>
       </div>
@@ -4015,7 +4671,8 @@ small{
     </section>
   </main>
 
-  <script src="app-config.js"></script>
+  <script src="assets/js/logo-paths.js"></script>
+<script src="app-config.js"></script>
   <script>
     const APP_CONFIG = window.APP_CONFIG || {};
     const SHEET_ID = APP_CONFIG.SHEET_ID || "1-Jc5y_mSHZSOk4Lm1ptz8NjqTowsFh9n_NRb3rIuu8g";
@@ -4037,6 +4694,22 @@ small{
     const RESPONSE_SHEET_NAME = "REPONSES";
     const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
     function getScriptUrl() { return APP_CONFIG.APPS_SCRIPT_URL || window._configScriptUrl || APPS_SCRIPT_URL; }
+
+    // V62.87 — transition externe sécurisée : écran noir + logo, sans modifier le scroll.
+    function showExternalTransition() {
+      const splash = document.getElementById("splashScreen");
+      if (!splash) return;
+      splash.style.display = "flex";
+      splash.style.opacity = "1";
+      splash.style.pointerEvents = "auto";
+    }
+
+    function openExternalPageWithTransition(url) {
+      showExternalTransition();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 40);
+    }
 
     let APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
     let APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
@@ -4620,7 +5293,7 @@ small{
           Object.entries(cfg0).forEach(([k,v]) => { state.config[k.trim().toLowerCase()] = String(v); });
           syncClubTextConfigFromSheet();
           // Mettre à jour logo splash si logo_url défini
-          const logoUrl = state.config["logo_url"];
+          const logoUrl = resolveClubLogoUrl(state.config["logo_url"]);
           if (logoUrl) {
             const splashLogo = document.getElementById("splashLogo");
             if (splashLogo) splashLogo.src = logoUrl;
@@ -4769,7 +5442,8 @@ small{
           gymnase: String(r[1] || "").trim(),
           adresse: String(r[2] || "").trim(),
           codePostal: String(r[3] || "").trim(),
-          ville: String(r[4] || "").trim()
+          ville: String(r[4] || "").trim(),
+          logo: String(r[5] || "").trim()
         })).filter(x => x.club && normalize(x.club) !== "club");
 
         // OFFICIELS attendu :
@@ -5640,6 +6314,75 @@ small{
       return raisonReponseMatchBloquee(m) === "";
     }
 
+
+
+    /* V62.82 — rendu commun des cartes de la page Mes matchs. */
+    function getOpponentLogoV6281(m){
+      const opponent = (state.adversaires || []).find(a => normalize(a.club) === normalize(m && m.adversaire));
+      return opponent ? String(opponent.logo || "").trim() : "";
+    }
+
+    function getClubLogoV6281(){
+      return resolveClubLogoUrl(cfgValue("logo_url", "")) || String((document.getElementById("mainLogo") || {}).src || CLUB_LOGO_FALLBACK);
+    }
+
+    function matchCardHtmlV6281(m, realIdx, past){
+      const home = isHomeType(m.type);
+      const statutInfo = statutMatchListeInfo_(m);
+      const forfait = !!statutInfo;
+      const stateClass = forfait ? "match-forfait-v6281" : (home ? "match-home-v6281" : "match-away-v6281");
+      const typeLabel = forfait ? statutInfo.label : (home ? "Domicile" : "Extérieur");
+      const teamName = m.equipe || "Équipe";
+      const opponentName = m.adversaire || "Adversaire";
+      const shortDate = (() => {
+        const raw = String(m.date || "").trim();
+        const match = raw.match(/^(\d{1,2})[\/.-](\d{1,2})/);
+        return match ? `${match[1].padStart(2, "0")}/${match[2].padStart(2, "0")}` : (raw || "-");
+      })();
+
+      return `
+        <div class="player-match-card-v6281 ${stateClass} ${past ? "match-past-v6281" : ""}" data-idx="${realIdx}" role="button" tabindex="0" aria-label="Ouvrir le match ${escapeHtml(teamName)} contre ${escapeHtml(opponentName)}">
+          <div class="player-match-badge-v6281 ${forfait ? "forfait" : ""}">${escapeHtml(typeLabel)}</div>
+          <div class="player-match-team-v6281">
+            <div class="player-match-team-name-v6281">${escapeHtml(teamName)}</div>
+          </div>
+          <div class="player-match-opponent-v6281">
+            <div class="player-match-opponent-name-v6281">${escapeHtml(opponentName)}</div>
+          </div>
+          <div class="player-match-meta-v6281">
+            <span><strong>${escapeHtml(shortDate)}</strong></span>
+            <span>•</span>
+            <span><strong>${escapeHtml(m.heure || "-")}</strong></span>
+            ${past ? '<span class="player-match-past-v6281">PASSÉ 🔒</span>' : ''}
+          </div>
+          <div class="player-match-arrow-v6281" aria-hidden="true">›</div>
+        </div>`;
+    }
+
+    function renderMatchGroupsV6281(futurs, passes){
+      function group(title, rows, startIndex, past){
+        if (!rows.length) return "";
+        return `<div class="match-section-title">${title}</div>` + rows.map((m, idx) => matchCardHtmlV6281(m, startIndex + idx, past)).join("");
+      }
+      return group("Matchs à venir", futurs, 0, false) + group("Matchs passés", passes, futurs.length, true);
+    }
+
+    function bindMatchCardsV6281(container){
+      container.querySelectorAll(".player-match-card-v6281").forEach(node => {
+        const open = () => {
+          state.detailBackScreen = "matchesScreen";
+          openMatchDetail(Number(node.dataset.idx));
+        };
+        node.addEventListener("click", open);
+        node.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            open();
+          }
+        });
+      });
+    }
+
     function openMatches(){
       const team = state.selectedTeam?.team || "";
       document.getElementById("matchesTitle").textContent = "Matchs — " + team;
@@ -5657,43 +6400,74 @@ small{
       if(!state.currentMatchRows.length){
         el.innerHTML = '<div class="empty">Aucun match trouvé pour cette équipe et cette saison.</div>';
       } else {
-        function renderGroup(title, rows, startIndex, past){
-          if (!rows.length) return "";
-          return `
-            <div class="match-section-title">${title}</div>
-            ${rows.map((m, idx) => {
-              const realIdx = startIndex + idx;
-              const typeInfo = badgeForType(m.type);
-              const lieuLigne = [m.gymnase, m.ville].filter(Boolean).join(" • ");
-              const pastBadge = past ? '<span class="match-lock">PASSÉ 🔒</span>' : "";
-              const statutInfo = statutMatchListeInfo_(m);
-              const statutBadge = statutInfo
-                ? `<div class="match-list-status ${statutInfo.cls}">❌ ${escapeHtml(statutInfo.label)}</div>`
-                : "";
-              return `
-                <div class="item ${past ? "match-past" : ""} ${statutInfo ? "has-forfait" : ""}" data-idx="${realIdx}">
-                  <div class="item-title">${escapeHtml(m.date)} ${typeInfo.badge}${pastBadge}</div>
-                  ${statutBadge}
-                  <div class="item-sub">${escapeHtml(m.heure)} • ${escapeHtml(buildMatchDisplay(m))}</div>
-                  ${!isHomeType(m.type) ? `<div class="item-sub">${escapeHtml(lieuLigne || m.adresse)}</div>` : ""}
-                </div>
-              `;
-            }).join("")}
-          `;
-        }
-
-        el.innerHTML =
-          renderGroup("Matchs à venir", futurs, 0, false) +
-          renderGroup("Matchs passés", passes, futurs.length, true);
-
-        el.querySelectorAll(".item").forEach(node => {
-          node.addEventListener("click", () => {
-            state.detailBackScreen = "matchesScreen";
-            openMatchDetail(Number(node.dataset.idx));
-          });
-        });
+        el.innerHTML = renderMatchGroupsV6281(futurs, passes);
+        bindMatchCardsV6281(el);
       }
       showScreen("matchesScreen");
+    }
+
+
+    function renderDetailMatchTeamsV6269(m){
+      const away = ["e","ext","exterieur","extérieur"].includes(normalize(m.type));
+      const opponent = (state.adversaires || []).find(a =>
+        normalize(a.club) === normalize(m.adversaire)
+      );
+      const opponentLogo = opponent ? String(opponent.logo || "").trim() : "";
+      const clubLogo = cfgValue("logo_url", "") ||
+        String((document.getElementById("mainLogo") || {}).src || "assets/logos/clubs/demo-app-club.png");
+
+      function setSide(side, name, logo, isClub){
+        const nameEl = document.getElementById("detail" + side + "NameV6269");
+        const logoEl = document.getElementById("detail" + side + "LogoV6269");
+
+        if (nameEl) nameEl.textContent = name || (isClub ? "Notre équipe" : "Adversaire");
+        if (!logoEl) return;
+
+        logoEl.style.display = "none";
+        logoEl.removeAttribute("src");
+        logoEl.alt = "";
+
+        if (!logo) return;
+
+        logoEl.src = logo;
+        logoEl.alt = isClub ? ("Logo " + (APP_CLUB_NAME || name || "du club")) : ("Logo " + (name || "adversaire"));
+        logoEl.style.display = "block";
+        logoEl.onerror = function(){
+          this.onerror = null;
+          if (isClub) {
+            this.src = "assets/logos/clubs/demo-app-club.png";
+            this.style.display = "block";
+          } else {
+            this.style.display = "none";
+            this.removeAttribute("src");
+          }
+        };
+      }
+
+      if (away) {
+        setSide("Left", m.adversaire, opponentLogo, false);
+        setSide("Right", m.equipe, clubLogo, true);
+      } else {
+        setSide("Left", m.equipe, clubLogo, true);
+        setSide("Right", m.adversaire, opponentLogo, false);
+      }
+
+      const typeBadge = document.getElementById("detailTypeBadgeV6269");
+      if (typeBadge) {
+        const statutInfo = statutMatchListeInfo_(m);
+        const home = isHomeType(m.type);
+        typeBadge.textContent = statutInfo ? statutInfo.label : (home ? "Domicile" : "Extérieur");
+        typeBadge.classList.remove(
+          "detail-type-home-v6286",
+          "detail-type-away-v6286",
+          "detail-type-forfeit-v6286"
+        );
+        typeBadge.classList.add(
+          statutInfo
+            ? "detail-type-forfeit-v6286"
+            : (home ? "detail-type-home-v6286" : "detail-type-away-v6286")
+        );
+      }
     }
 
     function openMatchDetail(idx){
@@ -5709,6 +6483,7 @@ small{
         if (row) row.style.display = visible ? "" : "none";
       };
 
+      renderDetailMatchTeamsV6269(m);
       document.getElementById("detailTitle").innerHTML = buildMatchTitleHtml(m);
       document.getElementById("detailSeasonTop").textContent = badgeForType(m.type).label || "-";
       document.getElementById("detailTeamInline").textContent = m.equipe || "";
@@ -5835,7 +6610,8 @@ if (!reponseOuverte) {
       buildMatchKey(m),
       m.equipe,
       m.type,
-      getCurrentMatchTextForForm(m)
+      getCurrentMatchTextForForm(m),
+      m.adversaire
     );
   };
 }
@@ -6884,7 +7660,7 @@ let gaEditingClub = "";
 function gaNewAdversaire(){
   gaEditingRow = "";
   gaEditingClub = "";
-  ["gaRow","gaOrigRow","gaOrigClub","gaOrigGymnase","gaOrigAdresse","gaOrigCodePostal","gaOrigVille","gaClub","gaGymnase","gaAdresse","gaCodePostal","gaVille"].forEach(id => {
+  ["gaRow","gaOrigRow","gaOrigClub","gaOrigGymnase","gaOrigAdresse","gaOrigCodePostal","gaOrigVille","gaOrigLogo","gaClub","gaGymnase","gaAdresse","gaCodePostal","gaVille","gaLogo"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = "";
   });
@@ -6946,11 +7722,13 @@ function gaEditAdversaire(row){
   set("gaOrigAdresse", a.adresse);
   set("gaOrigCodePostal", a.codePostal);
   set("gaOrigVille", a.ville);
+  set("gaOrigLogo", a.logo);
   set("gaClub", a.club);
   set("gaGymnase", a.gymnase);
   set("gaAdresse", a.adresse);
   set("gaCodePostal", a.codePostal);
   set("gaVille", a.ville);
+  set("gaLogo", a.logo);
   const title = document.getElementById("gaFormTitle");
   if (title) title.textContent = "Modifier adversaire — " + (a.club || "");
   const btn = document.getElementById("gaSaveBtn");
@@ -6974,11 +7752,13 @@ function gaPayload(){
     originalAdresse: val("gaOrigAdresse"),
     originalCodePostal: val("gaOrigCodePostal"),
     originalVille: val("gaOrigVille"),
+    originalLogo: val("gaOrigLogo"),
     club: val("gaClub"),
     gymnase: val("gaGymnase"),
     adresse: val("gaAdresse"),
     codePostal: val("gaCodePostal"),
-    ville: val("gaVille")
+    ville: val("gaVille"),
+    logo: val("gaLogo")
   };
 }
 
@@ -7466,7 +8246,7 @@ function openInfoModal(){
 
     
 
-function ouvrirFormulaire(match, equipe, typeMatch, displayMatch) {
+function ouvrirFormulaire(match, equipe, typeMatch, displayMatch, adversaireNom) {
   const joueurs = state.joueurs
     .filter(j => isJoueurActif(j) && j.equipe === equipe && (!state.season || sameSeason(j.saison, state.season)))
     .map(j => {
@@ -7476,13 +8256,20 @@ function ouvrirFormulaire(match, equipe, typeMatch, displayMatch) {
     });
 
   const joueursString = encodeURIComponent(joueurs.join("|"));
+  const adversaire = String(adversaireNom || "").trim();
+  const ficheAdversaire = (state.adversaires || []).find(a =>
+    normalize(a.club) === normalize(adversaire)
+  );
+  const logoAdversaire = ficheAdversaire ? String(ficheAdversaire.logo || "").trim() : "";
 
   const url = "formulaire.html?match=" + encodeURIComponent(match)
             + "&display=" + encodeURIComponent(displayMatch || match)
             + "&equipe=" + encodeURIComponent(equipe)
             + "&type=" + encodeURIComponent(typeMatch || "")
+            + "&adversaire=" + encodeURIComponent(adversaire)
+            + "&logoAdversaire=" + encodeURIComponent(logoAdversaire)
             + "&joueurs=" + joueursString
-            + "&v=buttonuniform1"
+            + "&v=logosadversaires1"
             + "&t=" + encodeURIComponent(Date.now());
 
   const popup = window.open(url, "_blank");
@@ -7585,6 +8372,36 @@ ${joueurs.map(j => "• " + j).join("\n")}`;
   window.open("https://wa.me/?text=" + encodeURIComponent(message), "_blank");
 }
 
+
+
+
+function getClubLogoAccueilV6276(){
+  const configured = resolveClubLogoUrl(cfgValue("logo_url", ""));
+  if (configured) return configured;
+
+  const mainLogo = document.getElementById("mainLogo");
+  if (mainLogo) {
+    const src = String(mainLogo.getAttribute("src") || "").trim();
+    if (src) return src;
+  }
+
+  return "assets/logos/clubs/demo-app-club.png";
+}
+
+function getOpponentLogoAccueilV6274(adversaire){
+  const adv = (state.adversaires || []).find(a =>
+    normalize(a.club) === normalize(adversaire)
+  );
+  return adv ? String(adv.logo || "").trim() : "";
+}
+
+
+function formatDateCourteAccueilV6277(value){
+  const txt = String(value || "").trim();
+  const m = txt.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!m) return txt;
+  return String(m[1]).padStart(2, "0") + "/" + String(m[2]).padStart(2, "0");
+}
 
 function renderWeekend() {
   const card = document.getElementById("weekendCard");
@@ -7718,20 +8535,67 @@ function renderWeekend() {
       ${visibles.map((m, i) => {
         const d = parseWeekendDate(m.date);
         const isDom = isHomeType(m.type);
-        const typeClass = isDom ? "type-dom" : "type-ext";
-        const typeLabel = isDom ? "Dom" : "Ext";
         const statutInfo = statutWeekendInfo(m);
         const adversaire = m.adversaire || buildMatchDisplay(m);
+        const adversaireLogo = getOpponentLogoAccueilV6274(adversaire);
+        const clubLogo = getClubLogoAccueilV6276();
+
+        const cardClass = statutInfo
+          ? "is-forfait-v6276"
+          : (isDom ? "is-home-v6276" : "is-away-v6276");
+
+        const badgeClass = statutInfo
+          ? "badge-forfait-v6276"
+          : (isDom ? "type-dom" : "type-ext");
+
+        const badgeLabel = statutInfo
+          ? statutInfo.label
+          : (isDom ? "Dom" : "Ext");
+
         return `
-          <div class="weekend-match ${statutInfo ? "has-forfait" : ""}">
-            <div class="weekend-main">
-              <div class="weekend-match-equipe">${escapeHtml(m.equipe || "Équipe ?")}</div>
-              <div class="weekend-match-adversaire">vs ${escapeHtml(adversaire || "Adversaire ?")}</div>
+          <div class="weekend-match weekend-match-v6276 ${cardClass}">
+            <div class="weekend-main weekend-main-v6276">
+
+              <div class="weekend-team-row-v6276 weekend-club-row-v6276">
+                <img
+                  class="weekend-team-logo-v6276"
+                  src="${escapeHtml(clubLogo)}"
+                  alt=""
+                  onerror="this.style.display='none';"
+                >
+                <div class="weekend-team-name-v6276 weekend-club-name-v6276">
+                  ${escapeHtml(m.equipe || "Équipe ?")}
+                </div>
+              </div>
+
+              <div class="weekend-vs-v6276">
+                <strong>VS</strong>
+              </div>
+
+              <div class="weekend-team-row-v6276 weekend-opponent-row-v6276">
+                ${adversaireLogo ? `
+                  <img
+                    class="weekend-team-logo-v6276"
+                    src="${escapeHtml(adversaireLogo)}"
+                    alt=""
+                    onerror="this.style.display='none';"
+                  >
+                ` : `<span class="weekend-logo-placeholder-v6276"></span>`}
+                <div class="weekend-team-name-v6276 weekend-opponent-name-v6276">
+                  ${escapeHtml(adversaire || "Adversaire ?")}
+                </div>
+              </div>
+
             </div>
-            <div class="weekend-meta">
-              <div class="weekend-date">${escapeHtml(d ? jourCourt(d) : "?")}<small>${escapeHtml(m.heure || "?")}</small></div>
-              <span class="weekend-match-type ${typeClass}">${typeLabel}</span>
-              ${statutInfo ? `<span class="weekend-status ${statutInfo.cls}">${escapeHtml(statutInfo.label)}</span>` : ""}
+
+            <div class="weekend-meta weekend-meta-v6276">
+              <div class="weekend-date weekend-date-v6276">
+                ${escapeHtml(formatDateCourteAccueilV6277(m.date) || "?")}
+                <small>${escapeHtml(m.heure || "?")}</small>
+              </div>
+              <span class="weekend-match-type ${badgeClass}">
+                ${escapeHtml(badgeLabel)}
+              </span>
             </div>
           </div>`;
       }).join("")}
@@ -8316,7 +9180,8 @@ function openMyFollowedMatches(){
   const title = document.getElementById("matchesTitle");
   const text = document.getElementById("matchesCardText");
   if (title) title.textContent = "Mes matchs";
-  if (text) text.textContent = "Matchs des équipes suivies. Clique sur un match pour répondre, voir la convocation, les apports et l’itinéraire.";
+  if (text) text.textContent = "";
+  if (text) text.style.display = "none";
 
   const allRows = (state.matchs || [])
     .filter(m => followed.some(name => cleanCompare(name) === cleanCompare(m.equipe)) && (!state.season || sameSeason(m.saison, state.season)))
@@ -8332,41 +9197,8 @@ function openMyFollowedMatches(){
   if(!state.currentMatchRows.length){
     el.innerHTML = '<div class="empty">Aucun match trouvé pour tes équipes suivies.<br><button class="player-inline-action" onclick="openMyTeamsSettingsPlayer()">Modifier mes équipes</button></div>';
   } else {
-    function renderGroup(titleGroup, rows, startIndex, past){
-      if (!rows.length) return "";
-      return `
-        <div class="match-section-title">${titleGroup}</div>
-        ${rows.map((m, idx) => {
-          const realIdx = startIndex + idx;
-          const typeInfo = badgeForType(m.type);
-          const lieuLigne = [m.gymnase, m.ville].filter(Boolean).join(" • ");
-          const pastBadge = past ? '<span class="match-lock">PASSÉ 🔒</span>' : "";
-          const statutInfo = statutMatchListeInfo_(m);
-          const statutBadge = statutInfo
-            ? `<div class="match-list-status ${statutInfo.cls}">❌ ${escapeHtml(statutInfo.label)}</div>`
-            : "";
-          return `
-            <div class="item ${past ? "match-past" : ""} ${statutInfo ? "has-forfait" : ""}" data-idx="${realIdx}">
-              <div class="item-title">${escapeHtml(m.equipe || "Équipe")} — ${escapeHtml(m.date)} ${typeInfo.badge}${pastBadge}</div>
-              ${statutBadge}
-              <div class="item-sub">${escapeHtml(m.heure)} • ${escapeHtml(buildMatchDisplay(m))}</div>
-              ${!isHomeType(m.type) ? `<div class="item-sub">${escapeHtml(lieuLigne || m.adresse)}</div>` : ""}
-            </div>
-          `;
-        }).join("")}
-      `;
-    }
-
-    el.innerHTML =
-      renderGroup("Matchs à venir", futurs, 0, false) +
-      renderGroup("Matchs passés", passes, futurs.length, true);
-
-    el.querySelectorAll(".item").forEach(node => {
-      node.addEventListener("click", () => {
-        state.detailBackScreen = "matchesScreen";
-        openMatchDetail(Number(node.dataset.idx));
-      });
-    });
+    el.innerHTML = renderMatchGroupsV6281(futurs, passes);
+    bindMatchCardsV6281(el);
   }
 
   showScreen("matchesScreen");
@@ -8388,31 +9220,16 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V62.67 JOUEURS</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V62.87 JOUEURS</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V62.67 — Joueurs : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier la mise en page ni les modules de la source</li>
-        <li>V62.66 — Joueurs : la carte Réseaux sociaux affiche Facebook, Instagram, TikTok, YouTube et le site internet uniquement lorsque leurs liens sont renseignés</li>
-        <li>V62.65 — Joueurs : le liseré des cartes en forfait est rouge, comme le badge de forfait</li>
-        <li>V62.64 — Joueurs : tous les badges de forfait sont rouges (forfait adverse et forfait du club)</li>
-        <li>V62.63 — Joueurs : badges Domicile en bleu et Extérieur en orange, indépendants des couleurs du club</li>
-        <li>V62.62 — Joueurs : le badge Forfait du club reste rouge après rafraîchissement</li>
-        <li>V62.61 — Joueurs : Mes matchs se reconstruit automatiquement après chargement ou clic sur Mettre à jour</li>
-        <li>V62.60 — Joueurs : badge Forfait adverse / Forfait du club visible dans la liste Mes matchs</li>
-        <li>V62.59 — Joueurs : matchs en forfait sans bloc organisation ni bouton itinéraire</li>
-        <li>V62.58 — Joueurs : titres WhatsApp liés à nom_club et fond de secours neutre</li>
-        <li>V62.57 — Joueurs : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
-        <li>V62.56 — Joueurs : libellés visibles neutralisés, sans nom de club dans le forfait</li>
-        <li>V62.55 — Joueurs : essai de libellés pilotés par nom_club, remplacé par la neutralisation V62.56</li>
-        <li>V62.54 — Joueurs : le module Bénévoles respecte activer_benevoles = Oui/Non</li>
-        <li>V62.53 — Joueurs : la carte événement respecte immédiatement club_event_actif = Oui/Non, sans cache</li>
-        <li>V62.52 — Joueurs : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
-        <li>V62.51 — Joueurs : intensité du fond actif portée à 35 % de la couleur secondaire</li>
-        <li>V62.50 — Joueurs : fond du bouton actif lié à la couleur secondaire du club</li>
-        <li>V62.49 — Joueurs : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
-        <li>V62.48 — Joueurs : bouton Valider mes équipes rendu lisible</li>
+        <li>V62.87 — Joueurs : transition sécurisée avec écran noir et logo lors du chargement et du retour vers Mes espaces</li>
+        <li>V62.86 — Joueurs : correction du badge du détail match — Domicile bleu, Extérieur orange et Forfait rouge</li>
+        <li>V62.85 — Joueurs : harmonisation Design System V2 de Mes matchs, titre compact, retour différencié, cartes affinées et chevrons renforcés</li>
+        <li>V62.84 — Joueurs : Mes matchs épuré, texte d’aide masqué, cartes plus compactes, retrait de « contre » et des icônes date/heure</li>
+        <li>V62.83 — Joueurs : Mes matchs simplifié en liste compacte d’accès rapide au détail</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8726,7 +9543,7 @@ function appliquerConfig() {
   setCfgText("benevolesCardText", "benevoles_texte", "Bénévoles du club.", "benevoles_texte_actif");
 
   // Logo
-  const logoSrc = cfg["logo_url"] || "Image PNG.png";
+  const logoSrc = resolveClubLogoUrl(cfg["logo_url"]);
   const ml = document.getElementById("mainLogo");
   const sl = document.getElementById("splashLogo");
   if (ml) ml.src = logoSrc;
@@ -8778,7 +9595,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V62.67-JOUEURS-PORTAIL-SOURCE-INTEGRALE";
+window.CAM_BASKET_VERSION = "V62.87-JOUEURS-TRANSITION-SECURISEE";
 
 </script>
 

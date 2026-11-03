@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Démo App Club V63.45 - Coach - portail séparé, base source conservée -->
+<!-- Démo App Club V63.56 - Coach - transition sécurisée -->
 
 <html lang="fr">
 <head>
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="apple-touch-icon" sizes="180x180" href="logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
+<link rel="apple-touch-icon" href="assets/logos/clubs/demo-app-club.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logos/clubs/demo-app-club.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/app-32.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Démo Coach Club</title>
   <meta name="theme-color" content="#1f4e79" />
-  <meta name="cam-basket-version" content="V63.45-COACH-PORTAIL-SOURCE-INTEGRALE" />
+  <meta name="cam-basket-version" content="V63.56-COACH-TRANSITION-SECURISEE" />
   <style>
     :root{
       --bg:#050505;
@@ -2140,9 +2140,9 @@ body.coach-app #weekendCard{
 
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="logo_32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="logo_192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="logo_180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/app-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/app-180.png">
 <meta name="apple-mobile-web-app-title" content="Démo App Club">
 
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkTDqW1vIEFwcCBDbHViIiwKICAic2hvcnRfbmFtZSI6ICJBcHAgQ2x1YiIsCiAgInN0YXJ0X3VybCI6ICIuL2luZGV4Lmh0bWwiLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjMDAwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAibG9nb18xOTIucG5nIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImxvZ29fNTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
@@ -3414,6 +3414,83 @@ small{
 /* Portail V1.11 : même style source pour les deux actions, sans modifier le contour global. */
 .header-mini-actions{gap:8px;flex-wrap:wrap;}
 </style>
+
+<style id="_coach_v6352_chevrons_semantiques">
+/* V63.52 — chevrons permanents et couleurs sémantiques */
+body.coach-app .weekend-match,
+body.coach-app .coach-space-match,
+body.coach-app #coachTeamsList .item{
+  position:relative!important;
+  padding-right:46px!important;
+}
+body.coach-app .weekend-match::after,
+body.coach-app .coach-space-match::after,
+body.coach-app #coachTeamsList .item::after{
+  content:"›"!important;
+  display:block!important;
+  position:absolute!important;
+  right:13px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  font-size:36px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:none!important;
+  z-index:20!important;
+}
+body.coach-app .weekend-match.type-dom::after,
+body.coach-app .coach-space-match.type-dom::after{color:#3b82f6!important;-webkit-text-fill-color:#3b82f6!important;}
+body.coach-app .weekend-match.type-ext::after,
+body.coach-app .coach-space-match.type-ext::after{color:#ff8a1f!important;-webkit-text-fill-color:#ff8a1f!important;}
+body.coach-app .weekend-match.has-forfait::after,
+body.coach-app .coach-space-match.has-forfait::after{color:#e04040!important;-webkit-text-fill-color:#e04040!important;}
+body.coach-app #coachTeamsList .item::after{color:var(--accent,#58a552)!important;}
+</style>
+
+<style id="_coach_v6353_liseres_semantiques">
+/* V63.53 — Cartes matchs : liseré de statut, sans flèche colorée. */
+body.coach-app .weekend-match::after,
+body.coach-app .coach-space-match::after,
+body.coach-app .coach-space-convoc::after,
+body.coach-app .home-match-card::after,
+body.coach-app .coach-match-card::after,
+body.coach-app #coachMatchesList .card::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* On libère l'espace précédemment réservé au chevron. */
+body.coach-app .weekend-match,
+body.coach-app .coach-space-match,
+body.coach-app .coach-space-convoc,
+body.coach-app .home-match-card,
+body.coach-app .coach-match-card,
+body.coach-app #coachMatchesList .card{
+  padding-right:10px!important;
+  border-left-width:6px!important;
+  border-left-style:solid!important;
+}
+
+/* Domicile = bleu. */
+body.coach-app .weekend-match.type-dom,
+body.coach-app .coach-space-match.type-dom{
+  border-left-color:#3b82f6!important;
+}
+
+/* Extérieur = orange. */
+body.coach-app .weekend-match.type-ext,
+body.coach-app .coach-space-match.type-ext{
+  border-left-color:#ff8a1f!important;
+}
+
+/* Forfait = rouge, prioritaire sur domicile/extérieur. */
+body.coach-app .weekend-match.has-forfait,
+body.coach-app .coach-space-match.has-forfait{
+  border-left-color:#e04040!important;
+}
+</style>
 </head>
 <body class="loading coach-app">
 
@@ -3429,21 +3506,18 @@ small{
   justify-content:center;
   transition:opacity 0.4s ease;
 ">
-  <img id="splashLogo" src="Image PNG.png" alt="Logo" style="
-    width:160px;
-    height:160px;
+  <img id="splashLogo" src="assets/logos/clubs/demo-app-club.png" alt="Logo" style="
+    display:block;
+    width:128px;
+    height:128px;
+    min-width:0;
+    min-height:0;
+    max-width:38vw;
+    max-height:38vw;
+    margin:0;
+    padding:0;
     object-fit:contain;
-    animation:splashPulse 1.5s ease-in-out infinite;
   ">
-  <div style="
-    margin-top:24px;
-    display:flex;
-    gap:8px;
-  ">
-    <div class="splash-dot"></div>
-    <div class="splash-dot" style="animation-delay:0.2s"></div>
-    <div class="splash-dot" style="animation-delay:0.4s"></div>
-  </div>
 </div>
 
 <div id="camSvgBackground" aria-hidden="true" style="opacity:0;transition:opacity 0.2s ease;">
@@ -3516,7 +3590,7 @@ small{
     <!-- Badge version cliquable — haut gauche -->
     <button onclick="openInfoModal()" id="versionBadge" style="
       display:none;
-    ">V63.45 COACH</button>
+    ">V63.56 COACH</button>
     <div class="hero">
       <div style="position:relative;display:inline-block;">
         <div class="hero-logo-btn" role="button" tabindex="0"
@@ -3524,7 +3598,7 @@ small{
           onclick="openInfoModal()"
           onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault();openInfoModal();}"
           style="cursor:pointer;">
-          <img src="Image PNG.png" alt="Logo" class="hero-logo" id="mainLogo">
+          <img src="assets/logos/clubs/demo-app-club.png" alt="Logo" class="hero-logo" id="mainLogo">
         </div>
         <div id="heroSlogan" style="
           display:none;
@@ -3548,7 +3622,7 @@ small{
         <button id="btn-home" class="btn-light active" onclick="setActiveButton('home'); showScreen('homeScreen')">Accueil</button>
         <button id="btn-coach" class="btn-outline" onclick="openCoachMain()">Coach</button>
       </div>
-      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="window.location.href='portail.html'">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
+      <div class="header-mini-actions"><button id="btn-spaces" type="button" class="btn-outline mini-update" onclick="openExternalPageWithTransition('portail.html')">⇄ Mes espaces</button><button id="btn-update" type="button" class="btn-outline mini-update" onclick="reloadData()">↻ Mettre à jour</button></div>
       <div id="status" class="status">Chargement…</div>
     </div>
   </header>
@@ -4172,7 +4246,8 @@ small{
     </section>
   </main>
 
-  <script src="app-config.js"></script>
+  <script src="assets/js/logo-paths.js"></script>
+<script src="app-config.js"></script>
   <script>
     const APP_CONFIG = window.APP_CONFIG || {};
     const SHEET_ID = APP_CONFIG.SHEET_ID || "1-Jc5y_mSHZSOk4Lm1ptz8NjqTowsFh9n_NRb3rIuu8g";
@@ -4194,6 +4269,22 @@ small{
     const RESPONSE_SHEET_NAME = "REPONSES";
     const APPS_SCRIPT_URL = APP_CONFIG.APPS_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbzkdFa0ccvvusu1nZeTQWDT2ea0EXgkxJQDproZ3606stimYFzrm0mNqzKSIoy2rMT3/exec";
     function getScriptUrl() { return APP_CONFIG.APPS_SCRIPT_URL || window._configScriptUrl || APPS_SCRIPT_URL; }
+
+    // V63.56 — transition externe sécurisée : écran noir + logo, sans modifier le scroll.
+    function showExternalTransition() {
+      const splash = document.getElementById("splashScreen");
+      if (!splash) return;
+      splash.style.display = "flex";
+      splash.style.opacity = "1";
+      splash.style.pointerEvents = "auto";
+    }
+
+    function openExternalPageWithTransition(url) {
+      showExternalTransition();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 40);
+    }
 
     let APP_NAME = APP_CONFIG.APP_NAME || "Démo App Club";
     let APP_CLUB_NAME = APP_CONFIG.CLUB_NAME || APP_NAME;
@@ -4493,7 +4584,7 @@ small{
           Object.entries(cfg0).forEach(([k,v]) => { state.config[k.trim().toLowerCase()] = String(v); });
           syncClubTextConfigFromSheet();
           // Mettre à jour logo splash si logo_url défini
-          const logoUrl = state.config["logo_url"];
+          const logoUrl = resolveClubLogoUrl(state.config["logo_url"]);
           if (logoUrl) {
             const splashLogo = document.getElementById("splashLogo");
             if (splashLogo) splashLogo.src = logoUrl;
@@ -4867,10 +4958,10 @@ small{
       });
     }
 
-    function openCoachMain(){
+    async function openCoachMain(){
       let code = String(sessionStorage.getItem("cam_coach_code") || state.codeCoach || "").trim();
       if (!code) {
-        code = prompt("Code coach ?") || "";
+        code = await requestCoachCode() || "";
       }
       code = String(code || "").trim();
       if (!code) return;
@@ -4909,7 +5000,7 @@ small{
       else setActiveButton("teams");
     }
 
-    function openCoachSpace(){
+    async function openCoachSpace(){
       const t = getSelectedTeamData();
       if (!t || !(t.equipe || t.team)) {
         alert("Sélectionne une équipe d’abord.");
@@ -4918,7 +5009,7 @@ small{
 
       const expected = String(t.codeCoach || "").trim();
       if (!state.coachAccessTeam || cleanCompare(state.coachAccessTeam) !== cleanCompare(t.equipe || t.team)) {
-        const code = prompt("Code coach ?");
+        const code = await requestCoachCode();
         if (!code || !String(code).trim()) return;
         if (expected && String(code).trim() !== expected) {
           alert("Code coach incorrect ❌");
@@ -5088,7 +5179,7 @@ small{
         const adversaire = m.adversaire || "Adversaire ?";
         const meta = [m.date || "-", m.heure || "-", typeInfo.label || ""].filter(Boolean).join(" • ");
         return `
-          <div class="item ${extraClass}" data-coach-match-idx="${i}">
+          <div class="item ${extraClass} ${isDom ? "type-dom" : "type-ext"}" data-coach-match-idx="${i}">
             <div class="coach-space-row">
               <div class="coach-space-main">
                 <div class="coach-space-team">${escapeHtml(m.equipe || "Équipe ?")}</div>
@@ -5115,7 +5206,7 @@ small{
             <div class="coach-forfait-state">Annulé</div>
             <div class="coach-forfait-label">${escapeHtml(libelleForfait)}</div>
           `;
-          return coachCardBase(m, i, sideForfait, "coach-space-match has-forfait");
+          return coachCardBase(m, i, sideForfait, `coach-space-match has-forfait ${isHomeType(m.type) ? "type-dom" : "type-ext"}`);
         }
 
         const s = computeResponseSummaryForMatch(m, responseObjects);
@@ -5125,7 +5216,7 @@ small{
           <div class="coach-response-label">réponses</div>
           <div class="coach-ready-count">${s.presents} OK</div>
         `;
-        return coachCardBase(m, i, side, "coach-space-match");
+        return coachCardBase(m, i, side, `coach-space-match ${isHomeType(m.type) ? "type-dom" : "type-ext"}`);
       }).join("");
 
       list.querySelectorAll(".coach-space-match").forEach(node => {
@@ -5140,7 +5231,7 @@ small{
       const header = document.getElementById("coachMatchHeader");
       if (header) {
         header.innerHTML = `
-          <h2>${buildMatchTitleHtml(m)}</h2>
+          <h2 class="match-detail-title coach-match-versus-title">${buildMatchTitleHtml(m)}</h2>
           <div class="coach-match-sub">${escapeHtml(m.equipe || "")} • ${escapeHtml(m.date || "-")} • ${escapeHtml(m.heure || "-")} • ${escapeHtml(badgeForType(m.type).label || "")}</div>
         `;
       }
@@ -7590,6 +7681,7 @@ async function annulerConvocation() {
   }
 }
 
+// V63.47 — Interface Coach compactée sans modification fonctionnelle.
 // V63.43 — Couleurs sémantiques Domicile / Extérieur / forfait harmonisées.
 // V63.42 — Affichage réel de la convocation et du statut « À remplacer » dans l’écran Coach.
 // V63.41 — Restauration fiable des données de convocation après rechargement.
@@ -7845,7 +7937,7 @@ function renderWeekend() {
         const statutInfo = statutWeekendInfo(m);
         const adversaire = m.adversaire || buildMatchDisplay(m);
         return `
-          <div class="weekend-match ${statutInfo ? "has-forfait" : ""}">
+          <div class="weekend-match ${typeClass} ${statutInfo ? "has-forfait" : ""}">
             <div class="weekend-main">
               <div class="weekend-match-equipe">${escapeHtml(m.equipe || "Équipe ?")}</div>
               <div class="weekend-match-adversaire">vs ${escapeHtml(adversaire || "Adversaire ?")}</div>
@@ -8485,29 +8577,16 @@ openMatches = function(){
 <div id="infoModal" class="modal-overlay" onclick="closeInfoModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <h3 id="versionAppTitle">Application Démo App Club</h3>
-      <div class="modal-line"><span class="modal-label">Version :</span> V63.45 COACH</div>
+      <div class="modal-line"><span class="modal-label">Version :</span> V63.56 COACH</div>
       <div class="modal-line"><span class="modal-label">Date de création :</span> 20/04/2026</div>
-      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 10/07/2026</div>
+      <div class="modal-line"><span class="modal-label">Dernière mise à jour :</span> 26/07/2026</div>
       <div class="modal-line"><span class="modal-label">Modifications :</span></div>
       <ul class="modal-list">
-        <li>V63.45 — Coach : ajout du bouton Mes espaces à côté de Mettre à jour, sans modifier la mise en page ni les modules de la source</li>
-        <li>V63.44 — Coach : carte Réseaux sociaux retirée de l’accueil Coach</li>
-        <li>V63.43 — Coach : badges Domicile bleus, Extérieur orange et indicateurs de forfait rouges</li>
-        <li>V63.42 — Coach : bloc Convocation ajouté dans le véritable écran Coach ; alerte et joueur « À remplacer » visibles après rechargement</li>
-        <li>V63.41 — Coach : convocation restaurée après rechargement et statut « À remplacer » visible côté Coach</li>
-        <li>V63.40 — Coach : récupération fiable du commentaire coach dans le message WhatsApp</li>
-        <li>V63.39 — Coach : titres et icône WhatsApp à nouveau pilotés par CONFIG</li>
-        <li>V63.38 — Coach : message WhatsApp de convocation enrichi avec commentaire coach et organisation</li>
-        <li>V63.37 — Coach : accès Effectif / licences rendu plus sobre et compact</li>
-        <li>V63.36 — Coach : section Effectif / licences configurable, limitée à l’équipe sélectionnée</li>
-        <li>V63.35 — Coach : matchs en forfait clairement annulés, réponses, organisation et convocations masquées</li>
-        <li>V63.34 — Coach : titres WhatsApp liés à nom_club et fond de secours neutre</li>
-        <li>V63.33 — Coach : démonstration neutralisée, statut forfait compatible et identité pilotée par CONFIG</li>
-        <li>V63.32 — Coach : logo sorti du composant bouton pour supprimer tout fond ou contour automatique</li>
-        <li>V63.31 — Coach : fond de navigation actif lié à la couleur secondaire du club à 35 %</li>
-        <li>V63.30 — Coach : fenêtre version avec 5 dernières modifications et bouton Fermer lisible</li>
-        <li>V63.29 — Coach : navigation Coach verrouillée en bouton secondaire</li>
-        <li>V63.28 — Coach : système de rôles visuels ajouté</li>
+        <li>V63.56 — Coach : transition sécurisée avec écran noir et logo lors du chargement et du retour vers Mes espaces</li>
+        <li>V63.55 — Coach : titre du détail match présenté en confrontation centrée</li>
+        <li>V63.54 — Coach : liserés domicile bleu, extérieur orange et forfait rouge verrouillés après chargement des couleurs du club</li>
+        <li>V63.53 — Coach : liserés des cartes matchs selon le statut — domicile bleu, extérieur orange, forfait rouge</li>
+        <li>V63.48 — Coach : première intégration des chevrons et de la modale de code sécurisée</li>
       </ul>
       <button class="modal-close" onclick="closeInfoModal()">Fermer</button>
       <div class="modal-credit">Créé par Alex</div>
@@ -8522,7 +8601,7 @@ openMatches = function(){
   if (window.__camCoachConvocationHandlerV4060) return;
   window.__camCoachConvocationHandlerV4060 = true;
 
-  document.addEventListener("click", function(e){
+  document.addEventListener("click", async function(e){
     const btnConvoc = e.target && e.target.closest ? e.target.closest("#btnFaireConvocationCoach") : null;
     if(btnConvoc){
       e.preventDefault();
@@ -8531,7 +8610,7 @@ openMatches = function(){
       // V60.61 : si le coach est déjà entré dans l’Espace coach,
       // on réutilise le code coach mémorisé pour éviter une deuxième demande.
       if (!state.codeCoach || !String(state.codeCoach).trim()) {
-        const codeCoach = prompt("Code coach ?");
+        const codeCoach = await requestCoachCode();
         if (!codeCoach || !String(codeCoach).trim()) return;
         state.codeCoach = String(codeCoach).trim();
       }
@@ -9090,7 +9169,7 @@ function appliquerConfig() {
   setCfgText("benevolesCardText", "benevoles_texte", "Bénévoles du club.", "benevoles_texte_actif");
 
   // Logo
-  const logoSrc = cfg["logo_url"] || "Image PNG.png";
+  const logoSrc = resolveClubLogoUrl(cfg["logo_url"]);
   const ml = document.getElementById("mainLogo");
   const sl = document.getElementById("splashLogo");
   if (ml) ml.src = logoSrc;
@@ -9142,7 +9221,7 @@ function appliquerConfig() {
 
 
 /* V61.00 - Marqueur de version stabilisee */
-window.CAM_BASKET_VERSION = "V63.45-COACH-PORTAIL-SOURCE-INTEGRALE";
+window.CAM_BASKET_VERSION = "V63.56-COACH-TRANSITION-SECURISEE";
 
 </script>
 
@@ -9667,6 +9746,307 @@ html body .coach-forfait-label{
   -webkit-text-fill-color:#ffb3b3!important;
 }
 </style>
+
+
+<style id="_coach_compact_v6346">
+/* V63.47 — Harmonisation visuelle Coach uniquement.
+   Aucun ID, aucune fonction et aucune logique métier modifiés. */
+
+/* En-tête plus compact */
+body.coach-app header{padding-top:12px!important;padding-bottom:12px!important;}
+body.coach-app header .hero-logo,
+body.coach-app header #mainLogo{width:112px!important;max-height:112px!important;}
+body.coach-app header .hero-logo-btn{margin-bottom:4px!important;}
+body.coach-app header .hero-title{font-size:31px!important;line-height:1.02!important;margin-top:0!important;}
+body.coach-app header .top-actions{margin-top:14px!important;gap:8px!important;}
+body.coach-app header .top-actions button{min-height:46px!important;padding:7px 10px!important;border-radius:18px!important;}
+body.coach-app header .header-mini-actions{margin-top:8px!important;gap:8px!important;}
+body.coach-app header .header-mini-actions button{min-height:40px!important;padding:7px 10px!important;border-radius:17px!important;}
+
+/* Espacement global Coach */
+body.coach-app main{padding-top:12px!important;}
+body.coach-app .back{margin-bottom:10px!important;padding:10px 13px!important;min-height:42px!important;}
+
+/* Accueil : prochains matchs plus denses */
+body.coach-app #weekendCard{padding:12px 14px!important;margin-bottom:10px!important;}
+body.coach-app .weekend-list-compact{gap:6px!important;}
+body.coach-app .weekend-match{padding:8px 10px!important;min-height:0!important;border-radius:16px!important;}
+body.coach-app .weekend-match-equipe{font-size:17px!important;margin-bottom:2px!important;}
+body.coach-app .weekend-match-adversaire{font-size:12.5px!important;}
+body.coach-app .weekend-date{font-size:11px!important;}
+body.coach-app .weekend-date small{font-size:14px!important;}
+
+/* Écran équipe : cartes d’introduction compactées */
+body.coach-app #teamMenuCard,
+body.coach-app .team-menu-summary{padding:15px 16px!important;margin-bottom:10px!important;border-radius:22px!important;}
+body.coach-app .team-menu-summary .team-head{margin-bottom:2px!important;}
+body.coach-app .team-menu-summary .team-name{font-size:27px!important;line-height:1.04!important;}
+body.coach-app .team-menu-summary .team-meta{font-size:14px!important;line-height:1.3!important;margin-top:5px!important;}
+body.coach-app .coach-effectif-entry{margin-bottom:10px!important;}
+body.coach-app .coach-effectif-btn{padding:11px 14px!important;border-radius:18px!important;}
+body.coach-app .coach-effectif-btn .big{font-size:15px!important;}
+body.coach-app .coach-effectif-btn .small{font-size:11.5px!important;}
+
+/* Liste réponses : cartes légèrement resserrées */
+body.coach-app .coach-space-section-head{margin:7px 2px 8px!important;}
+body.coach-app .coach-space-section-head-gap{margin-top:14px!important;}
+body.coach-app .coach-space-match,
+body.coach-app .coach-space-convoc{padding:9px 10px 9px 11px!important;border-radius:19px!important;}
+body.coach-app .coach-space-team{font-size:20px!important;}
+body.coach-app .coach-space-opponent{font-size:13px!important;margin-bottom:4px!important;}
+body.coach-app .coach-space-meta-line{font-size:11.5px!important;}
+body.coach-app .coach-response-count{font-size:19px!important;}
+
+@media(max-width:420px){
+  body.coach-app header .hero-logo,
+  body.coach-app header #mainLogo{width:104px!important;max-height:104px!important;}
+  body.coach-app header .hero-title{font-size:29px!important;}
+  body.coach-app .team-menu-summary .team-name{font-size:25px!important;}
+}
+</style>
+
+
+<!-- V63.48 — Modale code Coach harmonisée avec le module Joueur -->
+<div id="coachCodeModal" class="coach-code-overlay" aria-hidden="true">
+  <div class="coach-code-card" role="dialog" aria-modal="true" aria-labelledby="coachCodeTitle">
+    <h3 id="coachCodeTitle">Accès Coach</h3>
+    <p>Saisissez le code équipe.</p>
+    <input id="coachCodeInput" type="tel" inputmode="numeric" autocomplete="one-time-code" maxlength="4" aria-label="Code équipe">
+    <div id="coachCodeDots" class="coach-code-dots" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="coach-code-actions">
+      <button type="button" id="coachCodeCancel" class="coach-code-cancel">Annuler</button>
+      <button type="button" id="coachCodeValidate" class="coach-code-validate">Valider</button>
+    </div>
+  </div>
+</div>
+
+<style id="_coach_v6348_fixes">
+/* Chevrons toujours visibles sur les cartes Coach cliquables */
+body.coach-app .home-match-card,
+body.coach-app .weekend-match[data-home-match-idx],
+body.coach-app .coach-match-card,
+body.coach-app #coachMatchesList .card,
+body.coach-app #coachTeamsList .item,
+body.coach-app .coach-space-match,
+body.coach-app .coach-space-convoc{
+  position:relative!important;
+  padding-right:42px!important;
+}
+body.coach-app .home-match-card::after,
+body.coach-app .weekend-match[data-home-match-idx]::after,
+body.coach-app .coach-match-card::after,
+body.coach-app #coachMatchesList .card::after,
+body.coach-app #coachTeamsList .item::after,
+body.coach-app .coach-space-match::after,
+body.coach-app .coach-space-convoc::after{
+  content:"›";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent,#58a552);
+  font-size:34px;
+  line-height:1;
+  font-weight:800;
+  opacity:1;
+  pointer-events:none;
+}
+
+/* Modale code identique au principe validé côté Joueur */
+.coach-code-overlay{
+  display:none;position:fixed;inset:0;z-index:100000;
+  align-items:center;justify-content:center;padding:24px;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(5px);
+}
+.coach-code-overlay.active{display:flex}
+.coach-code-card{
+  position:relative;
+  width:min(100%,390px);padding:28px 26px 24px;border-radius:28px;
+  background:linear-gradient(180deg,#111,#090909);
+  border:3px solid var(--accent,#58a552);
+  box-shadow:0 18px 60px rgba(0,0,0,.65);
+}
+.coach-code-card h3{margin:0 0 8px;color:var(--accent,#58a552);font-size:30px;line-height:1.1}
+.coach-code-card p{margin:0 0 20px;color:#e8e8e8;font-size:19px}
+#coachCodeInput{
+  position:absolute!important;
+  left:26px!important;
+  top:88px!important;
+  width:calc(100% - 52px)!important;
+  height:82px!important;
+  z-index:5!important;
+  opacity:.01!important;
+  pointer-events:auto!important;
+  background:transparent!important;
+  border:0!important;
+  color:transparent!important;
+  caret-color:transparent!important;
+  padding:0!important;
+  margin:0!important;
+}
+.coach-code-dots{
+  position:relative;
+  z-index:3;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin:8px 0 30px;
+  cursor:text;
+}
+.coach-code-dots span{
+  width:22px;height:22px;border-radius:50%;
+  border:3px solid var(--accent,#58a552);background:transparent;
+  transition:.12s ease;
+}
+.coach-code-dots span.filled{background:var(--accent,#58a552);box-shadow:0 0 14px rgba(var(--accent-rgb),.5)}
+.coach-code-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.coach-code-actions button{min-height:62px;border-radius:20px;font-size:20px;font-weight:800}
+.coach-code-cancel{background:#191919;color:#fff;border:2px solid #666}
+.coach-code-validate{background:var(--button-bg,var(--accent,#58a552));color:var(--button-text,#000);border:2px solid var(--button-bg,var(--accent,#58a552))}
+</style>
+
+<script>
+(function(){
+  let coachCodeResolve = null;
+  const modal = document.getElementById('coachCodeModal');
+  const input = document.getElementById('coachCodeInput');
+  const dots = Array.from(document.querySelectorAll('#coachCodeDots span'));
+  const cancel = document.getElementById('coachCodeCancel');
+  const validate = document.getElementById('coachCodeValidate');
+
+  function refreshDots(){
+    const n = String(input.value || '').length;
+    dots.forEach((dot,i)=>dot.classList.toggle('filled', i < n));
+  }
+  function closeCoachCode(value){
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden','true');
+    const resolve = coachCodeResolve;
+    coachCodeResolve = null;
+    input.blur();
+    if(resolve) resolve(value);
+  }
+  window.requestCoachCode = function(){
+    if(coachCodeResolve) return Promise.resolve('');
+    input.value=''; refreshDots();
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden','false');
+    try { input.focus({preventScroll:true}); } catch(e) { input.focus(); }
+    setTimeout(()=>{
+      try { input.focus({preventScroll:true}); } catch(e) { input.focus(); }
+    },120);
+    return new Promise(resolve=>{ coachCodeResolve=resolve; });
+  };
+  modal.addEventListener('click',e=>{ if(e.target===modal) closeCoachCode(''); });
+  cancel.addEventListener('click',()=>closeCoachCode(''));
+  validate.addEventListener('click',()=>closeCoachCode(String(input.value||'').trim()));
+  input.addEventListener('input',()=>{
+    input.value=String(input.value||'').replace(/\D/g,'').slice(0,4);
+    refreshDots();
+    if(input.value.length===4) setTimeout(()=>closeCoachCode(input.value),120);
+  });
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter') closeCoachCode(String(input.value||'').trim());
+    if(e.key==='Escape') closeCoachCode('');
+  });
+  document.getElementById('coachCodeDots').addEventListener('click',()=>{
+    try { input.focus({preventScroll:true}); } catch(e) { input.focus(); }
+  });
+  document.querySelector('.coach-code-card').addEventListener('click',()=>{
+    try { input.focus({preventScroll:true}); } catch(e) { input.focus(); }
+  });
+})();
+</script>
+
+
+<style id="_coach_v6355_titre_match_centre">
+/* V63.55 — Détail Coach : confrontation lisible sur trois lignes. */
+#coachMatchHeader .coach-match-versus-title{
+  margin:0 0 14px 0;
+  text-align:center;
+  font-size:clamp(24px, 7vw, 32px);
+  line-height:1.08;
+  font-weight:900;
+}
+#coachMatchHeader .coach-match-versus-title .vs-line{
+  display:block;
+  color:#fff;
+  overflow-wrap:anywhere;
+}
+#coachMatchHeader .coach-match-versus-title .vs-small{
+  display:block;
+  margin:5px 0;
+  color:var(--accent);
+  font-size:.55em;
+  line-height:1;
+  font-weight:900;
+  text-transform:lowercase;
+}
+#coachMatchHeader .coach-match-sub{
+  text-align:center;
+}
+</style>
+
+<style id="_coach_v6354_liseres_verrouilles">
+/* V63.54 — Priorité absolue aux liserés sémantiques, même après appliquerConfig(). */
+html body.coach-app .weekend-match.type-dom,
+html body.coach-app .coach-space-match.type-dom{
+  border-left:6px solid #3b82f6!important;
+}
+html body.coach-app .weekend-match.type-ext,
+html body.coach-app .coach-space-match.type-ext{
+  border-left:6px solid #ff8a1f!important;
+}
+html body.coach-app .weekend-match.has-forfait,
+html body.coach-app .coach-space-match.has-forfait{
+  border-left:6px solid #e04040!important;
+}
+</style>
+<script id="_coach_v6354_liseres_verrouilles_js">
+(function(){
+  function semanticColor(card){
+    if (card.classList.contains('has-forfait')) return '#e04040';
+    if (card.classList.contains('type-ext')) return '#ff8a1f';
+    if (card.classList.contains('type-dom')) return '#3b82f6';
+    return '';
+  }
+
+  function lockCoachMatchLiseres(root){
+    var scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll('.weekend-match, .coach-space-match').forEach(function(card){
+      var color = semanticColor(card);
+      if (!color) return;
+      card.style.setProperty('border-left-width','6px','important');
+      card.style.setProperty('border-left-style','solid','important');
+      card.style.setProperty('border-left-color',color,'important');
+    });
+  }
+
+  window.lockCoachMatchLiseres = lockCoachMatchLiseres;
+
+  function scheduleLock(){
+    clearTimeout(scheduleLock._t);
+    scheduleLock._t = setTimeout(function(){ lockCoachMatchLiseres(document); }, 0);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    lockCoachMatchLiseres(document);
+    setTimeout(function(){ lockCoachMatchLiseres(document); }, 350);
+    setTimeout(function(){ lockCoachMatchLiseres(document); }, 1000);
+
+    var observer = new MutationObserver(function(mutations){
+      var relevant = mutations.some(function(m){
+        return m.type === 'childList' ||
+          (m.type === 'attributes' && (m.attributeName === 'class' || m.attributeName === 'style'));
+      });
+      if (relevant) scheduleLock();
+    });
+    observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','style']});
+  });
+})();
+</script>
 
 </body>
 </html>

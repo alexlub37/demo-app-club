@@ -1,0 +1,5 @@
+CORRECTION LOGOS V1.01
+
+Cause identifiée : la feuille CONFIG peut encore contenir l'ancienne valeur « Image PNG.png » ou « logo.png ». Après déplacement, cette valeur écrasait le bon chemin.
+
+Correction : conversion automatique des anciens chemins vers assets/logos/clubs/demo-app-club.png, conservation des URL externes et secours automatique si le logo ne charge pas.

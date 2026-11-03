@@ -1,0 +1,272 @@
+/* Démo App Club — Design System V1.01
+   Passe typographique officielle : lisibilité et hauteurs harmonisées.
+   Couleurs : toujours fournies par PARAMETRES_CLUB / CONFIG.
+   Ce fichier harmonise uniquement les dimensions, rythmes et composants communs. */
+:root{
+  --ds-space-1:4px;
+  --ds-space-2:8px;
+  --ds-space-3:12px;
+  --ds-space-4:16px;
+  --ds-space-5:20px;
+  --ds-space-6:24px;
+
+  --ds-radius-sm:12px;
+  --ds-radius-md:16px;
+  --ds-radius-lg:22px;
+  --ds-radius-pill:999px;
+
+  /* Échelle typographique officielle */
+  --ds-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --ds-font-xs:12px;
+  --ds-font-sm:13px;
+  --ds-font-body:15px;
+  --ds-font-button:16px;
+  --ds-font-card-title:18px;
+  --ds-font-section:24px;
+  --ds-font-page:30px;
+
+  --ds-line-tight:1.12;
+  --ds-line-title:1.18;
+  --ds-line-normal:1.35;
+  --ds-line-comfort:1.45;
+
+  --ds-control-h:48px;
+  --ds-card-gap:14px;
+  --ds-page-x:14px;
+}
+
+html,body{
+  overflow-x:hidden;
+  font-family:var(--ds-font-family)!important;
+  font-size:var(--ds-font-body)!important;
+  line-height:var(--ds-line-normal)!important;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+main{
+  width:100%;
+  max-width:900px;
+  margin-inline:auto;
+  padding-left:var(--ds-page-x);
+  padding-right:var(--ds-page-x);
+}
+
+/* =========================================================
+   TYPOGRAPHIE OFFICIELLE
+   ========================================================= */
+
+/* Titre principal de l'application / du club */
+.hero-title,
+.page-title,
+.app-title{
+  font-size:var(--ds-font-page)!important;
+  line-height:var(--ds-line-tight)!important;
+  font-weight:900!important;
+  letter-spacing:-.02em!important;
+}
+
+/* Titre principal d'un écran */
+main h1,
+.screen-title,
+.main-title{
+  font-size:var(--ds-font-page)!important;
+  line-height:var(--ds-line-title)!important;
+  font-weight:900!important;
+  margin-top:0!important;
+  margin-bottom:var(--ds-space-3)!important;
+}
+
+/* Titre de page / section */
+main h2,
+.section-title,
+.home-section-title,
+.coach-match-header h2,
+.gj-choice-title{
+  font-size:var(--ds-font-section)!important;
+  line-height:var(--ds-line-title)!important;
+  font-weight:900!important;
+  margin-top:0!important;
+  margin-bottom:var(--ds-space-2)!important;
+}
+
+/* Titre de carte */
+main h3,
+.item-title,
+.menu-btn .big,
+.role-menu-card .big,
+.card-title,
+.player-help-title,
+.home-info-title,
+.club-event-title,
+.club-social-title,
+.bureau-member-name,
+.team-name{
+  font-size:var(--ds-font-card-title)!important;
+  line-height:1.22!important;
+  font-weight:900!important;
+}
+
+/* Texte courant */
+p,
+main .detail-row,
+main .item-sub,
+main .team-meta,
+main .home-info-text,
+main .club-event-text,
+main .bureau-info-muted,
+main .officials-names,
+main .apports-list,
+main .coach-msg{
+  font-size:var(--ds-font-body)!important;
+  line-height:var(--ds-line-normal)!important;
+}
+
+/* Texte secondaire */
+.muted,
+.small,
+.note,
+small,
+.item-sub,
+.menu-btn .small,
+.role-menu-card .small,
+.gj-search-note,
+.gm-field small,
+.player-help-text,
+.club-social-btn,
+.modal-credit{
+  font-size:var(--ds-font-sm)!important;
+  line-height:var(--ds-line-normal)!important;
+}
+
+/* Libellés et micro-titres */
+label,
+.detail-label,
+.coach-title,
+.officials-label,
+.apports-kind,
+.match-section-title,
+.team-extra-title,
+.coach-space-section-head,
+.gm-field label,
+.gj-field label{
+  font-size:var(--ds-font-sm)!important;
+  line-height:1.25!important;
+  font-weight:850!important;
+}
+
+/* =========================================================
+   CARTES ET RYTHME
+   ========================================================= */
+.card,.item,.menu-btn,.match-card,.team-card,.player-card,.role-card,.role-card-click,
+.bureau-member-card,.convocation-card,.response-card,.list-card,.home-match-card,.home-week-card{
+  border-radius:var(--ds-radius-lg)!important;
+}
+.card{
+  padding:var(--ds-space-4)!important;
+  margin-bottom:var(--ds-card-gap)!important;
+}
+.list{gap:var(--ds-space-3)!important}
+.item,.menu-btn{padding:var(--ds-space-4)!important}
+
+/* =========================================================
+   BOUTONS ET CHAMPS
+   ========================================================= */
+button,.back,.btn-light,.btn-outline,.link-btn,input,select,textarea,.search{
+  border-radius:var(--ds-radius-md)!important;
+  font-family:var(--ds-font-family)!important;
+}
+button,.back,.btn-light,.btn-outline,.link-btn{
+  min-height:var(--ds-control-h);
+  padding:10px 14px!important;
+  font-size:var(--ds-font-button)!important;
+  line-height:1.2!important;
+  font-weight:850!important;
+}
+input,select,.search{
+  min-height:var(--ds-control-h);
+  padding:11px 14px!important;
+  font-size:var(--ds-font-body)!important;
+  line-height:1.25!important;
+}
+textarea{
+  padding:12px 14px!important;
+  font-size:var(--ds-font-body)!important;
+  line-height:var(--ds-line-comfort)!important;
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+.pill,.badge,.badge-home,.badge-away,.status-badge,.match-badge,.role-badge,
+.weekend-match-type,.match-list-status,.team-badge-cat{
+  border-radius:var(--ds-radius-pill)!important;
+  font-size:var(--ds-font-xs)!important;
+  line-height:1.15!important;
+  font-weight:900!important;
+}
+
+/* =========================================================
+   MODALES
+   ========================================================= */
+.modal-card,.modal-content,.modal-box,.info-modal-content{
+  border-radius:var(--ds-radius-lg)!important;
+  padding:var(--ds-space-5)!important;
+}
+.modal-card h3,
+.modal-content h3,
+.modal-box h3,
+.info-modal-content h3{
+  font-size:var(--ds-font-card-title)!important;
+  line-height:var(--ds-line-title)!important;
+}
+.modal-line{
+  font-size:var(--ds-font-body)!important;
+  line-height:var(--ds-line-normal)!important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media(max-width:600px){
+  :root{
+    --ds-page-x:12px;
+    --ds-card-gap:12px;
+  }
+  .hero-title,
+  main h1,
+  .screen-title,
+  .main-title{
+    font-size:28px!important;
+  }
+  main h2,
+  .section-title,
+  .home-section-title,
+  .coach-match-header h2,
+  .gj-choice-title{
+    font-size:22px!important;
+  }
+  .card{padding:14px!important}
+}
+
+
+/* Typography V1.10 */
+:root{
+ --font-title-main:28px;
+ --font-title-page:22px;
+ --font-title-card:17px;
+ --font-body:14px;
+ --font-small:12px;
+ --font-button:15px;
+ --font-badge:13px;
+ --radius-common:22px;
+ --padding-common:16px;
+}
+body{font-size:var(--font-body);line-height:1.25;}
+h1,.page-title{font-size:var(--font-title-main)!important;}
+h2{font-size:var(--font-title-page)!important;}
+h3,.card-title{font-size:var(--font-title-card)!important;}
+button,.btn{font-size:var(--font-button)!important;}
+.badge{font-size:var(--font-badge)!important;border-radius:999px;}
+.card{border-radius:var(--radius-common)!important;padding:var(--padding-common)!important;}
+.small,.text-small{font-size:var(--font-small)!important;}
